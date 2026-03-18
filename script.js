@@ -464,8 +464,11 @@ function createObtainiumInstructions() {
     const app = currentAppCatalog.find(item => item.appKey === activeModalAppKey);
     const patch = app ? app.patches.find(item => item.patchKey === activeModalPatchKey) : null;
 
-    const appNameNorm = normalizeForSearch(app?.appName || 'app');
-    const patchNameNorm = normalizeForSearch(patch?.patchName || 'patch');
+    const patchAssets = patch ? patch.builds.flatMap(build => build.assets || []) : [];
+    const parsedSample = patchAssets.find(asset => asset?.parsed)?.parsed || null;
+
+    const appSlug = parsedSample?.appSlug || slugifyForRegex(app?.appName || 'app');
+    const patchSlug = parsedSample?.patchSlug || slugifyForRegex(patch?.patchName || 'patch');
 
     const variantBuilds = patch ? getFilteredBuildsForFilter(patch, 'variant') : [];
     const variantOptions = Array.from(new Set(
@@ -475,7 +478,7 @@ function createObtainiumInstructions() {
             .filter(Boolean)
     ));
 
-    const specificRegex = `^${appNameNorm}-${patchNameNorm}.*\\.apk$`;
+    const specificRegex = `^${appSlug}-${patchSlug}.*\\.apk$`;
     const isVariantFilter = modalBuildFilter === 'variant';
 
     const copyCode = (text) => `onclick="navigator.clipboard.writeText('${text}').then(() => { this.textContent='Copied!'; setTimeout(() => { this.textContent='Copy'; }, 2000); })" `;
@@ -483,7 +486,7 @@ function createObtainiumInstructions() {
     const selectedExamplesMarkup = isVariantFilter
         ? (variantOptions.length > 0
             ? variantOptions.map(variant => {
-                const variantRegex = `^${appNameNorm}-${patchNameNorm}-${variant}.*\\.apk$`;
+                const variantRegex = `^${appSlug}-${patchSlug}-${variant}.*\\.apk$`;
                 const variantLabel = formatBrandDisplayName(variant);
                 return `
                         <div class="example">
@@ -498,8 +501,8 @@ function createObtainiumInstructions() {
                         <div class="example">
                             <strong>${app?.appName || 'App'} ${patch?.patchName || 'patch'} variants:</strong>
                             <div class="code-with-copy">
-                                <code>${escapeHtml(`^${appNameNorm}-${patchNameNorm}-.*\\.apk$`)}</code>
-                                <button type="button" class="copy-btn" ${copyCode(`^${appNameNorm}-${patchNameNorm}-.*\\.apk$`)}>Copy</button>
+                                <code>${escapeHtml(`^${appSlug}-${patchSlug}-.*\\.apk$`)}</code>
+                                <button type="button" class="copy-btn" ${copyCode(`^${appSlug}-${patchSlug}-.*\\.apk$`)}>Copy</button>
                             </div>
                         </div>`)
         : `
@@ -777,15 +780,27 @@ function parseAssetDisplay(filename, arch, fileType) {
     }
     
     const version = versionIndex >= 0 ? tokens[versionIndex] : 'Version unknown';
+    const appSlug = (appTokens.length > 0 ? appTokens : preMetaTokens).join('-').toLowerCase();
+    const patchSlug = (patchTokens.length > 0 ? patchTokens : ['patched', 'build']).join('-').toLowerCase();
 
     return {
         appName: formatBrandDisplayName(appTokens.length > 0 ? appTokens.join(' ') : preMetaTokens.join(' ') || baseName),
         patchName: formatBrandDisplayName(patchTokens.length > 0 ? patchTokens.join(' ') : 'Patched Build'),
+        appSlug,
+        patchSlug,
         variant: variant ? formatBrandDisplayName(variant) : null,
         version,
         archLabel: formatArchitectureLabel(arch, fileType),
         fileType
     };
+}
+
+function slugifyForRegex(value) {
+    return (value || '')
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '') || 'app';
 }
 
 function toTitleWords(value) {
