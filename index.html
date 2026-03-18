@@ -65,12 +65,25 @@
                         <button class="modal-filter-btn" data-filter="variant" type="button">Variant</button>
                     </div>
                 </div>
-                <button type="button" class="modal-close" aria-label="Close popup">×</button>
+                <div class="modal-header-right">
+                    <button type="button" class="modal-obtainium-btn" id="obtainiumBtn" aria-label="Install with Obtainium">Install with Obtainium</button>
+                    <button type="button" class="modal-close" aria-label="Close popup">×</button>
+                </div>
             </div>
             <div id="patchModalBody" class="modal-body"></div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <div id="obtainiumModal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="obtainiumTitle">
+            <div class="modal-header">
+                <h2 id="obtainiumTitle">Install with Obtainium</h2>
+                <button type="button" class="modal-close" aria-label="Close popup">×</button>
+            </div>
+            <div id="obtainiumBody" class="modal-body"></div>
+        </div>
+    </div>
+ 
+     <script src="script.js"></script>
 </body>
 </html>
