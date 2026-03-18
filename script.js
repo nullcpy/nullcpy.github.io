@@ -88,9 +88,21 @@ function setupEventListeners() {
         }
     });
 
+    document.getElementById('obtainiumBtn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        openObtainiumModal();
+    });
+
+    document.getElementById('obtainiumModal').addEventListener('click', (e) => {
+        if (e.target.id === 'obtainiumModal' || e.target.closest('.modal-close')) {
+            closeObtainiumModal();
+        }
+    });
+
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             closePatchModal();
+            closeObtainiumModal();
         }
     });
 }
@@ -429,6 +441,99 @@ function closePatchModal() {
     activeModalPatchKey = null;
 }
 
+function openObtainiumModal() {
+    const modal = document.getElementById('obtainiumModal');
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    
+    const body = document.getElementById('obtainiumBody');
+    body.innerHTML = createObtainiumInstructions();
+}
+
+function closeObtainiumModal() {
+    const modal = document.getElementById('obtainiumModal');
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+}
+
+function createObtainiumInstructions() {
+    const repoUrl = `https://github.com/${CONFIG.owner}/${CONFIG.repo}`;
+    const obtainiumLatestUrl = 'https://github.com/ImranR98/Obtainium/releases/latest';
+    const app = currentAppCatalog.find(item => item.appKey === activeModalAppKey);
+    const patch = app ? app.patches.find(item => item.patchKey === activeModalPatchKey) : null;
+
+    const appNameNorm = normalizeForSearch(app?.appName || 'app');
+    const patchNameNorm = normalizeForSearch(patch?.patchName || 'patch');
+
+    const variantBuilds = patch ? getFilteredBuildsForFilter(patch, 'variant') : [];
+    const variantOptions = Array.from(new Set(
+        variantBuilds
+            .flatMap(build => build.assets || [])
+            .map(asset => (asset?.parsed?.variant || '').toLowerCase())
+            .filter(Boolean)
+    ));
+
+    const specificRegex = `^${appNameNorm}-${patchNameNorm}.*\\.apk$`;
+    const isVariantFilter = modalBuildFilter === 'variant';
+
+    const copyCode = (text) => `onclick="navigator.clipboard.writeText('${text}').then(() => { this.textContent='Copied!'; setTimeout(() => { this.textContent='Copy'; }, 2000); })" `;
+
+    const selectedExamplesMarkup = isVariantFilter
+        ? (variantOptions.length > 0
+            ? variantOptions.map(variant => {
+                const variantRegex = `^${appNameNorm}-${patchNameNorm}-${variant}.*\\.apk$`;
+                const variantLabel = formatBrandDisplayName(variant);
+                return `
+                        <div class="example">
+                            <strong>${app?.appName || 'App'} ${patch?.patchName || 'patch'} ${variantLabel}:</strong>
+                            <div class="code-with-copy">
+                                <code>${escapeHtml(variantRegex)}</code>
+                                <button type="button" class="copy-btn" ${copyCode(variantRegex)}>Copy</button>
+                            </div>
+                        </div>`;
+            }).join('')
+            : `
+                        <div class="example">
+                            <strong>${app?.appName || 'App'} ${patch?.patchName || 'patch'} variants:</strong>
+                            <div class="code-with-copy">
+                                <code>${escapeHtml(`^${appNameNorm}-${patchNameNorm}-.*\\.apk$`)}</code>
+                                <button type="button" class="copy-btn" ${copyCode(`^${appNameNorm}-${patchNameNorm}-.*\\.apk$`)}>Copy</button>
+                            </div>
+                        </div>`)
+        : `
+                        <div class="example">
+                            <strong>${app?.appName || 'App'} with ${patch?.patchName || 'patch'}:</strong>
+                            <div class="code-with-copy">
+                                <code>${escapeHtml(specificRegex)}</code>
+                                <button type="button" class="copy-btn" ${copyCode(specificRegex)}>Copy</button>
+                            </div>
+                        </div>`;
+    
+    return `
+        <div class="obtainium-instructions">
+            <ol>
+                <li>Download and install Obtainium from <a href="${obtainiumLatestUrl}" target="_blank" rel="noopener noreferrer">GitHub</a>.</li>
+                <li>Open Obtainium on your device.</li>
+                <li>Tap Add app.</li>
+                <li>In the App source URL box, enter:
+                    <div class="instruction-code">
+                        <code>${escapeHtml(repoUrl)}</code>
+                        <button type="button" class="copy-btn" ${copyCode(repoUrl)}>Copy</button>
+                    </div>
+                </li>
+                <li>Scroll down to Filter APKs by regular expression and enter:
+                    <div class="filter-examples">
+                        ${selectedExamplesMarkup}
+                    </div>
+                </li>
+                <li>Tap Add to begin downloading. In future, Obtainium will automatically fetch updates when new releases are published.</li>
+            </ol>
+        </div>
+    `;
+}
+
 function renderOpenPatchModal() {
     if (!activeModalAppKey || !activeModalPatchKey) {
         return;
@@ -676,7 +781,7 @@ function parseAssetDisplay(filename, arch, fileType) {
     return {
         appName: formatBrandDisplayName(appTokens.length > 0 ? appTokens.join(' ') : preMetaTokens.join(' ') || baseName),
         patchName: formatBrandDisplayName(patchTokens.length > 0 ? patchTokens.join(' ') : 'Patched Build'),
-        variant: variant ? variant.toUpperCase() : null,
+        variant: variant ? formatBrandDisplayName(variant) : null,
         version,
         archLabel: formatArchitectureLabel(arch, fileType),
         fileType
