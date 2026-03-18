@@ -463,6 +463,13 @@ body.modal-open {
     padding: 14px 16px;
 }
 
+.modal-header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
 .modal-title-wrap {
     display: flex;
     flex-direction: column;
@@ -495,6 +502,24 @@ body.modal-open {
     background: var(--accent);
 }
 
+.modal-obtainium-btn {
+    border: 1px solid var(--accent);
+    background: rgba(88, 166, 255, 0.12);
+    color: var(--accent);
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.modal-obtainium-btn:hover {
+    background: rgba(88, 166, 255, 0.25);
+    border-color: var(--accent);
+}
+
 .modal-close {
     width: 34px;
     height: 34px;
@@ -510,6 +535,131 @@ body.modal-open {
 .modal-body {
     overflow: auto;
     padding: 14px 16px 16px;
+}
+
+.obtainium-instructions {
+    color: var(--text-primary);
+}
+
+.obtainium-instructions h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+    color: var(--text-primary);
+}
+
+.obtainium-instructions ol {
+    padding-left: 20px;
+    margin: 0;
+}
+
+.obtainium-instructions li {
+    margin-bottom: 14px;
+    line-height: 1.5;
+}
+
+.obtainium-instructions a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    font-weight: 700;
+}
+
+.obtainium-instructions a:hover {
+    color: var(--text-primary);
+}
+
+.instruction-code {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 0;
+    padding: 10px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+}
+
+.instruction-code code {
+    flex: 1;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: var(--accent);
+    overflow: auto;
+    word-break: break-all;
+}
+
+.copy-btn {
+    padding: 6px 12px;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 700;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+}
+
+.copy-btn:hover {
+    opacity: 0.9;
+}
+
+.filter-examples {
+    margin: 8px 0 0 0;
+}
+
+.example {
+    padding: 8px;
+    margin-bottom: 8px;
+    background: rgba(88, 166, 255, 0.08);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+}
+
+.example strong {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin-bottom: 4px;
+}
+
+.example code {
+    display: block;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    background: var(--bg-tertiary);
+    padding: 6px;
+    border-radius: 3px;
+    overflow: auto;
+    word-break: break-all;
+}
+
+.code-with-copy {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+.code-with-copy code {
+    flex: 1;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    background: var(--bg-tertiary);
+    padding: 6px;
+    border-radius: 3px;
+    overflow: auto;
+    word-break: break-all;
+    margin: 0 !important;
+    display: block !important;
+}
+
+.code-with-copy .copy-btn {
+    flex-shrink: 0;
 }
 
 .modal-build-card {
