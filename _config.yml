@@ -1,0 +1,15 @@
+# GitHub Pages Configuration
+title: ReVanced Builds
+description: Download the latest ReVanced patched apps
+url: https://nullcpy.github.io/
+repository: nullcpy/nullcpy.github.io
+
+# Theme (optional)
+theme: null
+
+# Build settings
+markdown: kramdown
+exclude:
+  - README.md
+  - .gitignore
+  - .nojekyll
