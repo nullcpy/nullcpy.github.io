@@ -325,7 +325,7 @@ function renderAppCards(apps) {
     currentAppCatalog = apps;
 
     if (apps.length === 0) {
-        buildsContainer.innerHTML = '<div class="no-results">No apps found. Try adjusting your filters or search.</div>';
+        buildsContainer.innerHTML = '<div class="no-results">No apps found.</div>';
         return;
     }
 
