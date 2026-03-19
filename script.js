@@ -136,10 +136,10 @@ async function loadReleases() {
         }
 
         allReleases = await response.json();
-        
+
         // Cache the releases
         cacheReleases(allReleases);
-        
+
         document.getElementById('loading').style.display = 'none';
         filterAndRenderReleases();
 
@@ -147,7 +147,7 @@ async function loadReleases() {
         console.error('Error loading releases:', error);
         document.getElementById('loading').style.display = 'none';
         document.getElementById('error').style.display = 'block';
-        document.getElementById('error').textContent = 
+        document.getElementById('error').textContent =
             `Failed to load releases: ${error.message}. Make sure you've configured the owner and repo in the script.`;
     }
 }
@@ -156,16 +156,16 @@ async function loadReleases() {
 function getCachedReleases() {
     const cached = localStorage.getItem('releases_cache');
     const timestamp = localStorage.getItem('releases_cache_time');
-    
+
     if (!cached || !timestamp) return null;
-    
+
     const age = (Date.now() - parseInt(timestamp)) / (1000 * 60);
     if (age > CONFIG.cacheDuration) {
         localStorage.removeItem('releases_cache');
         localStorage.removeItem('releases_cache_time');
         return null;
     }
-    
+
     return JSON.parse(cached);
 }
 
@@ -272,12 +272,12 @@ function buildAppCatalog(releases, query = '') {
             patches: Array.from(app.patches.values()).sort((a, b) =>
                 new Date(b.latestPublishedAt) - new Date(a.latestPublishedAt)
             )
-            .map(patch => ({
-                ...patch,
-                builds: Array.from(patch.builds.values()).sort((a, b) =>
-                    new Date(b.publishedAt) - new Date(a.publishedAt)
-                )
-            }))
+                .map(patch => ({
+                    ...patch,
+                    builds: Array.from(patch.builds.values()).sort((a, b) =>
+                        new Date(b.publishedAt) - new Date(a.publishedAt)
+                    )
+                }))
         }))
         .filter(app => app.patches.length > 0)
         .sort((a, b) => a.appName.localeCompare(b.appName));
@@ -323,7 +323,7 @@ function getBuildNumberLabel(release) {
 function renderAppCards(apps) {
     const buildsContainer = document.getElementById('builds');
     currentAppCatalog = apps;
-    
+
     if (apps.length === 0) {
         buildsContainer.innerHTML = '<div class="no-results">No apps found. Try adjusting your filters or search.</div>';
         return;
@@ -446,7 +446,7 @@ function openObtainiumModal() {
     modal.classList.add('open');
     modal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('modal-open');
-    
+
     const body = document.getElementById('obtainiumBody');
     body.innerHTML = createObtainiumInstructions();
 }
@@ -513,7 +513,7 @@ function createObtainiumInstructions() {
                                 <button type="button" class="copy-btn" ${copyCode(specificRegex)}>Copy</button>
                             </div>
                         </div>`;
-    
+
     return `
         <div class="obtainium-instructions">
             <ol>
@@ -762,7 +762,7 @@ function parseAssetDisplay(filename, arch, fileType) {
 
     const knownPatchTokens = new Set(['revanced', 'morphe', 'anddea']);
     const variantKeywords = new Set(['exp', 'nord', 'mocha', 'privacy', 'materialu']);
-    
+
     let patchStartIndex = preMetaTokens.findIndex(token => knownPatchTokens.has(token.toLowerCase()));
 
     if (patchStartIndex < 0) {
@@ -771,14 +771,14 @@ function parseAssetDisplay(filename, arch, fileType) {
 
     const appTokens = preMetaTokens.slice(0, patchStartIndex);
     let patchTokens = preMetaTokens.slice(patchStartIndex);
-    
+
     // Extract variant keywords from the end of patch tokens
     let variant = null;
     while (patchTokens.length > 1 && variantKeywords.has(patchTokens[patchTokens.length - 1].toLowerCase())) {
         variant = patchTokens[patchTokens.length - 1];
         patchTokens = patchTokens.slice(0, -1);
     }
-    
+
     const version = versionIndex >= 0 ? tokens[versionIndex] : 'Version unknown';
     const appSlug = (appTokens.length > 0 ? appTokens : preMetaTokens).join('-').toLowerCase();
     const patchSlug = (patchTokens.length > 0 ? patchTokens : ['patched', 'build']).join('-').toLowerCase();
@@ -816,7 +816,9 @@ function formatBrandDisplayName(value) {
         vpn: 'VPN',
         reddit: 'Reddit',
         instagram: 'Instagram',
-        twitter: 'Twitter'
+        twitter: 'Twitter',
+        rvx: 'ReVanced Extended',
+        anddea: 'ReVanced Advanced'
     };
 
     return toTitleWords(value)
