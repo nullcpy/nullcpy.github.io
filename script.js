@@ -556,7 +556,7 @@ function buildObtainiumRegexFromDownloadUrl(downloadUrl) {
         ? nameWithoutExt.replace(new RegExp(`-${escapeRegex(arch)}$`, 'i'), '')
         : nameWithoutExt;
     const baseName = nameWithoutArch
-        .replace(/-v?\d+(?:[._-]\d+){1,}[a-z0-9]*/i, '')
+        .replace(/-v?\d[\w.-]*$/i, '')
         .replace(/-+$/g, '');
 
     if (!baseName) {
