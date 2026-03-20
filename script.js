@@ -464,55 +464,46 @@ function createObtainiumInstructions() {
     const app = currentAppCatalog.find(item => item.appKey === activeModalAppKey);
     const patch = app ? app.patches.find(item => item.patchKey === activeModalPatchKey) : null;
 
-    const patchAssets = patch ? patch.builds.flatMap(build => build.assets || []) : [];
-    const parsedSample = patchAssets.find(asset => asset?.parsed)?.parsed || null;
+    const filteredBuilds = patch ? getFilteredBuildsForFilter(patch, modalBuildFilter) : [];
+    const fallbackBuilds = patch ? getFilteredBuildsForFilter(patch, 'all') : [];
+    const sourceBuilds = filteredBuilds.length > 0 ? filteredBuilds : fallbackBuilds;
+    const patchAssets = sourceBuilds.flatMap(build => build.assets || []);
 
-    const appSlug = parsedSample?.appSlug || slugifyForRegex(app?.appName || 'app');
-    const patchSlug = parsedSample?.patchSlug || slugifyForRegex(patch?.patchName || 'patch');
+    const regexMap = new Map();
+    patchAssets
+        .filter(asset => (asset?.name || '').toLowerCase().endsWith('.apk'))
+        .forEach(asset => {
+            const result = buildObtainiumRegexFromDownloadUrl(asset.browser_download_url);
+            if (!result?.regex || regexMap.has(result.regex)) {
+                return;
+            }
 
-    const variantBuilds = patch ? getFilteredBuildsForFilter(patch, 'variant') : [];
-    const variantOptions = Array.from(new Set(
-        variantBuilds
-            .flatMap(build => build.assets || [])
-            .map(asset => (asset?.parsed?.variant || '').toLowerCase())
-            .filter(Boolean)
-    ));
+            const appLabel = asset?.parsed?.appName || app?.appName || 'App';
+            const patchLabel = asset?.parsed?.patchName || patch?.patchName || 'patch';
+            const archLabel = result.arch ? ` (${formatObtainiumArchLabel(result.arch)})` : '';
+            regexMap.set(result.regex, `${appLabel} ${patchLabel}${archLabel}`);
+        });
 
-    const specificRegex = `^${appSlug}-${patchSlug}.*\\.apk$`;
-    const isVariantFilter = modalBuildFilter === 'variant';
+    const regexEntries = Array.from(regexMap.entries()).map(([regex, label]) => ({ regex, label }));
 
-    const copyCode = (text) => `onclick="navigator.clipboard.writeText('${text}').then(() => { this.textContent='Copied!'; setTimeout(() => { this.textContent='Copy'; }, 2000); })" `;
+    const copyCode = (text) => {
+        const escaped = escapeForOnclickCopy(text);
+        return `onclick="navigator.clipboard.writeText('${escaped}').then(() => { this.textContent='Copied!'; setTimeout(() => { this.textContent='Copy'; }, 2000); })" `;
+    };
 
-    const selectedExamplesMarkup = isVariantFilter
-        ? (variantOptions.length > 0
-            ? variantOptions.map(variant => {
-                const variantRegex = `^${appSlug}-${patchSlug}-${variant}.*\\.apk$`;
-                const variantLabel = formatBrandDisplayName(variant);
-                return `
-                        <div class="example">
-                            <strong>${app?.appName || 'App'} ${patch?.patchName || 'patch'} ${variantLabel}:</strong>
-                            <div class="code-with-copy">
-                                <code>${escapeHtml(variantRegex)}</code>
-                                <button type="button" class="copy-btn" ${copyCode(variantRegex)}>Copy</button>
-                            </div>
-                        </div>`;
-            }).join('')
-            : `
-                        <div class="example">
-                            <strong>${app?.appName || 'App'} ${patch?.patchName || 'patch'} variants:</strong>
-                            <div class="code-with-copy">
-                                <code>${escapeHtml(`^${appSlug}-${patchSlug}-.*\\.apk$`)}</code>
-                                <button type="button" class="copy-btn" ${copyCode(`^${appSlug}-${patchSlug}-.*\\.apk$`)}>Copy</button>
-                            </div>
-                        </div>`)
+    const selectedExamplesMarkup = regexEntries.length > 0
+        ? regexEntries.map(({ regex, label }) => `
+                    <div class="example">
+                        <strong>${escapeHtml(label)}</strong>
+                        <div class="code-with-copy">
+                            <code>${escapeHtml(regex)}</code>
+                            <button type="button" class="copy-btn" ${copyCode(regex)}>Copy</button>
+                        </div>
+                    </div>`).join('')
         : `
-                        <div class="example">
-                            <strong>${app?.appName || 'App'} with ${patch?.patchName || 'patch'}:</strong>
-                            <div class="code-with-copy">
-                                <code>${escapeHtml(specificRegex)}</code>
-                                <button type="button" class="copy-btn" ${copyCode(specificRegex)}>Copy</button>
-                            </div>
-                        </div>`;
+                    <div class="example">
+                        <strong>No APK URLs found for this patch.</strong>
+                    </div>`;
 
     return `
         <div class="obtainium-instructions">
@@ -526,7 +517,7 @@ function createObtainiumInstructions() {
                         <button type="button" class="copy-btn" ${copyCode(repoUrl)}>Copy</button>
                     </div>
                 </li>
-                <li>Scroll down to Filter APKs by regular expression and enter:
+                <li>Scroll down to Filter APKs by regular expression and use any of these unique regex values (generated from download URLs):
                     <div class="filter-examples">
                         ${selectedExamplesMarkup}
                     </div>
@@ -535,6 +526,87 @@ function createObtainiumInstructions() {
             </ol>
         </div>
     `;
+}
+
+function buildObtainiumRegexFromDownloadUrl(downloadUrl) {
+    if (!downloadUrl) {
+        return null;
+    }
+
+    let url;
+    try {
+        url = new URL(downloadUrl);
+    } catch (error) {
+        return null;
+    }
+
+    const pathParts = url.pathname.split('/').filter(Boolean);
+    const assetName = pathParts[pathParts.length - 1] ? decodeURIComponent(pathParts[pathParts.length - 1]) : '';
+    if (!assetName.toLowerCase().endsWith('.apk')) {
+        return null;
+    }
+
+    const nameWithoutExt = assetName.replace(/\.apk$/i, '');
+    const arch = extractArchFromAssetName(nameWithoutExt);
+    const nameWithoutArch = arch
+        ? nameWithoutExt.replace(new RegExp(`-${escapeRegex(arch)}$`, 'i'), '')
+        : nameWithoutExt;
+    const baseName = nameWithoutArch
+        .replace(/-v?\d+(?:[._-]\d+){1,}[a-z0-9]*/i, '')
+        .replace(/-+$/g, '');
+
+    if (!baseName) {
+        return null;
+    }
+
+    const regex = arch
+        ? `^${escapeRegex(baseName)}.*-${escapeRegex(arch)}\\.apk$`
+        : `^${escapeRegex(baseName)}.*\\.apk$`;
+
+    return { regex, arch, assetName };
+}
+
+function extractArchFromAssetName(nameWithoutExt) {
+    const knownArchs = [
+        'arm64-v8a',
+        'arm64',
+        'aarch64',
+        'armeabi-v7a',
+        'arm-v7a',
+        'arm32',
+        'x86_64',
+        'x86',
+        'universal',
+        'all'
+    ];
+
+    const lowerName = (nameWithoutExt || '').toLowerCase();
+    return knownArchs.find(arch => lowerName.endsWith(`-${arch}`)) || null;
+}
+
+function formatObtainiumArchLabel(arch) {
+    const normalized = String(arch || '').toLowerCase();
+    const map = {
+        'arm64-v8a': 'arm64',
+        arm64: 'arm64',
+        aarch64: 'arm64',
+        'arm-v7a': 'arm32',
+        'armeabi-v7a': 'arm32',
+        arm32: 'arm32',
+        all: 'universal'
+    };
+
+    return map[normalized] || normalized;
+}
+
+function escapeRegex(value) {
+    return String(value || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function escapeForOnclickCopy(value) {
+    return String(value || '')
+        .replace(/\\/g, '\\\\')
+        .replace(/'/g, "\\'");
 }
 
 function renderOpenPatchModal() {
