@@ -1,6 +1,5 @@
 // Configuration
 const CONFIG = {
-    // Change this to your GitHub username/org and repo
     owner: 'nullcpy',
     repo: 'rvb',
     // Cache duration in minutes
@@ -505,24 +504,29 @@ function createObtainiumInstructions() {
                         <strong>No APK URLs found for this patch.</strong>
                     </div>`;
 
+    const betaPrereleaseStepMarkup = modalBuildFilter === 'beta'
+        ? '<li>Enable include prereleases.</li>'
+        : '';
+
     return `
         <div class="obtainium-instructions">
             <ol>
                 <li>Download and install Obtainium from <a href="${obtainiumLatestUrl}" target="_blank" rel="noopener noreferrer">GitHub</a>.</li>
                 <li>Open Obtainium on your device.</li>
                 <li>Tap Add app.</li>
-                <li>In the App source URL box, enter:
+                <li>In the app source URL box, enter:
                     <div class="instruction-code">
                         <code>${escapeHtml(repoUrl)}</code>
                         <button type="button" class="copy-btn" ${copyCode(repoUrl)}>Copy</button>
                     </div>
                 </li>
-                <li>Scroll down to Filter APKs by regular expression and use any of these unique regex values (generated from download URLs):
+                <li>Scroll down to filter APKs by regular expression and enter regex for the APK you want:
                     <div class="filter-examples">
                         ${selectedExamplesMarkup}
                     </div>
                 </li>
-                <li>Tap Add to begin downloading. In future, Obtainium will automatically fetch updates when new releases are published.</li>
+                ${betaPrereleaseStepMarkup}
+                <li>Tap add to begin downloading. In future, Obtainium will automatically fetch updates when new releases are published.</li>
             </ol>
         </div>
     `;
