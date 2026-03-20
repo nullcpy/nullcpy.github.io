@@ -818,7 +818,10 @@ function formatBrandDisplayName(value) {
         instagram: 'Instagram',
         twitter: 'Twitter',
         rvx: 'ReVanced Extended',
-        anddea: 'ReVanced Advanced'
+        anddea: 'ReVanced Advanced',
+        exp: 'Experimental',
+        mocha: 'Mocha Theme',
+        nord: 'Nord Theme'
     };
 
     return toTitleWords(value)
