@@ -821,7 +821,8 @@ function formatBrandDisplayName(value) {
         anddea: 'ReVanced Advanced',
         exp: 'Experimental',
         mocha: 'Mocha Theme',
-        nord: 'Nord Theme'
+        nord: 'Nord Theme',
+        materialu: 'Material You'
     };
 
     return toTitleWords(value)
