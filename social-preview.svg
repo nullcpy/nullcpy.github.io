@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="NullStore">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#161b22"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#58a6ff"/>
+      <stop offset="100%" stop-color="#3fb950"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="80" y="80" width="1040" height="470" rx="32" fill="#0b1220" stroke="#30363d"/>
+  <rect x="525" y="150" width="150" height="150" rx="24" fill="#0b1220" stroke="#58a6ff" stroke-width="8"/>
+  <path d="M555 175v-14c0-22 16-38 45-38s45 16 45 38v14" fill="none" stroke="#3fb950" stroke-width="10" stroke-linecap="round"/>
+  <text x="600" y="227" text-anchor="middle" dominant-baseline="middle" font-family="Segoe UI,Arial,sans-serif" font-size="80" font-weight="700" fill="#58a6ff">&#248;</text>
+  <text x="600" y="402" text-anchor="middle" dominant-baseline="middle" font-family="Segoe UI,Arial,sans-serif" font-size="92" font-weight="700" fill="url(#accent)">NullStore</text>
+  <text x="600" y="494" text-anchor="middle" dominant-baseline="middle" font-family="Segoe UI,Arial,sans-serif" font-size="36" fill="#8b949e">Download latest patched apps.</text>
+</svg>
