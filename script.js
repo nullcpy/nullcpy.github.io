@@ -572,7 +572,7 @@ function createMicrogNoticeMarkup() {
     return `
         <div class="microg-note">
             <div class="microg-note-title">MicroG Required for Non-Root Login</div>
-            <div class="microg-note-text">Install one provider below before opening the app.</div>
+            <div class="microg-note-text">Install one from below before opening the app.</div>
             <div class="microg-note-links">
                 <a href="https://github.com/MorpheApp/MicroG-RE/releases/latest" target="_blank" rel="noopener noreferrer">Morphe</a>
                 <a href="https://github.com/ReVanced/GmsCore/releases/latest" target="_blank" rel="noopener noreferrer">ReVanced</a>
