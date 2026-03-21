@@ -369,26 +369,6 @@ function createMicrogNoticeMarkup() {
     `;
 }
 
-function createBuildInfoMarkup(label, info, badgeClass) {
-    if (!info) {
-        return `
-            <div class="build-info-box ${badgeClass}">
-                <div class="build-info-label">${label}</div>
-                <div class="build-info-value">N/A</div>
-                <div class="build-info-date">No build found</div>
-            </div>
-        `;
-    }
-
-    return `
-        <div class="build-info-box ${badgeClass}">
-            <div class="build-info-label">${label}</div>
-            <div class="build-info-value">${escapeHtml(info.build)}</div>
-            <div class="build-info-date">${formatDate(info.publishedAt)}</div>
-        </div>
-    `;
-}
-
 function createPatchMarkup(app, patch) {
     const buildCount = patch.builds.length;
 
@@ -584,21 +564,6 @@ function extractArchFromAssetName(nameWithoutExt) {
 
     const lowerName = (nameWithoutExt || '').toLowerCase();
     return knownArchs.find(arch => lowerName.endsWith(`-${arch}`)) || null;
-}
-
-function formatObtainiumArchLabel(arch) {
-    const normalized = String(arch || '').toLowerCase();
-    const map = {
-        'arm64-v8a': 'arm64',
-        arm64: 'arm64',
-        aarch64: 'arm64',
-        'arm-v7a': 'arm32',
-        'armeabi-v7a': 'arm32',
-        arm32: 'arm32',
-        all: 'universal'
-    };
-
-    return map[normalized] || normalized;
 }
 
 function escapeRegex(value) {
@@ -867,14 +832,6 @@ function parseAssetDisplay(filename, arch, fileType) {
         archLabel: formatArchitectureLabel(arch, fileType),
         fileType
     };
-}
-
-function slugifyForRegex(value) {
-    return (value || '')
-        .toLowerCase()
-        .trim()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/^-+|-+$/g, '') || 'app';
 }
 
 function toTitleWords(value) {
