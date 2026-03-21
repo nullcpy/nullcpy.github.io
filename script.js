@@ -479,8 +479,8 @@ function createObtainiumInstructions() {
 
             const appLabel = asset?.parsed?.appName || app?.appName || 'App';
             const patchLabel = asset?.parsed?.patchName || patch?.patchName || 'patch';
-            const archLabel = result.arch ? ` (${formatObtainiumArchLabel(result.arch)})` : '';
-            regexMap.set(result.regex, `${appLabel} ${patchLabel}${archLabel}`);
+            const variantLabel = asset?.parsed?.variant ? ` ${escapeHtml(asset.parsed.variant)}` : '';
+            regexMap.set(result.regex, `${appLabel} ${patchLabel}${variantLabel}`);
         });
 
     const regexEntries = Array.from(regexMap.entries()).map(([regex, label]) => ({ regex, label }));
@@ -563,9 +563,7 @@ function buildObtainiumRegexFromDownloadUrl(downloadUrl) {
         return null;
     }
 
-    const regex = arch
-        ? `^${escapeRegex(baseName)}.*-${escapeRegex(arch)}\\.apk$`
-        : `^${escapeRegex(baseName)}.*\\.apk$`;
+    const regex = `^${escapeRegex(baseName)}.*\\.apk$`;
 
     return { regex, arch, assetName };
 }
