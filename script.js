@@ -9,10 +9,32 @@ const CONFIG = {
 // State
 let allReleases = [];
 let searchTerm = '';
+let appViewFilter = 'all';
+let dynamicAppFilters = [];
 let currentAppCatalog = [];
 let activeModalAppKey = null;
 let activeModalPatchKey = null;
 let modalBuildFilter = 'all';
+let themeMode = 'system';
+
+const SHARED_APP_WORD_MIN_COUNT = 3;
+const SHARED_APP_WORD_FALLBACK_COUNT = 2;
+const SHARED_APP_WORD_STOPLIST = new Set([
+    'revanced',
+    'patched',
+    'patch',
+    'extended',
+    'advanced',
+    'theme',
+    'edition',
+    'android',
+    'app',
+    'google',
+    'meta',
+    'facebook',
+    'instagram',
+    'messenger'
+]);
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
@@ -24,32 +46,43 @@ document.addEventListener('DOMContentLoaded', () => {
 // Theme Management
 function setupTheme() {
     const savedTheme = localStorage.getItem('theme');
-    const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+    themeMode = savedTheme === 'light' || savedTheme === 'dark' || savedTheme === 'system'
+        ? savedTheme
+        : 'system';
 
-    if (savedTheme) {
-        applyTheme(savedTheme);
-    } else {
-        applyTheme(prefersLight ? 'light' : 'dark');
-    }
+    applyTheme(themeMode);
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: light)');
-    mediaQuery.addEventListener('change', (event) => {
-        if (localStorage.getItem('theme')) {
+    mediaQuery.addEventListener('change', () => {
+        if (themeMode !== 'system') {
             return;
         }
 
-        applyTheme(event.matches ? 'light' : 'dark');
+        applyTheme('system');
     });
 }
 
 function applyTheme(theme) {
-    const isLight = theme === 'light';
+    const isLight = theme === 'light'
+        ? true
+        : theme === 'dark'
+            ? false
+            : window.matchMedia('(prefers-color-scheme: light)').matches;
+
     document.body.classList.toggle('light-mode', isLight);
-    document.getElementById('themeBtn').textContent = isLight ? '🌙' : '☀️';
+    const themeBtn = document.getElementById('themeBtn');
+    themeBtn.textContent = theme === 'system' ? '🖥️' : theme === 'light' ? '☀️' : '🌙';
+    themeBtn.setAttribute('aria-label', `Theme mode: ${theme}`);
 }
 
 document.getElementById('themeBtn').addEventListener('click', () => {
-    const nextTheme = document.body.classList.contains('light-mode') ? 'dark' : 'light';
+    const nextTheme = themeMode === 'system'
+        ? 'light'
+        : themeMode === 'light'
+            ? 'dark'
+            : 'system';
+
+    themeMode = nextTheme;
     localStorage.setItem('theme', nextTheme);
     applyTheme(nextTheme);
 });
@@ -61,13 +94,33 @@ function setupEventListeners() {
         filterAndRenderReleases();
     });
 
+    const appFilterButtons = document.getElementById('appFilterButtons');
+    if (appFilterButtons) {
+        appFilterButtons.addEventListener('click', (e) => {
+            const filterBtn = e.target.closest('.filter-btn');
+            if (!filterBtn) {
+                return;
+            }
+
+            appViewFilter = filterBtn.dataset.filter || 'all';
+            updateAppFilterButtons();
+            filterAndRenderReleases();
+        });
+    }
+
     document.getElementById('builds').addEventListener('click', (e) => {
-        const trigger = e.target.closest('.patch-trigger');
+        const collapsedCard = e.target.closest('.app-card:not([open])');
+        if (collapsedCard && !e.target.closest('.app-card-summary')) {
+            collapsedCard.open = true;
+            return;
+        }
+
+        const trigger = e.target.closest('.patch-open-box');
         if (!trigger) {
             return;
         }
 
-        openPatchModal(trigger.dataset.appKey, trigger.dataset.patchKey);
+        openPatchModal(trigger.dataset.appKey, trigger.dataset.patchKey, trigger.dataset.filter || 'all');
     });
 
     document.getElementById('patchModal').addEventListener('click', (e) => {
@@ -176,9 +229,53 @@ function cacheReleases(releases) {
 // Filter and render releases
 function filterAndRenderReleases() {
     const filtered = allReleases.filter(r => !r.draft);
+    const fullCatalog = buildAppCatalog(filtered, '');
+    dynamicAppFilters = getDynamicAppFilters(fullCatalog);
+    renderDynamicAppFilterButtons(dynamicAppFilters);
+
+    if (appViewFilter.startsWith('word-') && !dynamicAppFilters.some(filter => filter.key === appViewFilter)) {
+        appViewFilter = 'all';
+    }
+
     const appCatalog = buildAppCatalog(filtered, searchTerm);
-    renderAppCards(appCatalog);
+    const filteredApps = applyAppViewFilter(appCatalog);
+    renderAppCards(filteredApps);
+    updateAppFilterButtons();
     document.getElementById('loading').style.display = 'none';
+}
+
+function updateAppFilterButtons() {
+    document.querySelectorAll('#appFilterButtons .filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.filter === appViewFilter);
+    });
+}
+
+function getAppLatestPublishedAt(app) {
+    return app.patches.reduce((latest, patch) => {
+        const patchTime = new Date(patch.latestPublishedAt).getTime();
+        return Number.isNaN(patchTime) ? latest : Math.max(latest, patchTime);
+    }, 0);
+}
+
+function applyAppViewFilter(apps) {
+    if (appViewFilter === 'google') {
+        return apps.filter(app => isGoogleApp(app.appName));
+    }
+
+    if (appViewFilter === 'meta') {
+        return apps.filter(app => isMetaApp(app.appName));
+    }
+
+    if (appViewFilter.startsWith('word-')) {
+        const word = appViewFilter.slice(5);
+        return apps.filter(app => getAppNameWords(app.appName).includes(word));
+    }
+
+    if (appViewFilter === 'recent') {
+        return [...apps].sort((a, b) => getAppLatestPublishedAt(b) - getAppLatestPublishedAt(a));
+    }
+
+    return apps;
 }
 
 function buildAppCatalog(releases, query = '') {
@@ -226,6 +323,9 @@ function buildAppCatalog(releases, query = '') {
                     patchName: parsed.patchName,
                     latestVersion: parsed.version,
                     latestPublishedAt: release.published_at,
+                    latestStable: null,
+                    latestBeta: null,
+                    latestVariant: null,
                     builds: new Map()
                 });
             }
@@ -237,6 +337,13 @@ function buildAppCatalog(releases, query = '') {
             if (releaseDate > patchDate) {
                 patchEntry.latestVersion = parsed.version;
                 patchEntry.latestPublishedAt = release.published_at;
+            }
+
+            const buildLabel = getBuildNumberLabel(release);
+            setLatestPatchMeta(patchEntry, releaseType, parsed.version, buildLabel, release.published_at);
+
+            if (parsed.variant) {
+                setLatestVariantMeta(patchEntry, parsed.variant, parsed.version, buildLabel, release.published_at);
             }
 
             const buildKey = String(release.id);
@@ -314,6 +421,36 @@ function setLatestBuildMeta(appEntry, releaseType, release) {
     }
 }
 
+function setLatestPatchMeta(patchEntry, releaseType, version, build, publishedAt) {
+    const key = releaseType === 'beta' ? 'latestBeta' : 'latestStable';
+    const current = patchEntry[key];
+    const currentDate = current ? new Date(current.publishedAt).getTime() : 0;
+    const releaseDate = new Date(publishedAt).getTime();
+
+    if (!current || releaseDate > currentDate) {
+        patchEntry[key] = {
+            version,
+            build,
+            publishedAt
+        };
+    }
+}
+
+function setLatestVariantMeta(patchEntry, variant, version, build, publishedAt) {
+    const current = patchEntry.latestVariant;
+    const currentDate = current ? new Date(current.publishedAt).getTime() : 0;
+    const releaseDate = new Date(publishedAt).getTime();
+
+    if (!current || releaseDate > currentDate) {
+        patchEntry.latestVariant = {
+            variant,
+            version,
+            build,
+            publishedAt
+        };
+    }
+}
+
 function getBuildNumberLabel(release) {
     return String(release.tag_name || release.name || 'N/A');
 }
@@ -336,19 +473,21 @@ function createAppCard(app) {
     const microgNoticeMarkup = isGoogleApp(app.appName) ? createMicrogNoticeMarkup() : '';
 
     return `
-        <div class="build-card app-card">
-            <div class="build-header">
+        <details class="build-card app-card">
+            <summary class="build-header app-card-summary">
                 <div class="app-name">${escapeHtml(app.appName)}</div>
                 <span class="patch-count">${app.patches.length} patch${app.patches.length > 1 ? 'es' : ''}</span>
-            </div>
+            </summary>
 
-            ${microgNoticeMarkup}
+            <div class="app-card-body">
+                ${microgNoticeMarkup}
 
-            <div class="patches-title">Available patches</div>
-            <div class="patches-list">
-                ${patchesMarkup}
+                <div class="patches-title">Available patches</div>
+                <div class="patches-list">
+                    ${patchesMarkup}
+                </div>
             </div>
-        </div>
+        </details>
     `;
 }
 
@@ -357,10 +496,83 @@ function isGoogleApp(appName) {
     return name.includes('youtube') || name.includes('google');
 }
 
+function isMetaApp(appName) {
+    const name = normalizeForSearch(appName);
+    return name.includes('facebook') || name.includes('instagram') || name.includes('messenger');
+}
+
+function getDynamicAppFilters(apps) {
+    const wordToAppKeys = new Map();
+
+    apps.forEach(app => {
+        const words = getAppNameWords(app.appName);
+        words.forEach(word => {
+            if (!wordToAppKeys.has(word)) {
+                wordToAppKeys.set(word, new Set());
+            }
+
+            wordToAppKeys.get(word).add(app.appKey);
+        });
+    });
+
+    const allWordEntries = Array.from(wordToAppKeys.entries());
+    const preferredEntries = allWordEntries.filter(([, appKeys]) => appKeys.size >= SHARED_APP_WORD_MIN_COUNT);
+    const fallbackEntries = allWordEntries.filter(([, appKeys]) => appKeys.size >= SHARED_APP_WORD_FALLBACK_COUNT);
+    const selectedEntries = preferredEntries.length > 0 ? preferredEntries : fallbackEntries;
+
+    return selectedEntries
+        .sort((a, b) => {
+            const byCount = b[1].size - a[1].size;
+            if (byCount !== 0) {
+                return byCount;
+            }
+
+            return a[0].localeCompare(b[0]);
+        })
+        .map(([word]) => ({
+            key: `word-${word}`,
+            label: toFilterLabel(word)
+        }));
+}
+
+function renderDynamicAppFilterButtons(filters) {
+    const filterButtons = document.getElementById('appFilterButtons');
+    if (!filterButtons) {
+        return;
+    }
+
+    filterButtons.querySelectorAll('.dynamic-filter-btn').forEach(btn => btn.remove());
+
+    filters.forEach(filter => {
+        const button = document.createElement('button');
+        button.className = 'filter-btn dynamic-filter-btn';
+        button.dataset.filter = filter.key;
+        button.type = 'button';
+        button.textContent = filter.label;
+        filterButtons.appendChild(button);
+    });
+}
+
+function getAppNameWords(appName) {
+    const words = (appName || '')
+        .toLowerCase()
+        .split(/[^a-z0-9]+/)
+        .filter(Boolean)
+        .filter(word => word.length >= 3)
+        .filter(word => !SHARED_APP_WORD_STOPLIST.has(word));
+
+    return Array.from(new Set(words));
+}
+
+function toFilterLabel(value) {
+    return value.replace(/\b[a-z]/g, char => char.toUpperCase());
+}
+
 function createMicrogNoticeMarkup() {
     return `
         <div class="microg-note">
-            <div class="microg-note-title">🚨 Non-rooted users need MicroG to login</div>
+            <div class="microg-note-title">MicroG Required for Non-Root Login</div>
+            <div class="microg-note-text">Install one provider below before opening the app.</div>
             <div class="microg-note-links">
                 <a href="https://github.com/MorpheApp/MicroG-RE/releases/latest" target="_blank" rel="noopener noreferrer">Morphe</a>
                 <a href="https://github.com/ReVanced/GmsCore/releases/latest" target="_blank" rel="noopener noreferrer">ReVanced</a>
@@ -371,19 +583,78 @@ function createMicrogNoticeMarkup() {
 
 function createPatchMarkup(app, patch) {
     const buildCount = patch.builds.length;
+    const allMeta = [patch.latestStable, patch.latestBeta, patch.latestVariant].filter(Boolean);
+    const latestBuild = allMeta.length > 0
+        ? allMeta.reduce((a, b) => new Date(a.publishedAt) > new Date(b.publishedAt) ? a : b).build
+        : null;
+    
+    const patchMetaBoxes = [];
+
+    if (patch.latestStable) {
+        patchMetaBoxes.push(`
+            <button class="patch-open-box stable" data-app-key="${app.appKey}" data-patch-key="${patch.patchKey}" data-filter="stable" type="button">
+                <span class="patch-meta-label">Stable</span>
+                <span class="patch-meta-value">${escapeHtml(patch.latestStable.version)}</span>
+                <span class="patch-meta-build">Build ${escapeHtml(patch.latestStable.build || 'N/A')}</span>
+                <span class="patch-meta-date">${formatDate(patch.latestStable.publishedAt)}</span>
+            </button>
+        `);
+    }
+
+    if (patch.latestBeta) {
+        patchMetaBoxes.push(`
+            <button class="patch-open-box beta" data-app-key="${app.appKey}" data-patch-key="${patch.patchKey}" data-filter="beta" type="button">
+                <span class="patch-meta-label">Beta</span>
+                <span class="patch-meta-value">${escapeHtml(patch.latestBeta.version)}</span>
+                <span class="patch-meta-build">Build ${escapeHtml(patch.latestBeta.build || 'N/A')}</span>
+                <span class="patch-meta-date">${formatDate(patch.latestBeta.publishedAt)}</span>
+            </button>
+        `);
+    }
+
+    const variants = getUniqueVariants(patch);
+    variants.forEach(variant => {
+        const latestVariantBuild = getLatestVariantBuild(patch, variant);
+        if (latestVariantBuild) {
+            patchMetaBoxes.push(`
+                <button class="patch-open-box variant" data-app-key="${app.appKey}" data-patch-key="${patch.patchKey}" data-filter="variant-${variant}" type="button">
+                    <span class="patch-meta-label">${escapeHtml(variant)}</span>
+                    <span class="patch-meta-value">${escapeHtml(latestVariantBuild.version)}</span>
+                    <span class="patch-meta-build">Build ${escapeHtml(latestVariantBuild.build || 'N/A')}</span>
+                    <span class="patch-meta-date">${formatDate(latestVariantBuild.publishedAt)}</span>
+                </button>
+            `);
+        }
+    });
+
+    if (patchMetaBoxes.length === 0) {
+        patchMetaBoxes.push(`
+            <button class="patch-open-box" data-app-key="${app.appKey}" data-patch-key="${patch.patchKey}" data-filter="all" type="button">
+                <span class="patch-meta-label">Latest</span>
+                <span class="patch-meta-value">${escapeHtml(patch.latestVersion)}</span>
+                <span class="patch-meta-date">${formatDate(patch.latestPublishedAt)}</span>
+            </button>
+        `);
+    }
+
+    const buildCountBadge = `<span class="patch-build-count">${buildCount} build${buildCount > 1 ? 's' : ''}</span>`;
 
     return `
-        <button class="patch-trigger" data-app-key="${app.appKey}" data-patch-key="${patch.patchKey}" type="button">
+        <div class="patch-entry">
             <span class="patch-trigger-left">
-                <span class="patch-chip">${escapeHtml(patch.patchName)}</span>
-                <span class="patch-meta">${escapeHtml(patch.latestVersion)} • ${formatDate(patch.latestPublishedAt)}</span>
+                <span class="patch-chip-group">
+                    <span class="patch-chip">${escapeHtml(patch.patchName)}</span>
+                    ${buildCountBadge}
+                </span>
+                <span class="patch-meta-grid">
+                    ${patchMetaBoxes.join('')}
+                </span>
             </span>
-            <span class="patch-open-hint">${buildCount} build${buildCount > 1 ? 's' : ''}</span>
-        </button>
+        </div>
     `;
 }
 
-function openPatchModal(appKey, patchKey) {
+function openPatchModal(appKey, patchKey, preferredFilter = 'all') {
     activeModalAppKey = appKey;
     activeModalPatchKey = patchKey;
 
@@ -393,7 +664,20 @@ function openPatchModal(appKey, patchKey) {
     const hasBetaBuild = patch ? getFilteredBuildsForFilter(patch, 'beta').length > 0 : false;
     const hasVariantBuild = patch ? getFilteredBuildsForFilter(patch, 'variant').length > 0 : false;
 
-    if (hasStableBuild) {
+    const prefersStable = preferredFilter === 'stable' && hasStableBuild;
+    const prefersBeta = preferredFilter === 'beta' && hasBetaBuild;
+    const prefersVariant = (preferredFilter === 'variant' || preferredFilter.startsWith('variant-')) && getFilteredBuildsForFilter(patch, preferredFilter).length > 0;
+    const prefersVersion = preferredFilter.startsWith('version-') && getFilteredBuildsForFilter(patch, preferredFilter).length > 0;
+
+    if (prefersStable) {
+        modalBuildFilter = 'stable';
+    } else if (prefersBeta) {
+        modalBuildFilter = 'beta';
+    } else if (prefersVariant) {
+        modalBuildFilter = preferredFilter;
+    } else if (prefersVersion) {
+        modalBuildFilter = preferredFilter;
+    } else if (hasStableBuild) {
         modalBuildFilter = 'stable';
     } else if (hasBetaBuild) {
         modalBuildFilter = 'beta';
@@ -599,17 +883,65 @@ function renderOpenPatchModal() {
     body.innerHTML = createPatchModalContent(patch, modalBuildFilter);
 }
 
+function getUniqueVariants(patch) {
+    const variants = new Set();
+    (patch.builds || []).forEach(build => {
+        (build.assets || []).forEach(asset => {
+            if (asset?.parsed?.variant) {
+                variants.add(asset.parsed.variant);
+            }
+        });
+    });
+    return Array.from(variants).sort();
+}
+
+function getUniqueVersions(patch) {
+    const versions = new Set();
+    (patch.builds || []).forEach(build => {
+        if (build.version) {
+            versions.add(build.version);
+        }
+    });
+    return Array.from(versions).sort().reverse();
+}
+
+function getLatestVariantBuild(patch, variantName) {
+    let latestBuild = null;
+    let latestDate = 0;
+
+    (patch.builds || []).forEach(build => {
+        const hasVariant = (build.assets || []).some(asset => asset?.parsed?.variant === variantName);
+        if (hasVariant) {
+            const buildDate = new Date(build.publishedAt).getTime();
+            if (buildDate > latestDate) {
+                latestDate = buildDate;
+                latestBuild = {
+                    version: build.version,
+                    build: build.build,
+                    publishedAt: build.publishedAt
+                };
+            }
+        }
+    });
+
+    return latestBuild;
+}
+
 function updateModalFilterButtons(patch = null) {
     const hasStableBuild = patch ? getFilteredBuildsForFilter(patch, 'stable').length > 0 : true;
     const hasBetaBuild = patch ? getFilteredBuildsForFilter(patch, 'beta').length > 0 : true;
-    const hasVariantBuild = patch ? getFilteredBuildsForFilter(patch, 'variant').length > 0 : true;
+    const hasVariantBuild = patch ? getFilteredBuildsForFilter(patch, 'variant').length > 0 : false;
+    const variants = patch ? getUniqueVariants(patch) : [];
+    const versions = patch ? getUniqueVersions(patch) : [];
 
     if (modalBuildFilter === 'stable' && !hasStableBuild) {
         modalBuildFilter = hasBetaBuild ? 'beta' : hasVariantBuild ? 'variant' : 'all';
     } else if (modalBuildFilter === 'beta' && !hasBetaBuild) {
         modalBuildFilter = hasStableBuild ? 'stable' : hasVariantBuild ? 'variant' : 'all';
-    } else if (modalBuildFilter === 'variant' && !hasVariantBuild) {
+    } else if ((modalBuildFilter === 'variant' || modalBuildFilter.startsWith('variant-')) && !hasVariantBuild) {
         modalBuildFilter = hasStableBuild ? 'stable' : hasBetaBuild ? 'beta' : 'all';
+    } else if (modalBuildFilter.startsWith('version-') && !getFilteredBuildsForFilter(patch, modalBuildFilter).length > 0) {
+        modalBuildFilter = hasStableBuild ? 'stable' : hasBetaBuild ? 'beta' : hasVariantBuild ? 'variant' : 'all';
     }
 
     document.querySelectorAll('.modal-filter-btn').forEach(btn => {
@@ -620,12 +952,50 @@ function updateModalFilterButtons(patch = null) {
                 ? hasStableBuild
                 : filter === 'beta'
                     ? hasBetaBuild
-                    : hasVariantBuild;
+                    : filter === 'variant'
+                        ? hasVariantBuild
+                        : false;
 
         btn.style.display = available ? '' : 'none';
         btn.disabled = !available;
         btn.classList.toggle('active', available && filter === modalBuildFilter);
     });
+
+    const filterButtonsContainer = document.querySelector('.modal-filter-buttons');
+    
+    // Create individual variant buttons
+    if (filterButtonsContainer && variants.length > 0) {
+        const existingVariantBtns = filterButtonsContainer.querySelectorAll('.variant-btn');
+        existingVariantBtns.forEach(btn => btn.remove());
+
+        variants.forEach(variant => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'modal-filter-btn variant-btn';
+            btn.dataset.filter = `variant-${variant}`;
+            btn.textContent = variant;
+            btn.disabled = false;
+            btn.classList.toggle('active', `variant-${variant}` === modalBuildFilter);
+            filterButtonsContainer.appendChild(btn);
+        });
+    }
+
+    // Create version buttons
+    if (filterButtonsContainer && versions.length > 1) {
+        const existingVersionBtns = filterButtonsContainer.querySelectorAll('.version-btn');
+        existingVersionBtns.forEach(btn => btn.remove());
+
+        versions.forEach(version => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'modal-filter-btn version-btn';
+            btn.dataset.filter = `version-${version}`;
+            btn.textContent = version;
+            btn.disabled = false;
+            btn.classList.toggle('active', `version-${version}` === modalBuildFilter);
+            filterButtonsContainer.appendChild(btn);
+        });
+    }
 }
 
 function createPatchModalContent(patch, buildFilter = 'all') {
@@ -665,6 +1035,16 @@ function getFilteredAssets(build, buildFilter) {
 
     if (buildFilter === 'variant') {
         return assets.filter(asset => isVariantAsset(asset));
+    }
+
+    if (buildFilter.startsWith('variant-')) {
+        const variantName = buildFilter.slice(8);
+        return assets.filter(asset => asset?.parsed?.variant === variantName);
+    }
+
+    if (buildFilter.startsWith('version-')) {
+        const version = buildFilter.slice(8);
+        return assets.filter(asset => asset?.parsed?.version === version);
     }
 
     return assets;
@@ -877,10 +1257,10 @@ function formatArchitectureLabel(arch, fileType) {
 // Utility functions
 function capitalizeArch(arch) {
     const map = {
-        'arm64': '📱 ARM64',
-        'arm32': '📱 ARM32',
-        'universal': '📦 Universal',
-        'x86': '💻 X86',
+        'arm64': 'ARM64',
+        'arm32': 'ARM32',
+        'universal': 'Universal',
+        'x86': 'X86',
         'other': 'Other'
     };
     return map[arch] || arch;
