@@ -401,6 +401,54 @@ main {
     border-color: var(--accent);
 }
 
+.twitter-login-note {
+    margin-top: 4px;
+    margin-bottom: 12px;
+    padding: 9px 11px;
+    border: 1px solid color-mix(in srgb, var(--accent-warning) 55%, var(--border) 45%);
+    background: linear-gradient(90deg, rgba(210, 153, 34, 0.16), rgba(210, 153, 34, 0.05));
+    border-radius: 10px;
+}
+
+.twitter-login-note-title {
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: var(--accent-warning);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.twitter-login-note-text {
+    margin-top: 4px;
+    font-size: 0.78rem;
+    line-height: 1.35;
+    color: var(--text-secondary);
+}
+
+.twitter-login-note-links {
+    margin-top: 7px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.twitter-login-note-links a {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 9px;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--accent-warning) 70%, var(--border) 30%);
+    color: var(--accent-warning);
+    text-decoration: none;
+    font-size: 0.74rem;
+    font-weight: 700;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.twitter-login-note-links a:hover {
+    background: rgba(210, 153, 34, 0.14);
+}
+
 .patches-list {
     margin-bottom: 12px;
 }
@@ -641,8 +689,8 @@ body.modal-open {
 
 .variant-btn.active {
     border-color: var(--accent);
-    color: #000;
-    background: var(--accent);
+    color: var(--accent);
+    background: rgba(88, 166, 255, 0.16);
 }
 
 .version-btn {
@@ -663,8 +711,8 @@ body.modal-open {
 
 .version-btn.active {
     border-color: var(--accent);
-    color: #000;
-    background: var(--accent);
+    color: var(--accent);
+    background: rgba(88, 166, 255, 0.16);
 }
 
 
@@ -685,8 +733,8 @@ body.modal-open {
 
 .modal-filter-btn.active {
     border-color: var(--accent);
-    color: #000;
-    background: var(--accent);
+    color: var(--accent);
+    background: rgba(88, 166, 255, 0.16);
 }
 
 .modal-obtainium-btn {
