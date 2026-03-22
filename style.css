@@ -81,10 +81,7 @@ body {
 
 /* Header */
 header {
-    background:
-        radial-gradient(1200px 260px at 10% -30%, rgba(88, 166, 255, 0.22), transparent 60%),
-        radial-gradient(900px 220px at 85% -40%, rgba(63, 185, 80, 0.14), transparent 60%),
-        linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+    background: var(--bg-secondary);
     border-bottom: 1px solid var(--border);
     padding: 48px 0 28px;
     text-align: center;
@@ -94,7 +91,7 @@ header {
 header h1 {
     font-size: clamp(2.2rem, 5vw, 3.4rem);
     margin-bottom: 18px;
-    background: linear-gradient(135deg, var(--accent), #ff6b6b);
+    background: linear-gradient(135deg, var(--accent), var(--accent-success));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
