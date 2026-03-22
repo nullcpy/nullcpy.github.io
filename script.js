@@ -579,7 +579,7 @@ function createMicrogNoticeMarkup() {
     return `
         <div class="microg-note">
             <div class="microg-note-title">Login Issue</div>
-            <div class="microg-note-text">Signing into a Google account on an APK (not a module) requires MicroG. Please install one from below before trying to sign in.</div>
+            <div class="microg-note-text">Signing into Google account on APK (not Module) requires MicroG. Please install one from below before trying to sign in.</div>
             <div class="microg-note-links">
                 <a href="https://github.com/MorpheApp/MicroG-RE/releases/latest" target="_blank" rel="noopener noreferrer">Morphe</a>
                 <a href="https://github.com/ReVanced/GmsCore/releases/latest" target="_blank" rel="noopener noreferrer">ReVanced</a>
