@@ -196,6 +196,10 @@ main {
     color: #000;
 }
 
+body.light-mode .filter-btn.active {
+    color: #fff;
+}
+
 /* Loading & Error */
 .loading {
     text-align: center;
