@@ -1198,7 +1198,7 @@ function parseAssetDisplay(filename, arch, fileType) {
     const stopIndex = stopIndexCandidates.length > 0 ? Math.min(...stopIndexCandidates) : tokens.length;
     const preMetaTokens = tokens.slice(0, stopIndex);
 
-    const knownPatchTokens = new Set(['revanced', 'morphe', 'anddea', 'piko']);
+    const knownPatchTokens = new Set(['revanced', 'morphe', 'anddea']);
     const variantKeywords = new Set(['exp', 'nord', 'mocha', 'privacy', 'materialu']);
 
     let patchStartIndex = preMetaTokens.findIndex(token => knownPatchTokens.has(token.toLowerCase()));
@@ -1252,8 +1252,7 @@ function formatBrandDisplayName(value) {
         exp: 'Experimental',
         mocha: 'Mocha Theme',
         nord: 'Nord Theme',
-        materialu: 'Material You',
-        piko: 'Morphe'
+        materialu: 'Material You'
     };
 
     return toTitleWords(value)
