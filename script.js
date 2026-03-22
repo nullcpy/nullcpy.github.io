@@ -471,6 +471,7 @@ function renderAppCards(apps) {
 function createAppCard(app) {
     const patchesMarkup = app.patches.map((patch) => createPatchMarkup(app, patch)).join('');
     const microgNoticeMarkup = isGoogleApp(app.appName) ? createMicrogNoticeMarkup() : '';
+    const twitterNoticeMarkup = isTwitterApp(app.appName) ? createTwitterLoginNoticeMarkup() : '';
 
     return `
         <details class="build-card app-card">
@@ -481,6 +482,7 @@ function createAppCard(app) {
 
             <div class="app-card-body">
                 ${microgNoticeMarkup}
+                ${twitterNoticeMarkup}
 
                 <div class="patches-title">Available patches</div>
                 <div class="patches-list">
@@ -499,6 +501,11 @@ function isGoogleApp(appName) {
 function isMetaApp(appName) {
     const name = normalizeForSearch(appName);
     return name.includes('facebook') || name.includes('instagram') || name.includes('messenger');
+}
+
+function isTwitterApp(appName) {
+    const name = normalizeForSearch(appName);
+    return name.includes('twitter');
 }
 
 function getDynamicAppFilters(apps) {
@@ -571,11 +578,23 @@ function toFilterLabel(value) {
 function createMicrogNoticeMarkup() {
     return `
         <div class="microg-note">
-            <div class="microg-note-title">MicroG Required for Non-Root Login</div>
-            <div class="microg-note-text">Install one from below before opening the app.</div>
+            <div class="microg-note-title">Login Issue</div>
+            <div class="microg-note-text">Google login on APKs (not Modules) requires MicroG. Install one from below before trying to sign in.</div>
             <div class="microg-note-links">
                 <a href="https://github.com/MorpheApp/MicroG-RE/releases/latest" target="_blank" rel="noopener noreferrer">Morphe</a>
                 <a href="https://github.com/ReVanced/GmsCore/releases/latest" target="_blank" rel="noopener noreferrer">ReVanced</a>
+            </div>
+        </div>
+    `;
+}
+
+function createTwitterLoginNoticeMarkup() {
+    return `
+        <div class="twitter-login-note">
+            <div class="twitter-login-note-title">Login Issue</div>
+            <div class="twitter-login-note-text">Since October 2025, Twitter has started checking whether the app is modified or if the phone integrity fails during login. These checks are server-side, not client-side.</div>
+            <div class="twitter-login-note-links">
+                <a href="https://t.me/pikopatches/1/59772" target="_blank" rel="noopener noreferrer">Workarounds</a>
             </div>
         </div>
     `;
@@ -587,7 +606,7 @@ function createPatchMarkup(app, patch) {
     const latestBuild = allMeta.length > 0
         ? allMeta.reduce((a, b) => new Date(a.publishedAt) > new Date(b.publishedAt) ? a : b).build
         : null;
-    
+
     const patchMetaBoxes = [];
 
     if (patch.latestStable) {
@@ -962,7 +981,7 @@ function updateModalFilterButtons(patch = null) {
     });
 
     const filterButtonsContainer = document.querySelector('.modal-filter-buttons');
-    
+
     // Create individual variant buttons
     if (filterButtonsContainer && variants.length > 0) {
         const existingVariantBtns = filterButtonsContainer.querySelectorAll('.variant-btn');
@@ -1233,7 +1252,8 @@ function formatBrandDisplayName(value) {
         exp: 'Experimental',
         mocha: 'Mocha Theme',
         nord: 'Nord Theme',
-        materialu: 'Material You'
+        materialu: 'Material You',
+        piko: 'Morphe'
     };
 
     return toTitleWords(value)
