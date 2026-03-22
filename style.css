@@ -947,7 +947,11 @@ body.modal-open {
 }
 
 .patch-release-link {
-    margin-top: 8px;
+    margin-top: 10px;
+    margin-left: -10px;
+    width: calc(100% + 20px);
+    padding: 10px 10px 0;
+    border-top: 1px solid var(--border);
 }
 
 .release-badge {
@@ -1063,7 +1067,7 @@ body.modal-open {
 .variant-badge {
     font-size: 0.75rem;
     font-weight: 700;
-    background: var(--accent);
+    background: #8b5cf6;
     color: #000;
     padding: 4px 10px;
     border-radius: 12px;
@@ -1095,13 +1099,13 @@ body.modal-open {
 }
 
 .download-btn.arm32 {
-    background: rgba(255, 165, 80, 0.2);
-    border: 1px solid #ffa550;
-    color: #ffa550;
+    background: rgba(20, 184, 166, 0.2);
+    border: 1px solid #14b8a6;
+    color: #14b8a6;
 }
 
 .download-btn.arm32:hover {
-    background: #ffa550;
+    background: #14b8a6;
     color: #000;
 }
 
@@ -1135,13 +1139,10 @@ body.modal-open {
 }
 
 .release-link {
-    display: inline-block;
+    display: block;
     color: var(--accent);
     text-decoration: none;
     font-size: 0.9rem;
-    margin-top: 10px;
-    border-top: 1px solid var(--border);
-    padding-top: 10px;
     transition: color 0.3s;
 }
 
