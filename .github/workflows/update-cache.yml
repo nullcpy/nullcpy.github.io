@@ -3,6 +3,8 @@ name: Update Releases Cache
 on:
   repository_dispatch:
     types: [update-catalog-cache]
+  schedule:
+    - cron: '0 2 * * *' # 02:00 AM UTC everyday
   workflow_dispatch:
 
 jobs:
