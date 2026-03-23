@@ -520,7 +520,7 @@ function isGoogleApp(appName) {
 
 function isMetaApp(appName) {
     const name = normalizeForSearch(appName);
-    return name.includes('facebook') || name.includes('instagram') || name.includes('messenger');
+    return name.includes('threads') || name.includes('instagram') || name.includes('messenger');
 }
 
 function isTwitterApp(appName) {
