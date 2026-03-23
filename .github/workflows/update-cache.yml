@@ -1,0 +1,28 @@
+name: Update Releases Cache
+
+on:
+  repository_dispatch:
+    types: [update-catalog-cache]
+  workflow_dispatch:
+
+jobs:
+  update-cache:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch releases from GitHub API
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api --paginate repos/nullcpy/rvb/releases > releases.json
+
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: auto-update releases cache from rvb dispatch"
+          file_pattern: releases.json
