@@ -774,7 +774,7 @@ function createObtainiumInstructions() {
 
             const appLabel = asset?.parsed?.appName || app?.appName || 'App';
             const patchLabel = asset?.parsed?.patchName || patch?.patchName || 'patch';
-            const variantLabel = asset?.parsed?.variant ? ` ${escapeHtml(asset.parsed.variant)}` : '';
+            const variantLabel = asset?.parsed?.variant ? ` (${escapeHtml(asset.parsed.variant)})` : '';
             regexMap.set(result.regex, `${appLabel} ${patchLabel}${variantLabel}`);
         });
 
