@@ -86,14 +86,14 @@ document.getElementById('themeBtn').addEventListener('click', () => {
 // Event Listeners
 function setupEventListeners() {
     let searchTimeout;
-    
+
     // 1. Debounced Search Input
     document.getElementById('searchInput').addEventListener('input', (e) => {
         clearTimeout(searchTimeout);
         searchTimeout = setTimeout(() => {
             searchTerm = e.target.value.toLowerCase();
             document.getElementById('loading').style.display = 'block';
-            
+
             setTimeout(() => {
                 filterAndRenderReleases();
             }, 10);
@@ -168,7 +168,7 @@ function setupEventListeners() {
     sentinel.id = 'scroll-sentinel';
     sentinel.style.height = '1px';
     document.getElementById('builds').after(sentinel);
-    
+
     observer.observe(sentinel);
 }
 
@@ -254,7 +254,7 @@ function filterAndRenderReleases() {
 
     const appCatalog = buildAppCatalog(filtered, searchTerm);
     const filteredApps = applyAppViewFilter(appCatalog);
-    
+
     renderAppCards(filteredApps);
     updateAppFilterButtons();
     document.getElementById('loading').style.display = 'none';
@@ -462,8 +462,8 @@ function getBuildNumberLabel(release) {
 function renderAppCards(apps) {
     const buildsContainer = document.getElementById('builds');
     currentAppCatalog = apps;
-    currentVisibleCount = 0; 
-    
+    currentVisibleCount = 0;
+
     buildsContainer.innerHTML = '';
 
     if (apps.length === 0) {
@@ -477,12 +477,12 @@ function renderAppCards(apps) {
 function renderNextChunk() {
     const buildsContainer = document.getElementById('builds');
     const nextChunk = currentAppCatalog.slice(currentVisibleCount, currentVisibleCount + RENDER_CHUNK_SIZE);
-    
+
     if (nextChunk.length === 0) return;
 
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = nextChunk.map(app => createAppCard(app)).join('');
-    
+
     while (tempDiv.firstChild) {
         buildsContainer.appendChild(tempDiv.firstChild);
     }
@@ -774,7 +774,7 @@ function createObtainiumInstructions() {
 
             const appLabel = asset?.parsed?.appName || app?.appName || 'App';
             const patchLabel = asset?.parsed?.patchName || patch?.patchName || 'patch';
-            const variantLabel = asset?.parsed?.variant ? ` (${escapeHtml(asset.parsed.variant)})` : '';
+            const variantLabel = asset?.parsed?.variant ? ` ${escapeHtml(asset.parsed.variant)}` : '';
             regexMap.set(result.regex, `${appLabel} ${patchLabel}${variantLabel}`);
         });
 
