@@ -7,6 +7,10 @@ on:
     - cron: '0 2 * * *' # 02:00 AM UTC everyday
   workflow_dispatch:
 
+concurrency:
+  group: ci
+  cancel-in-progress: false
+
 jobs:
   update-cache:
     runs-on: ubuntu-latest
