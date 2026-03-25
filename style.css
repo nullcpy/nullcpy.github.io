@@ -845,6 +845,10 @@ body.modal-open {
     opacity: 0.9;
 }
 
+body.light-mode .copy-btn {
+    color: #ffffff;
+}
+
 .filter-examples {
     margin: 8px 0 0 0;
 }
