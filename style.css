@@ -243,8 +243,6 @@ body.light-mode .filter-btn.active {
     border-radius: 16px;
     padding: 20px;
     transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-    display: flex;
-    flex-direction: column;
     break-inside: avoid;
     -webkit-column-break-inside: avoid;
     page-break-inside: avoid;
