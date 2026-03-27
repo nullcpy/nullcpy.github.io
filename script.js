@@ -1067,6 +1067,10 @@ function createModalBuildMarkup(build, openByDefault = false) {
         downloadsMarkup += `<div class="asset-group"><div class="asset-group-label">${capitalizeArch(arch)}</div>`;
         assets.forEach(asset => {
             const sizeStr = formatBytes(asset.size);
+
+            // Format the download count with commas (e.g., 1,234)
+            const downloads = (asset.download_count || 0).toLocaleString();
+
             const variantBadge = asset.parsed.variant ? `<span class="variant-badge">${escapeHtml(asset.parsed.variant)}</span>` : '';
             downloadsMarkup += `
                 <a href="${asset.browser_download_url}" 
@@ -1079,7 +1083,7 @@ function createModalBuildMarkup(build, openByDefault = false) {
                     </span>
                     <span class="asset-right">
                         ${variantBadge}
-                        <span class="btn-text">${escapeHtml(asset.parsed.archLabel)} • ${asset.fileType} • ${sizeStr}</span>
+                        <span class="btn-text">${escapeHtml(asset.parsed.archLabel)} • ${asset.fileType} • ${sizeStr} • ${downloads}</span>
                     </span>
                 </a>`;
         });
