@@ -6,6 +6,8 @@ const CONFIG = {
     cacheDuration: 5,
 };
 
+// Delete this comment later
+
 // State
 let allReleases = [];
 let searchTerm = '';
