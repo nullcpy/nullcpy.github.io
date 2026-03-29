@@ -774,7 +774,7 @@ function createObtainiumInstructions() {
 
             const appLabel = asset?.parsed?.appName || app?.appName || 'App';
             const patchLabel = asset?.parsed?.patchName || patch?.patchName || 'patch';
-            const variantLabel = asset?.parsed?.variant ? ` ${escapeHtml(asset.parsed.variant)}` : '';
+            const variantLabel = asset?.parsed?.variant ? ` (${escapeHtml(asset.parsed.variant)})` : '';
             regexMap.set(result.regex, `${appLabel} ${patchLabel}${variantLabel}`);
         });
 
@@ -1061,6 +1061,8 @@ function createModalBuildMarkup(build, openByDefault = false) {
     const hasVariantAssets = build.assets.some(asset => isVariantAsset(asset));
     let downloadsMarkup = '';
 
+    const uniqueBuildVersions = Array.from(new Set(build.assets.map(a => a.parsed?.version).filter(Boolean))).join(' / ');
+
     Object.entries(assetsByArch).forEach(([arch, assets]) => {
         if (assets.length === 0) return;
 
@@ -1097,7 +1099,7 @@ function createModalBuildMarkup(build, openByDefault = false) {
             <summary class="modal-build-header">
                 <div class="modal-build-header-left">
                     <div class="modal-build-title">Build ${escapeHtml(build.build)}</div>
-                    <div class="modal-build-date">${formatDate(build.publishedAt)} • ${escapeHtml(build.version)}</div>
+                    <div class="modal-build-date">${formatDate(build.publishedAt)} • ${escapeHtml(uniqueBuildVersions)}</div>
                 </div>
                 <span class="badge-group">
                     ${variantsIndicator}
