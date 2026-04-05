@@ -1213,7 +1213,7 @@ function formatBrandDisplayName(value) {
         youtube: 'YouTube', revanced: 'ReVanced', tiktok: 'TikTok', soundcloud: 'SoundCloud',
         vpn: 'VPN', reddit: 'Reddit', instagram: 'Instagram', twitter: 'Twitter', rvx: 'ReVanced Extended',
         anddea: 'ReVanced Advanced', exp: 'Experimental', mocha: 'Mocha Theme', nord: 'Nord Theme', materialu: 'Material You',
-        gplay: 'Google Play', foss: 'FOSS', gboard: "Google Keyboard", wps: "WPS"
+        gplay: 'Google Play', foss: 'FOSS', gboard: "Google Keyboard", wps: "WPS", rar: "RAR"
     };
     return toTitleWords(value)
         .split(' ')
