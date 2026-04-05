@@ -19,7 +19,7 @@ let themeMode = 'system';
 
 // Render State for Infinite Scroll
 let currentVisibleCount = 0;
-const RENDER_CHUNK_SIZE = 20;
+const RENDER_CHUNK_SIZE = 50;
 
 const SHARED_APP_WORD_MIN_COUNT = 3;
 const SHARED_APP_WORD_FALLBACK_COUNT = 2;
