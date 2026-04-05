@@ -1168,8 +1168,8 @@ function parseAssetDisplay(filename, arch, fileType) {
     const stopIndex = stopIndexCandidates.length > 0 ? Math.min(...stopIndexCandidates) : tokens.length;
     const preMetaTokens = tokens.slice(0, stopIndex);
 
-    const knownPatchTokens = new Set(['revanced', 'morphe', 'anddea']);
-    const variantKeywords = new Set(['exp', 'nord', 'mocha', 'privacy', 'materialu']);
+    const knownPatchTokens = new Set(['revanced', 'morphe', 'anddea', 'rvx']);
+    const variantKeywords = new Set(['exp', 'nord', 'mocha', 'privacy', 'materialu', 'foss', 'gplay']);
 
     let patchStartIndex = preMetaTokens.findIndex(token => knownPatchTokens.has(token.toLowerCase()));
     if (patchStartIndex < 0) {
@@ -1213,7 +1213,7 @@ function formatBrandDisplayName(value) {
         youtube: 'YouTube', revanced: 'ReVanced', tiktok: 'TikTok', soundcloud: 'SoundCloud',
         vpn: 'VPN', reddit: 'Reddit', instagram: 'Instagram', twitter: 'Twitter', rvx: 'ReVanced Extended',
         anddea: 'ReVanced Advanced', exp: 'Experimental', mocha: 'Mocha Theme', nord: 'Nord Theme', materialu: 'Material You',
-        gplay: 'Google Play', foss: 'FOSS', gboard: "Google Keyboard"
+        gplay: 'Google Play', foss: 'FOSS', gboard: "Google Keyboard", wps: "WPS"
     };
     return toTitleWords(value)
         .split(' ')
