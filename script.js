@@ -1211,7 +1211,7 @@ function toTitleWords(value) {
 function formatBrandDisplayName(value) {
     const brandOverrides = {
         youtube: 'YouTube', revanced: 'ReVanced', tiktok: 'TikTok', soundcloud: 'SoundCloud',
-        vpn: 'VPN', reddit: 'Reddit', instagram: 'Instagram', twitter: 'Twitter', rvx: 'ReVanced Extended',
+        vpn: 'VPN', rvx: 'ReVanced Extended',
         anddea: 'ReVanced Advanced', exp: 'Experimental', mocha: 'Mocha Theme', nord: 'Nord Theme', materialu: 'Material You',
         gplay: 'Google Play', foss: 'FOSS', gboard: "Google Keyboard", wps: "WPS", rar: "RAR"
     };
