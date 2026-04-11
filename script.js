@@ -1169,7 +1169,7 @@ function parseAssetDisplay(filename, arch, fileType) {
     const preMetaTokens = tokens.slice(0, stopIndex);
 
     const knownPatchTokens = new Set(['revanced', 'morphe', 'anddea', 'rvx']);
-    const variantKeywords = new Set(['exp', 'nord', 'mocha', 'privacy', 'materialu', 'foss', 'gplay']);
+    const variantKeywords = new Set(['exp', 'nord', 'mocha', 'privacy', 'materialu', 'foss', 'gplay', 'piko']);
 
     let patchStartIndex = preMetaTokens.findIndex(token => knownPatchTokens.has(token.toLowerCase()));
     if (patchStartIndex < 0) {
@@ -1211,8 +1211,8 @@ function toTitleWords(value) {
 function formatBrandDisplayName(value) {
     const brandOverrides = {
         youtube: 'YouTube', revanced: 'ReVanced', tiktok: 'TikTok', soundcloud: 'SoundCloud',
-        vpn: 'VPN', rvx: 'ReVanced Extended',
-        anddea: 'ReVanced Advanced', exp: 'Experimental', mocha: 'Mocha Theme', nord: 'Nord Theme', materialu: 'Material You',
+        vpn: 'VPN', rvx: 'ReVanced Extended', anddea: 'ReVanced Advanced', exp: 'Experimental', 
+        mocha: 'Mocha Theme', nord: 'Nord Theme', materialu: 'Material You',
         gplay: 'Google Play', foss: 'FOSS', gboard: "Google Keyboard", wps: "WPS", rar: "RAR"
     };
     return toTitleWords(value)
