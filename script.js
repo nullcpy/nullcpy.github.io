@@ -915,10 +915,10 @@ function getUniqueVersions(patch) {
             }
         });
     });
-    
+
     // OPTIMIZATION: Semantic version sorting using natural numeric collation.
     // Correctly sorts "v11.80" as newer than "v9.80".
-    return Array.from(versions).sort((a, b) => 
+    return Array.from(versions).sort((a, b) =>
         b.localeCompare(a, undefined, { numeric: true, sensitivity: 'base' })
     );
 }
@@ -950,7 +950,7 @@ function updateModalFilterButtons(patch = null) {
     const hasBetaBuild = patch ? getFilteredBuildsForFilter(patch, 'beta').length > 0 : true;
     const hasVariantBuild = patch ? getFilteredBuildsForFilter(patch, 'variant').length > 0 : false;
     const variants = patch ? getUniqueVariants(patch) : [];
-    
+
     // OPTIMIZATION: Limit to 5 versions to prevent UI clutter
     const versions = patch ? getUniqueVersions(patch).slice(0, 5) : [];
 
@@ -1226,7 +1226,7 @@ function toTitleWords(value) {
 function formatBrandDisplayName(value) {
     const brandOverrides = {
         youtube: 'YouTube', revanced: 'ReVanced', tiktok: 'TikTok', soundcloud: 'SoundCloud',
-        vpn: 'VPN', rvx: 'ReVanced Extended', anddea: 'ReVanced Advanced', exp: 'Experimental', 
+        vpn: 'VPN', rvx: 'ReVanced Extended', anddea: 'ReVanced Advanced', exp: 'Experimental',
         mocha: 'Mocha Theme', nord: 'Nord Theme', materialu: 'Material You',
         gplay: 'Google Play', foss: 'FOSS', gboard: "Google Keyboard", wps: "WPS", rar: "RAR"
     };
