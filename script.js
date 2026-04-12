@@ -1169,7 +1169,7 @@ function parseAssetDisplay(filename, arch, fileType) {
     const preMetaTokens = tokens.slice(0, stopIndex);
 
     const knownPatchTokens = new Set(['revanced', 'morphe', 'anddea', 'rvx']);
-    const variantKeywords = new Set(['exp', 'nord', 'mocha', 'privacy', 'materialu', 'foss', 'gplay', 'piko']);
+    const variantKeywords = new Set(['exp', 'nord', 'mocha', 'privacy', 'materialu', 'foss', 'gplay', 'piko', 'adobo']);
 
     let patchStartIndex = preMetaTokens.findIndex(token => knownPatchTokens.has(token.toLowerCase()));
     if (patchStartIndex < 0) {
