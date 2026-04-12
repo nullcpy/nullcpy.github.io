@@ -20,7 +20,6 @@ let themeMode = 'system';
 // Render State for Infinite Scroll
 let currentVisibleCount = 0;
 const RENDER_CHUNK_SIZE = 50;
-const RENDER_CHUNK_SIZE = 50;
 
 const SHARED_APP_WORD_MIN_COUNT = 3;
 const SHARED_APP_WORD_FALLBACK_COUNT = 2;
@@ -776,7 +775,6 @@ function createObtainiumInstructions() {
             const appLabel = asset?.parsed?.appName || app?.appName || 'App';
             const patchLabel = asset?.parsed?.patchName || patch?.patchName || 'patch';
             const variantLabel = asset?.parsed?.variant ? ` (${escapeHtml(asset.parsed.variant)})` : '';
-            const variantLabel = asset?.parsed?.variant ? ` (${escapeHtml(asset.parsed.variant)})` : '';
             regexMap.set(result.regex, `${appLabel} ${patchLabel}${variantLabel}`);
         });
 
@@ -917,10 +915,10 @@ function getUniqueVersions(patch) {
             }
         });
     });
-
+    
     // OPTIMIZATION: Semantic version sorting using natural numeric collation.
     // Correctly sorts "v11.80" as newer than "v9.80".
-    return Array.from(versions).sort((a, b) =>
+    return Array.from(versions).sort((a, b) => 
         b.localeCompare(a, undefined, { numeric: true, sensitivity: 'base' })
     );
 }
@@ -932,13 +930,10 @@ function getLatestVariantBuild(patch, variantName) {
     (patch.builds || []).forEach(build => {
         const variantAsset = (build.assets || []).find(asset => asset?.parsed?.variant === variantName);
         if (variantAsset) {
-        const variantAsset = (build.assets || []).find(asset => asset?.parsed?.variant === variantName);
-        if (variantAsset) {
             const buildDate = new Date(build.publishedAt).getTime();
             if (buildDate > latestDate) {
                 latestDate = buildDate;
                 latestBuild = {
-                    version: variantAsset.parsed.version,
                     version: variantAsset.parsed.version,
                     build: build.build,
                     publishedAt: build.publishedAt
@@ -955,7 +950,7 @@ function updateModalFilterButtons(patch = null) {
     const hasBetaBuild = patch ? getFilteredBuildsForFilter(patch, 'beta').length > 0 : true;
     const hasVariantBuild = patch ? getFilteredBuildsForFilter(patch, 'variant').length > 0 : false;
     const variants = patch ? getUniqueVariants(patch) : [];
-
+    
     // OPTIMIZATION: Limit to 5 versions to prevent UI clutter
     const versions = patch ? getUniqueVersions(patch).slice(0, 5) : [];
 
@@ -1083,8 +1078,6 @@ function createModalBuildMarkup(build, openByDefault = false) {
 
     const uniqueBuildVersions = Array.from(new Set(build.assets.map(a => a.parsed?.version).filter(Boolean))).join(' / ');
 
-    const uniqueBuildVersions = Array.from(new Set(build.assets.map(a => a.parsed?.version).filter(Boolean))).join(' / ');
-
     Object.entries(assetsByArch).forEach(([arch, assets]) => {
         if (assets.length === 0) return;
 
@@ -1093,6 +1086,7 @@ function createModalBuildMarkup(build, openByDefault = false) {
             const sizeStr = formatBytes(asset.size);
 
             const downloads = (asset.download_count || 0).toLocaleString();
+
             const variantBadge = asset.parsed.variant ? `<span class="variant-badge">${escapeHtml(asset.parsed.variant)}</span>` : '';
             downloadsMarkup += `
                 <a href="${asset.browser_download_url}" 
@@ -1119,7 +1113,6 @@ function createModalBuildMarkup(build, openByDefault = false) {
             <summary class="modal-build-header">
                 <div class="modal-build-header-left">
                     <div class="modal-build-title">Build ${escapeHtml(build.build)}</div>
-                    <div class="modal-build-date">${formatDate(build.publishedAt)} • ${escapeHtml(uniqueBuildVersions)}</div>
                     <div class="modal-build-date">${formatDate(build.publishedAt)} • ${escapeHtml(uniqueBuildVersions)}</div>
                 </div>
                 <span class="badge-group">
@@ -1192,8 +1185,6 @@ function parseAssetDisplay(filename, arch, fileType) {
 
     const knownPatchTokens = new Set(['revanced', 'morphe', 'anddea', 'rvx']);
     const variantKeywords = new Set(['exp', 'nord', 'mocha', 'privacy', 'materialu', 'foss', 'gplay', 'piko', 'adobo']);
-    const knownPatchTokens = new Set(['revanced', 'morphe', 'anddea', 'rvx']);
-    const variantKeywords = new Set(['exp', 'nord', 'mocha', 'privacy', 'materialu', 'foss', 'gplay', 'piko', 'adobo']);
 
     let patchStartIndex = preMetaTokens.findIndex(token => knownPatchTokens.has(token.toLowerCase()));
     if (patchStartIndex < 0) {
@@ -1235,7 +1226,7 @@ function toTitleWords(value) {
 function formatBrandDisplayName(value) {
     const brandOverrides = {
         youtube: 'YouTube', revanced: 'ReVanced', tiktok: 'TikTok', soundcloud: 'SoundCloud',
-        vpn: 'VPN', rvx: 'ReVanced Extended', anddea: 'ReVanced Advanced', exp: 'Experimental',
+        vpn: 'VPN', rvx: 'ReVanced Extended', anddea: 'ReVanced Advanced', exp: 'Experimental', 
         mocha: 'Mocha Theme', nord: 'Nord Theme', materialu: 'Material You',
         gplay: 'Google Play', foss: 'FOSS', gboard: "Google Keyboard", wps: "WPS", rar: "RAR"
     };
