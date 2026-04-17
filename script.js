@@ -1404,6 +1404,6 @@ function updateLastUpdateTimestamp() {
     
     const el = document.getElementById('lastUpdateText');
     if (el) {
-        el.textContent = `Updated ${datePart} ${timePart}`;
+        el.textContent = `${datePart} ${timePart}`;
     }
 }
