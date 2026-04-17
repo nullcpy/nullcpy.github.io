@@ -180,6 +180,7 @@ async function loadReleases() {
             allReleases = cached;
             document.getElementById('loading').style.display = 'none';
             document.getElementById('error').style.display = 'none';
+            updateLastUpdateTimestamp(); // Update time using cached data
             filterAndRenderReleases();
             return;
         }
@@ -209,6 +210,7 @@ async function loadReleases() {
         cacheReleases(allReleases);
 
         document.getElementById('loading').style.display = 'none';
+        updateLastUpdateTimestamp(); // Update time using fresh data
         filterAndRenderReleases();
 
     } catch (error) {
@@ -547,11 +549,7 @@ function getDynamicAppFilters(apps) {
     const selectedEntries = preferredEntries.length > 0 ? preferredEntries : fallbackEntries;
 
     return selectedEntries
-        .sort((a, b) => {
-            const byCount = b[1].size - a[1].size;
-            if (byCount !== 0) return byCount;
-            return a[0].localeCompare(b[0]);
-        })
+        .sort((a, b) => a[0].localeCompare(b[0])) // Strictly alphabetical sort
         .map(([word]) => ({
             key: `word-${word}`,
             label: toFilterLabel(word)
@@ -573,13 +571,18 @@ function renderDynamicAppFilterButtons(filters) {
         filterButtons.appendChild(button);
     });
 
+    // --- ALPHABETICAL SORTING LOGIC ---
+    // 1. Grab every button inside the filter container
     const allBtns = Array.from(filterButtons.querySelectorAll('.filter-btn'));
-    
+
+    // 2. Separate the fixed buttons from the ones we want to sort
     const fixedBtns = allBtns.filter(btn => btn.dataset.filter === 'all' || btn.dataset.filter === 'recent');
     const sortableBtns = allBtns.filter(btn => btn.dataset.filter !== 'all' && btn.dataset.filter !== 'recent');
 
+    // 3. Sort the remaining buttons alphabetically by their text label
     sortableBtns.sort((a, b) => a.textContent.localeCompare(b.textContent));
 
+    // 4. Re-append them to the container in the exact order we want
     fixedBtns.forEach(btn => filterButtons.appendChild(btn));
     sortableBtns.forEach(btn => filterButtons.appendChild(btn));
 }
@@ -1237,7 +1240,7 @@ function formatBrandDisplayName(value) {
     const brandOverrides = {
         youtube: 'YouTube', revanced: 'ReVanced', tiktok: 'TikTok', soundcloud: 'SoundCloud',
         vpn: 'VPN', rvx: 'ReVanced Extended', anddea: 'ReVanced Advanced', exp: 'Experimental',
-        mocha: 'Mocha Theme', nord: 'Nord Theme', materialu: 'Material You', photoshop: 'Adobe Photoshop', lightroom: 'Adobe Lightroom',
+        mocha: 'Mocha Theme', nord: 'Nord Theme', materialu: 'Material You',
         gplay: 'Google Play', foss: 'FOSS', gboard: "Google Keyboard", wps: "WPS", rar: "RAR"
     };
     return toTitleWords(value)
@@ -1349,10 +1352,26 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
-// Last updated timestamp
-window.addEventListener('load', () => {
-    const now = new Date();
-    const datePart = `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
-    const timePart = now.toLocaleTimeString('en-US');
-    document.getElementById('lastUpdate').textContent = `${datePart}, ${timePart}`;
-});
+// Update the last updated timestamp based on the newest release
+function updateLastUpdateTimestamp() {
+    if (!allReleases || allReleases.length === 0) return;
+
+    let latestTime = 0;
+    allReleases.forEach(release => {
+        const time = new Date(release.published_at).getTime();
+        if (time > latestTime) {
+            latestTime = time;
+        }
+    });
+
+    if (latestTime === 0) return;
+
+    const updateDate = new Date(latestTime);
+    const datePart = `${updateDate.getDate()}/${updateDate.getMonth() + 1}/${updateDate.getFullYear()}`;
+    const timePart = updateDate.toLocaleTimeString('en-US');
+
+    const el = document.getElementById('lastUpdate');
+    if (el) {
+        el.textContent = `${datePart}, ${timePart}`;
+    }
+}
