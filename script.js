@@ -282,6 +282,10 @@ function applyAppViewFilter(apps) {
         return apps.filter(app => isMetaApp(app.appName));
     }
 
+    if (appViewFilter === 'adobe') {
+        return apps.filter(app => isAdobeApp(app.appName));
+    }
+
     if (appViewFilter.startsWith('word-')) {
         const word = appViewFilter.slice(5);
         return apps.filter(app => getAppNameWords(app.appName).includes(word));
@@ -521,6 +525,11 @@ function isGoogleApp(appName) {
 function isMetaApp(appName) {
     const name = normalizeForSearch(appName);
     return name.includes('threads') || name.includes('instagram') || name.includes('messenger');
+}
+
+function isAdobeApp(appName) {
+    const name = normalizeForSearch(appName);
+    return name.includes('photoshop') || name.includes('lightroom');
 }
 
 function isTwitterApp(appName) {
