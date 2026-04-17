@@ -572,6 +572,16 @@ function renderDynamicAppFilterButtons(filters) {
         button.textContent = filter.label;
         filterButtons.appendChild(button);
     });
+
+    const allBtns = Array.from(filterButtons.querySelectorAll('.filter-btn'));
+    
+    const fixedBtns = allBtns.filter(btn => btn.dataset.filter === 'all' || btn.dataset.filter === 'recent');
+    const sortableBtns = allBtns.filter(btn => btn.dataset.filter !== 'all' && btn.dataset.filter !== 'recent');
+
+    sortableBtns.sort((a, b) => a.textContent.localeCompare(b.textContent));
+
+    fixedBtns.forEach(btn => filterButtons.appendChild(btn));
+    sortableBtns.forEach(btn => filterButtons.appendChild(btn));
 }
 
 function getAppNameWords(appName) {
