@@ -220,7 +220,7 @@ async function loadReleases() {
         console.error('Error loading releases:', error);
         
         // 2. Trigger the red error state if fetching fails
-        setPillState('error', 'Update failed');
+        setPillState('error', 'Failed to check updates');
         
         document.getElementById('loading').style.display = 'none';
         document.getElementById('error').style.display = 'block';
