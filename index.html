@@ -60,20 +60,20 @@
                 <div class="filter-buttons" id="appFilterButtons">
                     <button class="filter-btn active" data-filter="all" type="button">A - Z</button>
                     <button class="filter-btn" data-filter="recent" type="button">Recently Updated</button>
-                    <button class="filter-btn" data-filter="google" type="button">Google</button>
+                    <button class="filter-btn" data-filter="popular" type="button">Popular</button> <button
+                        class="filter-btn" data-filter="google" type="button">Google</button>
                     <button class="filter-btn" data-filter="meta" type="button">Meta</button>
                 </div>
+
+                <div id="loading" class="loading">
+                    <div class="spinner"></div>
+                    <p>Fetching latest builds...</p>
+                </div>
+
+                <div id="builds" class="builds-grid"></div>
+
+                <div id="error" class="error-message" style="display: none;"></div>
             </div>
-
-            <div id="loading" class="loading">
-                <div class="spinner"></div>
-                <p>Fetching latest builds...</p>
-            </div>
-
-            <div id="builds" class="builds-grid"></div>
-
-            <div id="error" class="error-message" style="display: none;"></div>
-        </div>
     </main>
 
     <footer>

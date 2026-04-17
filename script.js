@@ -275,6 +275,18 @@ function getAppLatestPublishedAt(app) {
     }, 0);
 }
 
+function getAppTotalDownloads(app) {
+    let total = 0;
+    (app.patches || []).forEach(patch => {
+        (patch.builds || []).forEach(build => {
+            (build.assets || []).forEach(asset => {
+                total += (asset.download_count || 0);
+            });
+        });
+    });
+    return total;
+}
+
 function applyAppViewFilter(apps) {
     if (appViewFilter === 'google') {
         return apps.filter(app => isGoogleApp(app.appName));
@@ -291,6 +303,10 @@ function applyAppViewFilter(apps) {
 
     if (appViewFilter === 'recent') {
         return [...apps].sort((a, b) => getAppLatestPublishedAt(b) - getAppLatestPublishedAt(a));
+    }
+    
+    if (appViewFilter === 'popular') {
+        return [...apps].sort((a, b) => getAppTotalDownloads(b) - getAppTotalDownloads(a));
     }
 
     return apps;
@@ -574,10 +590,16 @@ function renderDynamicAppFilterButtons(filters) {
     // --- ALPHABETICAL SORTING LOGIC ---
     // 1. Grab every button inside the filter container
     const allBtns = Array.from(filterButtons.querySelectorAll('.filter-btn'));
-
-    // 2. Separate the fixed buttons from the ones we want to sort
-    const fixedBtns = allBtns.filter(btn => btn.dataset.filter === 'all' || btn.dataset.filter === 'recent');
-    const sortableBtns = allBtns.filter(btn => btn.dataset.filter !== 'all' && btn.dataset.filter !== 'recent');
+    
+    // 2. Separate the fixed buttons from the ones we want to sort, in exact order!
+    const fixedKeys = ['all', 'recent', 'popular'];
+    const fixedBtns = [];
+    fixedKeys.forEach(key => {
+        const foundBtn = allBtns.find(btn => btn.dataset.filter === key);
+        if (foundBtn) fixedBtns.push(foundBtn);
+    });
+    
+    const sortableBtns = allBtns.filter(btn => !fixedKeys.includes(btn.dataset.filter));
 
     // 3. Sort the remaining buttons alphabetically by their text label
     sortableBtns.sort((a, b) => a.textContent.localeCompare(b.textContent));
@@ -928,10 +950,10 @@ function getUniqueVersions(patch) {
             }
         });
     });
-
+    
     // OPTIMIZATION: Semantic version sorting using natural numeric collation.
     // Correctly sorts "v11.80" as newer than "v9.80".
-    return Array.from(versions).sort((a, b) =>
+    return Array.from(versions).sort((a, b) => 
         b.localeCompare(a, undefined, { numeric: true, sensitivity: 'base' })
     );
 }
@@ -963,7 +985,7 @@ function updateModalFilterButtons(patch = null) {
     const hasBetaBuild = patch ? getFilteredBuildsForFilter(patch, 'beta').length > 0 : true;
     const hasVariantBuild = patch ? getFilteredBuildsForFilter(patch, 'variant').length > 0 : false;
     const variants = patch ? getUniqueVariants(patch) : [];
-
+    
     // OPTIMIZATION: Limit to 5 versions to prevent UI clutter
     const versions = patch ? getUniqueVersions(patch).slice(0, 5) : [];
 
@@ -1239,7 +1261,7 @@ function toTitleWords(value) {
 function formatBrandDisplayName(value) {
     const brandOverrides = {
         youtube: 'YouTube', revanced: 'ReVanced', tiktok: 'TikTok', soundcloud: 'SoundCloud',
-        vpn: 'VPN', rvx: 'ReVanced Extended', anddea: 'ReVanced Advanced', exp: 'Experimental',
+        vpn: 'VPN', rvx: 'ReVanced Extended', anddea: 'ReVanced Advanced', exp: 'Experimental', 
         mocha: 'Mocha Theme', nord: 'Nord Theme', materialu: 'Material You',
         gplay: 'Google Play', foss: 'FOSS', gboard: "Google Keyboard", wps: "WPS", rar: "RAR"
     };
@@ -1355,7 +1377,7 @@ function escapeHtml(text) {
 // Update the last updated timestamp based on the newest release
 function updateLastUpdateTimestamp() {
     if (!allReleases || allReleases.length === 0) return;
-
+    
     let latestTime = 0;
     allReleases.forEach(release => {
         const time = new Date(release.published_at).getTime();
@@ -1369,7 +1391,7 @@ function updateLastUpdateTimestamp() {
     const updateDate = new Date(latestTime);
     const datePart = `${updateDate.getDate()}/${updateDate.getMonth() + 1}/${updateDate.getFullYear()}`;
     const timePart = updateDate.toLocaleTimeString('en-US');
-
+    
     const el = document.getElementById('lastUpdate');
     if (el) {
         el.textContent = `${datePart}, ${timePart}`;
