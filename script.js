@@ -1389,11 +1389,21 @@ function updateLastUpdateTimestamp() {
     if (latestTime === 0) return;
 
     const updateDate = new Date(latestTime);
-    const datePart = `${updateDate.getDate()}/${updateDate.getMonth() + 1}/${updateDate.getFullYear()}`;
-    const timePart = updateDate.toLocaleTimeString('en-US');
     
-    const el = document.getElementById('lastUpdate');
+    // Format the date as "17 April, 2026"
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const datePart = `${updateDate.getDate()} ${months[updateDate.getMonth()]}, ${updateDate.getFullYear()}`;
+    
+    // Format the time as "3:45 PM"
+    let hours = updateDate.getHours();
+    const minutes = updateDate.getMinutes().toString().padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    const timePart = `${hours}:${minutes} ${ampm}`;
+    
+    const el = document.getElementById('lastUpdateText');
     if (el) {
-        el.textContent = `${datePart}, ${timePart}`;
+        el.textContent = `Updated ${datePart} ${timePart}`;
     }
 }

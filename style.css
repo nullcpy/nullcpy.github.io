@@ -135,6 +135,25 @@ header .subtitle {
     display: block;
 }
 
+.update-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: color-mix(in srgb, var(--accent) 15%, transparent);
+    color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-top: 15px; /* Gives it breathing room below the social links */
+    width: fit-content;
+}
+
+.update-pill svg {
+    flex-shrink: 0;
+}
+
 /* Main Content */
 main {
     padding: 20px 0;
