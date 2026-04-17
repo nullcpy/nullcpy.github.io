@@ -135,32 +135,36 @@ header .subtitle {
     display: block;
 }
 
+/* --- Update Status Pill --- */
 .update-pill {
-    --pill-green: #2ea043; 
-    
+    --pill-color: #2ea043; /* Default green */
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    
-    background-color: color-mix(in srgb, var(--pill-green) 15%, transparent);
-    color: var(--pill-green);
-    border: 1px solid color-mix(in srgb, var(--pill-green) 30%, transparent);
-    
+    background-color: color-mix(in srgb, var(--pill-color) 15%, transparent);
+    color: var(--pill-color);
+    border: 1px solid color-mix(in srgb, var(--pill-color) 30%, transparent);
     padding: 6px 14px;
     border-radius: 50px;
     font-size: 0.85rem;
     font-weight: 500;
     width: fit-content;
-    
     margin-top: 16px; 
-    
-    cursor: pointer;
-    transition: transform 0.2s, background-color 0.2s;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 }
 
 .update-pill svg {
     flex-shrink: 0;
 }
+
+/* The 3 Color States */
+.update-pill.success { --pill-color: #2ea043; } /* GitHub Green */
+.update-pill.checking { --pill-color: #d29922; } /* GitHub Yellow */
+.update-pill.error { --pill-color: #f85149; }   /* GitHub Red */
+
+/* Spinning animation for the checking state */
+@keyframes spin { 100% { transform: rotate(360deg); } }
+.update-pill svg.spin { animation: spin 1s linear infinite; }
 
 /* Main Content */
 main {
