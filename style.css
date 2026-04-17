@@ -136,22 +136,35 @@ header .subtitle {
 }
 
 .update-pill {
+    --pill-green: #2ea043; 
+    
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background-color: color-mix(in srgb, var(--accent) 15%, transparent);
-    color: var(--accent);
-    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+    
+    background-color: color-mix(in srgb, var(--pill-green) 15%, transparent);
+    color: var(--pill-green);
+    border: 1px solid color-mix(in srgb, var(--pill-green) 30%, transparent);
+    
     padding: 6px 14px;
     border-radius: 50px;
     font-size: 0.85rem;
     font-weight: 500;
-    margin-top: 15px; /* Gives it breathing room below the social links */
     width: fit-content;
+    
+    margin-top: 16px; 
+    
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
 }
 
 .update-pill svg {
     flex-shrink: 0;
+}
+
+.update-pill:hover {
+    transform: scale(1.03);
+    background-color: color-mix(in srgb, var(--pill-green) 25%, transparent);
 }
 
 /* Main Content */
