@@ -162,11 +162,6 @@ header .subtitle {
     flex-shrink: 0;
 }
 
-.update-pill:hover {
-    transform: scale(1.03);
-    background-color: color-mix(in srgb, var(--pill-green) 25%, transparent);
-}
-
 /* Main Content */
 main {
     padding: 20px 0;
