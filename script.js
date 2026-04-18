@@ -739,18 +739,22 @@ function openPatchModal(appKey, patchKey, preferredFilter = 'all') {
     const hasStableBuild = patch ? getFilteredBuildsForFilter(patch, 'stable').length > 0 : false;
     const hasBetaBuild = patch ? getFilteredBuildsForFilter(patch, 'beta').length > 0 : false;
     const hasVariantBuild = patch ? getFilteredBuildsForFilter(patch, 'variant').length > 0 : false;
+    const variants = patch ? getUniqueVariants(patch) : []; // Retrieve variants list
 
     const prefersStable = preferredFilter === 'stable' && hasStableBuild;
     const prefersBeta = preferredFilter === 'beta' && hasBetaBuild;
-    const prefersVariant = (preferredFilter === 'variant' || preferredFilter.startsWith('variant-')) && getFilteredBuildsForFilter(patch, preferredFilter).length > 0;
+    const prefersSpecificVariant = preferredFilter.startsWith('variant-') && getFilteredBuildsForFilter(patch, preferredFilter).length > 0;
+    const prefersGenericVariant = preferredFilter === 'variant' && hasVariantBuild;
     const prefersVersion = preferredFilter.startsWith('version-') && getFilteredBuildsForFilter(patch, preferredFilter).length > 0;
 
     if (prefersStable) {
         modalBuildFilter = 'stable';
     } else if (prefersBeta) {
         modalBuildFilter = 'beta';
-    } else if (prefersVariant) {
+    } else if (prefersSpecificVariant) {
         modalBuildFilter = preferredFilter;
+    } else if (prefersGenericVariant) {
+        modalBuildFilter = variants.length === 1 ? `variant-${variants[0]}` : 'variant';
     } else if (prefersVersion) {
         modalBuildFilter = preferredFilter;
     } else if (hasStableBuild) {
@@ -758,7 +762,7 @@ function openPatchModal(appKey, patchKey, preferredFilter = 'all') {
     } else if (hasBetaBuild) {
         modalBuildFilter = 'beta';
     } else if (hasVariantBuild) {
-        modalBuildFilter = 'variant';
+        modalBuildFilter = variants.length === 1 ? `variant-${variants[0]}` : 'variant';
     } else {
         modalBuildFilter = 'all';
     }
@@ -993,35 +997,40 @@ function updateModalFilterButtons(patch = null) {
     const hasBetaBuild = patch ? getFilteredBuildsForFilter(patch, 'beta').length > 0 : true;
     const hasVariantBuild = patch ? getFilteredBuildsForFilter(patch, 'variant').length > 0 : false;
     const variants = patch ? getUniqueVariants(patch) : [];
-
-    // OPTIMIZATION: Limit to 5 versions to prevent UI clutter
+    
+    const showGenericVariant = hasVariantBuild && variants.length > 1; 
+    
     const versions = patch ? getUniqueVersions(patch).slice(0, 5) : [];
 
+    if (modalBuildFilter === 'variant' && hasVariantBuild && variants.length === 1) {
+        modalBuildFilter = `variant-${variants[0]}`;
+    }
+
     if (modalBuildFilter === 'stable' && !hasStableBuild) {
-        modalBuildFilter = hasBetaBuild ? 'beta' : hasVariantBuild ? 'variant' : 'all';
+        modalBuildFilter = hasBetaBuild ? 'beta' : hasVariantBuild ? (variants.length === 1 ? `variant-${variants[0]}` : 'variant') : 'all';
     } else if (modalBuildFilter === 'beta' && !hasBetaBuild) {
-        modalBuildFilter = hasStableBuild ? 'stable' : hasVariantBuild ? 'variant' : 'all';
-    } else if ((modalBuildFilter === 'variant' || modalBuildFilter.startsWith('variant-')) && !hasVariantBuild) {
+        modalBuildFilter = hasStableBuild ? 'stable' : hasVariantBuild ? (variants.length === 1 ? `variant-${variants[0]}` : 'variant') : 'all';
+    } else if (modalBuildFilter === 'variant' && !showGenericVariant) {
+        modalBuildFilter = hasStableBuild ? 'stable' : hasBetaBuild ? 'beta' : 'all';
+    } else if (modalBuildFilter.startsWith('variant-') && !hasVariantBuild) {
         modalBuildFilter = hasStableBuild ? 'stable' : hasBetaBuild ? 'beta' : 'all';
     } else if (modalBuildFilter.startsWith('version-')) {
         const activeVersion = modalBuildFilter.slice(8);
-        // If the active filter got pushed out of the top 5, revert to 'all' or 'stable'
-        if (!versions.includes(activeVersion) || !getFilteredBuildsForFilter(patch, modalBuildFilter).length > 0) {
-            modalBuildFilter = hasStableBuild ? 'stable' : hasBetaBuild ? 'beta' : hasVariantBuild ? 'variant' : 'all';
+        if (!versions.includes(activeVersion) || getFilteredBuildsForFilter(patch, modalBuildFilter).length === 0) {
+            modalBuildFilter = hasStableBuild ? 'stable' : hasBetaBuild ? 'beta' : hasVariantBuild ? (variants.length === 1 ? `variant-${variants[0]}` : 'variant') : 'all';
         }
     }
 
     document.querySelectorAll('.modal-filter-btn').forEach(btn => {
         const filter = btn.dataset.filter;
-        const available = filter === 'all'
-            ? true
-            : filter === 'stable'
-                ? hasStableBuild
-                : filter === 'beta'
-                    ? hasBetaBuild
-                    : filter === 'variant'
-                        ? hasVariantBuild
-                        : false;
+        
+        if (!['all', 'stable', 'beta', 'variant'].includes(filter)) return;
+
+        let available = false;
+        if (filter === 'all') available = true;
+        else if (filter === 'stable') available = hasStableBuild;
+        else if (filter === 'beta') available = hasBetaBuild;
+        else if (filter === 'variant') available = showGenericVariant; // Apply the new logic here
 
         btn.style.display = available ? '' : 'none';
         btn.disabled = !available;
