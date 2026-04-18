@@ -218,10 +218,10 @@ async function loadReleases() {
 
     } catch (error) {
         console.error('Error loading releases:', error);
-        
+
         // 2. Trigger the red error state if fetching fails
         setPillState('error', 'Failed to check updates');
-        
+
         document.getElementById('loading').style.display = 'none';
         document.getElementById('error').style.display = 'block';
         document.getElementById('error').textContent = `Failed to load releases: ${error.message}`;
@@ -311,7 +311,7 @@ function applyAppViewFilter(apps) {
     if (appViewFilter === 'recent') {
         return [...apps].sort((a, b) => getAppLatestPublishedAt(b) - getAppLatestPublishedAt(a));
     }
-    
+
     if (appViewFilter === 'popular') {
         return [...apps].sort((a, b) => getAppTotalDownloads(b) - getAppTotalDownloads(a));
     }
@@ -379,9 +379,10 @@ function buildAppCatalog(releases, query = '') {
             }
 
             const buildLabel = getBuildNumberLabel(release);
-            setLatestPatchMeta(patchEntry, releaseType, parsed.version, buildLabel, release.published_at);
 
-            if (parsed.variant) {
+            if (!parsed.variant) {
+                setLatestPatchMeta(patchEntry, releaseType, parsed.version, buildLabel, release.published_at);
+            } else {
                 setLatestVariantMeta(patchEntry, parsed.variant, parsed.version, buildLabel, release.published_at);
             }
 
@@ -597,7 +598,7 @@ function renderDynamicAppFilterButtons(filters) {
     // --- ALPHABETICAL SORTING LOGIC ---
     // 1. Grab every button inside the filter container
     const allBtns = Array.from(filterButtons.querySelectorAll('.filter-btn'));
-    
+
     // 2. Separate the fixed buttons from the ones we want to sort, in exact order!
     const fixedKeys = ['all', 'recent', 'popular'];
     const fixedBtns = [];
@@ -605,7 +606,7 @@ function renderDynamicAppFilterButtons(filters) {
         const foundBtn = allBtns.find(btn => btn.dataset.filter === key);
         if (foundBtn) fixedBtns.push(foundBtn);
     });
-    
+
     const sortableBtns = allBtns.filter(btn => !fixedKeys.includes(btn.dataset.filter));
 
     // 3. Sort the remaining buttons alphabetically by their text label
@@ -957,10 +958,10 @@ function getUniqueVersions(patch) {
             }
         });
     });
-    
+
     // OPTIMIZATION: Semantic version sorting using natural numeric collation.
     // Correctly sorts "v11.80" as newer than "v9.80".
-    return Array.from(versions).sort((a, b) => 
+    return Array.from(versions).sort((a, b) =>
         b.localeCompare(a, undefined, { numeric: true, sensitivity: 'base' })
     );
 }
@@ -992,7 +993,7 @@ function updateModalFilterButtons(patch = null) {
     const hasBetaBuild = patch ? getFilteredBuildsForFilter(patch, 'beta').length > 0 : true;
     const hasVariantBuild = patch ? getFilteredBuildsForFilter(patch, 'variant').length > 0 : false;
     const variants = patch ? getUniqueVariants(patch) : [];
-    
+
     // OPTIMIZATION: Limit to 5 versions to prevent UI clutter
     const versions = patch ? getUniqueVersions(patch).slice(0, 5) : [];
 
@@ -1384,7 +1385,7 @@ function escapeHtml(text) {
 // Update the last updated timestamp based on the newest release
 function updateLastUpdateTimestamp() {
     if (!allReleases || allReleases.length === 0) return;
-    
+
     let latestTime = 0;
     allReleases.forEach(release => {
         const time = new Date(release.published_at).getTime();
@@ -1396,11 +1397,11 @@ function updateLastUpdateTimestamp() {
     if (latestTime === 0) return;
 
     const updateDate = new Date(latestTime);
-    
+
     // Format the date as "17 April, 2026"
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const datePart = `${updateDate.getDate()} ${months[updateDate.getMonth()]}, ${updateDate.getFullYear()}`;
-    
+
     // Format the time as "3:45 PM"
     let hours = updateDate.getHours();
     const minutes = updateDate.getMinutes().toString().padStart(2, '0');
@@ -1408,7 +1409,7 @@ function updateLastUpdateTimestamp() {
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
     const timePart = `${hours}:${minutes} ${ampm}`;
-    
+
     // 3. Trigger the green success state with the calculated time
     setPillState('success', `${datePart} ${timePart}`);
 }
@@ -1417,7 +1418,7 @@ function updateLastUpdateTimestamp() {
 function setPillState(state, text) {
     const textEl = document.getElementById('lastUpdateText');
     if (!textEl) return;
-    
+
     const pill = textEl.closest('.update-pill');
     if (!pill) return;
 
