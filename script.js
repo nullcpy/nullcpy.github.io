@@ -997,9 +997,9 @@ function updateModalFilterButtons(patch = null) {
     const hasBetaBuild = patch ? getFilteredBuildsForFilter(patch, 'beta').length > 0 : true;
     const hasVariantBuild = patch ? getFilteredBuildsForFilter(patch, 'variant').length > 0 : false;
     const variants = patch ? getUniqueVariants(patch) : [];
-    
-    const showGenericVariant = hasVariantBuild && variants.length > 1; 
-    
+
+    const showGenericVariant = hasVariantBuild && variants.length > 1;
+
     const versions = patch ? getUniqueVersions(patch).slice(0, 5) : [];
 
     if (modalBuildFilter === 'variant' && hasVariantBuild && variants.length === 1) {
@@ -1023,14 +1023,14 @@ function updateModalFilterButtons(patch = null) {
 
     document.querySelectorAll('.modal-filter-btn').forEach(btn => {
         const filter = btn.dataset.filter;
-        
+
         if (!['all', 'stable', 'beta', 'variant'].includes(filter)) return;
 
         let available = false;
         if (filter === 'all') available = true;
         else if (filter === 'stable') available = hasStableBuild;
         else if (filter === 'beta') available = hasBetaBuild;
-        else if (filter === 'variant') available = showGenericVariant; // Apply the new logic here
+        else if (filter === 'variant') available = showGenericVariant;
 
         btn.style.display = available ? '' : 'none';
         btn.disabled = !available;
@@ -1039,36 +1039,34 @@ function updateModalFilterButtons(patch = null) {
 
     const filterButtonsContainer = document.querySelector('.modal-filter-buttons');
 
-    if (filterButtonsContainer && variants.length > 0) {
-        const existingVariantBtns = filterButtonsContainer.querySelectorAll('.variant-btn');
-        existingVariantBtns.forEach(btn => btn.remove());
+    if (filterButtonsContainer) {
+        filterButtonsContainer.querySelectorAll('.variant-btn, .version-btn').forEach(btn => btn.remove());
 
-        variants.forEach(variant => {
-            const btn = document.createElement('button');
-            btn.type = 'button';
-            btn.className = 'modal-filter-btn variant-btn';
-            btn.dataset.filter = `variant-${variant}`;
-            btn.textContent = variant;
-            btn.disabled = false;
-            btn.classList.toggle('active', `variant-${variant}` === modalBuildFilter);
-            filterButtonsContainer.appendChild(btn);
-        });
-    }
+        if (variants.length > 0) {
+            variants.forEach(variant => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'modal-filter-btn variant-btn';
+                btn.dataset.filter = `variant-${variant}`;
+                btn.textContent = variant;
+                btn.disabled = false;
+                btn.classList.toggle('active', `variant-${variant}` === modalBuildFilter);
+                filterButtonsContainer.appendChild(btn);
+            });
+        }
 
-    if (filterButtonsContainer && versions.length > 1) {
-        const existingVersionBtns = filterButtonsContainer.querySelectorAll('.version-btn');
-        existingVersionBtns.forEach(btn => btn.remove());
-
-        versions.forEach(version => {
-            const btn = document.createElement('button');
-            btn.type = 'button';
-            btn.className = 'modal-filter-btn version-btn';
-            btn.dataset.filter = `version-${version}`;
-            btn.textContent = version;
-            btn.disabled = false;
-            btn.classList.toggle('active', `version-${version}` === modalBuildFilter);
-            filterButtonsContainer.appendChild(btn);
-        });
+        if (versions.length > 1) {
+            versions.forEach(version => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'modal-filter-btn version-btn';
+                btn.dataset.filter = `version-${version}`;
+                btn.textContent = version;
+                btn.disabled = false;
+                btn.classList.toggle('active', `version-${version}` === modalBuildFilter);
+                filterButtonsContainer.appendChild(btn);
+            });
+        }
     }
 }
 
