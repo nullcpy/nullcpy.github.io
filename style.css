@@ -1340,7 +1340,9 @@ footer a:hover {
 }
 
 /* Custom hover color for the Donate button */
-.social-links a.donate-link:hover {
-    color: #ea4aaa; /* A nice sponsor pink */
+.top-links a.donate-link:hover {
+    color: #ea4aaa; /* Pink icon */
+    border-color: #ea4aaa; /* Pink border */
+    background: rgba(234, 74, 170, 0.1); /* Subtle pink background glow */
     transform: scale(1.1);
 }
