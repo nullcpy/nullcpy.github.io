@@ -1338,3 +1338,9 @@ footer a:hover {
     text-align: center;
     color: var(--text-secondary);
 }
+
+/* Custom hover color for the Donate button */
+.social-links a.donate-link:hover {
+    color: #ea4aaa; /* A nice sponsor pink */
+    transform: scale(1.1);
+}
