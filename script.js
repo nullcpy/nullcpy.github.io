@@ -1278,7 +1278,7 @@ function formatBrandDisplayName(value) {
         youtube: 'YouTube', revanced: 'ReVanced', tiktok: 'TikTok', soundcloud: 'SoundCloud', xrecorder: 'XRecorder',
         vpn: 'VPN', rvx: 'ReVanced Extended', anddea: 'ReVanced Advanced', exp: 'Experimental', macrodroid: "MacroDroid",
         mocha: 'Mocha Theme', nord: 'Nord Theme', materialu: 'Material You', photoshop: 'Adobe Photoshop', lightroom: 'Adobe Lightroom',
-        gplay: 'Google Play', foss: 'FOSS', gboard: "Google Keyboard", wps: "WPS", rar: "RAR"
+        gplay: 'Google Play', foss: 'FOSS', gboard: "Google Keyboard", wps: "WPS", rar: "RAR", adguard: "AdGuard"
     };
     return toTitleWords(value)
         .split(' ')
