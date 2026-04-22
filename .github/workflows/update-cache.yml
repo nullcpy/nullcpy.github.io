@@ -33,3 +33,18 @@ jobs:
         with:
           commit_message: "update releases cache"
           file_pattern: releases.json
+
+  cleanup:
+    name: Cleanup
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    timeout-minutes: 10
+    steps:
+      - name: Remove older workflow runs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh run list -L400 --repo "$GITHUB_REPOSITORY" --json databaseId -q '.[].databaseId' |
+            tail -n+10 |
+            xargs -IID gh api "repos/$GITHUB_REPOSITORY/actions/runs/ID" -X DELETE || :
