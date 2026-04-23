@@ -915,6 +915,10 @@ function createObtainiumInstructions() {
         ? '<li>Enable include prereleases.</li>'
         : '';
 
+    const variantStepMarkup = modalBuildFilter.startsWith('variant')
+        ? '<li>To get beta updates enable include prereleases.</li>'
+        : '';
+
     return `
         <div class="obtainium-instructions">
             <ol>
@@ -933,6 +937,7 @@ function createObtainiumInstructions() {
                     </div>
                 </li>
                 ${betaPrereleaseStepMarkup}
+                ${variantStepMarkup}
                 <li>Tap add to begin downloading. In future, Obtainium will automatically fetch updates when new releases are published.</li>
             </ol>
         </div>
