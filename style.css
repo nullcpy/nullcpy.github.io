@@ -44,7 +44,9 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
-button, input, textarea {
+button,
+input,
+textarea {
     font-family: inherit;
 }
 
@@ -141,7 +143,8 @@ header .subtitle {
 
 /* --- Update Status Pill --- */
 .update-pill {
-    --pill-color: #2ea043; /* Default green */
+    --pill-color: #2ea043;
+    /* Default green */
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -153,7 +156,7 @@ header .subtitle {
     font-size: 0.85rem;
     font-weight: 500;
     width: fit-content;
-    margin-top: 16px; 
+    margin-top: 16px;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 }
 
@@ -162,13 +165,32 @@ header .subtitle {
 }
 
 /* The 3 Color States */
-.update-pill.success { --pill-color: #2ea043; } /* GitHub Green */
-.update-pill.checking { --pill-color: #d29922; } /* GitHub Yellow */
-.update-pill.error { --pill-color: #f85149; }   /* GitHub Red */
+.update-pill.success {
+    --pill-color: #2ea043;
+}
+
+/* GitHub Green */
+.update-pill.checking {
+    --pill-color: #d29922;
+}
+
+/* GitHub Yellow */
+.update-pill.error {
+    --pill-color: #f85149;
+}
+
+/* GitHub Red */
 
 /* Spinning animation for the checking state */
-@keyframes spin { 100% { transform: rotate(360deg); } }
-.update-pill svg.spin { animation: spin 1s linear infinite; }
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.update-pill svg.spin {
+    animation: spin 1s linear infinite;
+}
 
 /* Main Content */
 main {
@@ -1016,6 +1038,20 @@ body.light-mode .copy-btn {
     color: var(--accent-warning);
 }
 
+/* The Grey Archive Badge */
+.release-badge.archive {
+    background: rgba(139, 148, 158, 0.15);
+    /* Subtle grey background */
+    color: #8b949e;
+    /* Sleek grey text */
+}
+
+/* Ensure it stays readable if you are using Light Mode */
+body.light-mode .release-badge.archive {
+    background: rgba(87, 96, 106, 0.12);
+    color: #57606a;
+}
+
 .badge-group {
     display: flex;
     align-items: center;
@@ -1345,8 +1381,11 @@ footer a:hover {
 
 /* Custom hover color for the Donate button */
 .top-links a.donate-link:hover {
-    color: #ea4aaa; /* Pink icon */
-    border-color: #ea4aaa; /* Pink border */
-    background: rgba(234, 74, 170, 0.1); /* Subtle pink background glow */
+    color: #ea4aaa;
+    /* Pink icon */
+    border-color: #ea4aaa;
+    /* Pink border */
+    background: rgba(234, 74, 170, 0.1);
+    /* Subtle pink background glow */
     transform: scale(1.1);
 }

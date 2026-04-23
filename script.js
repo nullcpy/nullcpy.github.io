@@ -328,7 +328,10 @@ function buildAppCatalog(releases, query = '') {
     const appMap = new Map();
 
     sortedReleases.forEach(release => {
-        const releaseType = release.prerelease ? 'beta' : 'stable';
+        const isArchive = release.tag_name === 'stable' || release.tag_name === 'beta';
+        let releaseType = release.prerelease ? 'beta' : 'stable';
+        if (release.tag_name === 'stable') releaseType = 'stable';
+        if (release.tag_name === 'beta') releaseType = 'beta';
 
         (release.assets || []).forEach(asset => {
             const arch = detectArchitecture(asset.name);
@@ -360,39 +363,62 @@ function buildAppCatalog(releases, query = '') {
                 appEntry.patches.set(patchKey, {
                     patchKey,
                     patchName: parsed.patchName,
-                    latestVersion: parsed.version,
-                    latestPublishedAt: release.published_at,
+                    latestVersion: null, // Wait for a real date
+                    latestPublishedAt: 0,
                     latestStable: null,
                     latestBeta: null,
                     latestVariant: null,
+                    latestArchiveStable: null, // NEW FALLBACK
+                    latestArchiveBeta: null,   // NEW FALLBACK
                     builds: new Map()
                 });
             }
 
             const patchEntry = appEntry.patches.get(patchKey);
-            const patchDate = new Date(patchEntry.latestPublishedAt).getTime();
-            const releaseDate = new Date(release.published_at).getTime();
-
-            if (releaseDate > patchDate) {
-                patchEntry.latestVersion = parsed.version;
-                patchEntry.latestPublishedAt = release.published_at;
-            }
-
             const buildLabel = getBuildNumberLabel(release);
 
-            if (!parsed.variant) {
-                setLatestPatchMeta(patchEntry, releaseType, parsed.version, buildLabel, release.published_at);
+            // Get the true date of the APK upload
+            const buildDateString = isArchive ? (asset.updated_at || asset.created_at || release.published_at) : release.published_at;
+            const buildDateMs = new Date(buildDateString).getTime();
+
+            // STRICT PROTECTION: Only update the App Card timestamps if it is NOT an archive!
+            if (!isArchive) {
+                const patchDate = new Date(patchEntry.latestPublishedAt).getTime();
+
+                if (buildDateMs > patchDate) {
+                    patchEntry.latestVersion = parsed.version;
+                    patchEntry.latestPublishedAt = buildDateString;
+                }
+
+                if (!parsed.variant) {
+                    setLatestPatchMeta(patchEntry, releaseType, parsed.version, buildLabel, buildDateString);
+                } else {
+                    setLatestVariantMeta(patchEntry, parsed.variant, parsed.version, buildLabel, buildDateString);
+                }
             } else {
-                setLatestVariantMeta(patchEntry, parsed.variant, parsed.version, buildLabel, release.published_at);
+                // FALLBACK: Quietly track the newest archive for Dead Apps
+                if (releaseType === 'stable') {
+                    const currentMs = patchEntry.latestArchiveStable ? new Date(patchEntry.latestArchiveStable.publishedAt).getTime() : 0;
+                    if (buildDateMs > currentMs) {
+                        patchEntry.latestArchiveStable = { version: parsed.version, build: buildLabel, publishedAt: buildDateString };
+                    }
+                } else if (releaseType === 'beta') {
+                    const currentMs = patchEntry.latestArchiveBeta ? new Date(patchEntry.latestArchiveBeta.publishedAt).getTime() : 0;
+                    if (buildDateMs > currentMs) {
+                        patchEntry.latestArchiveBeta = { version: parsed.version, build: buildLabel, publishedAt: buildDateString };
+                    }
+                }
             }
 
-            const buildKey = String(release.id);
+            // Split archives into their own separate dropdowns based on Version!
+            const buildKey = isArchive ? `archive-${releaseType}-${parsed.version}` : String(release.id);
             if (!patchEntry.builds.has(buildKey)) {
                 patchEntry.builds.set(buildKey, {
                     releaseId: release.id,
-                    build: getBuildNumberLabel(release),
+                    build: isArchive ? parsed.version : getBuildNumberLabel(release),
                     releaseType,
-                    publishedAt: release.published_at,
+                    isArchive, // Flag for the modal
+                    publishedAt: isArchive ? (asset.updated_at || asset.created_at || release.published_at) : release.published_at,
                     releaseUrl: release.html_url,
                     version: parsed.version,
                     assets: []
@@ -413,18 +439,53 @@ function buildAppCatalog(releases, query = '') {
     });
 
     return Array.from(appMap.values())
-        .map(app => ({
-            ...app,
-            patches: Array.from(app.patches.values()).sort((a, b) =>
-                new Date(b.latestPublishedAt) - new Date(a.latestPublishedAt)
-            )
-                .map(patch => ({
-                    ...patch,
-                    builds: Array.from(patch.builds.values()).sort((a, b) =>
-                        new Date(b.publishedAt) - new Date(a.publishedAt)
-                    )
-                }))
-        }))
+        .map(app => {
+            // NEW: Apply fallback dates for archive-only apps before sorting
+            app.patches.forEach(patch => {
+                if (!patch.latestStable && patch.latestArchiveStable) {
+                    patch.latestStable = patch.latestArchiveStable;
+                    const archiveMs = new Date(patch.latestArchiveStable.publishedAt).getTime();
+                    const currentMs = patch.latestPublishedAt ? new Date(patch.latestPublishedAt).getTime() : 0;
+                    if (archiveMs > currentMs) {
+                        patch.latestVersion = patch.latestArchiveStable.version;
+                        patch.latestPublishedAt = patch.latestArchiveStable.publishedAt;
+                    }
+                }
+                if (!patch.latestBeta && patch.latestArchiveBeta) {
+                    patch.latestBeta = patch.latestArchiveBeta;
+                    const archiveMs = new Date(patch.latestArchiveBeta.publishedAt).getTime();
+                    const currentMs = patch.latestPublishedAt ? new Date(patch.latestPublishedAt).getTime() : 0;
+                    if (archiveMs > currentMs) {
+                        patch.latestVersion = patch.latestArchiveBeta.version;
+                        patch.latestPublishedAt = patch.latestArchiveBeta.publishedAt;
+                    }
+                }
+            });
+
+            return {
+                ...app,
+                patches: Array.from(app.patches.values()).sort((a, b) =>
+                    new Date(b.latestPublishedAt) - new Date(a.latestPublishedAt)
+                )
+                    .map(patch => ({
+                        ...patch,
+                        // Sink archives to the bottom!
+                        builds: Array.from(patch.builds.values()).sort((a, b) => {
+                            // 1. If one is an archive and the other isn't, sink the archive
+                            if (a.isArchive && !b.isArchive) return 1;
+                            if (!a.isArchive && b.isArchive) return -1;
+
+                            // 2. If BOTH are archives, sort them nicely by version number (highest first)
+                            if (a.isArchive && b.isArchive) {
+                                return b.version.localeCompare(a.version, undefined, { numeric: true, sensitivity: 'base' });
+                            }
+
+                            // 3. Otherwise (normal builds), just sort by date
+                            return new Date(b.publishedAt) - new Date(a.publishedAt);
+                        })
+                    }))
+            };
+        })
         .filter(app => app.patches.length > 0)
         .sort((a, b) => a.appName.localeCompare(b.appName));
 }
@@ -1122,11 +1183,22 @@ function isVariantAsset(asset) {
 
 function createModalBuildMarkup(build, openByDefault = false) {
     const assetsByArch = groupAssetsByArchitecture(build.assets);
+
     const buildBadgeClass = build.releaseType === 'beta' ? 'prerelease' : 'stable';
+    const badgeText = build.releaseType === 'beta' ? 'Beta' : 'Stable';
+
+    const archiveBadgeMarkup = build.isArchive ? '<span class="release-badge archive">Archive</span>' : '';
+    const titleText = build.isArchive ? escapeHtml(build.build) : `Build ${escapeHtml(build.build)}`;
+
     const hasVariantAssets = build.assets.some(asset => isVariantAsset(asset));
     let downloadsMarkup = '';
 
     const uniqueBuildVersions = Array.from(new Set(build.assets.map(a => a.parsed?.version).filter(Boolean))).join(' / ');
+
+    // Remove the app version string from the date line if it is an archive
+    const dateText = build.isArchive
+        ? formatDate(build.publishedAt)
+        : `${formatDate(build.publishedAt)} • ${escapeHtml(uniqueBuildVersions)}`;
 
     Object.entries(assetsByArch).forEach(([arch, assets]) => {
         if (assets.length === 0) return;
@@ -1162,12 +1234,13 @@ function createModalBuildMarkup(build, openByDefault = false) {
         <details class="modal-build-card" ${openByDefault ? 'open' : ''}>
             <summary class="modal-build-header">
                 <div class="modal-build-header-left">
-                    <div class="modal-build-title">Build ${escapeHtml(build.build)}</div>
-                    <div class="modal-build-date">${formatDate(build.publishedAt)} • ${escapeHtml(uniqueBuildVersions)}</div>
+                    <div class="modal-build-title">${titleText}</div>
+                    <div class="modal-build-date">${dateText}</div>
                 </div>
                 <span class="badge-group">
                     ${variantsIndicator}
-                    <span class="release-badge ${buildBadgeClass}">${build.releaseType === 'beta' ? 'Beta' : 'Stable'}</span>
+                    ${archiveBadgeMarkup}
+                    <span class="release-badge ${buildBadgeClass}">${badgeText}</span>
                 </span>
             </summary>
             <div class="modal-build-downloads">
