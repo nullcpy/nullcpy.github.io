@@ -1067,11 +1067,15 @@ function updateModalFilterButtons(patch = null) {
 
     const versions = patch ? getUniqueVersions(patch).slice(0, 5) : [];
 
+    const activeTypesCount = (hasStableBuild ? 1 : 0) + (hasBetaBuild ? 1 : 0) + (hasVariantBuild ? 1 : 0);
+
     if (modalBuildFilter === 'variant' && hasVariantBuild && variants.length === 1) {
         modalBuildFilter = `variant-${variants[0]}`;
     }
 
-    if (modalBuildFilter === 'stable' && !hasStableBuild) {
+    if (modalBuildFilter === 'all' && activeTypesCount <= 1) {
+        modalBuildFilter = hasStableBuild ? 'stable' : hasBetaBuild ? 'beta' : hasVariantBuild ? (variants.length === 1 ? `variant-${variants[0]}` : 'variant') : 'all';
+    } else if (modalBuildFilter === 'stable' && !hasStableBuild) {
         modalBuildFilter = hasBetaBuild ? 'beta' : hasVariantBuild ? (variants.length === 1 ? `variant-${variants[0]}` : 'variant') : 'all';
     } else if (modalBuildFilter === 'beta' && !hasBetaBuild) {
         modalBuildFilter = hasStableBuild ? 'stable' : hasVariantBuild ? (variants.length === 1 ? `variant-${variants[0]}` : 'variant') : 'all';
@@ -1092,7 +1096,7 @@ function updateModalFilterButtons(patch = null) {
         if (!['all', 'stable', 'beta', 'variant'].includes(filter)) return;
 
         let available = false;
-        if (filter === 'all') available = true;
+        if (filter === 'all') available = activeTypesCount > 1;
         else if (filter === 'stable') available = hasStableBuild;
         else if (filter === 'beta') available = hasBetaBuild;
         else if (filter === 'variant') available = showGenericVariant;
