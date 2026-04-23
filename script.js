@@ -444,6 +444,7 @@ function buildAppCatalog(releases, query = '') {
             app.patches.forEach(patch => {
                 if (!patch.latestStable && patch.latestArchiveStable) {
                     patch.latestStable = patch.latestArchiveStable;
+                    patch.latestStable.isArchiveFallback = true;
                     const archiveMs = new Date(patch.latestArchiveStable.publishedAt).getTime();
                     const currentMs = patch.latestPublishedAt ? new Date(patch.latestPublishedAt).getTime() : 0;
                     if (archiveMs > currentMs) {
@@ -453,6 +454,7 @@ function buildAppCatalog(releases, query = '') {
                 }
                 if (!patch.latestBeta && patch.latestArchiveBeta) {
                     patch.latestBeta = patch.latestArchiveBeta;
+                    patch.latestBeta.isArchiveFallback = true;
                     const archiveMs = new Date(patch.latestArchiveBeta.publishedAt).getTime();
                     const currentMs = patch.latestPublishedAt ? new Date(patch.latestPublishedAt).getTime() : 0;
                     if (archiveMs > currentMs) {
@@ -728,22 +730,24 @@ function createPatchMarkup(app, patch) {
     const patchMetaBoxes = [];
 
     if (patch.latestStable) {
+        const buildMarkup = patch.latestStable.isArchiveFallback ? '' : `<span class="patch-meta-build">Build ${escapeHtml(patch.latestStable.build || 'N/A')}</span>`;
         patchMetaBoxes.push(`
             <button class="patch-open-box stable" data-app-key="${app.appKey}" data-patch-key="${patch.patchKey}" data-filter="stable" type="button">
                 <span class="patch-meta-label">Stable</span>
                 <span class="patch-meta-value">${escapeHtml(patch.latestStable.version)}</span>
-                <span class="patch-meta-build">Build ${escapeHtml(patch.latestStable.build || 'N/A')}</span>
+                ${buildMarkup}
                 <span class="patch-meta-date">${formatDate(patch.latestStable.publishedAt)}</span>
             </button>
         `);
     }
 
     if (patch.latestBeta) {
+        const buildMarkup = patch.latestBeta.isArchiveFallback ? '' : `<span class="patch-meta-build">Build ${escapeHtml(patch.latestBeta.build || 'N/A')}</span>`;
         patchMetaBoxes.push(`
             <button class="patch-open-box beta" data-app-key="${app.appKey}" data-patch-key="${patch.patchKey}" data-filter="beta" type="button">
                 <span class="patch-meta-label">Beta</span>
                 <span class="patch-meta-value">${escapeHtml(patch.latestBeta.version)}</span>
-                <span class="patch-meta-build">Build ${escapeHtml(patch.latestBeta.build || 'N/A')}</span>
+                ${buildMarkup}
                 <span class="patch-meta-date">${formatDate(patch.latestBeta.publishedAt)}</span>
             </button>
         `);
