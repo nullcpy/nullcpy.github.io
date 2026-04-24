@@ -1,9 +1,68 @@
-// Configuration
+/** * ==========================================
+ * CONFIGURATION & CUSTOMIZATION
+ * Edit these values to update the app catalog behavior, branding, and notices.
+ * ==========================================
+ */
 const CONFIG = {
     owner: 'nullcpy',
     repo: 'rvb',
-    // Cache duration in minutes (used for localStorage fallback)
-    cacheDuration: 5,
+    cacheDuration: 5, // Cache duration in minutes
+
+    // App Categories for the top filter buttons (maps filter-btn dataset to keywords)
+    appCategories: {
+        google: ['youtube', 'google'],
+        meta: ['threads', 'instagram', 'messenger']
+    },
+
+    // Words ignored in the dynamic app filters (must be lowercase)
+    sharedAppWordStoplist: new Set([
+        'revanced', 'patched', 'patch', 'extended', 'advanced',
+        'theme', 'edition', 'android', 'app', 'google',
+        'meta', 'facebook', 'instagram', 'messenger'
+    ]),
+
+    // Known tokens indicating a patch name starts (must be lowercase)
+    knownPatchTokens: new Set(['revanced', 'morphe', 'anddea', 'rvx']),
+
+    // Known tokens indicating a variant (must be lowercase)
+    variantKeywords: new Set(['exp', 'nord', 'mocha', 'privacy', 'materialu', 'foss', 'gplay', 'piko', 'adobo']),
+
+    // Known architectures (used for regex parsing)
+    knownArchs: [
+        'arm64-v8a', 'arm64', 'aarch64', 'armeabi-v7a', 'arm-v7a',
+        'arm32', 'x86_64', 'x86', 'universal', 'all'
+    ],
+
+    // Brand name overrides (keys must be lowercase)
+    brandOverrides: {
+        youtube: 'YouTube', revanced: 'ReVanced', tiktok: 'TikTok', soundcloud: 'SoundCloud', xrecorder: 'XRecorder',
+        vpn: 'VPN', rvx: 'ReVanced Extended', anddea: 'ReVanced Advanced', exp: 'Experimental', macrodroid: "MacroDroid",
+        mocha: 'Mocha Theme', nord: 'Nord Theme', materialu: 'Material You', photoshop: 'Adobe Photoshop', lightroom: 'Adobe Lightroom',
+        gplay: 'Google Play', foss: 'FOSS', gboard: "Google Keyboard", wps: "WPS", rar: "RAR", adguard: "AdGuard"
+    },
+
+    // App-specific notices to display on App Cards
+    appNotices: [
+        {
+            triggers: ['youtube', 'google'], // App name keywords that trigger this notice
+            className: 'microg-note', // Defines the CSS prefix
+            title: 'Login Issue',
+            text: 'Signing into Google account on APK (not Module) requires MicroG. Please install one from below before trying to sign in.',
+            links: [
+                { label: 'Morphe', url: 'https://github.com/MorpheApp/MicroG-RE/releases/latest' },
+                { label: 'ReVanced', url: 'https://github.com/ReVanced/GmsCore/releases/latest' }
+            ]
+        },
+        {
+            triggers: ['twitter'],
+            className: 'twitter-login-note',
+            title: 'Login Issue',
+            text: 'Since October 2025, Twitter has started checking whether the app is modified or if the phone integrity fails during login. These checks are server-side, not client-side.',
+            links: [
+                { label: 'Workarounds', url: 'https://t.me/pikopatches/1/59772' }
+            ]
+        }
+    ]
 };
 
 // State
@@ -23,11 +82,6 @@ const RENDER_CHUNK_SIZE = 50;
 
 const SHARED_APP_WORD_MIN_COUNT = 3;
 const SHARED_APP_WORD_FALLBACK_COUNT = 2;
-const SHARED_APP_WORD_STOPLIST = new Set([
-    'revanced', 'patched', 'patch', 'extended', 'advanced',
-    'theme', 'edition', 'android', 'app', 'google',
-    'meta', 'facebook', 'instagram', 'messenger'
-]);
 
 // Caches for Memoization
 const parseCache = new Map();
@@ -295,12 +349,11 @@ function getAppTotalDownloads(app) {
 }
 
 function applyAppViewFilter(apps) {
-    if (appViewFilter === 'google') {
-        return apps.filter(app => isGoogleApp(app.appName));
-    }
-
-    if (appViewFilter === 'meta') {
-        return apps.filter(app => isMetaApp(app.appName));
+    if (CONFIG.appCategories[appViewFilter]) {
+        return apps.filter(app => {
+            const name = normalizeForSearch(app.appName);
+            return CONFIG.appCategories[appViewFilter].some(keyword => name.includes(keyword));
+        });
     }
 
     if (appViewFilter.startsWith('word-')) {
@@ -579,10 +632,32 @@ function renderNextChunk() {
     currentVisibleCount += RENDER_CHUNK_SIZE;
 }
 
+function createNoticeMarkup(notice) {
+    const linksMarkup = notice.links.map(link =>
+        `<a href="${link.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.label)}</a>`
+    ).join('\n                    ');
+
+    return `
+        <div class="${escapeHtml(notice.className)}">
+            <div class="${escapeHtml(notice.className)}-title">${escapeHtml(notice.title)}</div>
+            <div class="${escapeHtml(notice.className)}-text">${escapeHtml(notice.text)}</div>
+            <div class="${escapeHtml(notice.className)}-links">
+                ${linksMarkup}
+            </div>
+        </div>
+    `;
+}
+
 function createAppCard(app) {
     const patchesMarkup = app.patches.map((patch) => createPatchMarkup(app, patch)).join('');
-    const microgNoticeMarkup = isGoogleApp(app.appName) ? createMicrogNoticeMarkup() : '';
-    const twitterNoticeMarkup = isTwitterApp(app.appName) ? createTwitterLoginNoticeMarkup() : '';
+
+    let noticesMarkup = '';
+    CONFIG.appNotices.forEach(notice => {
+        const matches = notice.triggers.some(trigger => normalizeForSearch(app.appName).includes(trigger));
+        if (matches) {
+            noticesMarkup += createNoticeMarkup(notice);
+        }
+    });
 
     return `
         <details class="build-card app-card">
@@ -591,8 +666,7 @@ function createAppCard(app) {
                 <span class="patch-count">${app.patches.length} patch${app.patches.length > 1 ? 'es' : ''}</span>
             </summary>
             <div class="app-card-body">
-                ${microgNoticeMarkup}
-                ${twitterNoticeMarkup}
+                ${noticesMarkup}
                 <div class="patches-title">Available patches</div>
                 <div class="patches-list">
                     ${patchesMarkup}
@@ -602,20 +676,8 @@ function createAppCard(app) {
     `;
 }
 
-function isGoogleApp(appName) {
-    const name = normalizeForSearch(appName);
-    return name.includes('youtube') || name.includes('google');
-}
 
-function isMetaApp(appName) {
-    const name = normalizeForSearch(appName);
-    return name.includes('threads') || name.includes('instagram') || name.includes('messenger');
-}
 
-function isTwitterApp(appName) {
-    const name = normalizeForSearch(appName);
-    return name.includes('twitter');
-}
 
 function getDynamicAppFilters(apps) {
     const wordToAppKeys = new Map();
@@ -686,7 +748,7 @@ function getAppNameWords(appName) {
         .split(/[^a-z0-9]+/)
         .filter(Boolean)
         .filter(word => word.length >= 3)
-        .filter(word => !SHARED_APP_WORD_STOPLIST.has(word));
+        .filter(word => !CONFIG.sharedAppWordStoplist.has(word));
 
     return Array.from(new Set(words));
 }
@@ -695,30 +757,7 @@ function toFilterLabel(value) {
     return value.replace(/\b[a-z]/g, char => char.toUpperCase());
 }
 
-function createMicrogNoticeMarkup() {
-    return `
-        <div class="microg-note">
-            <div class="microg-note-title">Login Issue</div>
-            <div class="microg-note-text">Signing into Google account on APK (not Module) requires MicroG. Please install one from below before trying to sign in.</div>
-            <div class="microg-note-links">
-                <a href="https://github.com/MorpheApp/MicroG-RE/releases/latest" target="_blank" rel="noopener noreferrer">Morphe</a>
-                <a href="https://github.com/ReVanced/GmsCore/releases/latest" target="_blank" rel="noopener noreferrer">ReVanced</a>
-            </div>
-        </div>
-    `;
-}
 
-function createTwitterLoginNoticeMarkup() {
-    return `
-        <div class="twitter-login-note">
-            <div class="twitter-login-note-title">Login Issue</div>
-            <div class="twitter-login-note-text">Since October 2025, Twitter has started checking whether the app is modified or if the phone integrity fails during login. These checks are server-side, not client-side.</div>
-            <div class="twitter-login-note-links">
-                <a href="https://t.me/pikopatches/1/59772" target="_blank" rel="noopener noreferrer">Workarounds</a>
-            </div>
-        </div>
-    `;
-}
 
 function createPatchMarkup(app, patch) {
     const buildCount = patch.builds.length;
@@ -986,12 +1025,8 @@ function buildObtainiumRegexFromDownloadUrl(downloadUrl) {
 }
 
 function extractArchFromAssetName(nameWithoutExt) {
-    const knownArchs = [
-        'arm64-v8a', 'arm64', 'aarch64', 'armeabi-v7a', 'arm-v7a',
-        'arm32', 'x86_64', 'x86', 'universal', 'all'
-    ];
     const lowerName = (nameWithoutExt || '').toLowerCase();
-    return knownArchs.find(arch => lowerName.endsWith(`-${arch}`)) || null;
+    return CONFIG.knownArchs.find(arch => lowerName.endsWith(`-${arch}`)) || null;
 }
 
 function escapeRegex(value) {
@@ -1354,8 +1389,8 @@ function parseAssetDisplay(filename, arch, fileType) {
     const stopIndex = stopIndexCandidates.length > 0 ? Math.min(...stopIndexCandidates) : tokens.length;
     const preMetaTokens = tokens.slice(0, stopIndex);
 
-    const knownPatchTokens = new Set(['revanced', 'morphe', 'anddea', 'rvx']);
-    const variantKeywords = new Set(['exp', 'nord', 'mocha', 'privacy', 'materialu', 'foss', 'gplay', 'piko', 'adobo']);
+    const knownPatchTokens = CONFIG.knownPatchTokens;
+    const variantKeywords = CONFIG.variantKeywords;
 
     let patchStartIndex = preMetaTokens.findIndex(token => knownPatchTokens.has(token.toLowerCase()));
     if (patchStartIndex < 0) {
@@ -1395,15 +1430,9 @@ function toTitleWords(value) {
 }
 
 function formatBrandDisplayName(value) {
-    const brandOverrides = {
-        youtube: 'YouTube', revanced: 'ReVanced', tiktok: 'TikTok', soundcloud: 'SoundCloud', xrecorder: 'XRecorder',
-        vpn: 'VPN', rvx: 'ReVanced Extended', anddea: 'ReVanced Advanced', exp: 'Experimental', macrodroid: "MacroDroid",
-        mocha: 'Mocha Theme', nord: 'Nord Theme', materialu: 'Material You', photoshop: 'Adobe Photoshop', lightroom: 'Adobe Lightroom',
-        gplay: 'Google Play', foss: 'FOSS', gboard: "Google Keyboard", wps: "WPS", rar: "RAR", adguard: "AdGuard"
-    };
     return toTitleWords(value)
         .split(' ')
-        .map(token => brandOverrides[token.toLowerCase()] || token)
+        .map(token => CONFIG.brandOverrides[token.toLowerCase()] || token)
         .join(' ');
 }
 
