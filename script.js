@@ -775,9 +775,7 @@ function createPatchMarkup(app, patch) {
         }
     });
 
-    // Sort alphabetically by the label (Archive, Beta, Stable, etc.)
-    boxes.sort((a, b) => a.label.localeCompare(b.label));
-
+    // Keep logical order: Stable -> Beta -> Variants
     const patchMetaBoxes = boxes.map(b => b.html);
 
     if (patchMetaBoxes.length === 0) {
@@ -1269,7 +1267,18 @@ function createModalBuildMarkup(build, openByDefault = false) {
         downloadsMarkup += `</div>`;
     });
 
-    const variantsIndicator = hasVariantAssets ? '<span class="variants-indicator">Variant</span>' : '';
+    const modalBadges = [];
+    if (build.isArchive) {
+        modalBadges.push({ label: 'Archive', html: '<span class="release-badge archive">Archive</span>' });
+    }
+    modalBadges.push({ label: badgeText, html: `<span class="release-badge ${buildBadgeClass}">${badgeText}</span>` });
+    if (hasVariantAssets) {
+        modalBadges.push({ label: 'Variant', html: '<span class="variants-indicator">Variant</span>' });
+    }
+
+    // Sort the small pill badges alphabetically (Archive -> Beta/Stable -> Variant)
+    modalBadges.sort((a, b) => a.label.localeCompare(b.label));
+    const badgeGroupMarkup = modalBadges.map(b => b.html).join('\n                    ');
 
     return `
         <details class="modal-build-card" ${openByDefault ? 'open' : ''}>
@@ -1279,9 +1288,7 @@ function createModalBuildMarkup(build, openByDefault = false) {
                     <div class="modal-build-date">${dateText}</div>
                 </div>
                 <span class="badge-group">
-                    ${variantsIndicator}
-                    ${archiveBadgeMarkup}
-                    <span class="release-badge ${buildBadgeClass}">${badgeText}</span>
+                    ${badgeGroupMarkup}
                 </span>
             </summary>
             <div class="modal-build-downloads">
