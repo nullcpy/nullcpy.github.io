@@ -727,46 +727,58 @@ function createPatchMarkup(app, patch) {
         ? allMeta.reduce((a, b) => new Date(a.publishedAt) > new Date(b.publishedAt) ? a : b).build
         : null;
 
-    const patchMetaBoxes = [];
+    const boxes = [];
 
     if (patch.latestStable) {
         const buildMarkup = patch.latestStable.isArchiveFallback ? '' : `<span class="patch-meta-build">Build ${escapeHtml(patch.latestStable.build || 'N/A')}</span>`;
-        patchMetaBoxes.push(`
+        boxes.push({
+            label: 'Stable',
+            html: `
             <button class="patch-open-box stable" data-app-key="${app.appKey}" data-patch-key="${patch.patchKey}" data-filter="stable" type="button">
                 <span class="patch-meta-label">Stable</span>
                 <span class="patch-meta-value">${escapeHtml(patch.latestStable.version)}</span>
                 ${buildMarkup}
                 <span class="patch-meta-date">${formatDate(patch.latestStable.publishedAt)}</span>
             </button>
-        `);
+        `});
     }
 
     if (patch.latestBeta) {
         const buildMarkup = patch.latestBeta.isArchiveFallback ? '' : `<span class="patch-meta-build">Build ${escapeHtml(patch.latestBeta.build || 'N/A')}</span>`;
-        patchMetaBoxes.push(`
+        boxes.push({
+            label: 'Beta',
+            html: `
             <button class="patch-open-box beta" data-app-key="${app.appKey}" data-patch-key="${patch.patchKey}" data-filter="beta" type="button">
                 <span class="patch-meta-label">Beta</span>
                 <span class="patch-meta-value">${escapeHtml(patch.latestBeta.version)}</span>
                 ${buildMarkup}
                 <span class="patch-meta-date">${formatDate(patch.latestBeta.publishedAt)}</span>
             </button>
-        `);
+        `});
     }
 
     const variants = getUniqueVariants(patch);
     variants.forEach(variant => {
         const latestVariantBuild = getLatestVariantBuild(patch, variant);
         if (latestVariantBuild) {
-            patchMetaBoxes.push(`
+            const buildMarkup = latestVariantBuild.isArchiveFallback ? '' : `<span class="patch-meta-build">Build ${escapeHtml(latestVariantBuild.build || 'N/A')}</span>`;
+            boxes.push({
+                label: variant,
+                html: `
                 <button class="patch-open-box variant" data-app-key="${app.appKey}" data-patch-key="${patch.patchKey}" data-filter="variant-${variant}" type="button">
                     <span class="patch-meta-label">${escapeHtml(variant)}</span>
                     <span class="patch-meta-value">${escapeHtml(latestVariantBuild.version)}</span>
-                    <span class="patch-meta-build">Build ${escapeHtml(latestVariantBuild.build || 'N/A')}</span>
+                    ${buildMarkup}
                     <span class="patch-meta-date">${formatDate(latestVariantBuild.publishedAt)}</span>
                 </button>
-            `);
+            `});
         }
     });
+
+    // Sort alphabetically by the label (Archive, Beta, Stable, etc.)
+    boxes.sort((a, b) => a.label.localeCompare(b.label));
+
+    const patchMetaBoxes = boxes.map(b => b.html);
 
     if (patchMetaBoxes.length === 0) {
         patchMetaBoxes.push(`
@@ -1041,25 +1053,41 @@ function getUniqueVersions(patch) {
 }
 
 function getLatestVariantBuild(patch, variantName) {
-    let latestBuild = null;
-    let latestDate = 0;
+    let latestNormal = null;
+    let latestArchive = null;
+    let latestNormalDate = 0;
+    let latestArchiveDate = 0;
 
     (patch.builds || []).forEach(build => {
         const variantAsset = (build.assets || []).find(asset => asset?.parsed?.variant === variantName);
         if (variantAsset) {
             const buildDate = new Date(build.publishedAt).getTime();
-            if (buildDate > latestDate) {
-                latestDate = buildDate;
-                latestBuild = {
-                    version: variantAsset.parsed.version,
-                    build: build.build,
-                    publishedAt: build.publishedAt
-                };
+
+            if (!build.isArchive) {
+                if (buildDate > latestNormalDate) {
+                    latestNormalDate = buildDate;
+                    latestNormal = {
+                        version: variantAsset.parsed.version,
+                        build: build.build,
+                        publishedAt: build.publishedAt,
+                        isArchiveFallback: false
+                    };
+                }
+            } else {
+                if (buildDate > latestArchiveDate) {
+                    latestArchiveDate = buildDate;
+                    latestArchive = {
+                        version: variantAsset.parsed.version,
+                        build: build.build,
+                        publishedAt: build.publishedAt,
+                        isArchiveFallback: true
+                    };
+                }
             }
         }
     });
 
-    return latestBuild;
+    return latestNormal || latestArchive;
 }
 
 function updateModalFilterButtons(patch = null) {
