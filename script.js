@@ -34,7 +34,7 @@ const CONFIG = {
     ],
 
     // Brand name overrides (keys must be lowercase)
-    brandOverrides: {
+        brandOverrides: {
         youtube: 'YouTube', revanced: 'ReVanced', tiktok: 'TikTok', soundcloud: 'SoundCloud', xrecorder: 'XRecorder', calcnote: 'CalcNote',
         vpn: 'VPN', rvx: 'ReVanced Extended', anddea: 'ReVanced Advanced', exp: 'Experimental', macrodroid: 'MacroDroid', ticktick: 'TickTick', fing: 'Fing - Network Tools',
         mocha: 'Mocha Theme', nord: 'Nord Theme', materialu: 'Material You', photoshop: 'Adobe Photoshop', lightroom: 'Adobe Lightroom', xodo: 'Xodo PDF Reader & Editor',
@@ -450,15 +450,18 @@ function buildAppCatalog(releases, query = '') {
                 }
             } else {
                 // FALLBACK: Quietly track the newest archive for Dead Apps
-                if (releaseType === 'stable') {
-                    const currentMs = patchEntry.latestArchiveStable ? new Date(patchEntry.latestArchiveStable.publishedAt).getTime() : 0;
-                    if (buildDateMs > currentMs) {
-                        patchEntry.latestArchiveStable = { version: parsed.version, build: buildLabel, publishedAt: buildDateString };
-                    }
-                } else if (releaseType === 'beta') {
-                    const currentMs = patchEntry.latestArchiveBeta ? new Date(patchEntry.latestArchiveBeta.publishedAt).getTime() : 0;
-                    if (buildDateMs > currentMs) {
-                        patchEntry.latestArchiveBeta = { version: parsed.version, build: buildLabel, publishedAt: buildDateString };
+                // FIX: Only track non-variants for the generic Stable/Beta fallback boxes!
+                if (!parsed.variant) {
+                    if (releaseType === 'stable') {
+                        const currentMs = patchEntry.latestArchiveStable ? new Date(patchEntry.latestArchiveStable.publishedAt).getTime() : 0;
+                        if (buildDateMs > currentMs) {
+                            patchEntry.latestArchiveStable = { version: parsed.version, build: buildLabel, publishedAt: buildDateString };
+                        }
+                    } else if (releaseType === 'beta') {
+                        const currentMs = patchEntry.latestArchiveBeta ? new Date(patchEntry.latestArchiveBeta.publishedAt).getTime() : 0;
+                        if (buildDateMs > currentMs) {
+                            patchEntry.latestArchiveBeta = { version: parsed.version, build: buildLabel, publishedAt: buildDateString };
+                        }
                     }
                 }
             }
@@ -633,7 +636,7 @@ function renderNextChunk() {
 }
 
 function createNoticeMarkup(notice) {
-    const linksMarkup = notice.links.map(link =>
+    const linksMarkup = notice.links.map(link => 
         `<a href="${link.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.label)}</a>`
     ).join('\n                    ');
 
@@ -650,7 +653,7 @@ function createNoticeMarkup(notice) {
 
 function createAppCard(app) {
     const patchesMarkup = app.patches.map((patch) => createPatchMarkup(app, patch)).join('');
-
+    
     let noticesMarkup = '';
     CONFIG.appNotices.forEach(notice => {
         const matches = notice.triggers.some(trigger => normalizeForSearch(app.appName).includes(trigger));
@@ -1095,7 +1098,7 @@ function getLatestVariantBuild(patch, variantName) {
         const variantAsset = (build.assets || []).find(asset => asset?.parsed?.variant === variantName);
         if (variantAsset) {
             const buildDate = new Date(build.publishedAt).getTime();
-
+            
             if (!build.isArchive) {
                 if (buildDate > latestNormalDate) {
                     latestNormalDate = buildDate;
@@ -1310,7 +1313,7 @@ function createModalBuildMarkup(build, openByDefault = false) {
     if (hasVariantAssets) {
         modalBadges.push({ label: 'Variant', html: '<span class="variants-indicator">Variant</span>' });
     }
-
+    
     // Sort the small pill badges alphabetically (Archive -> Beta/Stable -> Variant)
     modalBadges.sort((a, b) => a.label.localeCompare(b.label));
     const badgeGroupMarkup = modalBadges.map(b => b.html).join('\n                    ');
