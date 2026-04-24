@@ -35,10 +35,10 @@ const CONFIG = {
 
     // Brand name overrides (keys must be lowercase)
     brandOverrides: {
-        youtube: 'YouTube', revanced: 'ReVanced', tiktok: 'TikTok', soundcloud: 'SoundCloud', xrecorder: 'XRecorder', calcnote: "CalcNote",
-        vpn: 'VPN', rvx: 'ReVanced Extended', anddea: 'ReVanced Advanced', exp: 'Experimental', macrodroid: "MacroDroid", ticktick: "TickTick",
-        mocha: 'Mocha Theme', nord: 'Nord Theme', materialu: 'Material You', photoshop: 'Adobe Photoshop', lightroom: 'Adobe Lightroom',
-        gplay: 'Google Play', foss: 'FOSS', gboard: "Google Keyboard", wps: "WPS", rar: "RAR", adguard: "AdGuard", moonplus: "Moon+", eyecon: "Eyecon Caller ID & Spam Block"
+        youtube: 'YouTube', revanced: 'ReVanced', tiktok: 'TikTok', soundcloud: 'SoundCloud', xrecorder: 'XRecorder', calcnote: 'CalcNote',
+        vpn: 'VPN', rvx: 'ReVanced Extended', anddea: 'ReVanced Advanced', exp: 'Experimental', macrodroid: 'MacroDroid', ticktick: 'TickTick',
+        mocha: 'Mocha Theme', nord: 'Nord Theme', materialu: 'Material You', photoshop: 'Adobe Photoshop', lightroom: 'Adobe Lightroom', xodo: 'Xodo PDF Reader & Editor',
+        gplay: 'Google Play', foss: 'FOSS', gboard: 'Google Keyboard', wps: 'WPS', rar: 'RAR', adguard: 'AdGuard', moonplus: 'Moon+', eyecon: 'Eyecon Caller ID & Spam Block'
     },
 
     // App-specific notices to display on App Cards
