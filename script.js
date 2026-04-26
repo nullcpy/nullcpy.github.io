@@ -942,22 +942,34 @@ function createObtainiumInstructions() {
             regexMap.set(result.regex, `${appLabel} ${patchLabel}${variantLabel}`);
         });
 
-    const regexEntries = Array.from(regexMap.entries()).map(([regex, label]) => ({ regex, label }));
-
     const copyCode = (text) => {
         const escaped = escapeForOnclickCopy(text);
         return `onclick="navigator.clipboard.writeText('${escaped}').then(() => { this.textContent='Copied!'; setTimeout(() => { this.textContent='Copy'; }, 2000); })" `;
     };
 
-    const selectedExamplesMarkup = regexEntries.length > 0
-        ? regexEntries.map(({ regex, label }) => `
+    const selectedExamplesMarkup = Array.from(regexMap.entries()).length > 0
+        ? Array.from(regexMap.entries()).map(([regex, label], index) => {
+            // Dynamically build the Obtainium JSON config
+            const safeId = `${CONFIG.owner}_${activeModalAppKey}_${activeModalPatchKey}_${index}`.replace(/[^a-zA-Z0-9_]/g, '_');
+            const obtainiumConfig = {
+                id: safeId,
+                name: label,
+                author: CONFIG.owner,
+                url: repoUrl,
+                additionalSettings: JSON.stringify({ apkFilterRegEx: regex })
+            };
+            const oneClickUrl = `https://apps.obtainium.imranr.dev/redirect?r=${encodeURIComponent('obtainium://app/' + JSON.stringify(obtainiumConfig))}`;
+
+            return `
                     <div class="example">
                         <strong>${escapeHtml(label)}</strong>
                         <div class="code-with-copy">
                             <code>${escapeHtml(regex)}</code>
                             <button type="button" class="copy-btn" ${copyCode(regex)}>Copy</button>
+                            <a href="${oneClickUrl}" class="obtainium-add-btn" target="_blank" rel="noopener noreferrer">Add to Obtainium</a>
                         </div>
-                    </div>`).join('')
+                    </div>`;
+        }).join('')
         : `
                     <div class="example">
                         <strong>No APK URLs found for this patch.</strong>

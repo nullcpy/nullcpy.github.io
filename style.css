@@ -1389,3 +1389,34 @@ footer a:hover {
     /* Subtle pink background glow */
     transform: scale(1.1);
 }
+.obtainium-add-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    background: rgba(69, 0, 255, 0.15);
+    color: #7b61ff;
+    border: 1px solid #7b61ff;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 700;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.obtainium-add-btn:hover {
+    background: #7b61ff;
+    color: #ffffff;
+}
+
+body.light-mode .obtainium-add-btn {
+    background: rgba(69, 0, 255, 0.1);
+    color: #4500FF;
+    border-color: #4500FF;
+}
+
+body.light-mode .obtainium-add-btn:hover {
+    background: #4500FF;
+    color: #ffffff;
+}
