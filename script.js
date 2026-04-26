@@ -41,6 +41,57 @@ const CONFIG = {
         gplay: 'Google Play', foss: 'FOSS', gboard: 'Google Keyboard', wps: 'WPS', rar: 'RAR', adguard: 'AdGuard', moonplus: 'Moon+', eyecon: 'Eyecon Caller ID & Spam Block'
     },
 
+    // Map app slugs to true Android Package IDs for Obtainium
+    appIds: {
+        'adguard': 'com.adguard.android.contentblocker',
+        'lightroom': 'com.adobe.lrmobile',
+        'photoshop-mix': 'com.adobe.psmobile',
+        'autosync': 'com.ttxapps.autosync',
+        'calcnote': 'com.appumstudios.calcnote',
+        'cricbuzz': 'com.cricbuzz.android',
+        'document-scanner': 'com.cv.docscanner',
+        'duolingo': 'com.duolingo',
+        'eyecon': 'com.eyecon.global',
+        'fing': 'com.overlook.android.fing',
+        'gboard': 'com.google.android.inputmethod.latin',
+        'google-news': 'com.google.android.apps.magazines',
+        'google-photos': 'com.google.android.apps.photos',
+        'google-recorder': 'com.google.android.apps.recorder',
+        'icon-packer': 'cn.ommiao.iconpacker',
+        'instagram': 'com.instagram.android',
+        'macrodroid': 'com.arlosoft.macrodroid',
+        'merriam-webster-dictionary': 'com.merriamwebster',
+        'messenger': 'com.facebook.orca',
+        'microsoft-lens': 'com.microsoft.office.officelens',
+        'moonplus-reader': 'com.flyersoft.moonreader',
+        'pandora': 'com.pandora.android',
+        'photomath': 'com.microblink.photomath',
+        'pinterest': 'com.pinterest',
+        'podcast-addict': 'com.bambuna.podcastaddict',
+        'proton-mail': 'ch.protonmail.android',
+        'proton-vpn': 'ch.protonvpn.android',
+        'reddit': 'com.reddit.frontpage',
+        'smart-launcher-6': 'ginlemon.flowerfree',
+        'solid-explorer': 'pl.solidexplorer2',
+        'soundcloud': 'com.soundcloud.android',
+        'symfonium': 'app.symfonik.music.player',
+        'telegram': 'org.telegram.messenger',
+        'threads': 'com.instagram.barcelona',
+        'ticktick': 'com.ticktick.task',
+        'truecaller': 'com.truecaller',
+        'tumblr': 'com.tumblr',
+        'twitch': 'tv.twitch.android.app',
+        'viber': 'com.viber.voip',
+        'wallcraft': 'com.wallpaperscraft.wallpaper',
+        'rar': 'com.rarlab.rar',
+        'wps-office': 'cn.wps.moffice_eng',
+        'twitter': 'com.twitter.android',
+        'xodo': 'com.xodo.pdf.reader',
+        'xrecorder': 'video.other.screenrecorder',
+        'youtube': 'com.google.android.youtube',
+        'youtube-music': 'com.google.android.apps.youtube.music'
+    },
+
     // App-specific notices to display on App Cards
     appNotices: [
         {
@@ -679,9 +730,6 @@ function createAppCard(app) {
     `;
 }
 
-
-
-
 function getDynamicAppFilters(apps) {
     const wordToAppKeys = new Map();
 
@@ -759,8 +807,6 @@ function getAppNameWords(appName) {
 function toFilterLabel(value) {
     return value.replace(/\b[a-z]/g, char => char.toUpperCase());
 }
-
-
 
 function createPatchMarkup(app, patch) {
     const buildCount = patch.builds.length;
@@ -949,29 +995,38 @@ function createObtainiumInstructions() {
 
     const selectedExamplesMarkup = Array.from(regexMap.entries()).length > 0
         ? Array.from(regexMap.entries()).map(([regex, label], index) => {
-            // Dynamically build the Obtainium JSON config
-            const safeId = `${CONFIG.owner}_${activeModalAppKey}_${activeModalPatchKey}_${index}`.replace(/[^a-zA-Z0-9_]/g, '_');
+
+            // Strict dictionary lookup. Fails gracefully if an app is missing from CONFIG.appIds.
+            const appId = CONFIG.appIds[activeModalAppKey];
+            if (!appId) console.warn(`Missing App ID for: ${activeModalAppKey}`);
+
+            const safeId = appId ? `${appId}_${index}` : '';
 
             const additionalSettings = { apkFilterRegEx: regex };
             if (modalBuildFilter === 'beta') {
                 additionalSettings.includePrereleases = true;
             }
 
-            const obtainiumConfig = {
-                id: safeId,
-                name: label,
-                author: CONFIG.owner,
-                url: repoUrl,
-                additionalSettings: JSON.stringify(additionalSettings)
-            };
-            const oneClickUrl = `https://apps.obtainium.imranr.dev/redirect?r=${encodeURIComponent('obtainium://app/' + JSON.stringify(obtainiumConfig))}`;
+            // Conditionally generate the Obtainium button HTML
+            let obtainiumButtonHtml = '';
+            if (appId) {
+                const obtainiumConfig = {
+                    id: safeId,
+                    name: label,
+                    author: CONFIG.owner,
+                    url: repoUrl,
+                    additionalSettings: JSON.stringify(additionalSettings)
+                };
+                const oneClickUrl = `https://apps.obtainium.imranr.dev/redirect?r=${encodeURIComponent('obtainium://app/' + JSON.stringify(obtainiumConfig))}`;
+                obtainiumButtonHtml = `<a href="${oneClickUrl}" class="copy-btn obtainium-add-btn" target="_blank" rel="noopener noreferrer">Add to Obtainium</a>`;
+            }
 
             return `
                     <div class="example">
                         <strong>${escapeHtml(label)}</strong>
-                        <div class="code-with-copy">
+                        <div class="code-with-copy ${appId ? '' : 'no-obtainium'}">
                             <code>${escapeHtml(regex)}</code>
-                            <a href="${oneClickUrl}" class="copy-btn obtainium-add-btn" target="_blank" rel="noopener noreferrer">Add to Obtainium</a>
+                            ${obtainiumButtonHtml}
                             <button type="button" class="copy-btn" ${copyCode(regex)}>Copy</button>
                         </div>
                     </div>`;
