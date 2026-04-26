@@ -1514,7 +1514,8 @@ function parseAssetDisplay(filename, arch, fileType) {
         const versionParts = [tokens[versionIndex]];
         for (let i = versionIndex + 1; i < tokens.length; i++) {
             const t = tokens[i].toLowerCase();
-            if (t === 'module' || t === 'universal' || CONFIG.knownArchs.some(a => a.includes(t))) {
+            const isArchToken = CONFIG.knownArchs.some(a => a.split('-').includes(t));
+            if (t === 'module' || t === 'universal' || isArchToken) {
                 break;
             }
             versionParts.push(tokens[i]);
