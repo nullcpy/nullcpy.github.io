@@ -224,6 +224,7 @@ main {
 
 .filter-buttons {
     display: flex;
+    justify-content: center;
     gap: 10px;
     flex-wrap: wrap;
 }
@@ -1274,10 +1275,6 @@ footer a:hover {
         flex-direction: column;
     }
 
-    .filter-buttons {
-        justify-content: center;
-    }
-
     .build-summary-grid {
         grid-template-columns: 1fr;
     }
@@ -1366,6 +1363,30 @@ footer a:hover {
         width: 45px;
         height: 45px;
         font-size: 20px;
+    }
+
+    /* Stack and reorder the regex copy section for mobile */
+    .code-with-copy {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .code-with-copy code {
+        order: 1;
+        margin-bottom: 4px !important;
+    }
+
+    /* Target the actual Copy button */
+    .code-with-copy button.copy-btn {
+        order: 2;
+    }
+
+    /* Target the Obtainium button */
+    .code-with-copy a.obtainium-add-btn {
+        order: 3;
+        justify-content: center;
+        /* Ensures the text stays centered when stretched */
+        margin-left: 0;
     }
 }
 
