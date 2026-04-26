@@ -76,7 +76,13 @@ const CONFIG = {
         'solidexplorer': 'pl.solidexplorer2',
         'soundcloud': 'com.soundcloud.android',
         'symfonium': 'app.symfonik.music.player',
-        'telegram': 'org.telegram.messenger',
+
+        // Use an object for variant-specific IDs
+        'telegram': {
+            default: 'org.telegram.messenger',
+            foss: 'org.telegram.messenger.web'
+        },
+
         'threads': 'com.instagram.barcelona',
         'ticktick': 'com.ticktick.task',
         'truecaller': 'com.truecaller',
@@ -986,7 +992,15 @@ function createObtainiumInstructions() {
             const appLabel = asset?.parsed?.appName || app?.appName || 'App';
             const patchLabel = asset?.parsed?.patchName || patch?.patchName || 'patch';
             const variantLabel = asset?.parsed?.variant ? ` (${escapeHtml(asset.parsed.variant)})` : '';
-            regexMap.set(result.regex, `${appLabel} ${patchLabel}${variantLabel}`);
+
+            // Extract the normalized variant slug (e.g., 'foss') or set as 'default'
+            const variantSlug = asset?.parsed?.variant ? normalizeForSearch(asset.parsed.variant) : 'default';
+
+            // Save both the label and the variant slug
+            regexMap.set(result.regex, {
+                label: `${appLabel} ${patchLabel}${variantLabel}`,
+                variantSlug: variantSlug
+            });
         });
 
     const copyCode = (text) => {
@@ -995,11 +1009,22 @@ function createObtainiumInstructions() {
     };
 
     const selectedExamplesMarkup = Array.from(regexMap.entries()).length > 0
-        ? Array.from(regexMap.entries()).map(([regex, label]) => {
+        ? Array.from(regexMap.entries()).map(([regex, data]) => {
 
-            // Strict dictionary lookup. Fails gracefully if an app is missing.
-            const appId = CONFIG.appIds[activeModalAppKey];
-            if (!appId) console.warn(`Missing App ID for: ${activeModalAppKey}`);
+            const label = data.label;
+            const variantSlug = data.variantSlug;
+
+            // Advanced lookup: handles strings or nested variant objects
+            const appConfig = CONFIG.appIds[activeModalAppKey];
+            let appId = null;
+
+            if (typeof appConfig === 'string') {
+                appId = appConfig;
+            } else if (typeof appConfig === 'object' && appConfig !== null) {
+                appId = appConfig[variantSlug] || appConfig['default'];
+            }
+
+            if (!appId) console.warn(`Missing App ID for: ${activeModalAppKey} (Variant: ${variantSlug})`);
 
             const additionalSettings = { apkFilterRegEx: regex };
             if (modalBuildFilter === 'beta') {
@@ -1010,7 +1035,7 @@ function createObtainiumInstructions() {
             let obtainiumButtonHtml = '';
             if (appId) {
                 const obtainiumConfig = {
-                    id: appId, // Directly using the package ID from the dictionary
+                    id: appId,
                     name: label,
                     author: CONFIG.owner,
                     url: repoUrl,
