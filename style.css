@@ -1371,12 +1371,14 @@ footer a:hover {
 
 /* No builds */
 .no-results {
-    background: var(--bg-secondary);
-    border: 2px dashed var(--border);
-    border-radius: 12px;
-    padding: 60px 20px;
+    padding: 100px 20px;
+    /* Pushes the text down the page */
     text-align: center;
     color: var(--text-secondary);
+    font-size: 1.1rem;
+    /* Makes it slightly larger and more readable */
+    column-span: all;
+    /* Prevents it from getting stuck in the first grid column */
 }
 
 /* Custom hover color for the Donate button */
