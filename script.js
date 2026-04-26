@@ -909,6 +909,13 @@ function openObtainiumModal() {
 
     const body = document.getElementById('obtainiumBody');
     body.innerHTML = createObtainiumInstructions();
+
+    // Reset the header in case it was modified before
+    const header = modal.querySelector('.modal-header');
+    header.innerHTML = `
+        <h2 id="obtainiumTitle">Install with Obtainium</h2>
+        <button type="button" class="modal-close" aria-label="Close popup">×</button>
+    `;
 }
 
 function closeObtainiumModal() {
@@ -949,14 +956,18 @@ function createObtainiumInstructions() {
 
     const selectedExamplesMarkup = Array.from(regexMap.entries()).length > 0
         ? Array.from(regexMap.entries()).map(([regex, label], index) => {
-            // Dynamically build the Obtainium JSON config
             const safeId = `${CONFIG.owner}_${activeModalAppKey}_${activeModalPatchKey}_${index}`.replace(/[^a-zA-Z0-9_]/g, '_');
+            const additionalSettings = { apkFilterRegEx: regex };
+            if (modalBuildFilter === 'beta') {
+                additionalSettings.includePrereleases = true;
+            }
+
             const obtainiumConfig = {
                 id: safeId,
                 name: label,
                 author: CONFIG.owner,
                 url: repoUrl,
-                additionalSettings: JSON.stringify({ apkFilterRegEx: regex })
+                additionalSettings: JSON.stringify(additionalSettings)
             };
             const oneClickUrl = `https://apps.obtainium.imranr.dev/redirect?r=${encodeURIComponent('obtainium://app/' + JSON.stringify(obtainiumConfig))}`;
 
@@ -965,8 +976,8 @@ function createObtainiumInstructions() {
                         <strong>${escapeHtml(label)}</strong>
                         <div class="code-with-copy">
                             <code>${escapeHtml(regex)}</code>
-                            <button type="button" class="copy-btn" ${copyCode(regex)}>Copy</button>
                             <a href="${oneClickUrl}" class="obtainium-add-btn" target="_blank" rel="noopener noreferrer">Add to Obtainium</a>
+                            <button type="button" class="copy-btn" ${copyCode(regex)}>Copy</button>
                         </div>
                     </div>`;
         }).join('')
@@ -983,7 +994,7 @@ function createObtainiumInstructions() {
         ? '<li>To get beta updates enable include prereleases.</li>'
         : '';
 
-    return `
+    const html = `
         <div class="obtainium-instructions">
             <ol>
                 <li>Download and install Obtainium from <a href="${obtainiumLatestUrl}" target="_blank" rel="noopener noreferrer">GitHub</a>.</li>
@@ -1006,6 +1017,8 @@ function createObtainiumInstructions() {
             </ol>
         </div>
     `;
+    
+    return html;
 }
 
 function buildObtainiumRegexFromDownloadUrl(downloadUrl) {
