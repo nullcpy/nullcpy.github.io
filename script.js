@@ -971,7 +971,7 @@ function createObtainiumInstructions() {
                         <strong>${escapeHtml(label)}</strong>
                         <div class="code-with-copy">
                             <code>${escapeHtml(regex)}</code>
-                            <a href="${oneClickUrl}" class="obtainium-add-btn" target="_blank" rel="noopener noreferrer">Add to Obtainium</a>
+                            <a href="${oneClickUrl}" class="copy-btn obtainium-add-btn" target="_blank" rel="noopener noreferrer">Add to Obtainium</a>
                             <button type="button" class="copy-btn" ${copyCode(regex)}>Copy</button>
                         </div>
                     </div>`;

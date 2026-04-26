@@ -1390,28 +1390,8 @@ footer a:hover {
     transform: scale(1.1);
 }
 
-.obtainium-add-btn {
-    display: inline-flex;
-    align-items: center;
-    padding: 6px 12px;
-    background: rgb(139, 92, 246);
-    /* Match the variant-badge purple */
-    color: #000;
-    border: none;
-    border-radius: 4px;
+a.obtainium-add-btn {
+    background: rgb(139, 92, 246); /* Match the variant-badge purple */
     text-decoration: none;
-    font-size: 0.75rem;
-    font-weight: 700;
-    white-space: nowrap;
-    transition: opacity 0.2s;
-    cursor: pointer;
-    flex-shrink: 0;
-}
-
-.obtainium-add-btn:hover {
-    opacity: 0.9;
-}
-
-body.light-mode .obtainium-add-btn {
-    color: #ffffff;
+    display: inline-block; /* Ensures the padding renders correctly on an <a> tag */
 }
