@@ -1368,32 +1368,30 @@ footer a:hover {
         font-size: 20px;
     }
 
-    /* Allow buttons to sit side-by-side on mobile */
     .code-with-copy {
+        display: flex;
         flex-direction: row;
-        /* Keep horizontal */
         flex-wrap: wrap;
-        /* Wrap to next line only if no space */
-        align-items: center;
-        gap: 6px;
-        /* Tighter gap for small screens */
+        /* Allows buttons to move to a new line */
+        gap: 8px;
+        width: 100%;
     }
 
     .code-with-copy code {
-        width: 100%;
-        /* Keeps the regex on its own line above buttons */
-        margin-bottom: 4px;
+        flex: 0 0 100%;
+        /* Forces regex to take the full top width */
+        margin-bottom: 4px !important;
+        font-size: 0.8rem;
+        word-break: break-all;
+        /* Ensures long regex doesn't break layout */
     }
 
     .code-with-copy button.copy-btn,
     .code-with-copy a.obtainium-add-btn {
         flex: 1;
-        /* Makes buttons equal width side-by-side */
+        /* Buttons grow to fill the second row equally */
         justify-content: center;
-        padding: 8px 4px;
-        /* Slightly taller for easier tapping */
-        font-size: 0.7rem;
-        /* Prevents text overflow on very small phones */
+        white-space: nowrap;
     }
 }
 
@@ -1423,13 +1421,11 @@ footer a:hover {
 .obtainium-instructions a.obtainium-add-btn {
     background: rgb(178, 142, 231);
     color: #000 !important;
+    /* Forces the text to be black */
     text-decoration: none !important;
-    display: inline-flex;
-    /* Use inline-flex for better alignment control */
-    align-items: center;
-    justify-content: center;
+    /* Forces the underline away */
+    display: inline-block;
     line-height: normal;
-    margin-left: 0;
 }
 
 body.light-mode .obtainium-instructions a.obtainium-add-btn {
