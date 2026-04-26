@@ -986,7 +986,7 @@ function createObtainiumInstructions() {
     patchAssets
         .filter(asset => (asset?.name || '').toLowerCase().endsWith('.apk'))
         .forEach(asset => {
-            const result = buildObtainiumRegexFromDownloadUrl(asset.browser_download_url);
+            const result = buildObtainiumRegexFromAsset(asset);
             if (!result?.regex || regexMap.has(result.regex)) return;
 
             const appLabel = asset?.parsed?.appName || app?.appName || 'App';
@@ -1093,18 +1093,10 @@ function createObtainiumInstructions() {
     `;
 }
 
-function buildObtainiumRegexFromDownloadUrl(downloadUrl) {
-    if (!downloadUrl) return null;
+function buildObtainiumRegexFromAsset(asset) {
+    if (!asset || !asset.name) return null;
 
-    let url;
-    try {
-        url = new URL(downloadUrl);
-    } catch (error) {
-        return null;
-    }
-
-    const pathParts = url.pathname.split('/').filter(Boolean);
-    const assetName = pathParts[pathParts.length - 1] ? decodeURIComponent(pathParts[pathParts.length - 1]) : '';
+    const assetName = asset.name;
     if (!assetName.toLowerCase().endsWith('.apk')) return null;
 
     const nameWithoutExt = assetName.replace(/\.apk$/i, '');
@@ -1112,14 +1104,25 @@ function buildObtainiumRegexFromDownloadUrl(downloadUrl) {
     const nameWithoutArch = arch
         ? nameWithoutExt.replace(new RegExp(`-${escapeRegex(arch)}$`, 'i'), '')
         : nameWithoutExt;
-    const baseName = nameWithoutArch
-        .replace(/-v?\d[\w.-]*$/i, '')
-        .replace(/-+$/g, '');
+
+    let baseName = nameWithoutArch;
+
+    // Use the highly accurate version string we already extracted during parsing
+    if (asset.parsed && asset.parsed.version && asset.parsed.version !== 'Version unknown') {
+        const versionIndex = nameWithoutArch.lastIndexOf(`-${asset.parsed.version}`);
+        if (versionIndex !== -1) {
+            baseName = nameWithoutArch.substring(0, versionIndex);
+        }
+    } else {
+        // Fallback for edge cases: Requires a dot in the version to prevent false positives like "-6"
+        baseName = nameWithoutArch
+            .replace(/-v?\d+(?:\.\d+)[\w.-]*$/i, '')
+            .replace(/-+$/g, '');
+    }
 
     if (!baseName) return null;
 
-    // OPTIMIZATION: Appended '-v?\\d' to make the regex extremely strict.
-    // Prevents "reddit-morphe" from bleeding over and matching "reddit-morphe-adobo"
+    // Generate the strict Obtainium regex
     const regex = `^${escapeRegex(baseName)}-v?\\d.*\\.apk$`;
     return { regex, arch, assetName };
 }
