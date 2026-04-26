@@ -994,13 +994,11 @@ function createObtainiumInstructions() {
     };
 
     const selectedExamplesMarkup = Array.from(regexMap.entries()).length > 0
-        ? Array.from(regexMap.entries()).map(([regex, label], index) => {
+        ? Array.from(regexMap.entries()).map(([regex, label]) => {
 
-            // Strict dictionary lookup. Fails gracefully if an app is missing from CONFIG.appIds.
+            // Strict dictionary lookup. Fails gracefully if an app is missing.
             const appId = CONFIG.appIds[activeModalAppKey];
             if (!appId) console.warn(`Missing App ID for: ${activeModalAppKey}`);
-
-            const safeId = appId ? `${appId}_${index}` : '';
 
             const additionalSettings = { apkFilterRegEx: regex };
             if (modalBuildFilter === 'beta') {
@@ -1011,7 +1009,7 @@ function createObtainiumInstructions() {
             let obtainiumButtonHtml = '';
             if (appId) {
                 const obtainiumConfig = {
-                    id: safeId,
+                    id: appId, // Directly using the package ID from the dictionary
                     name: label,
                     author: CONFIG.owner,
                     url: repoUrl,
