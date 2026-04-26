@@ -1509,7 +1509,18 @@ function parseAssetDisplay(filename, arch, fileType) {
         patchTokens = patchTokens.slice(0, -1);
     }
 
-    const version = versionIndex >= 0 ? tokens[versionIndex] : 'Version unknown';
+    let version = 'Version unknown';
+    if (versionIndex >= 0) {
+        const versionParts = [tokens[versionIndex]];
+        for (let i = versionIndex + 1; i < tokens.length; i++) {
+            const t = tokens[i].toLowerCase();
+            if (t === 'module' || t === 'universal' || CONFIG.knownArchs.some(a => a.includes(t))) {
+                break;
+            }
+            versionParts.push(tokens[i]);
+        }
+        version = versionParts.join('-');
+    }
     const appSlug = (appTokens.length > 0 ? appTokens : preMetaTokens).join('-').toLowerCase();
     const patchSlug = (patchTokens.length > 0 ? patchTokens : ['patched', 'build']).join('-').toLowerCase();
 
