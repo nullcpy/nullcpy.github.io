@@ -1390,8 +1390,12 @@ footer a:hover {
     transform: scale(1.1);
 }
 
-a.obtainium-add-btn {
-    background: rgb(139, 92, 246); /* Match the variant-badge purple */
-    text-decoration: none;
-    display: inline-block; /* Ensures the padding renders correctly on an <a> tag */
+.obtainium-instructions a.obtainium-add-btn {
+    background: rgb(139, 92, 246); 
+    color: #000 !important;           /* Forces the text to be black */
+    display: inline-block; 
+}
+
+body.light-mode .obtainium-instructions a.obtainium-add-btn {
+    color: #ffffff !important;        /* Forces white text in light mode */
 }
