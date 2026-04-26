@@ -1424,6 +1424,7 @@ footer a:hover {
     /* Forces the text to be black */
     text-decoration: none !important;
     /* Forces the underline away */
+    justify-content: center;
     display: inline-block;
     line-height: normal;
 }
