@@ -34,7 +34,7 @@ const CONFIG = {
     ],
 
     // Brand name overrides (keys must be lowercase)
-        brandOverrides: {
+    brandOverrides: {
         youtube: 'YouTube', revanced: 'ReVanced', tiktok: 'TikTok', soundcloud: 'SoundCloud', xrecorder: 'XRecorder', calcnote: 'CalcNote',
         vpn: 'VPN', rvx: 'ReVanced Extended', anddea: 'ReVanced Advanced', exp: 'Experimental', macrodroid: 'MacroDroid', ticktick: 'TickTick', fing: 'Fing - Network Tools',
         mocha: 'Mocha Theme', nord: 'Nord Theme', materialu: 'Material You', photoshop: 'Adobe Photoshop', lightroom: 'Adobe Lightroom', xodo: 'Xodo PDF Reader & Editor',
@@ -636,7 +636,7 @@ function renderNextChunk() {
 }
 
 function createNoticeMarkup(notice) {
-    const linksMarkup = notice.links.map(link => 
+    const linksMarkup = notice.links.map(link =>
         `<a href="${link.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.label)}</a>`
     ).join('\n                    ');
 
@@ -653,7 +653,7 @@ function createNoticeMarkup(notice) {
 
 function createAppCard(app) {
     const patchesMarkup = app.patches.map((patch) => createPatchMarkup(app, patch)).join('');
-    
+
     let noticesMarkup = '';
     CONFIG.appNotices.forEach(notice => {
         const matches = notice.triggers.some(trigger => normalizeForSearch(app.appName).includes(trigger));
@@ -951,12 +951,18 @@ function createObtainiumInstructions() {
         ? Array.from(regexMap.entries()).map(([regex, label], index) => {
             // Dynamically build the Obtainium JSON config
             const safeId = `${CONFIG.owner}_${activeModalAppKey}_${activeModalPatchKey}_${index}`.replace(/[^a-zA-Z0-9_]/g, '_');
+
+            const additionalSettings = { apkFilterRegEx: regex };
+            if (modalBuildFilter === 'beta') {
+                additionalSettings.includePrereleases = true;
+            }
+
             const obtainiumConfig = {
                 id: safeId,
                 name: label,
                 author: CONFIG.owner,
                 url: repoUrl,
-                additionalSettings: JSON.stringify({ apkFilterRegEx: regex })
+                additionalSettings: JSON.stringify(additionalSettings)
             };
             const oneClickUrl = `https://apps.obtainium.imranr.dev/redirect?r=${encodeURIComponent('obtainium://app/' + JSON.stringify(obtainiumConfig))}`;
 
@@ -965,8 +971,8 @@ function createObtainiumInstructions() {
                         <strong>${escapeHtml(label)}</strong>
                         <div class="code-with-copy">
                             <code>${escapeHtml(regex)}</code>
-                            <button type="button" class="copy-btn" ${copyCode(regex)}>Copy</button>
                             <a href="${oneClickUrl}" class="obtainium-add-btn" target="_blank" rel="noopener noreferrer">Add to Obtainium</a>
+                            <button type="button" class="copy-btn" ${copyCode(regex)}>Copy</button>
                         </div>
                     </div>`;
         }).join('')
@@ -1110,7 +1116,7 @@ function getLatestVariantBuild(patch, variantName) {
         const variantAsset = (build.assets || []).find(asset => asset?.parsed?.variant === variantName);
         if (variantAsset) {
             const buildDate = new Date(build.publishedAt).getTime();
-            
+
             if (!build.isArchive) {
                 if (buildDate > latestNormalDate) {
                     latestNormalDate = buildDate;
@@ -1325,7 +1331,7 @@ function createModalBuildMarkup(build, openByDefault = false) {
     if (hasVariantAssets) {
         modalBadges.push({ label: 'Variant', html: '<span class="variants-indicator">Variant</span>' });
     }
-    
+
     // Sort the small pill badges alphabetically (Archive -> Beta/Stable -> Variant)
     modalBadges.sort((a, b) => a.label.localeCompare(b.label));
     const badgeGroupMarkup = modalBadges.map(b => b.html).join('\n                    ');
