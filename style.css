@@ -1391,11 +1391,16 @@ footer a:hover {
 }
 
 .obtainium-instructions a.obtainium-add-btn {
-    background: rgb(139, 92, 246); 
-    color: #000 !important;           /* Forces the text to be black */
-    display: inline-block; 
+    background: rgb(210, 180, 255);
+    color: #000 !important;
+    /* Forces the text to be black */
+    text-decoration: none !important;
+    /* Forces the underline away */
+    display: inline-block;
 }
 
 body.light-mode .obtainium-instructions a.obtainium-add-btn {
-    color: #ffffff !important;        /* Forces white text in light mode */
+    background: rgb(139, 92, 246);
+    color: #ffffff !important;
+    /* Forces white text in light mode */
 }
