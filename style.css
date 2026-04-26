@@ -1391,7 +1391,6 @@ footer a:hover {
         flex: 1;
         /* Buttons grow to fill the second row equally */
         justify-content: center;
-        white-space: nowrap;
     }
 }
 
@@ -1424,7 +1423,7 @@ footer a:hover {
     /* Forces the text to be black */
     text-decoration: none !important;
     /* Forces the underline away */
-    justify-content: center;
+    text-align: center;
     display: inline-block;
     line-height: normal;
 }
