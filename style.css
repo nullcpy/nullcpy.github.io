@@ -141,6 +141,17 @@ header .subtitle {
     display: block;
 }
 
+/* Custom hover color for the Donate button */
+.top-links a.donate-link:hover {
+    color: #ea4aaa;
+    /* Pink icon */
+    border-color: #ea4aaa;
+    /* Pink border */
+    background: rgba(234, 74, 170, 0.1);
+    /* Subtle pink background glow */
+    transform: scale(1.1);
+}
+
 /* --- Update Status Pill --- */
 .update-pill {
     --pill-color: #2ea043;
@@ -167,19 +178,18 @@ header .subtitle {
 /* The 3 Color States */
 .update-pill.success {
     --pill-color: #2ea043;
+    /* GitHub Green */
 }
 
-/* GitHub Green */
 .update-pill.checking {
     --pill-color: #d29922;
+    /* GitHub Yellow */
 }
 
-/* GitHub Yellow */
 .update-pill.error {
     --pill-color: #f85149;
+    /* GitHub Red */
 }
-
-/* GitHub Red */
 
 /* Spinning animation for the checking state */
 @keyframes spin {
@@ -270,16 +280,6 @@ body.light-mode .filter-btn.active {
     margin: 0 auto 20px;
 }
 
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
 .error-message {
     background: rgba(255, 107, 107, 0.1);
     border: 2px solid var(--accent-danger);
@@ -288,6 +288,15 @@ body.light-mode .filter-btn.active {
     color: var(--accent-danger);
     text-align: center;
     margin: 20px 0;
+}
+
+/* No builds */
+.no-results {
+    padding: 100px 20px;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    column-span: all;
 }
 
 /* Builds Grid */
@@ -414,6 +423,7 @@ body.light-mode .filter-btn.active {
     color: var(--text-secondary);
 }
 
+/* Notices */
 .microg-note {
     margin-top: 4px;
     margin-bottom: 12px;
@@ -510,6 +520,7 @@ body.light-mode .filter-btn.active {
     background: rgba(210, 153, 34, 0.14);
 }
 
+/* Patches List */
 .patches-list {
     margin-bottom: 12px;
 }
@@ -668,6 +679,7 @@ body.light-mode .filter-btn.active {
     color: #8b5cf6;
 }
 
+/* Modals */
 body.modal-open {
     overflow: hidden;
 }
@@ -735,51 +747,8 @@ body.modal-open {
     align-items: center;
 }
 
-.variant-btn {
-    border: 1px solid var(--border);
-    background: var(--bg-tertiary);
-    color: var(--text-primary);
-    border-radius: 999px;
-    padding: 4px 10px;
-    font-size: 0.75rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.variant-btn:hover:not(:disabled) {
-    border-color: var(--accent);
-    background: rgba(88, 166, 255, 0.15);
-}
-
-.variant-btn.active {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: rgba(88, 166, 255, 0.16);
-}
-
-.version-btn {
-    border: 1px solid var(--border);
-    background: var(--bg-tertiary);
-    color: var(--text-primary);
-    border-radius: 999px;
-    padding: 4px 10px;
-    font-size: 0.75rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.version-btn:hover:not(:disabled) {
-    border-color: var(--accent);
-    background: rgba(88, 166, 255, 0.15);
-}
-
-.version-btn.active {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: rgba(88, 166, 255, 0.16);
-}
-
-
+.variant-btn,
+.version-btn,
 .modal-filter-btn {
     border: 1px solid var(--border);
     background: var(--bg-tertiary);
@@ -788,13 +757,18 @@ body.modal-open {
     padding: 4px 10px;
     font-size: 0.75rem;
     cursor: pointer;
+    transition: all 0.2s ease;
 }
 
+.variant-btn:hover:not(:disabled),
+.version-btn:hover:not(:disabled),
 .modal-filter-btn:hover:not(:disabled) {
     border-color: var(--accent);
     background: rgba(88, 166, 255, 0.15);
 }
 
+.variant-btn.active,
+.version-btn.active,
 .modal-filter-btn.active {
     border-color: var(--accent);
     color: var(--accent);
@@ -836,6 +810,7 @@ body.modal-open {
     padding: 14px 16px 16px;
 }
 
+/* Obtainium Modal Content */
 .obtainium-instructions {
     color: var(--text-primary);
 }
@@ -888,6 +863,7 @@ body.modal-open {
     word-break: break-all;
 }
 
+/* Copy & Obtainium Action Buttons */
 .copy-btn {
     padding: 6px 12px;
     background: var(--accent);
@@ -907,6 +883,22 @@ body.modal-open {
 
 body.light-mode .copy-btn {
     color: #ffffff;
+}
+
+.obtainium-instructions a.obtainium-add-btn {
+    background: rgb(178, 142, 231);
+    color: #000 !important;
+    text-decoration: none !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: normal;
+    margin-left: 0;
+}
+
+body.light-mode .obtainium-instructions a.obtainium-add-btn {
+    background: rgb(139, 92, 246);
+    color: #ffffff !important;
 }
 
 .filter-examples {
@@ -961,10 +953,12 @@ body.light-mode .copy-btn {
     display: block !important;
 }
 
-.code-with-copy .copy-btn {
+.code-with-copy .copy-btn,
+.code-with-copy .obtainium-add-btn {
     flex-shrink: 0;
 }
 
+/* Modal Builds Output */
 .modal-build-card {
     border: 1px solid var(--border);
     border-radius: 10px;
@@ -1038,15 +1032,11 @@ body.light-mode .copy-btn {
     color: var(--accent-warning);
 }
 
-/* The Grey Archive Badge */
 .release-badge.archive {
     background: rgba(139, 148, 158, 0.15);
-    /* Subtle grey background */
     color: #8b949e;
-    /* Sleek grey text */
 }
 
-/* Ensure it stays readable if you are using Light Mode */
 body.light-mode .release-badge.archive {
     background: rgba(87, 96, 106, 0.12);
     color: #57606a;
@@ -1368,6 +1358,7 @@ footer a:hover {
         font-size: 20px;
     }
 
+    /* Mobile Obtainium Regex Stacking */
     .code-with-copy {
         display: flex;
         flex-direction: row;
@@ -1392,44 +1383,30 @@ footer a:hover {
         /* Buttons grow to fill the second row equally */
         justify-content: center;
     }
-}
 
-/* No builds */
-.no-results {
-    padding: 100px 20px;
-    /* Pushes the text down the page */
-    text-align: center;
-    color: var(--text-secondary);
-    font-size: 1.1rem;
-    /* Makes it slightly larger and more readable */
-    column-span: all;
-    /* Prevents it from getting stuck in the first grid column */
-}
+    /* OVERRIDE: Revert to single-line layout when Obtainium button is hidden */
+    .code-with-copy.no-obtainium {
+        flex-wrap: nowrap;
+        /* Force onto a single line */
+        align-items: center;
+    }
 
-/* Custom hover color for the Donate button */
-.top-links a.donate-link:hover {
-    color: #ea4aaa;
-    /* Pink icon */
-    border-color: #ea4aaa;
-    /* Pink border */
-    background: rgba(234, 74, 170, 0.1);
-    /* Subtle pink background glow */
-    transform: scale(1.1);
-}
+    .code-with-copy.no-obtainium code {
+        flex: 1;
+        /* Shrink to fit the remaining space */
+        min-width: 0;
+        /* Critical: prevents flexbox from breaking out of container */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        /* Adds "..." to long regexes */
+        margin-bottom: 0 !important;
+    }
 
-.obtainium-instructions a.obtainium-add-btn {
-    background: rgb(178, 142, 231);
-    color: #000 !important;
-    /* Forces the text to be black */
-    text-decoration: none !important;
-    /* Forces the underline away */
-    text-align: center;
-    display: inline-block;
-    line-height: normal;
-}
-
-body.light-mode .obtainium-instructions a.obtainium-add-btn {
-    background: rgb(139, 92, 246);
-    color: #ffffff !important;
-    /* Forces white text in light mode */
+    .code-with-copy.no-obtainium button.copy-btn {
+        flex: 0 0 auto;
+        /* Don't stretch the button, keep its natural width */
+        padding: 6px 12px;
+        /* Restore standard button padding */
+    }
 }
