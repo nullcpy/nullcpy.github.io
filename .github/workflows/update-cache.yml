@@ -35,7 +35,17 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh api --paginate repos/nullcpy/rvb/releases > releases.json
+          gh api --paginate repos/nullcpy/rvb/releases > releases_new.json
+
+          # Validate: must be a non-empty JSON array
+          COUNT=$(jq 'if type == "array" then length else 0 end' releases_new.json)
+          if [ "$COUNT" -eq 0 ]; then
+            echo "::error::GitHub API returned an empty releases array. Aborting to preserve existing cache."
+            exit 1
+          fi
+
+          echo "Fetched $COUNT releases. Updating cache."
+          mv releases_new.json releases.json
 
       - name: Commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v5
