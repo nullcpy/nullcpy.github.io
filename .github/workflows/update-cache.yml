@@ -48,7 +48,7 @@ jobs:
           mv releases_new.json releases.json
 
       - name: Commit and push changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: "update releases cache"
           file_pattern: releases.json
