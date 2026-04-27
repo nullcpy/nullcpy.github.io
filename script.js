@@ -125,6 +125,7 @@ const CONFIG = {
 
 // State
 let allReleases = [];
+let cachedFullCatalog = [];
 let searchTerm = '';
 let appViewFilter = 'all';
 let dynamicAppFilters = [];
@@ -183,25 +184,25 @@ function applyTheme(theme) {
     themeBtn.setAttribute('aria-label', `Theme mode: ${theme}`);
 }
 
-document.getElementById('themeBtn').addEventListener('click', () => {
-    const nextTheme = themeMode === 'system'
-        ? 'light'
-        : themeMode === 'light'
-            ? 'dark'
-            : 'system';
-
-    themeMode = nextTheme;
-    localStorage.setItem('theme', nextTheme);
-    applyTheme(nextTheme);
-});
-
 // Event Listeners
 function setupEventListeners() {
     let searchTimeout;
 
+    // Theme button
+    document.getElementById('themeBtn').addEventListener('click', () => {
+        const nextTheme = themeMode === 'system'
+            ? 'light'
+            : themeMode === 'light'
+                ? 'dark'
+                : 'system';
+        themeMode = nextTheme;
+        localStorage.setItem('theme', nextTheme);
+        applyTheme(nextTheme);
+    });
+
     const menuBtn = document.getElementById('menuBtn');
     const actionMenu = document.getElementById('actionMenu');
-    
+
     if (menuBtn && actionMenu) {
         menuBtn.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -224,11 +225,7 @@ function setupEventListeners() {
         clearTimeout(searchTimeout);
         searchTimeout = setTimeout(() => {
             searchTerm = e.target.value.toLowerCase();
-            document.getElementById('loading').style.display = 'block';
-
-            setTimeout(() => {
-                filterAndRenderReleases();
-            }, 10);
+            filterAndRenderReleases();
         }, 250);
     });
 
@@ -322,7 +319,8 @@ async function loadReleases() {
             allReleases = cached;
             document.getElementById('loading').style.display = 'none';
             document.getElementById('error').style.display = 'none';
-            updateLastUpdateTimestamp(); // Update time using cached data
+            rebuildCatalogCache();
+            updateLastUpdateTimestamp();
             filterAndRenderReleases();
             return;
         }
@@ -366,9 +364,10 @@ async function loadReleases() {
         allReleases = fetchedData;
 
         cacheReleases(allReleases);
+        rebuildCatalogCache();
 
         document.getElementById('loading').style.display = 'none';
-        updateLastUpdateTimestamp(); // Update time using fresh data
+        updateLastUpdateTimestamp();
         filterAndRenderReleases();
 
     } catch (error) {
@@ -405,19 +404,50 @@ function cacheReleases(releases) {
     localStorage.setItem('releases_cache_time', Date.now().toString());
 }
 
+// Build and cache the full app catalog — called once when release data changes
+function rebuildCatalogCache() {
+    cachedFullCatalog = buildAppCatalog(allReleases.filter(r => !r.draft));
+    dynamicAppFilters = getDynamicAppFilters(cachedFullCatalog);
+}
+
+// Apply a search query to an already-built catalog without rebuilding from scratch
+function filterCatalogBySearch(catalog, query) {
+    if (!query) return catalog;
+    const normalizedQuery = normalizeForSearch(query);
+    return catalog
+        .map(app => {
+            const filteredPatches = app.patches
+                .map(patch => {
+                    const filteredBuilds = patch.builds
+                        .map(build => ({
+                            ...build,
+                            assets: build.assets.filter(asset =>
+                                assetMatchesSearch(
+                                    asset.parsed, asset,
+                                    { name: build.build, tag_name: build.build },
+                                    query, normalizedQuery
+                                )
+                            )
+                        }))
+                        .filter(build => build.assets.length > 0);
+                    return filteredBuilds.length > 0 ? { ...patch, builds: filteredBuilds } : null;
+                })
+                .filter(Boolean);
+            return filteredPatches.length > 0 ? { ...app, patches: filteredPatches } : null;
+        })
+        .filter(Boolean);
+}
+
 // Filter and render releases
 function filterAndRenderReleases() {
-    const filtered = allReleases.filter(r => !r.draft);
-    const fullCatalog = buildAppCatalog(filtered, '');
-    dynamicAppFilters = getDynamicAppFilters(fullCatalog);
     renderDynamicAppFilterButtons(dynamicAppFilters);
 
     if (appViewFilter.startsWith('word-') && !dynamicAppFilters.some(filter => filter.key === appViewFilter)) {
         appViewFilter = 'all';
     }
 
-    const appCatalog = buildAppCatalog(filtered, searchTerm);
-    const filteredApps = applyAppViewFilter(appCatalog);
+    const searchedCatalog = filterCatalogBySearch(cachedFullCatalog, searchTerm);
+    const filteredApps = applyAppViewFilter(searchedCatalog);
 
     renderAppCards(filteredApps);
     updateAppFilterButtons();
@@ -742,10 +772,10 @@ function createNoticeMarkup(notice) {
     ).join('\n                    ');
 
     return `
-        <div class="${escapeHtml(notice.className)}">
-            <div class="${escapeHtml(notice.className)}-title">${escapeHtml(notice.title)}</div>
-            <div class="${escapeHtml(notice.className)}-text">${escapeHtml(notice.text)}</div>
-            <div class="${escapeHtml(notice.className)}-links">
+        <div class="app-notice ${escapeHtml(notice.className)}">
+            <div class="app-notice-title">${escapeHtml(notice.title)}</div>
+            <div class="app-notice-text">${escapeHtml(notice.text)}</div>
+            <div class="app-notice-links">
                 ${linksMarkup}
             </div>
         </div>
@@ -1692,9 +1722,12 @@ function isWithinEditDistance(a, b, maxDistance) {
 }
 
 function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
+    return String(text ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
 }
 
 // Update the last updated timestamp based on the newest release
@@ -1704,32 +1737,18 @@ function updateLastUpdateTimestamp() {
         return;
     }
 
-    let latestTime = 0;
-    allReleases.forEach(release => {
-        const time = new Date(release.published_at).getTime();
-        if (time > latestTime) {
-            latestTime = time;
-        }
-    });
+    const latestTime = allReleases.reduce((max, release) => {
+        const t = new Date(release.published_at).getTime();
+        return t > max ? t : max;
+    }, 0);
 
     if (latestTime === 0) return;
 
-    const updateDate = new Date(latestTime);
-
-    // Format the date as "17 April, 2026"
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    const datePart = `${updateDate.getDate()} ${months[updateDate.getMonth()]}, ${updateDate.getFullYear()}`;
-
-    // Format the time as "3:45 PM"
-    let hours = updateDate.getHours();
-    const minutes = updateDate.getMinutes().toString().padStart(2, '0');
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    const timePart = `${hours}:${minutes} ${ampm}`;
-
-    // 3. Trigger the green success state with the calculated time
-    setPillState('success', `${datePart} ${timePart}`);
+    const dateStr = new Date(latestTime).toLocaleString('en-US', {
+        day: 'numeric', month: 'long', year: 'numeric',
+        hour: 'numeric', minute: '2-digit'
+    });
+    setPillState('success', dateStr);
 }
 
 // Manages the visual state of the Update Pill (No click events)

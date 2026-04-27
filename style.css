@@ -398,49 +398,6 @@ body.light-mode .filter-btn.active {
     white-space: nowrap;
 }
 
-.build-summary-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
-    margin-bottom: 14px;
-}
-
-.build-info-box {
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    background: var(--bg-tertiary);
-    padding: 10px 12px;
-}
-
-.build-info-box.stable {
-    border-color: rgba(63, 185, 80, 0.55);
-}
-
-.build-info-box.beta {
-    border-color: rgba(208, 153, 34, 0.55);
-}
-
-.build-info-label {
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--text-secondary);
-}
-
-.build-info-value {
-    margin-top: 4px;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    overflow-wrap: anywhere;
-}
-
-.build-info-date {
-    margin-top: 2px;
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-}
 
 .patches-title {
     margin-top: 4px;
@@ -452,100 +409,82 @@ body.light-mode .filter-btn.active {
     color: var(--text-secondary);
 }
 
-/* Notices */
-.microg-note {
+/* App Notices */
+.app-notice {
     margin-top: 4px;
     margin-bottom: 12px;
     padding: 11px 12px;
-    border: 1px dashed color-mix(in srgb, var(--accent) 45%, var(--border) 55%);
-    background: linear-gradient(90deg, rgba(88, 166, 255, 0.14), rgba(88, 166, 255, 0.04));
     border-radius: 10px;
 }
 
-.microg-note-title {
+.app-notice-title {
     font-size: 0.78rem;
     font-weight: 700;
-    color: var(--accent);
     text-transform: uppercase;
     letter-spacing: 0.03em;
 }
 
-.microg-note-text {
+.app-notice-text {
     margin-top: 4px;
     font-size: 0.8rem;
-    color: var(--text-secondary);
-}
-
-.microg-note-links {
-    margin-top: 7px;
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-.microg-note-links a {
-    display: inline-flex;
-    align-items: center;
-    padding: 4px 10px;
-    border-radius: 999px;
-    border: 1px solid rgba(88, 166, 255, 0.5);
-    color: var(--accent);
-    text-decoration: none;
-    font-size: 0.76rem;
-    font-weight: 700;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
-}
-
-.microg-note-links a:hover {
-    background: rgba(88, 166, 255, 0.12);
-    border-color: var(--accent);
-}
-
-.twitter-login-note {
-    margin-top: 4px;
-    margin-bottom: 12px;
-    padding: 9px 11px;
-    border: 1px solid color-mix(in srgb, var(--accent-warning) 55%, var(--border) 45%);
-    background: linear-gradient(90deg, rgba(210, 153, 34, 0.16), rgba(210, 153, 34, 0.05));
-    border-radius: 10px;
-}
-
-.twitter-login-note-title {
-    font-size: 0.76rem;
-    font-weight: 700;
-    color: var(--accent-warning);
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-}
-
-.twitter-login-note-text {
-    margin-top: 4px;
-    font-size: 0.78rem;
     line-height: 1.35;
     color: var(--text-secondary);
 }
 
-.twitter-login-note-links {
+.app-notice-links {
     margin-top: 7px;
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
 }
 
-.twitter-login-note-links a {
+.app-notice-links a {
     display: inline-flex;
     align-items: center;
-    padding: 3px 9px;
+    padding: 4px 10px;
     border-radius: 999px;
-    border: 1px solid color-mix(in srgb, var(--accent-warning) 70%, var(--border) 30%);
-    color: var(--accent-warning);
     text-decoration: none;
-    font-size: 0.74rem;
+    font-size: 0.76rem;
     font-weight: 700;
     transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
-.twitter-login-note-links a:hover {
+/* Info notice (blue) — e.g. microg-note */
+.microg-note {
+    border: 1px dashed color-mix(in srgb, var(--accent) 45%, var(--border) 55%);
+    background: linear-gradient(90deg, rgba(88, 166, 255, 0.14), rgba(88, 166, 255, 0.04));
+}
+
+.microg-note .app-notice-title {
+    color: var(--accent);
+}
+
+.microg-note .app-notice-links a {
+    border: 1px solid rgba(88, 166, 255, 0.5);
+    color: var(--accent);
+}
+
+.microg-note .app-notice-links a:hover {
+    background: rgba(88, 166, 255, 0.12);
+    border-color: var(--accent);
+}
+
+/* Warning notice (yellow) — e.g. twitter-login-note */
+.twitter-login-note {
+    border: 1px solid color-mix(in srgb, var(--accent-warning) 55%, var(--border) 45%);
+    background: linear-gradient(90deg, rgba(210, 153, 34, 0.16), rgba(210, 153, 34, 0.05));
+}
+
+.twitter-login-note .app-notice-title {
+    color: var(--accent-warning);
+}
+
+.twitter-login-note .app-notice-links a {
+    border: 1px solid color-mix(in srgb, var(--accent-warning) 70%, var(--border) 30%);
+    color: var(--accent-warning);
+}
+
+.twitter-login-note .app-notice-links a:hover {
     background: rgba(210, 153, 34, 0.14);
 }
 
@@ -573,17 +512,6 @@ body.light-mode .filter-btn.active {
     align-items: flex-start;
     gap: 12px;
     width: 100%;
-}
-
-.patch-open-hint {
-    font-size: 0.74rem;
-    font-weight: 700;
-    padding: 4px 10px;
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    background: var(--bg-tertiary);
-    color: var(--text-secondary);
-    white-space: nowrap;
 }
 
 .patch-chip {
@@ -1092,27 +1020,6 @@ body.light-mode .release-badge.archive {
     letter-spacing: 0.3px;
 }
 
-.version-info {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    margin-bottom: 12px;
-}
-
-.version-info strong {
-    color: var(--accent);
-}
-
-.release-date {
-    color: var(--text-secondary);
-    font-size: 0.85rem;
-    margin-bottom: 15px;
-}
-
-.assets {
-    flex-grow: 1;
-    margin-bottom: 15px;
-}
-
 .asset-group {
     margin-bottom: 12px;
 }
@@ -1139,7 +1046,7 @@ body.light-mode .release-badge.archive {
     font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
     text-decoration: none;
     text-align: left;
     word-break: break-word;
@@ -1249,13 +1156,6 @@ body.light-mode .variant-badge {
 
 .release-link:hover {
     color: #ff6b6b;
-}
-
-.empty-message {
-    text-align: center;
-    color: var(--text-secondary);
-    padding: 60px 20px;
-    font-size: 1.2rem;
 }
 
 /* Footer */
@@ -1388,11 +1288,6 @@ footer a:hover {
         width: 45px;
         height: 45px;
         font-size: 20px;
-    }
-
-    .theme-toggle {
-        flex-direction: column;
-        align-items: flex-end;
     }
 
     /* Mobile Obtainium Regex Stacking */
