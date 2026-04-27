@@ -30,8 +30,19 @@
 </head>
 
 <body>
-    <div class="theme-toggle">
-        <button id="themeBtn" aria-label="Theme mode: system">🖥️</button>
+    <div class="theme-toggle" id="actionMenu">
+        <button id="menuBtn" aria-label="Menu" aria-expanded="false">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+        <div class="action-buttons">
+            <button id="themeBtn" aria-label="Theme mode: system">🖥️</button>
+            <a href="https://nullcpy.github.io/rvb/" id="docsBtn" aria-label="Documentation" target="_blank" rel="noopener noreferrer">📑</a>
+            <a href="https://t.me/rvb27/1094" id="announcementBtn" aria-label="Announcement" target="_blank" rel="noopener noreferrer">📢</a>
+        </div>
     </div>
 
     <header>

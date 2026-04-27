@@ -199,8 +199,28 @@ document.getElementById('themeBtn').addEventListener('click', () => {
 function setupEventListeners() {
     let searchTimeout;
 
+    const menuBtn = document.getElementById('menuBtn');
+    const actionMenu = document.getElementById('actionMenu');
+    
+    if (menuBtn && actionMenu) {
+        menuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            actionMenu.classList.toggle('open');
+            menuBtn.setAttribute('aria-expanded', actionMenu.classList.contains('open'));
+        });
+
+        document.addEventListener('click', (e) => {
+            if (actionMenu.classList.contains('open') && !actionMenu.contains(e.target)) {
+                actionMenu.classList.remove('open');
+                menuBtn.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+
     // 1. Debounced Search Input
-    document.getElementById('searchInput').addEventListener('input', (e) => {
+    const searchInput = document.getElementById('searchInput');
+    
+    searchInput.addEventListener('input', (e) => {
         clearTimeout(searchTimeout);
         searchTimeout = setTimeout(() => {
             searchTerm = e.target.value.toLowerCase();
@@ -212,6 +232,14 @@ function setupEventListeners() {
         }, 250);
     });
 
+    searchInput.addEventListener('focus', (e) => {
+        if (window.innerWidth <= 768) {
+            const searchBox = e.target.closest('.search-box') || e.target;
+            const y = searchBox.getBoundingClientRect().top + window.scrollY - 15;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+    });
+
     const appFilterButtons = document.getElementById('appFilterButtons');
     if (appFilterButtons) {
         appFilterButtons.addEventListener('click', (e) => {
@@ -219,7 +247,6 @@ function setupEventListeners() {
             if (!filterBtn) return;
 
             appViewFilter = filterBtn.dataset.filter || 'all';
-            updateAppFilterButtons();
             filterAndRenderReleases();
         });
     }
@@ -305,22 +332,38 @@ async function loadReleases() {
 
         // Add a timestamp to bypass GitHub Pages CDN cache
         const cacheBuster = new Date().getTime();
-        let response = await fetch(`releases.json?v=${cacheBuster}`);
+        let fetchedData = null;
+        let useFallback = true;
 
-        // Fallback to live API if releases.json is missing
-        if (!response.ok) {
-            console.warn('Static cache not found. Falling back to live API...');
-            response = await fetch(
+        try {
+            const response = await fetch(`releases.json?v=${cacheBuster}`);
+            if (response.ok) {
+                const data = await response.json();
+                if (Array.isArray(data) && data.length > 0) {
+                    fetchedData = data;
+                    useFallback = false;
+                }
+            }
+        } catch (e) {
+            console.warn('Network error fetching releases.json (likely file:// protocol).', e);
+        }
+
+        // Fallback to live API if releases.json is missing, empty, or fetch threw an error
+        if (useFallback) {
+            console.warn('Static cache not found or empty. Falling back to live API...');
+            const response = await fetch(
                 `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/releases`,
                 { headers: { 'Accept': 'application/vnd.github.v3+json' } }
             );
+
+            if (!response.ok) {
+                throw new Error(`Failed to fetch data: ${response.status}`);
+            }
+            
+            fetchedData = await response.json();
         }
 
-        if (!response.ok) {
-            throw new Error(`Failed to fetch data: ${response.status}`);
-        }
-
-        allReleases = await response.json();
+        allReleases = fetchedData;
 
         cacheReleases(allReleases);
 
@@ -377,13 +420,26 @@ function filterAndRenderReleases() {
     const filteredApps = applyAppViewFilter(appCatalog);
 
     renderAppCards(filteredApps);
-    updateAppFilterButtons();
+    updateAppFilterButtons(filteredApps.length);
     document.getElementById('loading').style.display = 'none';
 }
 
-function updateAppFilterButtons() {
+function updateAppFilterButtons(count = 0) {
     document.querySelectorAll('#appFilterButtons .filter-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.filter === appViewFilter);
+        const isActive = btn.dataset.filter === appViewFilter;
+        btn.classList.toggle('active', isActive);
+
+        const existingBadge = btn.querySelector('.filter-badge');
+        if (existingBadge) {
+            existingBadge.remove();
+        }
+
+        if (isActive) {
+            const badge = document.createElement('span');
+            badge.className = 'filter-badge';
+            badge.textContent = count;
+            btn.appendChild(badge);
+        }
     });
 }
 
@@ -1656,7 +1712,10 @@ function escapeHtml(text) {
 
 // Update the last updated timestamp based on the newest release
 function updateLastUpdateTimestamp() {
-    if (!allReleases || allReleases.length === 0) return;
+    if (!allReleases || allReleases.length === 0) {
+        setPillState('success', 'No releases found');
+        return;
+    }
 
     let latestTime = 0;
     allReleases.forEach(release => {
