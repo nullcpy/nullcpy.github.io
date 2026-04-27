@@ -79,7 +79,6 @@ textarea {
     pointer-events: none;
 }
 
-.theme-toggle:hover .action-buttons,
 .theme-toggle.open .action-buttons {
     opacity: 1;
     visibility: visible;
