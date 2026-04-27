@@ -420,26 +420,13 @@ function filterAndRenderReleases() {
     const filteredApps = applyAppViewFilter(appCatalog);
 
     renderAppCards(filteredApps);
-    updateAppFilterButtons(filteredApps.length);
+    updateAppFilterButtons();
     document.getElementById('loading').style.display = 'none';
 }
 
-function updateAppFilterButtons(count = 0) {
+function updateAppFilterButtons() {
     document.querySelectorAll('#appFilterButtons .filter-btn').forEach(btn => {
-        const isActive = btn.dataset.filter === appViewFilter;
-        btn.classList.toggle('active', isActive);
-
-        const existingBadge = btn.querySelector('.filter-badge');
-        if (existingBadge) {
-            existingBadge.remove();
-        }
-
-        if (isActive) {
-            const badge = document.createElement('span');
-            badge.className = 'filter-badge';
-            badge.textContent = count;
-            btn.appendChild(badge);
-        }
+        btn.classList.toggle('active', btn.dataset.filter === appViewFilter);
     });
 }
 
