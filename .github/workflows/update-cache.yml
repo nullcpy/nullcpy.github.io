@@ -2,9 +2,9 @@ name: Update Releases Cache
 
 on:
   repository_dispatch:
-    types: [update-catalog-cache]
+    types: [ update-catalog-cache ]
   schedule:
-    - cron: '0 2 * * *' # 02:00 AM UTC everyday
+    - cron: "0 2 * * *" # 02:00 AM UTC everyday
   workflow_dispatch:
 
 concurrency:
@@ -53,4 +53,10 @@ jobs:
           commit_message: "update releases cache"
           file_pattern: releases.json
 
-
+  trigger_notify_failure:
+    needs: [ update-cache ]
+    if: failure()
+    uses: ./.github/workflows/notify.yml
+    with:
+      workflow_name: "Update Releases Cache"
+    secrets: inherit
