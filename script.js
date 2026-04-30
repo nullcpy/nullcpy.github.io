@@ -220,7 +220,7 @@ function setupEventListeners() {
 
     // 1. Debounced Search Input
     const searchInput = document.getElementById('searchInput');
-    
+
     searchInput.addEventListener('input', (e) => {
         clearTimeout(searchTimeout);
         searchTimeout = setTimeout(() => {
@@ -357,7 +357,7 @@ async function loadReleases() {
             if (!response.ok) {
                 throw new Error(`Failed to fetch data: ${response.status}`);
             }
-            
+
             fetchedData = await response.json();
         }
 
@@ -1559,7 +1559,7 @@ function parseAssetDisplay(filename, arch, fileType) {
 
     const baseName = filename.replace(/\.(apk|zip)$/i, '');
     const tokens = baseName.split('-').filter(Boolean);
-    const versionIndex = tokens.findIndex(token => /^v?\d+(?:\.\d+)+/i.test(token));
+    const versionIndex = tokens.findIndex(token => /^v\d+[\d.]*$|^\d+[\d.]+$/i.test(token));
     const moduleIndex = tokens.findIndex(token => token.toLowerCase() === 'module');
     const stopIndexCandidates = [versionIndex, moduleIndex].filter(index => index >= 0);
     const stopIndex = stopIndexCandidates.length > 0 ? Math.min(...stopIndexCandidates) : tokens.length;
