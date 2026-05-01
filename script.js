@@ -1559,7 +1559,8 @@ function parseAssetDisplay(filename, arch, fileType) {
 
     const baseName = filename.replace(/\.(apk|zip)$/i, '');
     const tokens = baseName.split('-').filter(Boolean);
-    const versionIndex = tokens.findIndex(token => /^v\d+[\d.]*$|^\d+[\d.]+$/i.test(token));
+    const archSubTokens = new Set(CONFIG.knownArchs.flatMap(a => a.split('-')));
+    const versionIndex = tokens.findIndex(token => /^v\d+/i.test(token) && !archSubTokens.has(token.toLowerCase()));
     const moduleIndex = tokens.findIndex(token => token.toLowerCase() === 'module');
     const stopIndexCandidates = [versionIndex, moduleIndex].filter(index => index >= 0);
     const stopIndex = stopIndexCandidates.length > 0 ? Math.min(...stopIndexCandidates) : tokens.length;
