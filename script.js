@@ -11,7 +11,7 @@ const CONFIG = {
     // App Categories for the top filter buttons (maps filter-btn dataset to keywords)
     appCategories: {
         google: ['youtube', 'google'],
-        meta: ['threads', 'instagram', 'messenger']
+        meta: ['threads', 'instagram', 'messenger', 'facebook']
     },
 
     // Words ignored in the dynamic app filters (must be lowercase)
