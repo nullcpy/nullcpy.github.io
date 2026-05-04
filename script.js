@@ -35,7 +35,7 @@ const CONFIG = {
 
     // Brand name overrides (keys must be lowercase)
     brandOverrides: {
-        youtube: 'YouTube', revanced: 'ReVanced', tiktok: 'TikTok', soundcloud: 'SoundCloud', xrecorder: 'XRecorder', calcnote: 'CalcNote',
+        youtube: 'YouTube', revanced: 'ReVanced', tiktok: 'TikTok', soundcloud: 'SoundCloud', xrecorder: 'XRecorder', calcnote: 'CalcNote', imdb: 'IMDB', trakt: 'trakt.TV',
         vpn: 'VPN', rvx: 'ReVanced Extended', anddea: 'ReVanced Advanced', exp: 'Experimental', macrodroid: 'MacroDroid', ticktick: 'TickTick', fing: 'Fing - Network Tools',
         mocha: 'Mocha Theme', nord: 'Nord Theme', materialu: 'Material You', photoshop: 'Adobe Photoshop', lightroom: 'Adobe Lightroom', xodo: 'Xodo PDF Reader & Editor',
         gplay: 'Google Play', foss: 'FOSS', gboard: 'Google Keyboard', wps: 'WPS', rar: 'RAR', adguard: 'AdGuard', moonplus: 'Moon+', eyecon: 'Eyecon Caller ID & Spam Block'
