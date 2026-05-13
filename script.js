@@ -471,29 +471,14 @@ function rebuildCatalogCache() {
 // Apply a search query to an already-built catalog without rebuilding from scratch
 function filterCatalogBySearch(catalog, query) {
     if (!query) return catalog;
-    const normalizedQuery = normalizeForSearch(query);
     return catalog
-        .map(app => {
-            const filteredPatches = app.patches
-                .map(patch => {
-                    const filteredBuilds = patch.builds
-                        .map(build => ({
-                            ...build,
-                            assets: build.assets.filter(asset =>
-                                assetMatchesSearch(
-                                    asset.parsed, asset,
-                                    { name: build.build, tag_name: build.build },
-                                    query, normalizedQuery
-                                )
-                            )
-                        }))
-                        .filter(build => build.assets.length > 0);
-                    return filteredBuilds.length > 0 ? { ...patch, builds: filteredBuilds } : null;
-                })
-                .filter(Boolean);
-            return filteredPatches.length > 0 ? { ...app, patches: filteredPatches } : null;
-        })
-        .filter(Boolean);
+        .map(app => ({
+            app,
+            score: getAppSearchScore(app.appName, query)
+        }))
+        .filter(item => item.score !== Infinity)
+        .sort((a, b) => a.score - b.score || a.app.appName.localeCompare(b.app.appName))
+        .map(item => item.app);
 }
 
 // Filter and render releases
@@ -535,6 +520,28 @@ function getAppTotalDownloads(app) {
         });
     });
     return total;
+}
+
+function getAppSearchScore(appName, query) {
+    const normalizedQuery = normalizeForSearch(query);
+    const normalizedAppName = normalizeForSearch(appName);
+    if (!normalizedQuery || !normalizedAppName) return Infinity;
+
+    if (normalizedAppName === normalizedQuery) return 0;
+    if (normalizedAppName.startsWith(normalizedQuery)) return 1;
+
+    const appTokens = getSearchTokens(appName);
+    if (appTokens.length === 0) return Infinity;
+
+    const exactTokenMatch = appTokens.some(token => token === normalizedQuery);
+    if (exactTokenMatch) return 2;
+
+    const tokenPrefixMatch = appTokens.some(token => token.startsWith(normalizedQuery));
+    if (tokenPrefixMatch) return 3;
+
+    if (normalizedAppName.includes(normalizedQuery)) return 4;
+
+    return Infinity;
 }
 
 function applyAppViewFilter(apps) {
