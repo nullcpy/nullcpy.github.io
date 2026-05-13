@@ -16,9 +16,7 @@ const CONFIG = {
 
     // Words ignored in the dynamic app filters (must be lowercase)
     sharedAppWordStoplist: new Set([
-        'revanced', 'patched', 'patch', 'extended', 'advanced',
-        'theme', 'edition', 'android', 'app', 'google',
-        'meta', 'facebook', 'instagram', 'messenger'
+
     ]),
 
     // Known tokens indicating a patch name starts (must be lowercase)
