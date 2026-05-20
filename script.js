@@ -45,6 +45,7 @@ const CONFIG = {
         'adguard': 'com.adguard.android',
         'adobelightroom': 'com.adobe.lrmobile',
         'adobephotoshopmix': 'com.adobe.psmobile',
+        'automate': 'com.llamalab.automate',
         'autosync': 'com.ttxapps.autosync',
         'calcnote': 'com.appumstudios.calcnote',
         'camscanner': 'com.intsig.camscanner',
@@ -83,6 +84,7 @@ const CONFIG = {
         'smartlauncher6': 'ginlemon.flowerfree',
         'solidexplorer': 'pl.solidexplorer2',
         'soundcloud': 'com.soundcloud.android',
+        'speedtest': 'org.zwanoo.android.speedtest',
         'symfonium': 'app.symfonik.music.player',
 
         // Use an object for variant-specific IDs
