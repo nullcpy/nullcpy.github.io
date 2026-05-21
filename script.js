@@ -32,7 +32,7 @@ const CONFIG = {
     // Brand name overrides (keys must be lowercase)
     brandOverrides: {
         youtube: 'YouTube', revanced: 'ReVanced', tiktok: 'TikTok', soundcloud: 'SoundCloud', xrecorder: 'XRecorder', calcnote: 'CalcNote', imdb: 'IMDb', trakt: 'trakt.TV', github: 'GitHub',
-        vpn: 'VPN', rvx: 'ReVanced Extended', anddea: 'ReVanced Advanced', exp: 'Experimental', macrodroid: 'MacroDroid', ticktick: 'TickTick', fing: 'Fing - Network Tools',
+        vpn: 'VPN', rvx: 'ReVanced Extended', anddea: 'ReVanced Advanced', exp: 'Experimental', macrodroid: 'MacroDroid', ticktick: 'TickTick', fing: 'Fing - Network Tools', sdmaid: 'SD Maid 2/SE',
         mocha: 'Mocha Theme', nord: 'Nord Theme', materialu: 'Material You', photoshop: 'Adobe Photoshop', lightroom: 'Adobe Lightroom', xodo: 'Xodo PDF Reader & Editor',
         gplay: 'Google Play', foss: 'FOSS', gboard: 'Google Keyboard', wps: 'WPS', rar: 'RAR', adguard: 'AdGuard', moonplus: 'Moon+', eyecon: 'Eyecon Caller ID & Spam Block',
         camscanner: 'CamScanner'
@@ -81,6 +81,7 @@ const CONFIG = {
         'protonmail': 'ch.protonmail.android',
         'protonvpn': 'ch.protonvpn.android',
         'reddit': 'com.reddit.frontpage',
+        'sdmaid2se': 'eu.darken.sdmse',
         'smartlauncher6': 'ginlemon.flowerfree',
         'solidexplorer': 'pl.solidexplorer2',
         'soundcloud': 'com.soundcloud.android',
