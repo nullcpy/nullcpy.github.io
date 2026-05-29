@@ -82,6 +82,7 @@ const CONFIG = {
         'protonvpn': 'ch.protonvpn.android',
         'reddit': 'com.reddit.frontpage',
         'sdmaid2se': 'eu.darken.sdmse',
+        'showly': 'com.michaldrabik.showly2',
         'smartlauncher6': 'ginlemon.flowerfree',
         'solidexplorer': 'pl.solidexplorer2',
         'soundcloud': 'com.soundcloud.android',
