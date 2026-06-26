@@ -33,6 +33,7 @@ const CONFIG = {
     "adobo",
     "patcheddit",
     "paresh",
+    "nightly",
   ]),
 
   // Known architectures (used for regex parsing)
