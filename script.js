@@ -86,6 +86,7 @@ const CONFIG = {
     eyecon: "Eyecon Caller ID & Spam Block",
     camscanner: "CamScanner",
     inshorts: "Inshorts - News in 60 words",
+    warp: "Cloudflare Warp"
   },
 
   // Map app slugs to true Android Package IDs for Obtainium
@@ -100,6 +101,7 @@ const CONFIG = {
     batteryguru: "com.paget96.batteryguru",
     calcnote: "com.appumstudios.calcnote",
     camscanner: "com.intsig.camscanner",
+    cloudflarewarp: "com.cloudflare.onedotonedotonedotone",
     cricbuzz: "com.cricbuzz.android",
     cryptomator: "org.cryptomator",
     documentscanner: "com.cv.docscanner",
@@ -164,6 +166,7 @@ const CONFIG = {
     wallcraft: "com.wallpaperscraft.wallpaper",
     rar: "com.rarlab.rar",
     wpsoffice: "cn.wps.moffice_eng",
+    waze: "com.waze",
     twitter: "com.twitter.android",
     xodopdfreadereditor: "com.xodo.pdf.reader",
     xrecorder: "videoeditor.videorecorder.screenrecorder",
