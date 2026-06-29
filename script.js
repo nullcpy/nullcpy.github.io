@@ -34,6 +34,7 @@ const CONFIG = {
     "patcheddit",
     "paresh",
     "nightly",
+    "atv"
   ]),
 
   // Known architectures (used for regex parsing)
@@ -88,7 +89,8 @@ const CONFIG = {
     inshorts: "Inshorts - News in 60 words",
     warp: "1.1.1.1 + WARP",
     acalendar: "aCalendar",
-    at4k: "AT4K"
+    at4k: "AT4K",
+    atv: "Android TV"
   },
 
   // Map app slugs to true Android Package IDs for Obtainium
