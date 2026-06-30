@@ -12,7 +12,7 @@ const CONFIG = {
   appCategories: {
     google: ["youtube", "google"],
     meta: ["threads", "instagram", "messenger", "facebook", "!plusmessenger"],
-    vpn: ["1111warp", "vpn"]
+    vpn: ["1111warp", "vpnify", "vpn"]
   },
 
   // Words ignored in the dynamic app filters (must be lowercase)
@@ -96,7 +96,7 @@ const CONFIG = {
     hbomax: "HBO Max",
     vix: "ViX",
     komoot: "komoot - hike, bike & run",
-    vpnify: "VPNify Unlimited VPN Proxy",
+    vpnify: "VPNify",
     snorelab: "SnoreLab"
   },
 
@@ -204,7 +204,7 @@ const CONFIG = {
     ventusky: "cz.ackee.ventusky",
     viber: "com.viber.voip",
     vix: "com.univision.prendetv",
-    vpnifyunlimitedvpnproxy: "com.vpn.free.hotspot.secure.vpnify",
+    vpnify: "com.vpn.free.hotspot.secure.vpnify",
 
     rar: "com.rarlab.rar",
 
