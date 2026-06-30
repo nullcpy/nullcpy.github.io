@@ -95,7 +95,9 @@ const CONFIG = {
     disneyplus: "Disney+",
     hbomax: "HBO Max",
     vix: "ViX",
-    komoot: "komoot - hike, bike & run"
+    komoot: "komoot - hike, bike & run",
+    vpnify: "VPNify Unlimited VPN Proxy",
+    snorelab: "SnoreLab"
   },
 
   // Map app slugs to true Android Package IDs for Obtainium
@@ -159,6 +161,7 @@ const CONFIG = {
     moneymanager: "com.realbyteapps.moneymanagerfree",
 
     niagaralauncher: "bitpit.launcher",
+    ninjavpn: "app.ninjavpn.android",
     novalauncher: "com.teslacoilsw.launcher",
 
     pandora: "com.pandora.android",
@@ -167,16 +170,18 @@ const CONFIG = {
     pinterest: "com.pinterest",
     plusmessenger: "org.telegram.plus",
     podcastaddict: "com.bambuna.podcastaddict",
+    poweramp: "com.maxmpz.audioplayer",
     primevideo: "com.amazon.amazonvideo.livingroom",
     protonmail: "ch.protonmail.android",
     protonvpn: "ch.protonvpn.android",
-    poweramp: "com.maxmpz.audioplayer",
+    projectivylauncher: "com.spocky.projengmenu",
 
     sdmaid2se: "eu.darken.sdmse",
     showly: "com.michaldrabik.showly2",
     smartlauncher6: "ginlemon.flowerfree",
     solidexplorer: "pl.solidexplorer2",
     soundcloud: "com.soundcloud.android",
+    snorelab: "com.snorelab.app",
     speedtest: "org.zwanoo.android.speedtest",
     symfonium: "app.symfonik.music.player",
 
@@ -199,11 +204,13 @@ const CONFIG = {
     ventusky: "cz.ackee.ventusky",
     viber: "com.viber.voip",
     vix: "com.univision.prendetv",
+    vpnifyunlimitedvpnproxy: "com.vpn.free.hotspot.secure.vpnify",
 
     rar: "com.rarlab.rar",
 
     wallcraft: "com.wallpaperscraft.wallpaper",
     waze: "com.waze",
+    windscribevpn: "com.windscribe.vpn",
     wpsoffice: "cn.wps.moffice_eng",
 
     twitter: "com.twitter.android",
@@ -218,7 +225,6 @@ const CONFIG = {
       morphe: "app.morphe.android.youtube",
       default: "com.google.android.youtube",
     },
-
     youtubemusic: {
       revanced: "app.revanced.android.apps.youtube.music",
       rvx: "app.rvx.android.apps.youtube.music",
