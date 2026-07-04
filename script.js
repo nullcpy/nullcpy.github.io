@@ -98,7 +98,8 @@ const CONFIG = {
     komoot: "komoot - hike, bike & run",
     vpnify: "VPNify",
     snorelab: "SnoreLab",
-    myfitnesspal: "MyFitnessPal"
+    myfitnesspal: "MyFitnessPal",
+    terabox: "TeraBox"
   },
 
   // Map app slugs to true Android Package IDs for Obtainium
@@ -192,6 +193,7 @@ const CONFIG = {
       default: "org.telegram.messenger",
       foss: "org.telegram.messenger.web",
     },
+    terabox: "com.dubox.drive",
     threads: "com.instagram.barcelona",
     ticktick: "com.ticktick.task",
     tiktok: "com.zhiliaoapp.musically",
