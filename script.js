@@ -99,7 +99,8 @@ const CONFIG = {
     vpnify: "VPNify",
     snorelab: "SnoreLab",
     myfitnesspal: "MyFitnessPal",
-    terabox: "TeraBox"
+    terabox: "TeraBox",
+    plutotv: "PlutoTV",
   },
 
   // Map app slugs to true Android Package IDs for Obtainium
@@ -110,6 +111,7 @@ const CONFIG = {
 
     acalendar: "org.withouthat.acalendar",
     adguard: "com.adguard.android",
+    adobeacrobat: "com.adobe.reader",
     adobelightroom: "com.adobe.lrmobile",
     adobephotoshopmix: "com.adobe.psmobile",
     automate: "com.llamalab.automate",
@@ -133,6 +135,8 @@ const CONFIG = {
     facebook: "com.facebook.katana",
     fingnetworktools: "com.overlook.android.fing",
 
+    github: "com.github.android",
+    goodreads: "com.goodreads",
     googlekeyboard: "com.google.android.inputmethod.latin",
     googlenews: "com.google.android.apps.magazines",
     googlephotos: {
@@ -148,6 +152,7 @@ const CONFIG = {
 
     iconpacker: "cn.ommiao.iconpacker",
     instagram: "com.instagram.android",
+    inshot: "com.camerasideas.instashot",
     inshortsnewsin60words: "com.nis.app",
     imdb: "com.imdb.mobile",
 
@@ -173,9 +178,13 @@ const CONFIG = {
     photomath: "com.microblink.photomath",
     pinterest: "com.pinterest",
     plusmessenger: "org.telegram.plus",
+    plutotv: { androidtv: "tv.pluto.android" },
     podcastaddict: "com.bambuna.podcastaddict",
     poweramp: "com.maxmpz.audioplayer",
-    primevideo: { androidtv: "com.amazon.amazonvideo.livingroom.mod" },
+    primevideo: {
+      default: "com.amazon.avod.thirdpartyclient",
+      androidtv: "com.amazon.amazonvideo.livingroom.mod"
+    },
     protonmail: "ch.protonmail.android",
     protonvpn: "ch.protonvpn.android",
     projectivylauncher: "com.spocky.projengmenu",
@@ -197,6 +206,7 @@ const CONFIG = {
     threads: "com.instagram.barcelona",
     ticktick: "com.ticktick.task",
     tiktok: "com.zhiliaoapp.musically",
+    todoist: "com.todoist",
     trakttv: "tv.trakt.trakt",
     truecaller: "com.truecaller",
     tubi: "com.tubitv",
