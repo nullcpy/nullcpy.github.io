@@ -30,3 +30,11 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./
           publish_branch: gh-pages
+
+  trigger_notify_failure:
+    needs: [ deploy ]
+    if: failure()
+    uses: ./.github/workflows/notify.yml
+    with:
+      workflow_name: "Deploy to GitHub Pages"
+    secrets: inherit
