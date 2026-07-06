@@ -38,7 +38,7 @@ jobs:
 
       - name: Deploy to GitHub Pages (with Retries)
         id: deployment
-        uses: Wandalen/wretry.action@v3.5.0
+        uses: Wandalen/wretry.action@v3.8.0
         with:
           action: actions/deploy-pages@v4
           attempt_limit: 3
