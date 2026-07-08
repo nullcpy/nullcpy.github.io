@@ -35,7 +35,8 @@ const CONFIG = {
     "patcheddit",
     "paresh",
     "nightly",
-    "androidtv"
+    "androidtv",
+    "alt"
   ]),
 
   // Known architectures (used for regex parsing)
