@@ -162,11 +162,11 @@ const CONFIG = {
     luminawallpapers: "com.lumina.wallpapers",
 
     macrodroid: "com.arlosoft.macrodroid",
+    medium: "com.medium.reader",
     merriamwebsterdictionary: "com.merriamwebster",
     messenger: "com.facebook.orca",
     microsoftlens: "com.microsoft.office.officelens",
     myfitnesspal: "com.myfitnesspal.android",
-
     moonreader: "com.flyersoft.moonreader",
     moneymanager: "com.realbyteapps.moneymanagerfree",
 
