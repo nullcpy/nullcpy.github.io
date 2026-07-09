@@ -102,6 +102,7 @@ const CONFIG = {
     myfitnesspal: "MyFitnessPal",
     terabox: "TeraBox",
     plutotv: "PlutoTV",
+    accuweather: "AccuWeather",
   },
 
   // Map app slugs to true Android Package IDs for Obtainium
@@ -115,14 +116,18 @@ const CONFIG = {
     adobeacrobat: "com.adobe.reader",
     adobelightroom: "com.adobe.lrmobile",
     adobephotoshopmix: "com.adobe.psmobile",
+    accuweather: "com.accuweather.android",
+    alldocumentreader: "alldocumentreader.office.viewer.filereader.pdfviewer",
+    at4klauncher: "com.overdevs.at4k",
     automate: "com.llamalab.automate",
     autosync: "com.ttxapps.autosync",
-    at4klauncher: "com.overdevs.at4k",
 
     batteryguru: "com.paget96.batteryguru",
+    betamaniac: "it.mirko.beta",
 
     calcnote: "com.appumstudios.calcnote",
     camscanner: "com.intsig.camscanner",
+    canva: "com.canva.editor",
     cricbuzz: "com.cricbuzz.android",
     cryptomator: "org.cryptomator",
 
@@ -204,6 +209,7 @@ const CONFIG = {
       foss: "org.telegram.messenger.web",
     },
     terabox: "com.dubox.drive",
+    theweatherchannel: "com.weather.Weather",
     threads: "com.instagram.barcelona",
     ticktick: "com.ticktick.task",
     tiktok: "com.zhiliaoapp.musically",
