@@ -172,6 +172,7 @@ const CONFIG = {
     merriamwebsterdictionary: "com.merriamwebster",
     messenger: "com.facebook.orca",
     microsoftlens: "com.microsoft.office.officelens",
+    microsoftedge: "com.microsoft.emmx",
     moonreader: "com.flyersoft.moonreader",
     moneymanager: "com.realbyteapps.moneymanagerfree",
     mxplayer: "com.mxtech.videoplayer.ad",
