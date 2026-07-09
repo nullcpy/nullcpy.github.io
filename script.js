@@ -127,7 +127,6 @@ const CONFIG = {
 
     calcnote: "com.appumstudios.calcnote",
     camscanner: "com.intsig.camscanner",
-    canva: "com.canva.editor",
     cricbuzz: "com.cricbuzz.android",
     cryptomator: "org.cryptomator",
 
