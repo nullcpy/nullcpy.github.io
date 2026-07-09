@@ -103,6 +103,8 @@ const CONFIG = {
     terabox: "TeraBox",
     plutotv: "PlutoTV",
     accuweather: "AccuWeather",
+    pixiv: "pixiv",
+    mxplayer: "MX Player",
   },
 
   // Map app slugs to true Android Package IDs for Obtainium
@@ -172,6 +174,7 @@ const CONFIG = {
     microsoftlens: "com.microsoft.office.officelens",
     moonreader: "com.flyersoft.moonreader",
     moneymanager: "com.realbyteapps.moneymanagerfree",
+    mxplayer: "com.mxtech.videoplayer.ad",
     myfitnesspal: "com.myfitnesspal.android",
 
     niagaralauncher: "bitpit.launcher",
@@ -182,6 +185,7 @@ const CONFIG = {
     peacock: "com.peacocktv.peacockandroid",
     photomath: "com.microblink.photomath",
     pinterest: "com.pinterest",
+    pixiv: "jp.pxv.android",
     plusmessenger: "org.telegram.plus",
     plutotv: { androidtv: "tv.pluto.android" },
     podcastaddict: "com.bambuna.podcastaddict",
