@@ -16,7 +16,7 @@ const CONFIG = {
   },
 
   // Words ignored in the dynamic app filters (must be lowercase)
-  sharedAppWordStoplist: new Set(["messenger"]),
+  sharedAppWordStoplist: new Set(["messenger", "document", "reader"]),
 
   // Known tokens indicating a patch name starts (must be lowercase)
   knownPatchTokens: new Set(["revanced", "morphe", "anddea", "rvx", "xposed"]),
