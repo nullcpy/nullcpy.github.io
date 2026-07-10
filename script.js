@@ -175,7 +175,7 @@ const CONFIG = {
     microsoftedge: "com.microsoft.emmx",
     moonreader: "com.flyersoft.moonreader",
     moneymanager: "com.realbyteapps.moneymanagerfree",
-    mxplayer: "com.mxtech.videoplayer.ad",
+    mxplayer: "com.mxtech.videoplayer.pro",
     myfitnesspal: "com.myfitnesspal.android",
 
     niagaralauncher: "bitpit.launcher",
