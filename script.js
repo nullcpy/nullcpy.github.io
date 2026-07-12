@@ -119,7 +119,7 @@ const CONFIG = {
     adobelightroom: "com.adobe.lrmobile",
     adobephotoshopmix: "com.adobe.psmobile",
     accuweather: "com.accuweather.android",
-    alldocumentreader: "alldocumentreader.office.viewer.filereader.pdfviewer",
+    alldocumentreader: "alldocumentsreader.docuemntviewer",
     at4klauncher: "com.overdevs.at4k",
     automate: "com.llamalab.automate",
     autosync: "com.ttxapps.autosync",
