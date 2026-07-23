@@ -126,6 +126,7 @@ const CONFIG = {
 
     batteryguru: "com.paget96.batteryguru",
     betamaniac: "it.mirko.beta",
+    bravebrowser: "com.brave.browser",
 
     calcnote: "com.appumstudios.calcnote",
     camscanner: "com.intsig.camscanner",
