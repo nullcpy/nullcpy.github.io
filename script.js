@@ -105,6 +105,7 @@ const CONFIG = {
     accuweather: "AccuWeather",
     pixiv: "pixiv",
     mxplayer: "MX Player",
+    movebox: "MoveBox"
   },
 
   // Map app slugs to true Android Package IDs for Obtainium
@@ -176,6 +177,10 @@ const CONFIG = {
     microsoftedge: "com.microsoft.emmx",
     moonreader: "com.flyersoft.moonreader",
     moneymanager: "com.realbyteapps.moneymanagerfree",
+    moviebox: {
+      default: "com.community.oneroom",
+      androidtv: "com.community.mbox.tv"
+    },
     mxplayer: "com.mxtech.videoplayer.pro",
     myfitnesspal: "com.myfitnesspal.android",
 
