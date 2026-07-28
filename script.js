@@ -105,7 +105,7 @@ const CONFIG = {
     accuweather: "AccuWeather",
     pixiv: "pixiv",
     mxplayer: "MX Player",
-    movebox: "MoveBox"
+    moviebox: "MovieBox"
   },
 
   // Map app slugs to true Android Package IDs for Obtainium
