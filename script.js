@@ -130,6 +130,7 @@ const CONFIG = {
     bravebrowser: "com.brave.browser",
 
     calcnote: "com.appumstudios.calcnote",
+    caloriecounter: "com.fatsecret.android",
     camscanner: "com.intsig.camscanner",
     cricbuzz: "com.cricbuzz.android",
     cryptomator: "org.cryptomator",
