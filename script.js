@@ -147,7 +147,10 @@ const CONFIG = {
 
     github: "com.github.android",
     goodreads: "com.goodreads",
-    googlekeyboard: "com.google.android.inputmethod.latin",
+    googlekeyboard: {
+      default: "com.google.android.inputmethod.latin",
+      alt: "dev.jason.com.google.android.inputmethod.latin"
+    },
     googlenews: "com.google.android.apps.magazines",
     googlephotos: {
       revanced: "app.revanced.android.apps.photos",
