@@ -19,7 +19,7 @@ const CONFIG = {
   sharedAppWordStoplist: new Set(["messenger", "document", "reader"]),
 
   // Known tokens indicating a patch name starts (must be lowercase)
-  knownPatchTokens: new Set(["revanced", "morphe", "anddea", "rvx", "xposed"]),
+  knownPatchTokens: new Set(["revanced", "morphe", "anddea", "rvx", "xposed", "instafel"]),
 
   // Known tokens indicating a variant (must be lowercase)
   variantKeywords: new Set([
@@ -36,7 +36,8 @@ const CONFIG = {
     "paresh",
     "nightly",
     "androidtv",
-    "alt"
+    "alt",
+    "clone"
   ]),
 
   // Known architectures (used for regex parsing)
@@ -164,7 +165,10 @@ const CONFIG = {
     holavpn: "org.hola.play",
 
     iconpacker: "cn.ommiao.iconpacker",
-    instagram: "com.instagram.android",
+    instagram: {
+      default: "com.instagram.android",
+      clone: "com.instafel.android"
+    },
     inshot: "com.camerasideas.instashot",
     inshortsnewsin60words: "com.nis.app",
     imdb: "com.imdb.mobile",
