@@ -119,7 +119,7 @@ const CONFIG = {
     adguard: "com.adguard.android",
     adobeacrobat: "com.adobe.reader",
     adobelightroom: "com.adobe.lrmobile",
-    adobephotoshopmix: "com.adobe.psmobile",
+    adobephotoshopmix: "com.adobe.photoshopmix",
     accuweather: "com.accuweather.android",
     alldocumentreader: "alldocumentsreader.docuemntviewer",
     at4klauncher: "com.overdevs.at4k",
