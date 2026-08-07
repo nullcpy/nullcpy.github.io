@@ -106,7 +106,8 @@ const CONFIG = {
     accuweather: "AccuWeather",
     pixiv: "pixiv",
     mxplayer: "MX Player",
-    moviebox: "MovieBox"
+    moviebox: "MovieBox",
+    kinestop: "KineStop"
   },
 
   // Map app slugs to true Android Package IDs for Obtainium
@@ -161,6 +162,7 @@ const CONFIG = {
     googlerecorder: "com.google.android.apps.recorder",
 
     hbomax: "com.wbd.hbomax",
+    hermit: "com.chimbori.hermitcrab",
     hellochineselearnchinese: "com.hellochinese",
     holavpn: "org.hola.play",
 
@@ -173,6 +175,7 @@ const CONFIG = {
     inshortsnewsin60words: "com.nis.app",
     imdb: "com.imdb.mobile",
 
+    kinestop: "com.urbandroid.kinestop",
     komoothikebikerun: "de.komoot.android",
 
     luminawallpapers: "com.lumina.wallpapers",
