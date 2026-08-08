@@ -151,7 +151,7 @@ const CONFIG = {
     goodreads: "com.goodreads",
     googlekeyboard: {
       default: "com.google.android.inputmethod.latin",
-      alt: "dev.jason.com.google.android.inputmethod.latin"
+      clone: "dev.jason.com.google.android.inputmethod.latin"
     },
     googlenews: "com.google.android.apps.magazines",
     googlephotos: {
