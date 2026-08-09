@@ -841,10 +841,10 @@ function buildAppCatalog(releases) {
 
       if (release.build_data) {
         const appKeyLower = appKey.toLowerCase();
-        const bd = release.build_data[appKeyLower] || 
-                   release.build_data[parsed.appName.toLowerCase()] || 
-                   release.build_data[parsed.appName] ||
-                   release.build_data[parsed.appName.toLowerCase().replace(/\s+/g, "-")];
+        const bd = release.build_data[appKeyLower] ||
+          release.build_data[parsed.appName.toLowerCase()] ||
+          release.build_data[parsed.appName] ||
+          release.build_data[parsed.appName.toLowerCase().replace(/\s+/g, "-")];
         if (bd) {
           buildDataApplied = bd.applied_patches || null;
           buildDataPatches = bd.patches || null;
@@ -1364,7 +1364,7 @@ function toFilterLabel(value) {
 function openPatchModal(appKey, patchKey, preferredChannel = "stable", preferredVariant = "default") {
   activeModalAppKey = appKey;
   activeModalPatchKey = patchKey;
-  
+
   const app = currentAppCatalog.find((item) => item.appKey === activeModalAppKey);
   const patch = app ? app.patches.find((item) => item.patchKey === activeModalPatchKey) : null;
 
@@ -1509,18 +1509,12 @@ function createModalBuildMarkup(app, patch, build, openByDefault = false) {
     downloadsMarkup += `</div>`;
   });
 
-  // Patch info banner
-  // Removed duplicate: changelogLink was also shown in Applied Patches modal meta
-  const patchNames = build.patchMeta && build.patchMeta.patches.length > 0
-    ? build.patchMeta.patches.join(", ")
-    : patch.patchName;
-
   const patchInfoBanner = `
-    <div style="font-size: 0.82rem; color: var(--text-secondary); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding-bottom: 10px; border-bottom: 1px solid var(--border); margin-bottom: 12px;">
-      <span><strong>Patch Source:</strong> ${escapeHtml(patchNames)}</span>
-      <button class="patch-applied-btn" data-app-key="${app.appKey}" data-patch-key="${patch.patchKey}" data-build-id="${build.releaseId}" type="button">
-        🔍 Applied Patches
-      </button>
+    <div class="patch-info-row">
+      <div class="patch-info-actions">
+        <button class="patch-applied-btn" data-app-key="${app.appKey}" data-patch-key="${patch.patchKey}" data-build-id="${build.releaseId}" type="button">Applied Patches</button>
+        <a href="${build.releaseUrl}" target="_blank" rel="noopener noreferrer" class="release-link release-link-button">View source release on GitHub →</a>
+      </div>
     </div>
   `;
 
@@ -1538,7 +1532,6 @@ function createModalBuildMarkup(app, patch, build, openByDefault = false) {
       <div class="modal-build-downloads">
         ${patchInfoBanner}
         ${downloadsMarkup}
-        <a href="${build.releaseUrl}" target="_blank" rel="noopener noreferrer" class="release-link">View source release on GitHub →</a>
       </div>
     </details>
   `;
@@ -1550,7 +1543,7 @@ function closePatchModal() {
     modal.classList.remove("open");
     modal.setAttribute("aria-hidden", "true");
     if (!document.getElementById("appliedPatchesModal")?.classList.contains("open") &&
-        !document.getElementById("obtainiumModal")?.classList.contains("open")) {
+      !document.getElementById("obtainiumModal")?.classList.contains("open")) {
       document.body.classList.remove("modal-open");
     }
   }
@@ -1574,8 +1567,7 @@ function openAppliedPatchesModal(appKey, patchKey, buildId) {
     const pNames = build.patchMeta.patches.join(", ") || patch.patchName;
     const clUrl = build.patchMeta.changelogs[0] || null;
     metaEl.innerHTML = `
-      <span class="patch-engine-badge">${escapeHtml(pNames)}</span>
-      ${clUrl ? `<a href="${clUrl}" target="_blank" rel="noopener noreferrer" class="release-link" style="font-size: 0.82rem;">View Upstream Changelog ↗</a>` : ""}
+      ${clUrl ? `<a href="${clUrl}" target="_blank" rel="noopener noreferrer" class="patch-engine-badge patch-engine-link" title="Open changelog">${escapeHtml(pNames)}</a>` : `<span class="patch-engine-badge">${escapeHtml(pNames)}</span>`}
     `;
   }
 
@@ -1647,7 +1639,7 @@ function closeAppliedPatchesModal() {
     modal.classList.remove("open");
     modal.setAttribute("aria-hidden", "true");
     if (!document.getElementById("patchModal")?.classList.contains("open") &&
-        !document.getElementById("obtainiumModal")?.classList.contains("open")) {
+      !document.getElementById("obtainiumModal")?.classList.contains("open")) {
       document.body.classList.remove("modal-open");
     }
   }
@@ -1684,7 +1676,7 @@ function createObtainiumInstructions(app, patch) {
 
   // If a specific variant is selected (e.g. not "default" / "all")
   const isSpecificVariant = modalVariantFilter && modalVariantFilter !== "default" && modalVariantFilter !== "all";
-  
+
   let regexPattern = `^${appNameNorm}-${patchNameNorm}.*\\.apk$`;
   if (isSpecificVariant) {
     regexPattern = `^${appNameNorm}-${patchNameNorm}-${modalVariantFilter}.*\\.apk$`;
@@ -1719,7 +1711,7 @@ function createObtainiumInstructions(app, patch) {
       const vSafeId = vPackageId
         ? (v.variantKey === "default" ? vPackageId : `${vPackageId}_${v.variantKey}`)
         : `${CONFIG.owner}_${app.appKey}_${patch.patchKey}_${v.variantKey}_${index}`.replace(/[^a-zA-Z0-9_]/g, "_");
-      
+
       const vAdditionalSettings = { apkFilterRegEx: vRegex };
       if (modalBuildFilter === "beta") {
         vAdditionalSettings.includePrereleases = true;
@@ -1763,7 +1755,7 @@ function createObtainiumInstructions(app, patch) {
         <li>Open Obtainium on your device.</li>
         <li>Tap <strong>Add App</strong>.</li>
         <li>In the <strong>App Source URL</strong> box, enter:
-          <div class="instruction-code">
+          <div class="instruction-code code-with-copy">
             <code>${repoUrl}</code>
             <button class="copy-btn" onclick="copyToClipboard('${repoUrl}', 'Repository URL copied!')" type="button">Copy</button>
           </div>
@@ -1797,7 +1789,7 @@ function closeObtainiumModal() {
     modal.classList.remove("open");
     modal.setAttribute("aria-hidden", "true");
     if (!document.getElementById("patchModal")?.classList.contains("open") &&
-        !document.getElementById("appliedPatchesModal")?.classList.contains("open")) {
+      !document.getElementById("appliedPatchesModal")?.classList.contains("open")) {
       document.body.classList.remove("modal-open");
     }
   }
@@ -2029,7 +2021,7 @@ function updateLastUpdateTimestamp() {
     hour: "numeric",
     minute: "2-digit",
   });
-  setPillState("success", `Updated: ${dateStr}`);
+  setPillState("success", dateStr);
 }
 
 function setPillState(state, text) {

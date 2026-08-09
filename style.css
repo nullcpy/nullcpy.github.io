@@ -12,18 +12,25 @@
     --btn-on-accent: #0d1117;
 
     /* NullStore logo: blue #58a6ff → green #3fb950 */
-    --accent: #58a6ff;               /* logo blue — primary CTA, links, filters */
+    --accent: #58a6ff;
+    /* logo blue — primary CTA, links, filters */
     --accent-glow: rgba(88, 166, 255, 0.18);
-    --accent-stable: #3fb950;        /* logo green — stable channel */
+    --accent-stable: #3fb950;
+    /* logo green — stable channel */
     --accent-stable-glow: rgba(63, 185, 80, 0.18);
-    --accent-beta: #c47bd4;          /* soft lavender — beta channel */
+    --accent-beta: #c47bd4;
+    /* soft lavender — beta channel */
     --accent-beta-glow: rgba(196, 123, 212, 0.18);
-    --accent-variant: #58a6ff;       /* blue — variant indicator */
+    --accent-variant: #58a6ff;
+    /* blue — variant indicator */
     --accent-variant-glow: rgba(88, 166, 255, 0.15);
-    --accent-module: #d4a04a;        /* warm amber — root modules */
+    --accent-module: #d4a04a;
+    /* warm amber — root modules */
     --accent-module-glow: rgba(212, 160, 74, 0.18);
-    --accent-tv: #3fb950;            /* green — Android TV */
-    --accent-danger: #f85149;        /* GitHub red — errors */
+    --accent-tv: #3fb950;
+    /* green — Android TV */
+    --accent-danger: #f85149;
+    /* GitHub red — errors */
     --accent-warning: #d4a04a;
 
     --border: rgba(240, 237, 232, 0.08);
@@ -52,18 +59,24 @@ body.light-mode {
     --btn-on-accent: #ffffff;
 
     /* Deeper versions of the logo palette for light bg readability */
-    --accent: #0969da;               /* GitHub blue (light) */
+    --accent: #0969da;
+    /* GitHub blue (light) */
     --accent-glow: rgba(9, 105, 218, 0.12);
-    --accent-stable: #1a7f37;        /* GitHub green (light) */
+    --accent-stable: #1a7f37;
+    /* GitHub green (light) */
     --accent-stable-glow: rgba(26, 127, 55, 0.12);
-    --accent-beta: #8250df;          /* GitHub purple */
+    --accent-beta: #8250df;
+    /* GitHub purple */
     --accent-beta-glow: rgba(130, 80, 223, 0.12);
-    --accent-variant: #0969da;       /* blue */
+    --accent-variant: #0969da;
+    /* blue */
     --accent-variant-glow: rgba(9, 105, 218, 0.10);
-    --accent-module: #b8882e;        /* warm amber */
+    --accent-module: #b8882e;
+    /* warm amber */
     --accent-module-glow: rgba(184, 136, 46, 0.12);
     --accent-tv: #1a7f37;
-    --accent-danger: #cf222e;        /* GitHub danger */
+    --accent-danger: #cf222e;
+    /* GitHub danger */
     --accent-warning: #9a6700;
 
     --border: #e8e0d5;
@@ -103,7 +116,10 @@ body.light-mode {
         radial-gradient(ellipse at 80% 90%, rgba(26, 127, 55, 0.04) 0%, transparent 50%);
 }
 
-button, input, select, textarea {
+button,
+input,
+select,
+textarea {
     font-family: inherit;
 }
 
@@ -143,7 +159,10 @@ button, input, select, textarea {
     pointer-events: auto;
 }
 
-#menuBtn, #themeBtn, #issueBtn, #announcementBtn {
+#menuBtn,
+#themeBtn,
+#issueBtn,
+#announcementBtn {
     background: var(--bg-secondary);
     border: 1px solid var(--border);
     color: var(--text-primary);
@@ -161,7 +180,14 @@ button, input, select, textarea {
     backdrop-filter: blur(12px);
 }
 
-#menuBtn:hover, #themeBtn:hover, #issueBtn:hover, #announcementBtn:hover {
+#themeBtn {
+    font-size: 20px;
+}
+
+#menuBtn:hover,
+#themeBtn:hover,
+#issueBtn:hover,
+#announcementBtn:hover {
     transform: scale(1.08);
     border-color: var(--accent);
     box-shadow: 0 0 15px var(--accent-glow);
@@ -263,7 +289,9 @@ header h1 {
 }
 
 @keyframes spin {
-    100% { transform: rotate(360deg); }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .update-pill svg.spin {
@@ -369,14 +397,15 @@ main {
 
 .filter-btn {
     padding: 6px 14px;
-    background: var(--bg-secondary);
+    background: var(--bg-tertiary);
     border: 1px solid var(--border);
     border-radius: var(--radius-full);
-    color: var(--text-secondary);
+    color: var(--text-primary);
     font-size: 0.82rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: var(--shadow);
 }
 
 .filter-btn:hover {
@@ -492,9 +521,9 @@ main {
     padding: 18px 20px;
     box-shadow: var(--shadow);
     transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-                box-shadow 0.25s ease,
-                border-color 0.2s ease,
-                background 0.35s ease;
+        box-shadow 0.25s ease,
+        border-color 0.2s ease,
+        background 0.35s ease;
     backdrop-filter: blur(12px);
     display: flex;
     flex-direction: column;
@@ -621,11 +650,15 @@ main {
     background: linear-gradient(90deg, var(--accent-glow), transparent);
 }
 
-.microg-note .app-notice-title { color: var(--accent); }
+.microg-note .app-notice-title {
+    color: var(--accent);
+}
+
 .microg-note .app-notice-links a {
     border: 1px solid var(--border-hover);
     color: var(--accent);
 }
+
 .microg-note .app-notice-links a:hover {
     background: var(--accent);
     color: var(--btn-on-accent);
@@ -635,11 +668,16 @@ main {
     border: 1px dashed var(--accent-warning);
     background: linear-gradient(90deg, rgba(250, 189, 47, 0.12), transparent);
 }
-.twitter-login-note .app-notice-title { color: var(--accent-warning); }
+
+.twitter-login-note .app-notice-title {
+    color: var(--accent-warning);
+}
+
 .twitter-login-note .app-notice-links a {
     border: 1px solid var(--accent-warning);
     color: var(--accent-warning);
 }
+
 .twitter-login-note .app-notice-links a:hover {
     background: var(--accent-warning);
     color: var(--btn-on-accent);
@@ -688,6 +726,16 @@ main {
     letter-spacing: 0.02em;
 }
 
+.patch-engine-link {
+    text-decoration: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.patch-engine-link:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+}
+
 .patch-stat-badge {
     display: inline-flex;
     align-items: center;
@@ -705,22 +753,21 @@ main {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    padding: 4px 10px;
-    border-radius: var(--radius-full);
-    background: var(--accent-variant-glow);
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    background: var(--accent-variant);
     border: 1px solid var(--accent-variant);
-    color: var(--accent-variant);
-    font-size: 0.74rem;
+    color: var(--btn-on-accent);
+    font-size: 0.78rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 12px var(--accent-variant-glow);
 }
 
 .patch-applied-btn:hover {
-    background: var(--accent-variant);
-    color: var(--btn-on-accent);
+    opacity: 0.92;
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px var(--accent-variant-glow);
 }
 
 /* Variant Rows & Matrix */
@@ -781,6 +828,7 @@ main {
 .channel-box-btn.stable {
     border-color: var(--border-stable);
 }
+
 .channel-box-btn.stable:hover {
     background: var(--accent-stable-glow);
     border-color: var(--accent-stable);
@@ -789,6 +837,7 @@ main {
 .channel-box-btn.beta {
     border-color: var(--border-beta);
 }
+
 .channel-box-btn.beta:hover {
     background: var(--accent-beta-glow);
     border-color: var(--accent-beta);
@@ -797,6 +846,7 @@ main {
 .channel-box-btn.archive {
     border-color: rgba(148, 163, 184, 0.2);
 }
+
 .channel-box-btn.archive:hover {
     background: rgba(148, 163, 184, 0.1);
 }
@@ -816,9 +866,17 @@ main {
     letter-spacing: 0.04em;
 }
 
-.channel-tag.stable { color: var(--accent-stable); }
-.channel-tag.beta { color: var(--accent-beta); }
-.channel-tag.archive { color: var(--text-muted); }
+.channel-tag.stable {
+    color: var(--accent-stable);
+}
+
+.channel-tag.beta {
+    color: var(--accent-beta);
+}
+
+.channel-tag.archive {
+    color: var(--text-muted);
+}
 
 .channel-date {
     font-size: 0.68rem;
@@ -946,8 +1004,8 @@ body.modal-open {
 
 .modal-filter-btn {
     border: 1px solid var(--border);
-    background: var(--bg-secondary);
-    color: var(--text-secondary);
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
     border-radius: var(--radius-full);
     padding: 5px 14px;
     font-size: 0.78rem;
@@ -955,6 +1013,7 @@ body.modal-open {
     cursor: pointer;
     transition: all 0.2s ease;
     user-select: none;
+    box-shadow: var(--shadow);
 }
 
 .modal-filter-btn:hover {
@@ -973,20 +1032,20 @@ body.modal-open {
 
 .modal-obtainium-btn {
     border: 1px solid var(--accent);
-    background: var(--accent-glow);
-    color: var(--accent);
-    border-radius: var(--radius-md);
-    padding: 8px 14px;
+    background: var(--accent);
+    color: var(--btn-on-accent);
+    border-radius: var(--radius-sm);
+    padding: 8px 16px;
     font-size: 0.84rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
     white-space: nowrap;
+    box-shadow: 0 4px 12px var(--accent-glow);
 }
 
 .modal-obtainium-btn:hover {
-    background: var(--accent);
-    color: var(--btn-on-accent);
+    opacity: 0.92;
     transform: translateY(-1px);
 }
 
@@ -1147,6 +1206,43 @@ body.modal-open {
     opacity: 0.8;
 }
 
+.release-link-button {
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    text-decoration: none;
+    box-shadow: var(--shadow);
+}
+
+.release-link-button:hover {
+    opacity: 1;
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-glow);
+}
+
+.patch-info-row {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 12px;
+}
+
+.patch-info-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
 /* Asset Download Groups */
 .asset-group {
     display: flex;
@@ -1179,15 +1275,27 @@ body.modal-open {
 }
 
 .download-btn:hover {
-    border-color: var(--accent);
-    background: var(--accent-glow);
+    background: var(--bg-card-hover);
+    border-color: var(--border);
     transform: translateY(-1px);
+    box-shadow: var(--shadow-hover);
 }
 
-.download-btn.arm64 { border-left: 4px solid var(--accent); }
-.download-btn.arm32 { border-left: 4px solid var(--accent-variant); }
-.download-btn.universal { border-left: 4px solid var(--accent-stable); }
-.download-btn.x86 { border-left: 4px solid var(--accent-module); }
+.download-btn.arm64 {
+    border-left: 4px solid transparent;
+}
+
+.download-btn.arm32 {
+    border-left: 4px solid transparent;
+}
+
+.download-btn.universal {
+    border-left: 4px solid transparent;
+}
+
+.download-btn.x86 {
+    border-left: 4px solid transparent;
+}
 
 .asset-left {
     display: flex;
@@ -1340,28 +1448,39 @@ body.modal-open {
     background: var(--bg-tertiary);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
+    flex-wrap: nowrap;
 }
 
 .instruction-code code {
     flex: 1;
+    min-width: 0;
     font-family: "JetBrains Mono", monospace;
     font-size: 0.85rem;
     color: var(--accent);
     word-break: break-all;
 }
 
+.instruction-code .copy-btn,
+.instruction-code .obtainium-add-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 34px;
+    padding: 7px 12px;
+    font-size: 0.78rem;
+    line-height: 1;
+    white-space: nowrap;
+    flex: 0 0 auto;
+}
+
 .copy-btn {
-    padding: 6px 14px;
     background: var(--accent);
     color: var(--btn-on-accent);
     border: none;
     border-radius: var(--radius-sm);
     cursor: pointer;
-    font-size: 0.78rem;
     font-weight: 700;
     transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    white-space: nowrap;
-    flex-shrink: 0;
 }
 
 .copy-btn:hover {
@@ -1371,21 +1490,14 @@ body.modal-open {
 
 /* Obtainium add button — Zen style: solid accent bg, light text, rounded */
 .obtainium-add-btn {
-    background: var(--accent);
+    background: var(--accent-beta);
     color: var(--btn-on-accent) !important;
     text-decoration: none !important;
-    padding: 6px 14px;
     border-radius: var(--radius-sm);
-    font-size: 0.78rem;
     font-weight: 700;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
-    flex-shrink: 0;
     border: none;
     transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 2px 8px var(--accent-glow);
+    box-shadow: 0 2px 8px var(--accent-beta-glow);
 }
 
 .obtainium-add-btn:hover {
@@ -1393,7 +1505,7 @@ body.modal-open {
     color: var(--btn-on-accent) !important;
     text-decoration: none !important;
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px var(--accent-glow);
+    box-shadow: 0 4px 16px var(--accent-beta-glow);
 }
 
 .code-with-copy {
@@ -1405,6 +1517,7 @@ body.modal-open {
 
 .code-with-copy code {
     flex: 1;
+    min-width: 0;
     font-family: "JetBrains Mono", monospace;
     font-size: 0.8rem;
     color: var(--text-secondary);
@@ -1543,6 +1656,63 @@ footer a:hover {
         flex-shrink: 0;
         padding: 4px 12px;
         font-size: 0.74rem;
+    }
+
+    .instruction-code {
+        flex-wrap: wrap;
+        gap: 6px;
+        padding: 8px 10px;
+    }
+
+    .instruction-code.code-with-copy {
+        flex-wrap: nowrap;
+    }
+
+    .instruction-code code {
+        flex: 1 1 100%;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 0.74rem;
+    }
+
+    .instruction-code.code-with-copy code {
+        flex: 1 1 0;
+        width: auto;
+    }
+
+    .instruction-code .copy-btn,
+    .instruction-code .obtainium-add-btn {
+        flex: 1 1 0;
+        width: 0;
+        min-height: 32px;
+        padding: 6px 10px;
+        font-size: 0.72rem;
+    }
+
+    .instruction-code.code-with-copy .copy-btn {
+        flex: 0 0 auto;
+        width: auto;
+    }
+
+    .code-with-copy {
+        flex-wrap: nowrap;
+    }
+
+    .code-with-copy code {
+        flex: 1 1 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 0.74rem;
+    }
+
+    .code-with-copy .copy-btn {
+        flex: 0 0 auto;
+        width: auto;
+        min-height: 32px;
+        padding: 6px 12px;
     }
 
     .download-btn {
