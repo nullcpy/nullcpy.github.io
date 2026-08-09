@@ -173,6 +173,13 @@ def main():
     # Load existing master build metadata
     master_build = load_json(MASTER_BUILD_FILE) or {}
 
+    # Load repo-level build.json if fetched directly from nullcpy/rvb repository
+    repo_build = load_json("repo_build.json")
+    if isinstance(repo_build, dict):
+        print(f"[OK] Ingested build.json directly from rvb repository ({len(repo_build)} entries)")
+        for target_key, info in repo_build.items():
+            merge_entry_into_master(master_build, target_key, info)
+
     # Load previous releases.json cache to identify already processed releases
     cached_releases = load_json("releases.json") or []
     cached_by_id = {r.get("id"): r for r in cached_releases if isinstance(r, dict) and "id" in r}
