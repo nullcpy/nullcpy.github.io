@@ -1014,22 +1014,42 @@ body.modal-open {
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     background: var(--bg-tertiary);
-    overflow: hidden;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
 }
 
 .modal-build-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     list-style: none;
     cursor: pointer;
-    padding: 14px 16px;
-    background: rgba(0, 0, 0, 0.15);
+    padding: 16px 18px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-md);
+    min-height: 56px;
+    box-sizing: border-box;
+    transition: background-color 0.2s ease;
 }
 
 .modal-build-header::-webkit-details-marker {
     display: none;
+}
+
+.modal-build-card[open] .modal-build-header {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.modal-build-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    line-height: 1.3;
 }
 
 .modal-build-title {
@@ -1037,37 +1057,40 @@ body.modal-open {
     font-weight: 700;
     color: var(--text-primary);
     font-family: "JetBrains Mono", monospace;
+    line-height: 1.4;
 }
 
 .modal-build-date {
-    font-size: 0.8rem;
+    font-size: 0.82rem;
     color: var(--text-muted);
+    line-height: 1.3;
 }
 
 .modal-build-downloads {
-    border-top: 1px solid var(--border);
-    padding: 16px;
+    padding: 18px;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 16px;
+    box-sizing: border-box;
 }
 
 /* Badges */
 .badge-group {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     flex-wrap: wrap;
 }
 
 .release-badge {
     display: inline-block;
-    padding: 3px 10px;
+    padding: 4px 12px;
     border-radius: var(--radius-full);
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.03em;
+    line-height: 1.2;
 }
 
 .release-badge.stable {
@@ -1089,25 +1112,27 @@ body.modal-open {
 }
 
 .variants-indicator {
-    padding: 3px 10px;
+    padding: 4px 12px;
     border-radius: var(--radius-full);
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     font-weight: 700;
     background: var(--accent-variant-glow);
     border: 1px solid rgba(6, 182, 212, 0.35);
     color: var(--accent-variant);
     text-transform: uppercase;
+    line-height: 1.2;
 }
 
 /* Asset Download Groups */
 .asset-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
+    margin-bottom: 6px;
 }
 
 .asset-group-label {
-    font-size: 0.78rem;
+    font-size: 0.8rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.04em;
@@ -1119,13 +1144,14 @@ body.modal-open {
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    padding: 12px 16px;
+    padding: 14px 18px;
     background: var(--bg-secondary);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     color: var(--text-primary);
     text-decoration: none;
     transition: all 0.2s ease;
+    box-sizing: border-box;
 }
 
 .download-btn:hover {
@@ -1142,42 +1168,48 @@ body.modal-open {
 .asset-left {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 4px;
     flex: 1;
+    min-width: 0;
 }
 
 .asset-title {
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 700;
+    line-height: 1.3;
 }
 
 .asset-subtitle {
-    font-size: 0.8rem;
+    font-size: 0.82rem;
     color: var(--text-muted);
     font-family: "JetBrains Mono", monospace;
+    line-height: 1.3;
 }
 
 .asset-right {
     display: flex;
     align-items: center;
     gap: 12px;
+    flex-shrink: 0;
 }
 
 .btn-text {
-    font-size: 0.78rem;
+    font-size: 0.8rem;
     color: var(--text-secondary);
     font-family: "JetBrains Mono", monospace;
 }
 
 .copy-hash-btn {
-    padding: 4px 8px;
+    padding: 6px 10px;
     background: var(--bg-tertiary);
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     color: var(--text-muted);
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     font-weight: 600;
     cursor: pointer;
+    transition: all 0.15s ease;
+}
     transition: all 0.15s ease;
 }
 
