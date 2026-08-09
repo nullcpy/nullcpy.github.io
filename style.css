@@ -21,9 +21,9 @@
     --accent-beta: #e8832a;
     /* warm orange — beta channel */
     --accent-beta-glow: rgba(232, 131, 42, 0.18);
-    --accent-obtainium: #8250df;
-    /* signature purple — Obtainium buttons */
-    --accent-obtainium-glow: rgba(130, 80, 223, 0.25);
+    --accent-obtainium: #c47bd4;
+    /* signature lavender purple — Obtainium buttons (dark) */
+    --accent-obtainium-glow: rgba(196, 123, 212, 0.25);
     --accent-variant: #58a6ff;
     /* blue — variant indicator */
     --accent-variant-glow: rgba(88, 166, 255, 0.15);
@@ -1055,7 +1055,7 @@ body.modal-open {
 .modal-obtainium-btn {
     border: 1px solid var(--accent-obtainium);
     background: var(--accent-obtainium);
-    color: #ffffff;
+    color: var(--btn-on-accent);
     border-radius: var(--radius-sm);
     height: 36px;
     padding: 0 14px;
@@ -1577,7 +1577,7 @@ body.light-mode .download-btn:hover {
 /* Obtainium add button — signature purple */
 .obtainium-add-btn {
     background: var(--accent-obtainium);
-    color: #ffffff !important;
+    color: var(--btn-on-accent) !important;
     text-decoration: none !important;
     border-radius: var(--radius-sm);
     font-weight: 700;
@@ -1588,7 +1588,7 @@ body.light-mode .download-btn:hover {
 
 .obtainium-add-btn:hover {
     opacity: 0.88;
-    color: #ffffff !important;
+    color: var(--btn-on-accent) !important;
     text-decoration: none !important;
     transform: translateY(-2px);
     box-shadow: 0 4px 16px var(--accent-obtainium-glow);
