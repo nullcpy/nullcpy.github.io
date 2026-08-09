@@ -1,0 +1,20 @@
+{
+  "imdb": {
+    "morphe": {
+      "9.3.4": {},
+      "default": {}
+    }
+  },
+  "imdb-morphe": {
+    "9.3.4": {},
+    "default": {}
+  },
+  "gboard-morphe-adobo": {
+    "default": {},
+    "17.7.7.932364120-release-arm64-v8a": {}
+  },
+  "reddit-morphe-adobo": {
+    "default": {},
+    "2026.31.1": {}
+  }
+}
