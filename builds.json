@@ -513,6 +513,19 @@
           "Skip ads ",
           "Clone Prime Video "
         ]
+      },
+      "260179": {
+        "patches": "ajstrick81/patches-1.23.0.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.24.0",
+        "applied_patches": [
+          "Bundle native ad-strip hook ",
+          "Disable auto-updates ",
+          "Load native ad-strip hook ",
+          "Override certificate pinning ",
+          "Prime Video extension ",
+          "Skip ads ",
+          "Clone Prime Video "
+        ]
       }
     }
   },
@@ -521,6 +534,13 @@
       "260175": {
         "patches": "ajstrick81/patches-1.22.0.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.23.0",
+        "applied_patches": [
+          "HBO Max - Disable Ads "
+        ]
+      },
+      "260179": {
+        "patches": "ajstrick81/patches-1.23.0.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.24.0",
         "applied_patches": [
           "HBO Max - Disable Ads "
         ]
@@ -536,6 +556,14 @@
           "Disable auto-updates ",
           "Skip ads "
         ]
+      },
+      "260179": {
+        "patches": "ajstrick81/patches-1.23.0.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.24.0",
+        "applied_patches": [
+          "Disable auto-updates ",
+          "Skip ads "
+        ]
       }
     }
   },
@@ -547,6 +575,13 @@
         "applied_patches": [
           "Skip ads "
         ]
+      },
+      "260179": {
+        "patches": "ajstrick81/patches-1.23.0.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.24.0",
+        "applied_patches": [
+          "Skip ads "
+        ]
       }
     }
   },
@@ -555,6 +590,14 @@
       "260175": {
         "patches": "ajstrick81/patches-1.22.0.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.23.0",
+        "applied_patches": [
+          "Override certificate pinning ",
+          "Skip ads "
+        ]
+      },
+      "260179": {
+        "patches": "ajstrick81/patches-1.23.0.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.24.0",
         "applied_patches": [
           "Override certificate pinning ",
           "Skip ads "
@@ -572,6 +615,15 @@
           "Override certificate pinning ",
           "Skip ads "
         ]
+      },
+      "260179": {
+        "patches": "ajstrick81/patches-1.23.0.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.24.0",
+        "applied_patches": [
+          "Disable auto-updates ",
+          "Override certificate pinning ",
+          "Skip ads "
+        ]
       }
     }
   },
@@ -580,6 +632,40 @@
       "260177": {
         "patches": "icysymmetra/patches-0.6.0.mpp",
         "changelog": "https://github.com/icysymmetra/tiktok-patches-for-morphe/releases/tag/v0.6.0",
+        "applied_patches": [
+          "Always show publish date ",
+          "Copy comments without username ",
+          "Custom offline videos limit ",
+          "Disable login requirement ",
+          "Disable long-press quick share ",
+          "Downloads ",
+          "Enable Live search ",
+          "Enable non-personalized search ",
+          "Feature Gate Lab ",
+          "Feed filter ",
+          "Feed tab navigation ",
+          "Fix Google login ",
+          "Hide CAPTCHA popups ",
+          "Hide floating promotions ",
+          "Hide quick comment reactions ",
+          "Hold-and-slide 2x lock ",
+          "Open external links directly ",
+          "Playback speed ",
+          "Remember clear display ",
+          "Resume videos after scrolling ",
+          "SIM spoof ",
+          "Sanitize sharing links ",
+          "Settings ",
+          "Show seekbar ",
+          "Show seekbar thumbnail ",
+          "Stop video looping ",
+          "Translate comments ",
+          "Disable screen capture detection "
+        ]
+      },
+      "260179": {
+        "patches": "icysymmetra/patches-0.6.1.mpp",
+        "changelog": "https://github.com/icysymmetra/tiktok-patches-for-morphe/releases/tag/v0.6.1",
         "applied_patches": [
           "Always show publish date ",
           "Copy comments without username ",
