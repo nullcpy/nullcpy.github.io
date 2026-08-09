@@ -1527,9 +1527,9 @@ async function openAppliedPatchesModal(appKey, patchKey, buildId) {
   const metaEl = document.getElementById("appliedPatchesMeta");
   const build = patch.builds.find((b) => String(b.releaseId) === String(buildId)) || patch.builds[0];
 
-  let pNames = build?.patchMeta?.patches?.length > 0 ? build.patchMeta.patches.join(", ") : patch.patchName;
-  let clUrl = build?.patchMeta?.changelogs?.[0] || null;
-  let appliedPatches = (Array.isArray(build?.appliedPatches) && build.appliedPatches.length > 0) ? build.appliedPatches : null;
+  let pNames = null;
+  let clUrl = null;
+  let appliedPatches = null;
 
   // Resolve applied patches from builds.json
   if (!appliedPatches) {
@@ -1538,8 +1538,24 @@ async function openAppliedPatchesModal(appKey, patchKey, buildId) {
     const patchKeyNorm = normalizeForSearch(patch.patchKey || patch.patchName);
     const asset = build?.assets?.[0];
     const variantNorm = asset?.parsed?.variant ? normalizeForSearch(asset.parsed.variant) : "";
+
+    // Extract raw filename slug (e.g. "gboard") from the asset name to handle brand-display-name
+    // expansion (e.g. "gboard" -> "Google Keyboard" -> appKeyNorm="googlekeyboard" which doesn't
+    // match builds.json keys that use the original slug).
+    let rawSlugNorm = appKeyNorm;
+    if (asset?.name) {
+      const baseName = asset.name.replace(/\.(apk|zip)$/i, "");
+      const tokens = baseName.split("-").filter(Boolean);
+      const patchIdx = tokens.findIndex((t) => CONFIG.knownPatchTokens.has(t.toLowerCase()));
+      if (patchIdx > 0) {
+        rawSlugNorm = tokens.slice(0, patchIdx).join("").toLowerCase();
+      }
+    }
+
     const targetKey = `${appKeyNorm}-${patchKeyNorm}`;
     const variantTargetKey = variantNorm ? `${appKeyNorm}-${patchKeyNorm}-${variantNorm}` : targetKey;
+    const rawTargetKey = `${rawSlugNorm}-${patchKeyNorm}`;
+    const rawVariantTargetKey = variantNorm ? `${rawSlugNorm}-${patchKeyNorm}-${variantNorm}` : rawTargetKey;
 
     function isPatchEntry(obj) {
       return obj && typeof obj === "object" && (
@@ -1597,11 +1613,29 @@ async function openAppliedPatchesModal(appKey, patchKey, buildId) {
       return null;
     }
 
-    const resolved =
-      resolveVersionFromDict(masterData[variantTargetKey], build?.version) ||
-      resolveVersionFromDict(masterData[appKeyNorm]?.[patchKeyNorm], build?.version) ||
-      resolveVersionFromDict(masterData[targetKey], build?.version) ||
-      resolveVersionFromDict(masterData[appKeyNorm], build?.version);
+    const versionsToTry = [...new Set([build?.build, build?.version].filter(Boolean))];
+
+    let resolved = null;
+    if (variantNorm) {
+      for (const ver of versionsToTry) {
+        resolved =
+          resolveVersionFromDict(masterData[rawVariantTargetKey], ver) ||
+          resolveVersionFromDict(masterData[variantTargetKey], ver);
+        if (resolved) break;
+      }
+    } else {
+      for (const ver of versionsToTry) {
+        resolved =
+          resolveVersionFromDict(masterData[rawSlugNorm]?.[patchKeyNorm], ver) ||
+          resolveVersionFromDict(masterData[appKeyNorm]?.[patchKeyNorm], ver) ||
+          resolveVersionFromDict(masterData[rawTargetKey], ver) ||
+          resolveVersionFromDict(masterData[targetKey], ver) ||
+          resolveVersionFromDict(masterData[rawSlugNorm], ver) ||
+          resolveVersionFromDict(masterData[appKeyNorm], ver);
+        if (resolved) break;
+      }
+    }
+
 
     if (resolved) {
       if (Array.isArray(resolved.applied_patches) && resolved.applied_patches.length > 0) {
@@ -1619,7 +1653,7 @@ async function openAppliedPatchesModal(appKey, patchKey, buildId) {
   if (metaEl) {
     const patchNamesList = Array.isArray(pNames)
       ? pNames
-      : (typeof pNames === "string" ? pNames.split(/,\s*/).filter(Boolean) : [patch.patchName]);
+      : (typeof pNames === "string" ? pNames.split(/,\s*/).filter(Boolean) : []);
 
     const changelogList = Array.isArray(clUrl)
       ? clUrl
@@ -1649,7 +1683,6 @@ async function openAppliedPatchesModal(appKey, patchKey, buildId) {
     const searchInput = document.getElementById("patchSearchInput");
     if (searchInput) {
       searchInput.value = "";
-      searchInput.focus();
     }
   }
 }
