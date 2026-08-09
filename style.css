@@ -1100,6 +1100,11 @@ body.modal-open {
     width: 100%;
 }
 
+body.light-mode .modal-build-card {
+    background: #ffffff;
+    border: 1px solid var(--border);
+}
+
 .modal-build-header {
     display: flex;
     justify-content: space-between;
@@ -1120,11 +1125,20 @@ body.modal-open {
 }
 
 body.light-mode .modal-build-header {
-    background: rgba(0, 0, 0, 0.03);
+    background: var(--bg-primary);
 }
 
 body.light-mode .modal-build-header:hover {
-    background: rgba(0, 0, 0, 0.06);
+    background: var(--bg-tertiary);
+}
+
+body.light-mode .download-btn {
+    background: #ffffff;
+    border: 1px solid var(--border);
+}
+
+body.light-mode .download-btn:hover {
+    background: var(--bg-primary);
 }
 
 .modal-build-header::-webkit-details-marker {
