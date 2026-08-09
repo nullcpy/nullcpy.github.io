@@ -909,23 +909,30 @@ function buildAppCatalog(releases) {
         ...app,
         patches: Array.from(app.patches.values())
           .sort((a, b) => new Date(b.latestPublishedAt) - new Date(a.latestPublishedAt))
-          .map((patch) => ({
-            ...patch,
-            variants: Array.from(patch.variants.values()).sort((a, b) => {
-              if (a.variantKey === "default") return -1;
-              if (b.variantKey === "default") return 1;
-              return a.variantName.localeCompare(b.variantName);
-            }),
-            builds: Array.from(patch.builds.values()).sort((a, b) => {
-              if (a.isArchive && !b.isArchive) return 1;
-              if (!a.isArchive && b.isArchive) return -1;
-              if (a.isArchive && b.isArchive) {
-                const comp = b.version.localeCompare(a.version, undefined, { numeric: true, sensitivity: "base" });
-                if (comp !== 0) return comp;
-              }
-              return new Date(b.publishedAt) - new Date(a.publishedAt);
-            }),
-          })),
+          .map((patch) => {
+            const patchDownloads = Array.from(patch.builds.values()).reduce(
+              (sum, b) => sum + (b.assets || []).reduce((aSum, a) => aSum + (a.download_count || 0), 0),
+              0
+            );
+            return {
+              ...patch,
+              totalDownloads: patchDownloads,
+              variants: Array.from(patch.variants.values()).sort((a, b) => {
+                if (a.variantKey === "default") return -1;
+                if (b.variantKey === "default") return 1;
+                return a.variantName.localeCompare(b.variantName);
+              }),
+              builds: Array.from(patch.builds.values()).sort((a, b) => {
+                if (a.isArchive && !b.isArchive) return 1;
+                if (!a.isArchive && b.isArchive) return -1;
+                if (a.isArchive && b.isArchive) {
+                  const comp = b.version.localeCompare(a.version, undefined, { numeric: true, sensitivity: "base" });
+                  if (comp !== 0) return comp;
+                }
+                return new Date(b.publishedAt) - new Date(a.publishedAt);
+              }),
+            };
+          }),
       };
     })
     .filter((app) => app.patches.length > 0)
@@ -1688,21 +1695,44 @@ function createObtainiumInstructions(app, patch) {
     regexPattern = `^${appNameNorm}-${patchNameNorm}-${modalVariantFilter}.*\\.apk$`;
   }
 
+  const mainLabel = `${app?.appName || "App"} (${patch?.patchName || "Patch"})`;
+  const mainSafeId = `${CONFIG.owner}_${app?.appKey || "app"}_${patch?.patchKey || "patch"}`.replace(/[^a-zA-Z0-9_]/g, "_");
+  const mainConfig = {
+    id: mainSafeId,
+    name: mainLabel,
+    author: CONFIG.owner,
+    url: repoUrl,
+    additionalSettings: JSON.stringify({ apkFilterRegEx: regexPattern })
+  };
+  const mainOneClickUrl = `https://apps.obtainium.imranr.dev/redirect?r=${encodeURIComponent("obtainium://app/" + JSON.stringify(mainConfig))}`;
+
   // Build variant examples list if multiple variants exist
   let variantExamplesMarkup = "";
   if (patch && patch.variants && patch.variants.length > 1) {
-    const examples = patch.variants.map((v) => {
+    const examples = patch.variants.map((v, index) => {
       const vRegex = v.variantKey === "default"
         ? `^${appNameNorm}-${patchNameNorm}.*\\.apk$`
         : `^${appNameNorm}-${patchNameNorm}-${v.variantKey}.*\\.apk$`;
+      const vLabel = `${app.appName} (${patch.patchName} - ${v.variantName})`;
+      const vSafeId = `${CONFIG.owner}_${app.appKey}_${patch.patchKey}_${v.variantKey}_${index}`.replace(/[^a-zA-Z0-9_]/g, "_");
+      const vConfig = {
+        id: vSafeId,
+        name: vLabel,
+        author: CONFIG.owner,
+        url: repoUrl,
+        additionalSettings: JSON.stringify({ apkFilterRegEx: vRegex })
+      };
+      const vOneClickUrl = `https://apps.obtainium.imranr.dev/redirect?r=${encodeURIComponent("obtainium://app/" + JSON.stringify(vConfig))}`;
+
       return `
         <div style="margin-top: 8px;">
           <div style="font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px;">
-            ${escapeHtml(app.appName)} (${escapeHtml(patch.patchName)} - ${escapeHtml(v.variantName)}):
+            ${escapeHtml(vLabel)}:
           </div>
           <div class="instruction-code">
             <code>${escapeHtml(vRegex)}</code>
             <button class="copy-btn" onclick="copyToClipboard('${escapeHtml(vRegex)}', 'Regex copied!')" type="button">Copy</button>
+            <a href="${vOneClickUrl}" class="obtainium-add-btn" target="_blank" rel="noopener noreferrer">Add to Obtainium</a>
           </div>
         </div>
       `;
@@ -1732,6 +1762,7 @@ function createObtainiumInstructions(app, patch) {
           <div class="instruction-code">
             <code>${escapeHtml(regexPattern)}</code>
             <button class="copy-btn" onclick="copyToClipboard('${escapeHtml(regexPattern)}', 'Regex copied!')" type="button">Copy</button>
+            <a href="${mainOneClickUrl}" class="obtainium-add-btn" target="_blank" rel="noopener noreferrer">Add to Obtainium</a>
           </div>
           ${variantExamplesMarkup}
         </li>
