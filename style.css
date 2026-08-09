@@ -1783,8 +1783,9 @@ footer a:hover {
     }
 
     .download-action-btn {
-        flex: 1;
-        max-width: 140px;
-        text-align: center;
+        flex: 0 0 auto;
+        width: auto;
+        padding: 6px 14px;
+        font-size: 0.78rem;
     }
 }
