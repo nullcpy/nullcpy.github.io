@@ -1525,7 +1525,21 @@ async function openAppliedPatchesModal(appKey, patchKey, buildId) {
   }
 
   const metaEl = document.getElementById("appliedPatchesMeta");
-  const build = patch.builds.find((b) => String(b.releaseId) === String(buildId)) || patch.builds[0];
+    // Determine appropriate build: for archive builds, match version and use most recent non‑archive build
+    let build = patch.builds.find((b) => String(b.releaseId) === String(buildId));
+    if (!build) {
+      build = patch.builds[0];
+    }
+    if (build && build.isArchive) {
+      // Determine the version identifier to match (some builds store it in `version`, others in `build`)
+      const targetVersion = build.version || build.build;
+      const recent = patch.builds
+        .filter((b) => !b.isArchive && (b.version === targetVersion || b.build === targetVersion))
+        .sort((a, b) => (b.releaseId || 0) - (a.releaseId || 0))[0];
+      if (recent) {
+        build = recent;
+      }
+    }
 
   let pNames = null;
   let clUrl = null;
