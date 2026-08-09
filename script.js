@@ -171,8 +171,10 @@ const CONFIG = {
     iconpacker: "cn.ommiao.iconpacker",
     instagram: {
       default: "com.instagram.android",
-      clone: "com.instafel.android",
-      instafel: "com.instafel.android"
+      instafel: {
+        default: "com.instagram.android",
+        clone: "com.instafel.android"
+      }
     },
     inshot: "com.camerasideas.instashot",
     inshortsnewsin60words: "com.nis.app",
@@ -1900,7 +1902,7 @@ function getAppPackageId(app, patch, variantKey) {
     for (const [key, val] of Object.entries(CONFIG.appIds)) {
       const normKey = normalizeForSearch(key);
       if (normKey === appNameNorm || appNameNorm.includes(normKey) || normKey.includes(appNameNorm) ||
-          normKey === appKeyNorm || appKeyNorm.includes(normKey) || normKey.includes(appKeyNorm)) {
+        normKey === appKeyNorm || appKeyNorm.includes(normKey) || normKey.includes(appKeyNorm)) {
         mapping = val;
         break;
       }
@@ -1926,29 +1928,41 @@ function getAppPackageId(app, patch, variantKey) {
 
     const normVariant = normalizeForSearch(variantKey || "");
 
-    // 1. Check variant overrides (e.g. clone, androidtv, foss)
-    if (normVariant && normVariant !== "default" && normVariant !== "all") {
-      if (mapping[normVariant]) return mapping[normVariant];
-      if (normVariant.includes("tv") && mapping["androidtv"]) return mapping["androidtv"];
-      if (normVariant.includes("clone") && mapping["clone"]) return mapping["clone"];
-      if (normVariant.includes("foss") && mapping["foss"]) return mapping["foss"];
-    }
-
-    // 2. Check patch overrides (e.g. revanced, rvx, anddea, morphe)
+    // Check if there is an engine/patch-specific sub-mapping (e.g. instagram.instafel)
+    let activeMapping = mapping;
     for (const pCand of patchCandidates) {
       if (!pCand) continue;
-      if (mapping[pCand]) return mapping[pCand];
-      if (pCand === "revancedextended" && mapping["rvx"]) return mapping["rvx"];
-      if (pCand === "revancedadvanced" && mapping["anddea"]) return mapping["anddea"];
-      if (pCand === "rvx" && mapping["revancedextended"]) return mapping["revancedextended"];
-      if (pCand === "anddea" && mapping["revancedadvanced"]) return mapping["revancedadvanced"];
+      const sub = mapping[pCand] ||
+        (pCand === "revancedextended" ? mapping["rvx"] : null) ||
+        (pCand === "revancedadvanced" ? mapping["anddea"] : null) ||
+        (pCand === "rvx" ? mapping["revancedextended"] : null) ||
+        (pCand === "anddea" ? mapping["revancedadvanced"] : null);
+
+      if (sub) {
+        if (typeof sub === "string") return sub;
+        if (typeof sub === "object") {
+          activeMapping = sub;
+          break;
+        }
+      }
     }
 
-    // 3. Default fallback
-    if (mapping.default) return mapping.default;
+    // 1. Check variant overrides in activeMapping (e.g. clone, androidtv, foss)
+    if (normVariant && normVariant !== "default" && normVariant !== "all") {
+      if (typeof activeMapping[normVariant] === "string") return activeMapping[normVariant];
+      if (normVariant.includes("tv") && typeof activeMapping["androidtv"] === "string") return activeMapping["androidtv"];
+      if (normVariant.includes("clone") && typeof activeMapping["clone"] === "string") return activeMapping["clone"];
+      if (normVariant.includes("foss") && typeof activeMapping["foss"] === "string") return activeMapping["foss"];
+      if (typeof mapping[normVariant] === "string") return mapping[normVariant];
+    }
 
-    // 4. First string value fallback
-    const firstVal = Object.values(mapping).find((v) => typeof v === "string");
+    // 2. Default fallback on activeMapping or top-level mapping
+    if (typeof activeMapping.default === "string") return activeMapping.default;
+    if (typeof mapping.default === "string") return mapping.default;
+
+    // 3. First string value fallback
+    const firstVal = Object.values(activeMapping).find((v) => typeof v === "string") ||
+      Object.values(mapping).find((v) => typeof v === "string");
     if (firstVal) return firstVal;
   }
 
