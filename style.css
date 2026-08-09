@@ -1174,7 +1174,9 @@ body.modal-open {
 }
 
 .patch-info-actions>* {
-    min-width: 0;
+    flex: 1 1 auto;
+    min-width: max-content;
+    text-align: center;
 }
 
 .release-badge {
@@ -1423,12 +1425,17 @@ body.modal-open {
 
 #patchSearchInput {
     flex: 1;
+    min-width: 0;
     padding: 10px 14px;
     background: var(--bg-tertiary);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     color: var(--text-primary);
     font-size: 0.9rem;
+}
+
+#patchCountBadge {
+    flex-shrink: 0;
 }
 
 #patchSearchInput:focus {
@@ -1722,8 +1729,8 @@ footer a:hover {
     }
 
     .patch-info-actions>* {
-        flex: 1 1 0;
-        min-width: 0;
+        flex: 1 1 auto;
+        min-width: max-content;
     }
 
     .instruction-code {
