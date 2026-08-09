@@ -109,6 +109,9 @@ def merge_entry_into_master(master_build, target_key, info, release_tag=None):
     app_key, engine = parse_target_key(target_key)
     raw_ver = str(info.get("version") or "").strip()
     version = re.sub(r"^v(?=\d)", "", raw_ver, flags=re.IGNORECASE) if raw_ver else ""
+    # Strip trailing arch suffixes so version keys match what JS parses from filenames
+    ARCH_SUFFIXES = r"(?:-(arm64-v8a|armeabi-v7a|arm64|aarch64|arm-v7a|arm32|x86_64|x86|universal|all))+$"
+    version = re.sub(ARCH_SUFFIXES, "", version, flags=re.IGNORECASE)
     patches = info.get("patches", "")
     changelog = info.get("changlog") or info.get("changelog") or ""
     applied_patches = info.get("applied_patches", [])
