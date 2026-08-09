@@ -45,7 +45,8 @@ jobs:
           fi
 
           echo "Fetched $COUNT releases. Updating cache."
-          mv releases_new.json releases.json
+          python3 .github/scripts/merge_build_meta.py
+          rm -f releases_new.json
 
       - name: Commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v7
