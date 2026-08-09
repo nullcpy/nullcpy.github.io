@@ -1,76 +1,77 @@
 :root {
-    --bg-primary: #0a0e17;
-    --bg-secondary: #111827;
-    --bg-tertiary: #1e293b;
-    --bg-card: rgba(17, 24, 39, 0.85);
-    --bg-card-hover: rgba(30, 41, 59, 0.9);
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
-    /* Dark mode: buttons with colored bg use black text for contrast */
-    --btn-on-accent: #0a0e17;
+    /* Zen-inspired: warm near-black dark backgrounds */
+    --bg-primary: #1a1814;
+    --bg-secondary: #201e1a;
+    --bg-tertiary: #2a2723;
+    --bg-card: rgba(32, 30, 26, 0.92);
+    --bg-card-hover: rgba(38, 35, 30, 0.95);
+    --text-primary: #f0ede8;
+    --text-secondary: #a89f94;
+    --text-muted: #6b6358;
+    /* Dark mode: coral buttons use white text */
+    --btn-on-accent: #f0ede8;
 
-    --accent: #83a598;       /* gruvbox aqua (mapped to primary accent) */
-    --accent-glow: rgba(131, 165, 152, 0.18);
-    --accent-stable: #b8bb26;
-    --accent-stable-glow: rgba(184, 187, 38, 0.18);
-    --accent-beta: #d3869b;
-    --accent-beta-glow: rgba(211, 134, 155, 0.18);
-    --accent-variant: #83a598;
-    --accent-variant-glow: rgba(131, 165, 152, 0.18);
-    --accent-module: #fabd2f;
-    --accent-module-glow: rgba(250, 189, 47, 0.18);
-    --accent-tv: #458588;
-    --accent-danger: #fb4934;
-    --accent-warning: #fabd2f;
+    /* Zen coral-inspired accent palette */
+    --accent: #e8614a;           /* coral / zen primary */
+    --accent-glow: rgba(232, 97, 74, 0.18);
+    --accent-stable: #6db57e;    /* calm sage green */
+    --accent-stable-glow: rgba(109, 181, 126, 0.18);
+    --accent-beta: #c47bd4;      /* soft lavender */
+    --accent-beta-glow: rgba(196, 123, 212, 0.18);
+    --accent-variant: #5ba8c4;   /* calm teal-blue */
+    --accent-variant-glow: rgba(91, 168, 196, 0.18);
+    --accent-module: #d4a04a;    /* warm amber */
+    --accent-module-glow: rgba(212, 160, 74, 0.18);
+    --accent-tv: #5ba8c4;
+    --accent-danger: #e8614a;
+    --accent-warning: #d4a04a;
 
-    --border: rgba(255, 255, 255, 0.08);
-    --border-hover: rgba(131, 165, 152, 0.45);
-    --border-stable: rgba(184, 187, 38, 0.35);
-    --border-beta: rgba(211, 134, 155, 0.35);
-    --shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--border);
-    --shadow-hover: 0 20px 35px -5px rgba(0, 0, 0, 0.6), 0 0 18px rgba(131, 165, 152, 0.18);
-    --radius-sm: 6px;
-    --radius-md: 10px;
-    --radius-lg: 14px;
+    --border: rgba(240, 237, 232, 0.08);
+    --border-hover: rgba(232, 97, 74, 0.45);
+    --border-stable: rgba(109, 181, 126, 0.35);
+    --border-beta: rgba(196, 123, 212, 0.35);
+    --shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--border);
+    --shadow-hover: 0 16px 32px -6px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(232, 97, 74, 0.25);
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
     --radius-full: 9999px;
 }
 
-/* Gruvbox Material Light mode */
+/* Zen-inspired Light mode: warm off-white paper */
 body.light-mode {
-    /* Gruvbox Material hard light bg palette */
-    --bg-primary: #f9f5d7;
-    --bg-secondary: #fbf1c7;
-    --bg-tertiary: #f2e5bc;
-    --bg-card: rgba(251, 241, 199, 0.97);
-    --bg-card-hover: #fbf1c7;
-    --text-primary: #282828;
-    --text-secondary: #504945;
-    --text-muted: #928374;
-    /* Light mode: buttons with colored bg use white text for contrast */
+    --bg-primary: #faf8f5;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f2ede6;
+    --bg-card: rgba(255, 255, 255, 0.98);
+    --bg-card-hover: #ffffff;
+    --text-primary: #1c1a17;
+    --text-secondary: #56504a;
+    --text-muted: #9c9088;
+    /* Light mode: coral buttons use white text */
     --btn-on-accent: #ffffff;
 
-    /* Gruvbox Material light accents */
-    --accent: #076678;           /* gruvbox blue dark */
-    --accent-glow: rgba(7, 102, 120, 0.14);
-    --accent-stable: #79740e;    /* gruvbox yellow dark */
-    --accent-stable-glow: rgba(121, 116, 14, 0.14);
-    --accent-beta: #8f3f71;      /* gruvbox purple dark */
-    --accent-beta-glow: rgba(143, 63, 113, 0.14);
-    --accent-variant: #427b58;   /* gruvbox aqua dark */
-    --accent-variant-glow: rgba(66, 123, 88, 0.14);
-    --accent-module: #b57614;    /* gruvbox orange dark */
-    --accent-module-glow: rgba(181, 118, 20, 0.14);
-    --accent-tv: #076678;
-    --accent-danger: #9d0006;    /* gruvbox red dark */
-    --accent-warning: #b57614;
+    /* Light mode: same coral family, slightly deeper */
+    --accent: #d4503a;
+    --accent-glow: rgba(212, 80, 58, 0.12);
+    --accent-stable: #4a9a5c;
+    --accent-stable-glow: rgba(74, 154, 92, 0.12);
+    --accent-beta: #9b57b8;
+    --accent-beta-glow: rgba(155, 87, 184, 0.12);
+    --accent-variant: #3d8fa8;
+    --accent-variant-glow: rgba(61, 143, 168, 0.12);
+    --accent-module: #b8882e;
+    --accent-module-glow: rgba(184, 136, 46, 0.12);
+    --accent-tv: #3d8fa8;
+    --accent-danger: #c43a28;
+    --accent-warning: #b8882e;
 
-    --border: #d5c4a1;
-    --border-hover: #076678;
-    --border-stable: rgba(121, 116, 14, 0.45);
-    --border-beta: rgba(143, 63, 113, 0.45);
-    --shadow: 0 4px 20px -2px rgba(40, 40, 40, 0.12), 0 0 0 1px var(--border);
-    --shadow-hover: 0 12px 25px -4px rgba(40, 40, 40, 0.18), 0 0 14px rgba(7, 102, 120, 0.14);
+    --border: #e8e0d5;
+    --border-hover: #d4503a;
+    --border-stable: rgba(74, 154, 92, 0.4);
+    --border-beta: rgba(155, 87, 184, 0.4);
+    --shadow: 0 2px 16px -2px rgba(28, 26, 23, 0.08), 0 0 0 1px var(--border);
+    --shadow-hover: 0 10px 24px -4px rgba(28, 26, 23, 0.14), 0 0 0 1px rgba(212, 80, 58, 0.3);
 }
 
 * {
@@ -86,20 +87,20 @@ html {
 body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: "Bricolage Grotesque", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     line-height: 1.6;
     min-height: 100vh;
     background-image: 
-        radial-gradient(circle at 15% 15%, rgba(131, 165, 152, 0.05) 0%, transparent 40%),
-        radial-gradient(circle at 85% 65%, rgba(211, 134, 155, 0.05) 0%, transparent 40%);
+        radial-gradient(ellipse at 20% 0%, rgba(232, 97, 74, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 90%, rgba(196, 123, 212, 0.04) 0%, transparent 50%);
     background-attachment: fixed;
-    transition: background-color 0.35s ease, color 0.35s ease;
+    transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 body.light-mode {
     background-image: 
-        radial-gradient(circle at 15% 15%, rgba(7, 102, 120, 0.05) 0%, transparent 40%),
-        radial-gradient(circle at 85% 65%, rgba(143, 63, 113, 0.05) 0%, transparent 40%);
+        radial-gradient(ellipse at 20% 0%, rgba(212, 80, 58, 0.05) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 90%, rgba(155, 87, 184, 0.03) 0%, transparent 50%);
 }
 
 button, input, select, textarea {
@@ -174,7 +175,7 @@ header {
     text-align: center;
     margin-bottom: 36px;
     backdrop-filter: blur(16px);
-    transition: background 0.35s ease, border-color 0.35s ease;
+    transition: background 0.4s ease, border-color 0.4s ease;
 }
 
 header h1 {
@@ -733,8 +734,8 @@ main {
     flex-direction: column;
     gap: 6px;
     padding: 8px;
-    background: rgba(0, 0, 0, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.10);
+    border: 1px solid var(--border);
     border-radius: var(--radius-sm);
 }
 
@@ -848,14 +849,14 @@ body.modal-open {
 .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(2, 6, 23, 0.8);
+    background: rgba(10, 8, 6, 0.75);
     display: none;
     align-items: center;
     justify-content: center;
     padding: 20px;
     overflow-y: auto;
     z-index: 2000;
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(10px);
 }
 
 .modal-overlay.open {
@@ -869,7 +870,7 @@ body.modal-open {
     background: var(--bg-secondary);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 24px 48px -8px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--border);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -1035,7 +1036,7 @@ body.modal-open {
     list-style: none;
     cursor: pointer;
     padding: 16px 18px;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.12);
     border-radius: var(--radius-md);
     min-height: 56px;
     box-sizing: border-box;
