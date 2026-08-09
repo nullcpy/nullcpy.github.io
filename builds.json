@@ -39,6 +39,22 @@
           "Sanitize share links "
         ]
       }
+    },
+    "2026.32.0": {
+      "260178": {
+        "patches": "jkennethcarino/patches-1.3.1-dev.1.mpp",
+        "changelog": "https://github.com/jkennethcarino/adobo/releases/tag/v1.3.1-dev.1",
+        "applied_patches": [
+          "Colorize comment indent lines ",
+          "Disable home screen redirect ",
+          "Disable screenshot banner ",
+          "Hide community menu badge ",
+          "Hide post view counts ",
+          "Open external links directly ",
+          "Remove ads and telemetry ",
+          "Sanitize share links "
+        ]
+      }
     }
   },
   "twitter-morphe": {
