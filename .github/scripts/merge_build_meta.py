@@ -3,7 +3,7 @@ import urllib.request
 import os
 import re
 
-MASTER_BUILD_FILE = "master_build.json"
+MASTER_BUILD_FILE = "builds.json"
 KNOWN_ENGINES = ["revanced", "morphe", "anddea", "rvx", "xposed", "instafel", "default"]
 
 def load_json(filepath):
@@ -51,9 +51,9 @@ def parse_asset_filename(filename):
 
 def merge_entry_into_master(master_build, target_key, info):
     """
-    Merge a build_data entry into master_build.json.
-    Supports both nested structure master_build[app][engine][version]
-    and direct target key fallback master_build[target][version].
+    Merge a build_data entry into builds.json.
+    Supports both nested structure builds[app][engine][version]
+    and direct target key fallback builds[target][version].
     """
     if not isinstance(info, dict):
         return
@@ -90,9 +90,9 @@ def merge_entry_into_master(master_build, target_key, info):
             master_build[target_key][version] = entry_data
         master_build[target_key]["default"] = entry_data
 
-def prune_stale_metadata(master_build, releases):
+def prune_stale_metadata(builds, releases):
     """
-    Prunes apps and versions from master_build that no longer exist
+    Prunes apps and versions from builds that no longer exist
     in ANY active release (across the 100 numbered releases + archive release).
     """
     live_apps = set()
@@ -210,7 +210,7 @@ def main():
     # Prune stale metadata based on live inventory across all releases
     master_build = prune_stale_metadata(master_build, releases)
 
-    # Save clean master_build.json (single source of truth for all builds)
+    # Save clean builds.json (single source of truth for all builds)
     with open(MASTER_BUILD_FILE, "w", encoding="utf-8") as f:
         json.dump(master_build, f, indent=2, ensure_ascii=False)
     print(f"[OK] Successfully wrote {MASTER_BUILD_FILE} ({len(master_build)} apps)")

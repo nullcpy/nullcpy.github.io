@@ -52,7 +52,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: "update releases cache and master build metadata [skip ci]"
-          file_pattern: "releases.json master_build.json"
+          file_pattern: "releases.json builds.json"
 
   trigger_notify_failure:
     needs: [ update-cache ]

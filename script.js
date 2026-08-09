@@ -631,7 +631,7 @@ async function loadReleases() {
     allReleases = fetchedData;
     cacheReleases(allReleases);
     rebuildCatalogCache();
-    fetchMasterBuildData(); // Prefetch master_build.json in background for instant modal opens
+    fetchMasterBuildData(); // Prefetch builds.json in background for instant modal opens
 
     document.getElementById("loading").style.display = "none";
     updateLastUpdateTimestamp();
@@ -1498,14 +1498,14 @@ let masterBuildDataCache = null;
 async function fetchMasterBuildData() {
   if (masterBuildDataCache) return masterBuildDataCache;
   try {
-    const resp = await fetch("master_build.json");
+    const resp = await fetch("builds.json");
     if (resp.ok) {
       masterBuildDataCache = await resp.json();
     } else {
       masterBuildDataCache = {};
     }
   } catch (e) {
-    console.warn("Could not load master_build.json:", e);
+    console.warn("Could not load builds.json:", e);
     masterBuildDataCache = {};
   }
   return masterBuildDataCache;
@@ -1529,7 +1529,7 @@ async function openAppliedPatchesModal(appKey, patchKey, buildId) {
   let clUrl = build?.patchMeta?.changelogs?.[0] || null;
   let appliedPatches = (Array.isArray(build?.appliedPatches) && build.appliedPatches.length > 0) ? build.appliedPatches : null;
 
-  // If appliedPatches not embedded on release, resolve from master_build.json
+  // Resolve applied patches from builds.json
   if (!appliedPatches) {
     const masterData = await fetchMasterBuildData();
     const appKeyNorm = normalizeForSearch(app.appKey || app.appName);
