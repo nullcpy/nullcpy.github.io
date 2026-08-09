@@ -631,6 +631,7 @@ async function loadReleases() {
     allReleases = fetchedData;
     cacheReleases(allReleases);
     rebuildCatalogCache();
+    fetchMasterBuildData(); // Prefetch master_build.json in background for instant modal opens
 
     document.getElementById("loading").style.display = "none";
     updateLastUpdateTimestamp();

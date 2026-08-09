@@ -180,18 +180,10 @@ def main():
     new_build_data_count = 0
 
     for rel in releases:
-        rel_id = rel.get("id")
-        cached_rel = cached_by_id.get(rel_id)
+        # Strip any legacy embedded build_data so releases.json remains a clean GitHub API dump
+        rel.pop("build_data", None)
 
-        # 1. If release already has embedded build_data from cache, re-use and merge
-        if cached_rel and cached_rel.get("build_data"):
-            rel["build_data"] = cached_rel["build_data"]
-            if isinstance(rel["build_data"], dict):
-                for target_key, info in rel["build_data"].items():
-                    merge_entry_into_master(master_build, target_key, info)
-            continue
-
-        # 2. Check for build.json asset in new release
+        # Check for build.json asset in release
         assets = rel.get("assets", [])
         build_json_asset = next(
             (a for a in assets if a.get("name") in ["build.json", "manifest.json"]),
@@ -206,9 +198,8 @@ def main():
                 )
                 with urllib.request.urlopen(req, timeout=10) as resp:
                     build_data = json.loads(resp.read().decode("utf-8"))
-                    rel["build_data"] = build_data
                     new_build_data_count += 1
-                    print(f"[OK] Ingested new build.json for Release {rel.get('tag_name')}")
+                    print(f"[OK] Ingested build.json for Release {rel.get('tag_name')}")
 
                     if isinstance(build_data, dict):
                         for target_key, info in build_data.items():
@@ -219,15 +210,15 @@ def main():
     # Prune stale metadata based on live inventory across all releases
     master_build = prune_stale_metadata(master_build, releases)
 
-    # Save clean master_build.json
+    # Save clean master_build.json (single source of truth for all builds)
     with open(MASTER_BUILD_FILE, "w", encoding="utf-8") as f:
         json.dump(master_build, f, indent=2, ensure_ascii=False)
     print(f"[OK] Successfully wrote {MASTER_BUILD_FILE} ({len(master_build)} apps)")
 
-    # Save updated releases.json cache
+    # Save 100% clean releases.json cache
     with open("releases.json", "w", encoding="utf-8") as f:
         json.dump(releases, f, separators=(",", ":"))
-    print(f"[OK] Successfully wrote releases.json ({len(releases)} releases, {new_build_data_count} newly ingested)")
+    print(f"[OK] Successfully wrote clean releases.json ({len(releases)} releases, {new_build_data_count} newly ingested)")
 
 if __name__ == "__main__":
     main()
