@@ -1605,8 +1605,22 @@ async function openAppliedPatchesModal(appKey, patchKey, buildId) {
       const cleanVer = rawVer.toLowerCase().replace(/^v(?=\d)/i, "").trim();
 
       // 1. Exact match (with and without leading v)
-      for (const candidate of [dict[rawVer], dict[cleanVer], dict[`v${cleanVer}`]]) {
+      for (const key of [rawVer, cleanVer, `v${cleanVer}`]) {
+        const candidate = dict[key];
+        if (!candidate) continue;
+        // Direct patch entry
         if (isPatchEntry(candidate)) return candidate;
+        // Version node containing tag entries — pick the most recent tag
+        if (candidate && typeof candidate === "object") {
+          const tagKeys = Object.keys(candidate).sort((a, b) => {
+            const na = Number(a), nb = Number(b);
+            if (!isNaN(na) && !isNaN(nb)) return nb - na;
+            return b.localeCompare(a);
+          });
+          for (const tagKey of tagKeys) {
+            if (isPatchEntry(candidate[tagKey])) return candidate[tagKey];
+          }
+        }
       }
 
       // 2. Drill into nested engine dict (e.g. masterData["gboard"] = { morphe: { "ver": {...} } })
