@@ -7,8 +7,8 @@ MASTER_BUILD_FILE = "builds.json"
 KNOWN_ENGINES = ["revanced", "morphe", "anddea", "rvx", "xposed", "instafel", "default"]
 
 def load_json(filepath):
-    """Load JSON from a local file if it exists."""
-    if os.path.exists(filepath):
+    """Load JSON from a local file if it exists and is non-empty."""
+    if os.path.exists(filepath) and os.path.getsize(filepath) > 0:
         try:
             with open(filepath, "r", encoding="utf-8") as f:
                 return json.load(f)
@@ -145,15 +145,23 @@ def prune_stale_metadata(builds, releases):
             allowed_versions = live_versions_by_app.get(k, set())
             for sub_k in list(app_data.keys()):
                 sub_val = app_data[sub_k]
-                if isinstance(sub_val, dict) and sub_k in KNOWN_ENGINES:
-                    # Nested engine dict: app_data[engine][version]
+
+                # Check if sub_val is a build metadata payload dict (containing fields like applied_patches, patches, etc.)
+                is_payload_dict = isinstance(sub_val, dict) and (
+                    "applied_patches" in sub_val or "patches" in sub_val or "changelog" in sub_val or "changlog" in sub_val
+                )
+
+                if is_payload_dict:
+                    # sub_k is a version string (e.g. "9.3.4") or "default"
+                    if sub_k != "default" and sub_k not in allowed_versions:
+                        del app_data[sub_k]
+                        print(f"[-] Pruned purged version: {k} v{sub_k}")
+                elif isinstance(sub_val, dict) and sub_k in KNOWN_ENGINES and sub_k != "default":
+                    # sub_k is an actual engine sub-container (e.g. "morphe", "revanced")
                     for ver_k in list(sub_val.keys()):
                         if ver_k != "default" and ver_k not in allowed_versions:
                             del sub_val[ver_k]
                             print(f"[-] Pruned purged version: {k}/{sub_k} v{ver_k}")
-                elif sub_k != "default" and sub_k not in KNOWN_ENGINES and sub_k not in allowed_versions:
-                    del app_data[sub_k]
-                    print(f"[-] Pruned purged version: {k} v{sub_k}")
 
     if pruned_apps:
         print(f"[-] Cleaned up deleted apps from metadata: {', '.join(pruned_apps)}")
