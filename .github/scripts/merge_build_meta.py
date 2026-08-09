@@ -120,10 +120,10 @@ def prune_stale_metadata(builds, releases):
 
     if not live_apps:
         print("Warning: Live inventory empty, skipping pruning to avoid data loss.")
-        return master_build
+        return builds
 
     # Prune stale top-level app keys
-    all_stored_keys = list(master_build.keys())
+    all_stored_keys = list(builds.keys())
     pruned_apps = []
     for k in all_stored_keys:
         # Check if app key or target matches live inventory
@@ -135,12 +135,12 @@ def prune_stale_metadata(builds, releases):
         )
 
         if not is_live:
-            del master_build[k]
+            del builds[k]
             pruned_apps.append(k)
             continue
 
         # Prune stale versions within the app
-        app_data = master_build[k]
+        app_data = builds[k]
         if isinstance(app_data, dict):
             allowed_versions = live_versions_by_app.get(k, set())
             for sub_k in list(app_data.keys()):
@@ -158,7 +158,7 @@ def prune_stale_metadata(builds, releases):
     if pruned_apps:
         print(f"[-] Cleaned up deleted apps from metadata: {', '.join(pruned_apps)}")
 
-    return master_build
+    return builds
 
 def main():
     if not os.path.exists("releases_new.json"):
