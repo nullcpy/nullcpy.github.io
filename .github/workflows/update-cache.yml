@@ -37,9 +37,6 @@ jobs:
         run: |
           gh api --paginate repos/nullcpy/rvb/releases > releases_new.json
 
-          # Also fetch build.json directly from rvb repo if committed there
-          gh api repos/nullcpy/rvb/contents/build.json --jq '.content' | base64 -d > repo_build.json 2>/dev/null || rm -f repo_build.json
-
           # Validate: must be a non-empty JSON array
           COUNT=$(jq 'if type == "array" then length else 0 end' releases_new.json)
           if [ "$COUNT" -eq 0 ]; then
@@ -49,7 +46,7 @@ jobs:
 
           echo "Fetched $COUNT releases. Updating cache."
           python3 .github/scripts/merge_build_meta.py
-          rm -f releases_new.json repo_build.json
+          rm -f releases_new.json
 
       - name: Commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v7
