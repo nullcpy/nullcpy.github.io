@@ -1530,8 +1530,9 @@ async function openAppliedPatchesModal(appKey, patchKey, buildId) {
     if (!build) {
       build = patch.builds[0];
     }
-    if (build && build.isArchive) {
-      // Determine the version identifier to match (some builds store it in `version`, others in `build`)
+    const isArchiveBuild = build && build.isArchive;
+    if (isArchiveBuild) {
+      // For archive builds, find the most recent non-archive build with the same version
       const targetVersion = build.version || build.build;
       const recent = patch.builds
         .filter((b) => !b.isArchive && (b.version === targetVersion || b.build === targetVersion))
@@ -1603,22 +1604,20 @@ async function openAppliedPatchesModal(appKey, patchKey, buildId) {
 
       const cleanVer = rawVer.toLowerCase().replace(/^v(?=\d)/i, "").trim();
 
-      // 1. Direct match (with and without leading v)
+      // 1. Exact match (with and without leading v)
       for (const candidate of [dict[rawVer], dict[cleanVer], dict[`v${cleanVer}`]]) {
         if (isPatchEntry(candidate)) return candidate;
       }
 
-      // 2. Prefix / partial match against keys
-      const matchedKey = keys.find((k) => {
-        const cleanK = k.toLowerCase().replace(/^v(?=\d)/i, "").trim();
-        return cleanK.startsWith(cleanVer) || cleanVer.startsWith(cleanK);
-      });
-      if (matchedKey && isPatchEntry(dict[matchedKey])) return dict[matchedKey];
-
-      // 3. Drill into nested engine dict (e.g. masterData["gboard"] = { morphe: { "ver": {...} } })
+      // 2. Drill into nested engine dict (e.g. masterData["gboard"] = { morphe: { "ver": {...} } })
+      // Only drill one level to avoid version bleeding across unrelated versions
       for (const k of keys) {
         const sub = dict[k];
         if (sub && typeof sub === "object" && !isPatchEntry(sub)) {
+          // Try exact match within this nested dict only
+          const cleanK = k.toLowerCase().replace(/^v(?=\d)/i, "").trim();
+          // Skip if this looks like a version key itself (avoid wrong-version drill-in)
+          if (/^\d/.test(cleanK)) continue;
           const result = resolveVersionFromDict(sub, rawVer);
           if (result) return result;
         }
@@ -1627,6 +1626,7 @@ async function openAppliedPatchesModal(appKey, patchKey, buildId) {
       return null;
     }
 
+    // For archive builds we only have version info, use it strictly
     const versionsToTry = [...new Set([build?.build, build?.version].filter(Boolean))];
 
     let resolved = null;
@@ -1648,6 +1648,11 @@ async function openAppliedPatchesModal(appKey, patchKey, buildId) {
           resolveVersionFromDict(masterData[appKeyNorm], ver);
         if (resolved) break;
       }
+    }
+
+    // If nothing resolved strictly, do NOT fall back to any random entry
+    if (!resolved) {
+      resolved = null;
     }
 
 
