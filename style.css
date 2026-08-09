@@ -1399,7 +1399,7 @@ body.light-mode .obtainium-instructions a:not(.obtainium-add-btn) {
 .copy-btn {
     padding: 6px 14px;
     background: var(--accent);
-    color: #000000;
+    color: #000000 !important;
     border: none;
     border-radius: var(--radius-sm);
     cursor: pointer;
@@ -1414,9 +1414,13 @@ body.light-mode .obtainium-instructions a:not(.obtainium-add-btn) {
     opacity: 0.9;
 }
 
+body.light-mode .copy-btn {
+    color: #ffffff !important;
+}
+
 .obtainium-add-btn {
     background: var(--accent-beta);
-    color: #ffffff !important;
+    color: #000000 !important;
     text-decoration: none !important;
     padding: 6px 14px;
     border-radius: var(--radius-sm);
@@ -1433,7 +1437,7 @@ body.light-mode .obtainium-instructions a:not(.obtainium-add-btn) {
 
 .obtainium-add-btn:hover {
     opacity: 0.9;
-    color: #ffffff !important;
+    color: #000000 !important;
     text-decoration: none !important;
     transform: translateY(-1px);
 }
@@ -1442,6 +1446,10 @@ body.light-mode .obtainium-add-btn {
     background: #8b5cf6;
     color: #ffffff !important;
     text-decoration: none !important;
+}
+
+body.light-mode .obtainium-add-btn:hover {
+    color: #ffffff !important;
 }
 
 .code-with-copy {
