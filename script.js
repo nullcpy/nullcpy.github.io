@@ -500,7 +500,7 @@ function setupEventListeners() {
         openAppliedPatchesModal(
           appliedTrigger.dataset.appKey,
           appliedTrigger.dataset.patchKey,
-          appliedTrigger.dataset.buildId
+          appliedTrigger.dataset.buildKey
         );
         return;
       }
@@ -820,6 +820,7 @@ function buildAppCatalog(releases) {
 
       if (!patchEntry.builds.has(buildKey)) {
         patchEntry.builds.set(buildKey, {
+          buildKey,
           releaseId: release.id,
           build: isArchive ? parsed.version : getBuildNumberLabel(release),
           releaseType,
@@ -1456,7 +1457,7 @@ function createModalBuildMarkup(app, patch, build, openByDefault = false) {
 
   const patchInfoBanner = `
     <div class="patch-info-actions">
-      <button class="patch-applied-btn" data-app-key="${app.appKey}" data-patch-key="${patch.patchKey}" data-build-id="${build.releaseId}" type="button">View Applied Patches</button>
+      <button class="patch-applied-btn" data-app-key="${app.appKey}" data-patch-key="${patch.patchKey}" data-build-key="${build.buildKey || build.releaseId}" type="button">View Applied Patches</button>
       <a href="${build.releaseUrl}" target="_blank" rel="noopener noreferrer" class="release-link-button">View Release Source</a>
     </div>
   `;
@@ -1514,7 +1515,7 @@ async function fetchMasterBuildData() {
 }
 
 // Applied Patches Modal Controller
-async function openAppliedPatchesModal(appKey, patchKey, buildId) {
+async function openAppliedPatchesModal(appKey, patchKey, buildKey) {
   const app = currentAppCatalog.find((item) => item.appKey === appKey);
   const patch = app ? app.patches.find((item) => item.patchKey === patchKey) : null;
   if (!app || !patch) return;
@@ -1525,22 +1526,11 @@ async function openAppliedPatchesModal(appKey, patchKey, buildId) {
   }
 
   const metaEl = document.getElementById("appliedPatchesMeta");
-    // Determine appropriate build: for archive builds, match version and use most recent non‑archive build
-    let build = patch.builds.find((b) => String(b.releaseId) === String(buildId));
-    if (!build) {
-      build = patch.builds[0];
-    }
-    const isArchiveBuild = build && build.isArchive;
-    if (isArchiveBuild) {
-      // For archive builds, find the most recent non-archive build with the same version
-      const targetVersion = build.version || build.build;
-      const recent = patch.builds
-        .filter((b) => !b.isArchive && (b.version === targetVersion || b.build === targetVersion))
-        .sort((a, b) => (b.releaseId || 0) - (a.releaseId || 0))[0];
-      if (recent) {
-        build = recent;
-      }
-    }
+  let build = patch.builds.find((b) => b.buildKey === buildKey || String(b.releaseId) === String(buildKey));
+  if (!build) {
+    build = patch.builds[0];
+  }
+  const isArchiveBuild = build && build.isArchive;
 
   let pNames = null;
   let clUrl = null;
@@ -1641,9 +1631,9 @@ async function openAppliedPatchesModal(appKey, patchKey, buildId) {
     }
 
     // For non-archive builds, specificTag is the release tag (e.g. "260173") to match exactly.
-    // For archive builds, specificTag is the version string (same as version) — not a numeric tag.
     const specificTag = isArchiveBuild ? null : (build?.build || null);
-    const versionsToTry = [...new Set([build?.version, build?.build].filter(Boolean))];
+    const cleanBuildVer = (build?.version || "").replace(/^v(?=\d)/i, "").trim();
+    const versionsToTry = cleanBuildVer ? [cleanBuildVer, `v${cleanBuildVer}`] : [];
 
     let resolved = null;
     if (variantNorm) {
