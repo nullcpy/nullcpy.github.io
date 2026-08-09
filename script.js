@@ -773,7 +773,7 @@ function buildAppCatalog(releases) {
       }
 
       const patchEntry = appEntry.patches.get(patchKey);
-      const variantKey = parsed.variant ? normalizeForSearch(parsed.variant) : "default";
+      const variantKey = parsed.rawVariant || (parsed.variant ? normalizeForSearch(parsed.variant) : "default") || "default";
       const variantName = parsed.variant ? parsed.variant : "Standard";
 
       if (!patchEntry.variants.has(variantKey)) {
@@ -2111,6 +2111,7 @@ function parseAssetDisplay(filename, arch, fileType) {
     appName: formatBrandDisplayName(appTokens.length > 0 ? appTokens.join(" ") : preMetaTokens.join(" ") || baseName),
     patchName: formatBrandDisplayName(patchTokens.length > 0 ? patchTokens.join(" ") : "Patched Build"),
     variant: variant ? formatBrandDisplayName(variant) : null,
+    rawVariant: variant ? variant.toLowerCase() : null,
     version,
     fileType,
   };
