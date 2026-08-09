@@ -1442,10 +1442,18 @@ body.light-mode .download-btn:hover {
     border-radius: var(--radius-md);
     color: var(--text-primary);
     font-size: 0.9rem;
+    height: 42px;
+    box-sizing: border-box;
 }
 
 #patchCountBadge {
     flex-shrink: 0;
+    height: 42px;
+    padding: 0 14px;
+    border-radius: var(--radius-md);
+    display: inline-flex;
+    align-items: center;
+    box-sizing: border-box;
 }
 
 #patchSearchInput:focus {
