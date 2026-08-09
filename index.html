@@ -162,17 +162,17 @@
     <div id="patchModal" class="modal-overlay" aria-hidden="true">
         <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="patchModalTitle">
             <div class="modal-header">
-                <div class="modal-title-wrap">
+                <div class="modal-header-top">
                     <h2 id="patchModalTitle">Patch builds</h2>
-                    <div class="modal-filter-buttons">
-                        <button class="modal-filter-btn active" data-filter="stable" type="button">Stable</button>
-                        <button class="modal-filter-btn" data-filter="beta" type="button">Beta</button>
+                    <div class="modal-header-right">
+                        <button type="button" class="modal-obtainium-btn" id="obtainiumBtn"
+                            aria-label="Install with Obtainium">Install with Obtainium</button>
+                        <button type="button" class="modal-close" aria-label="Close popup">×</button>
                     </div>
                 </div>
-                <div class="modal-header-right">
-                    <button type="button" class="modal-obtainium-btn" id="obtainiumBtn"
-                        aria-label="Install with Obtainium">Install with Obtainium</button>
-                    <button type="button" class="modal-close" aria-label="Close popup">×</button>
+                <div class="modal-filter-buttons">
+                    <button class="modal-filter-btn active" data-filter="stable" type="button">Stable</button>
+                    <button class="modal-filter-btn" data-filter="beta" type="button">Beta</button>
                 </div>
             </div>
             <div id="patchModalBody" class="modal-body"></div>

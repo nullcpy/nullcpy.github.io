@@ -516,8 +516,7 @@ function setupEventListeners() {
       if (filterBtn && !filterBtn.disabled) {
         const filterType = filterBtn.dataset.filter;
         if (filterType.startsWith("variant-")) {
-          const vKey = filterType.slice(8);
-          modalVariantFilter = modalVariantFilter === vKey ? "all" : vKey;
+          modalVariantFilter = filterType.slice(8);
         } else {
           modalBuildFilter = filterType;
         }

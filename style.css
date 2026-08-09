@@ -904,18 +904,19 @@ body.modal-open {
 
 .modal-header {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    flex-direction: column;
     gap: 12px;
     border-bottom: 1px solid var(--border);
     padding: 16px 20px;
     background: var(--bg-tertiary);
 }
 
-.modal-title-wrap {
+.modal-header-top {
     display: flex;
-    flex-direction: column;
-    gap: 8px;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
 }
 
 .modal-header h2 {
@@ -1486,36 +1487,57 @@ footer a:hover {
     }
 
     .modal-header {
-        position: relative;
-        padding: 16px 16px 14px;
+        position: static;
+        padding: 14px 16px 12px;
+        gap: 10px;
     }
 
-    .modal-title-wrap {
+    .modal-header-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
+        gap: 8px;
+    }
+
+    .modal-header-top h2 {
+        font-size: 1.05rem;
         min-width: 0;
-        padding-right: 48px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     .modal-header-right {
-        position: absolute;
-        top: 14px;
-        right: 14px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-shrink: 0;
     }
 
-    .modal-header-right #obtainiumBtn {
-        display: none;
+    .modal-obtainium-btn {
+        padding: 6px 10px;
+        font-size: 0.74rem;
+        white-space: nowrap;
+    }
+
+    .modal-close {
+        width: 32px;
+        height: 32px;
+        font-size: 1.2rem;
     }
 
     .modal-filter-buttons {
         display: flex;
         flex-wrap: wrap;
         gap: 6px;
-        margin-top: 6px;
-        width: calc(100% + 40px);
+        width: 100%;
     }
 
     .modal-filter-btn {
         flex-shrink: 0;
+        padding: 4px 12px;
+        font-size: 0.74rem;
     }
 
     .download-btn {
