@@ -786,6 +786,10 @@ main {
     border-radius: var(--radius-sm);
 }
 
+body.light-mode .variant-row {
+    background: rgba(0, 0, 0, 0.025);
+}
+
 .variant-title-wrap {
     display: flex;
     align-items: center;
@@ -1109,6 +1113,18 @@ body.modal-open {
     min-height: 56px;
     box-sizing: border-box;
     transition: background-color 0.2s ease;
+}
+
+.modal-build-header:hover {
+    background: rgba(0, 0, 0, 0.18);
+}
+
+body.light-mode .modal-build-header {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+body.light-mode .modal-build-header:hover {
+    background: rgba(0, 0, 0, 0.06);
 }
 
 .modal-build-header::-webkit-details-marker {
