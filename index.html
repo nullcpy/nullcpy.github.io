@@ -94,7 +94,11 @@
         <div class="container">
             <div class="search-box">
                 <div class="search-input-wrap">
-                    <input type="text" id="searchInput" placeholder="Search apps...">
+                    <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" id="searchInput" placeholder="Search apps, patches, variants, architectures...">
                     <button type="button" id="searchClearBtn" aria-label="Clear search">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -103,10 +107,43 @@
                         </svg>
                     </button>
                 </div>
-                <div class="filter-buttons" id="appFilterButtons">
-                    <button class="filter-btn active" data-filter="all" type="button">All</button>
-                    <button class="filter-btn" data-filter="recent" type="button">Recently Updated</button>
-                    <button class="filter-btn" data-filter="popular" type="button">Popular</button>
+
+                <!-- Primary Channel / Format Quick Filters -->
+                <div class="channel-filter-bar" id="channelFilterBar" role="tablist" aria-label="Release channel filters">
+                    <button class="channel-btn active" data-channel="all" type="button" role="tab" aria-selected="true">
+                        <span class="channel-dot all"></span> All Releases
+                    </button>
+                    <button class="channel-btn" data-channel="stable" type="button" role="tab" aria-selected="false">
+                        <span class="channel-dot stable"></span> Stable
+                    </button>
+                    <button class="channel-btn" data-channel="beta" type="button" role="tab" aria-selected="false">
+                        <span class="channel-dot beta"></span> Beta
+                    </button>
+                    <button class="channel-btn" data-channel="module" type="button" role="tab" aria-selected="false">
+                        <span class="channel-dot module"></span> Modules
+                    </button>
+                    <button class="channel-btn" data-channel="tv" type="button" role="tab" aria-selected="false">
+                        <span class="channel-dot tv"></span> Android TV
+                    </button>
+                </div>
+
+                <!-- Secondary Category & App Chips Toolbar -->
+                <div class="filter-toolbar">
+                    <div class="filter-buttons" id="appFilterButtons">
+                        <button class="filter-btn active" data-filter="all" type="button">All Categories</button>
+                    </div>
+                    <div class="sort-selector-wrap">
+                        <label for="sortSelect" class="sort-label">Sort:</label>
+                        <select id="sortSelect" class="sort-select" aria-label="Sort apps">
+                            <option value="recent">⚡ Recently Updated</option>
+                            <option value="popular">🔥 Most Popular</option>
+                            <option value="name">🔤 Name (A-Z)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="catalog-status-bar">
+                    <span id="catalogCountText" class="catalog-count-text"></span>
                 </div>
 
                 <div id="loading" class="loading">
@@ -118,8 +155,10 @@
 
                 <div id="error" class="error-message" style="display: none;"></div>
             </div>
+        </div>
     </main>
 
+    <!-- Download & Build Details Modal -->
     <div id="patchModal" class="modal-overlay" aria-hidden="true">
         <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="patchModalTitle">
             <div class="modal-header">
@@ -129,7 +168,7 @@
                         <button class="modal-filter-btn active" data-filter="all" type="button">All</button>
                         <button class="modal-filter-btn" data-filter="stable" type="button">Stable</button>
                         <button class="modal-filter-btn" data-filter="beta" type="button">Beta</button>
-                        <button class="modal-filter-btn" data-filter="variant" type="button">Variant</button>
+                        <button class="modal-filter-btn" data-filter="variant" type="button">Variants</button>
                     </div>
                 </div>
                 <div class="modal-header-right">
@@ -142,6 +181,25 @@
         </div>
     </div>
 
+    <!-- Applied Patches Checklist Modal -->
+    <div id="appliedPatchesModal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-card modal-card-wide" role="dialog" aria-modal="true" aria-labelledby="appliedPatchesTitle">
+            <div class="modal-header">
+                <div class="modal-title-wrap">
+                    <h2 id="appliedPatchesTitle">Applied Patches</h2>
+                    <div id="appliedPatchesMeta" class="applied-patches-meta"></div>
+                </div>
+                <button type="button" class="modal-close" aria-label="Close popup">×</button>
+            </div>
+            <div class="applied-patches-search-wrap">
+                <input type="text" id="patchSearchInput" placeholder="Filter applied patches...">
+                <span id="patchCountBadge" class="patch-count-badge"></span>
+            </div>
+            <div id="appliedPatchesBody" class="modal-body applied-patches-body"></div>
+        </div>
+    </div>
+
+    <!-- Obtainium Instructions Modal -->
     <div id="obtainiumModal" class="modal-overlay" aria-hidden="true">
         <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="obtainiumTitle">
             <div class="modal-header">
@@ -151,6 +209,9 @@
             <div id="obtainiumBody" class="modal-body"></div>
         </div>
     </div>
+
+    <!-- Toast Notification -->
+    <div id="toastNotification" class="toast-notification" aria-live="polite"></div>
 
     <script src="script.js"></script>
     <img src="https://visitor-badge.laobi.icu/badge?page_id=nullcpy.github.io" style="display: none;" />
