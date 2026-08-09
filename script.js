@@ -516,23 +516,12 @@ function setupEventListeners() {
       if (filterBtn && !filterBtn.disabled) {
         const filterType = filterBtn.dataset.filter;
         if (filterType.startsWith("variant-")) {
-          modalVariantFilter = filterType.slice(8);
+          const vKey = filterType.slice(8);
+          modalVariantFilter = modalVariantFilter === vKey ? "all" : vKey;
         } else {
           modalBuildFilter = filterType;
         }
         renderOpenPatchModal();
-        return;
-      }
-
-      // Copy SHA-256 button inside modal
-      const copyHashBtn = e.target.closest(".copy-hash-btn");
-      if (copyHashBtn) {
-        e.preventDefault();
-        e.stopPropagation();
-        const hash = copyHashBtn.dataset.hash;
-        if (hash) {
-          copyToClipboard(hash, "SHA-256 hash copied to clipboard!");
-        }
         return;
       }
 
@@ -1363,10 +1352,10 @@ function toFilterLabel(value) {
 }
 
 // Download Modal Controller
-function openPatchModal(appKey, patchKey, preferredChannel = "all", preferredVariant = "all") {
+function openPatchModal(appKey, patchKey, preferredChannel = "stable", preferredVariant = "all") {
   activeModalAppKey = appKey;
   activeModalPatchKey = patchKey;
-  modalBuildFilter = preferredChannel;
+  modalBuildFilter = preferredChannel === "beta" ? "beta" : "stable";
   modalVariantFilter = preferredVariant;
 
   renderOpenPatchModal();
@@ -1402,10 +1391,10 @@ function renderOpenPatchModal() {
 }
 
 function updateModalFilterButtons(patch) {
-  const filterButtons = document.querySelectorAll(".modal-filter-btn");
+  const filterButtons = document.querySelectorAll(".modal-filter-btn:not(.variant-pill-btn)");
   filterButtons.forEach((btn) => {
     const filter = btn.dataset.filter;
-    if (["all", "stable", "beta"].includes(filter)) {
+    if (["stable", "beta"].includes(filter)) {
       btn.classList.toggle("active", filter === modalBuildFilter);
     }
   });
@@ -1428,7 +1417,7 @@ function updateModalFilterButtons(patch) {
   }
 }
 
-function createPatchModalContent(app, patch, buildFilter = "all", variantFilter = "all") {
+function createPatchModalContent(app, patch, buildFilter = "stable", variantFilter = "all") {
   let builds = patch.builds || [];
 
   // Filter builds
@@ -1461,8 +1450,6 @@ function createPatchModalContent(app, patch, buildFilter = "all", variantFilter 
 
 function createModalBuildMarkup(app, patch, build, openByDefault = false) {
   const assetsByArch = groupAssetsByArchitecture(build.assets);
-  const buildBadgeClass = build.releaseType === "beta" ? "prerelease" : "stable";
-  const badgeText = build.releaseType === "beta" ? "Beta" : "Stable";
   const titleText = build.isArchive ? escapeHtml(build.build) : `Build ${escapeHtml(build.build)}`;
 
   let downloadsMarkup = "";
@@ -1527,7 +1514,6 @@ function createModalBuildMarkup(app, patch, build, openByDefault = false) {
         </div>
         <span class="badge-group">
           ${build.isArchive ? '<span class="release-badge archive">Archive</span>' : ""}
-          <span class="release-badge ${buildBadgeClass}">${badgeText}</span>
         </span>
       </summary>
       <div class="modal-build-downloads">

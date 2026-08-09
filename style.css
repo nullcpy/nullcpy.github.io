@@ -1463,7 +1463,13 @@ footer a:hover {
 
     .modal-header {
         position: relative;
-        padding-right: 54px;
+        padding: 16px 16px 14px;
+    }
+
+    .modal-title-wrap {
+        width: 100%;
+        min-width: 0;
+        padding-right: 48px;
     }
 
     .modal-header-right {
@@ -1478,16 +1484,10 @@ footer a:hover {
 
     .modal-filter-buttons {
         display: flex;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        flex-wrap: nowrap;
-        padding-bottom: 4px;
-        max-width: 100%;
-        scrollbar-width: none;
-    }
-
-    .modal-filter-buttons::-webkit-scrollbar {
-        display: none;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 6px;
+        width: calc(100% + 40px);
     }
 
     .modal-filter-btn {
