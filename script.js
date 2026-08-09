@@ -696,6 +696,8 @@ function buildAppCatalog(releases) {
     const patchMetaFromRelease = extractPatchInfoFromRelease(release);
 
     (release.assets || []).forEach((asset) => {
+      if (!asset.name || !/\.(apk|zip)$/i.test(asset.name)) return;
+
       const arch = detectArchitecture(asset.name);
       const fileType = getFileType(asset.name);
       const parsed = parseAssetDisplay(asset.name, arch, fileType);
