@@ -1536,23 +1536,52 @@ async function openAppliedPatchesModal(appKey, patchKey, buildId) {
     const masterData = await fetchMasterBuildData();
     const appKeyNorm = normalizeForSearch(app.appKey || app.appName);
     const patchKeyNorm = normalizeForSearch(patch.patchKey || patch.patchName);
+    const asset = build?.assets?.[0];
+    const variantNorm = asset?.parsed?.variant ? normalizeForSearch(asset.parsed.variant) : "";
     const targetKey = `${appKeyNorm}-${patchKeyNorm}`;
+    const variantTargetKey = variantNorm ? `${appKeyNorm}-${patchKeyNorm}-${variantNorm}` : targetKey;
+
+    function resolveVersionFromDict(dict, rawVer) {
+      if (!dict || typeof dict !== "object") return null;
+      const keys = Object.keys(dict).filter((k) => k !== "default");
+      if (keys.length === 0) return null;
+
+      if (!rawVer) return dict[keys[0]];
+
+      const cleanVer = rawVer.toLowerCase().replace(/^v(?=\d)/i, "").trim();
+
+      // 1. Direct or leading-v stripped match
+      if (dict[rawVer]) return dict[rawVer];
+      if (dict[cleanVer]) return dict[cleanVer];
+      if (dict[`v${cleanVer}`]) return dict[`v${cleanVer}`];
+
+      // 2. Prefix / partial match against dict keys
+      const matchedKey = keys.find((k) => {
+        const cleanK = k.toLowerCase().replace(/^v(?=\d)/i, "").trim();
+        return cleanK.startsWith(cleanVer) || cleanVer.startsWith(cleanK);
+      });
+      if (matchedKey) return dict[matchedKey];
+
+      // 3. Fallback if dict has single version entry
+      if (keys.length === 1) return dict[keys[0]];
+
+      return null;
+    }
 
     const resolved =
-      (masterData[appKeyNorm]?.[patchKeyNorm]?.[build?.version]) ||
-      (masterData[targetKey]?.[build?.version]) ||
-      (masterData[appKeyNorm]?.[patchKeyNorm]?.default) ||
-      (masterData[targetKey]?.default) ||
-      (masterData[appKeyNorm]?.default);
+      resolveVersionFromDict(masterData[variantTargetKey], build?.version) ||
+      resolveVersionFromDict(masterData[appKeyNorm]?.[patchKeyNorm], build?.version) ||
+      resolveVersionFromDict(masterData[targetKey], build?.version) ||
+      resolveVersionFromDict(masterData[appKeyNorm], build?.version);
 
     if (resolved) {
       if (Array.isArray(resolved.applied_patches) && resolved.applied_patches.length > 0) {
         appliedPatches = resolved.applied_patches;
       }
-      if ((!pNames || pNames === patch.patchName) && resolved.patches) {
+      if (resolved.patches) {
         pNames = resolved.patches;
       }
-      if (!clUrl && resolved.changelog) {
+      if (resolved.changelog) {
         clUrl = resolved.changelog;
       }
     }
@@ -1948,7 +1977,7 @@ function parseAssetDisplay(filename, arch, fileType) {
 
   let version = "Version unknown";
   if (versionIndex >= 0) {
-    const versionParts = [tokens[versionIndex]];
+    const versionParts = [tokens[versionIndex].replace(/^v(?=\d)/i, "")];
     for (let i = versionIndex + 1; i < tokens.length; i++) {
       const t = tokens[i].toLowerCase();
       const isArchToken = CONFIG.knownArchs.some((a) => a.split("-").includes(t));

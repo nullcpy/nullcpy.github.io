@@ -107,7 +107,8 @@ def merge_entry_into_master(master_build, target_key, info):
         return
 
     app_key, engine = parse_target_key(target_key)
-    version = info.get("version")
+    raw_ver = str(info.get("version") or "").strip()
+    version = re.sub(r"^v(?=\d)", "", raw_ver, flags=re.IGNORECASE) if raw_ver else ""
     patches = info.get("patches", "")
     changelog = info.get("changlog") or info.get("changelog") or ""
     applied_patches = info.get("applied_patches", [])
@@ -118,7 +119,7 @@ def merge_entry_into_master(master_build, target_key, info):
         "applied_patches": applied_patches
     }
 
-    # 1. Store under nested structure: master_build[app_key][engine]
+    # 1. Store under nested structure: master_build[app_key][engine][version]
     if app_key not in master_build or not isinstance(master_build[app_key], dict):
         master_build[app_key] = {}
     if engine not in master_build[app_key]:
@@ -126,7 +127,6 @@ def merge_entry_into_master(master_build, target_key, info):
 
     if version:
         master_build[app_key][engine][version] = entry_data.copy()
-    master_build[app_key][engine]["default"] = entry_data.copy()
 
     # 2. Also store under target slug for direct matching (e.g. "youtube-morphe")
     if target_key not in master_build or not isinstance(master_build[target_key], dict):
@@ -134,7 +134,6 @@ def merge_entry_into_master(master_build, target_key, info):
     if isinstance(master_build[target_key], dict):
         if version:
             master_build[target_key][version] = entry_data.copy()
-        master_build[target_key]["default"] = entry_data.copy()
 
 def prune_stale_metadata(builds, releases):
     """
@@ -151,7 +150,7 @@ def prune_stale_metadata(builds, releases):
             if parsed:
                 app_k = parsed["app_key"]
                 target_k = parsed["target"]
-                ver = parsed["version"]
+                ver = re.sub(r"^v(?=\d)", "", parsed["version"], flags=re.IGNORECASE)
 
                 live_apps.add(app_k)
                 live_apps.add(target_k)
@@ -189,17 +188,22 @@ def prune_stale_metadata(builds, releases):
         app_data = builds[k]
         if isinstance(app_data, dict):
             allowed_versions = live_versions_by_app.get(k, set())
+            clean_allowed = {re.sub(r"^v(?=\d)", "", v, flags=re.IGNORECASE) for v in allowed_versions}
+
             for sub_k in list(app_data.keys()):
                 sub_val = app_data[sub_k]
                 if isinstance(sub_val, dict) and sub_k in KNOWN_ENGINES:
                     # Nested engine dict: app_data[engine][version]
                     for ver_k in list(sub_val.keys()):
-                        if ver_k != "default" and ver_k not in allowed_versions:
+                        clean_ver = re.sub(r"^v(?=\d)", "", ver_k, flags=re.IGNORECASE)
+                        if clean_ver not in clean_allowed:
                             del sub_val[ver_k]
                             print(f"[-] Pruned purged version: {k}/{sub_k} v{ver_k}")
-                elif sub_k != "default" and sub_k not in KNOWN_ENGINES and sub_k not in allowed_versions:
-                    del app_data[sub_k]
-                    print(f"[-] Pruned purged version: {k} v{sub_k}")
+                elif sub_k not in KNOWN_ENGINES:
+                    clean_ver = re.sub(r"^v(?=\d)", "", sub_k, flags=re.IGNORECASE)
+                    if clean_ver not in clean_allowed:
+                        del app_data[sub_k]
+                        print(f"[-] Pruned purged version: {k} v{sub_k}")
 
         if isinstance(app_data, dict) and not app_data:
             del builds[k]
