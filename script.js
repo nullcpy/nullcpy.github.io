@@ -1278,7 +1278,7 @@ function createPatchMarkup(app, patch) {
   `;
 }
 
-// Dynamic Filter Buttons Generator
+// Dynamic Filter Buttons Generator (Alphabetically Sorted)
 function getDynamicAppFilters(apps) {
   const wordToAppKeys = new Map();
 
@@ -1293,7 +1293,6 @@ function getDynamicAppFilters(apps) {
   const categoryKeys = new Set(Object.keys(CONFIG.appCategories));
   const dynamicFilters = Array.from(wordToAppKeys.entries())
     .filter(([word, appKeys]) => appKeys.size >= SHARED_APP_WORD_MIN_COUNT && !categoryKeys.has(word))
-    .sort((a, b) => a[0].localeCompare(b[0]))
     .map(([word]) => ({
       key: `word-${word}`,
       label: toFilterLabel(word),
@@ -1304,7 +1303,9 @@ function getDynamicAppFilters(apps) {
     label: toFilterLabel(key),
   }));
 
-  return [...categoryFilters, ...dynamicFilters];
+  return [...categoryFilters, ...dynamicFilters].sort((a, b) =>
+    a.label.localeCompare(b.label, undefined, { sensitivity: "base" })
+  );
 }
 
 function renderDynamicAppFilterButtons(filters) {
