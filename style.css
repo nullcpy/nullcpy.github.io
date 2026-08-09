@@ -196,18 +196,18 @@ textarea {
 /* Header */
 header {
     background: linear-gradient(180deg, var(--bg-secondary) 0%, transparent 100%);
-    padding: 56px 0 36px;
+    padding: 36px 0 20px;
     text-align: center;
-    margin-bottom: 36px;
+    margin-bottom: 24px;
     backdrop-filter: blur(16px);
     transition: background 0.4s ease, border-color 0.4s ease;
 }
 
 header h1 {
-    font-size: clamp(2.4rem, 6vw, 3.8rem);
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
     font-weight: 800;
     letter-spacing: -0.03em;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     background: linear-gradient(135deg, var(--accent) 0%, var(--accent-stable) 50%, var(--accent-beta) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -219,7 +219,7 @@ header h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     flex-wrap: wrap;
 }
 
@@ -230,8 +230,8 @@ header h1 {
     color: var(--text-secondary);
     text-decoration: none;
     transition: all 0.2s ease;
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     background: var(--bg-tertiary);
@@ -245,8 +245,8 @@ header h1 {
 }
 
 .top-link-icon {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     display: block;
 }
 
@@ -265,13 +265,13 @@ header h1 {
     background-color: color-mix(in srgb, var(--pill-color) 12%, transparent);
     color: var(--pill-color);
     border: 1px solid color-mix(in srgb, var(--pill-color) 25%, transparent);
-    padding: 6px 16px;
+    padding: 5px 14px;
     border-radius: var(--radius-full);
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     font-weight: 600;
     font-family: "JetBrains Mono", monospace;
     width: fit-content;
-    margin-top: 18px;
+    margin-top: 14px;
     transition: all 0.2s ease;
 }
 
@@ -304,10 +304,10 @@ main {
 
 /* Search Box Container */
 .search-box {
-    margin-bottom: 36px;
+    margin-bottom: 24px;
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 14px;
 }
 
 .search-input-wrap {
@@ -1634,7 +1634,8 @@ footer a:hover {
     }
 
     header {
-        padding: 40px 0 24px;
+        padding: 24px 0 16px;
+        margin-bottom: 18px;
     }
 
     .builds-grid {
