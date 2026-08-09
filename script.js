@@ -1557,9 +1557,23 @@ async function openAppliedPatchesModal(appKey, patchKey, buildId) {
   }
 
   if (metaEl) {
-    metaEl.innerHTML = `
-      ${clUrl ? `<a href="${clUrl}" target="_blank" rel="noopener noreferrer" class="patch-engine-badge patch-engine-link" title="Open changelog">${escapeHtml(pNames)}</a>` : `<span class="patch-engine-badge">${escapeHtml(pNames)}</span>`}
-    `;
+    const patchNamesList = Array.isArray(pNames)
+      ? pNames
+      : (typeof pNames === "string" ? pNames.split(/,\s*/).filter(Boolean) : [patch.patchName]);
+
+    const changelogList = Array.isArray(clUrl)
+      ? clUrl
+      : (typeof clUrl === "string" ? clUrl.split(/,\s*/).filter(Boolean) : (clUrl ? [clUrl] : []));
+
+    const badgesHtml = patchNamesList.map((name, index) => {
+      const url = changelogList[index] || (changelogList.length === 1 ? changelogList[0] : null);
+      if (url) {
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="patch-engine-badge patch-engine-link" title="Open changelog for ${escapeHtml(name)}">${escapeHtml(name)}</a>`;
+      }
+      return `<span class="patch-engine-badge">${escapeHtml(name)}</span>`;
+    }).join("");
+
+    metaEl.innerHTML = badgesHtml;
   }
 
   // Load patches list (from resolved info or null if unavailable)
