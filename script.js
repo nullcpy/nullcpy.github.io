@@ -1,4 +1,5 @@
-/** * ==========================================
+/**
+ * ==========================================
  * CONFIGURATION & CUSTOMIZATION
  * Edit these values to update the app catalog behavior, branding, and notices.
  * ==========================================
@@ -8,7 +9,7 @@ const CONFIG = {
   repo: "rvb",
   cacheDuration: 5, // Cache duration in minutes
 
-  // App Categories for the top filter buttons (maps filter-btn dataset to keywords)
+  // App Categories for the filter buttons
   appCategories: {
     google: ["youtube", "google"],
     meta: ["threads", "instagram", "messenger", "facebook", "!plusmessenger"],
@@ -111,11 +112,8 @@ const CONFIG = {
   },
 
   // Map app slugs to true Android Package IDs for Obtainium
-  // Keys MUST be the fully normalized appName (lowercase, no spaces, no symbols)
-  // app + patch + variant, app + patch + default, app + variant, app + default, app only
   appIds: {
     "1111warp": "com.cloudflare.onedotonedotonedotone",
-
     acalendar: "org.withouthat.acalendar",
     adguard: "com.adguard.android",
     adobeacrobat: "com.adobe.reader",
@@ -126,27 +124,21 @@ const CONFIG = {
     at4klauncher: "com.overdevs.at4k",
     automate: "com.llamalab.automate",
     autosync: "com.ttxapps.autosync",
-
     batteryguru: "com.paget96.batteryguru",
     betamaniac: "it.mirko.beta",
     bravebrowser: "com.brave.browser",
-
     calcnote: "com.appumstudios.calcnote",
     caloriecounter: "com.fatsecret.android",
     camscanner: "com.intsig.camscanner",
     cricbuzz: "com.cricbuzz.android",
     cryptomator: "org.cryptomator",
-
     documentscanner: "com.cv.docscanner",
     duolingo: "com.duolingo",
     disneyplus: "com.disney.disneyplus",
     discord: "com.discord",
-
     eyeconcalleridspamblock: "com.eyecon.global",
-
     facebook: "com.facebook.katana",
     fingnetworktools: "com.overlook.android.fing",
-
     github: "com.github.android",
     goodreads: "com.goodreads",
     googlekeyboard: {
@@ -160,12 +152,10 @@ const CONFIG = {
       default: "com.google.android.apps.photos",
     },
     googlerecorder: "com.google.android.apps.recorder",
-
     hbomax: "com.wbd.hbomax",
     hermit: "com.chimbori.hermitcrab",
     hellochineselearnchinese: "com.hellochinese",
     holavpn: "org.hola.play",
-
     iconpacker: "cn.ommiao.iconpacker",
     instagram: {
       default: "com.instagram.android",
@@ -174,12 +164,9 @@ const CONFIG = {
     inshot: "com.camerasideas.instashot",
     inshortsnewsin60words: "com.nis.app",
     imdb: "com.imdb.mobile",
-
     kinestop: "com.urbandroid.kinestop",
     komoothikebikerun: "de.komoot.android",
-
     luminawallpapers: "com.lumina.wallpapers",
-
     macrodroid: "com.arlosoft.macrodroid",
     medium: "com.medium.reader",
     merriamwebsterdictionary: "com.merriamwebster",
@@ -194,11 +181,9 @@ const CONFIG = {
     },
     mxplayer: "com.mxtech.videoplayer.pro",
     myfitnesspal: "com.myfitnesspal.android",
-
     niagaralauncher: "bitpit.launcher",
     ninjavpn: "app.ninjavpn.android",
     novalauncher: "com.teslacoilsw.launcher",
-
     pandora: "com.pandora.android",
     peacock: "com.peacocktv.peacockandroid",
     photomath: "com.microblink.photomath",
@@ -215,7 +200,6 @@ const CONFIG = {
     protonmail: "ch.protonmail.android",
     protonvpn: "ch.protonvpn.android",
     projectivylauncher: "com.spocky.projengmenu",
-
     sdmaid2se: "eu.darken.sdmse",
     showly: "com.michaldrabik.showly2",
     smartlauncher6: "ginlemon.flowerfree",
@@ -224,7 +208,6 @@ const CONFIG = {
     snorelab: "com.snorelab.app",
     speedtest: "org.zwanoo.android.speedtest",
     symfonium: "app.symfonik.music.player",
-
     telegram: {
       default: "org.telegram.messenger",
       foss: "org.telegram.messenger.web",
@@ -240,27 +223,20 @@ const CONFIG = {
     tubi: "com.tubitv",
     tumblr: "com.tumblr",
     twitch: "tv.twitch.android.app",
-
     reddit: "com.reddit.frontpage",
     rumble: "com.rumble.battles",
-
     ventusky: "cz.ackee.ventusky",
     viber: "com.viber.voip",
     vix: "com.univision.prendetv",
     vpnify: "com.vpn.free.hotspot.secure.vpnify",
-
     rar: "com.rarlab.rar",
-
     wallcraft: "com.wallpaperscraft.wallpaper",
     waze: "com.waze",
     windscribevpn: "com.windscribe.vpn",
     wpsoffice: "cn.wps.moffice_eng",
-
     twitter: "com.twitter.android",
-
     xodopdfreadereditor: "com.xodo.pdf.reader",
     xrecorder: "videoeditor.videorecorder.screenrecorder",
-
     youtube: {
       revanced: "app.revanced.android.youtube",
       rvx: "app.rvx.android.youtube",
@@ -280,26 +256,20 @@ const CONFIG = {
   // App-specific notices to display on App Cards
   appNotices: [
     {
-      triggers: ["youtube", "google"], // App name keywords that trigger this notice
-      className: "microg-note", // Defines the CSS prefix
+      triggers: ["youtube", "google"],
+      className: "microg-note",
       title: "Login Issue",
       text: "Signing into Google account on APK (not Module) requires MicroG. Please install one from below before trying to sign in.",
       links: [
-        {
-          label: "Morphe",
-          url: "https://github.com/MorpheApp/MicroG-RE/releases/latest",
-        },
-        {
-          label: "ReVanced",
-          url: "https://github.com/ReVanced/GmsCore/releases/latest",
-        },
+        { label: "Morphe", url: "https://github.com/MorpheApp/MicroG-RE/releases/latest" },
+        { label: "ReVanced", url: "https://github.com/ReVanced/GmsCore/releases/latest" },
       ],
     },
     {
       triggers: ["twitter"],
       className: "twitter-login-note",
       title: "Login Issue",
-      text: "Since October 2025, Twitter has started checking whether the app is modified or if the phone integrity fails during login. These checks are server-side, not client-side.",
+      text: "Since October 2025, Twitter has started checking whether the app is modified or if phone integrity fails during login.",
       links: [
         { label: "Workarounds", url: "https://t.me/pikopatches/1/59772" },
       ],
@@ -311,18 +281,21 @@ const CONFIG = {
 let allReleases = [];
 let cachedFullCatalog = [];
 let searchTerm = "";
-let appViewFilter = "all";
+let channelFilter = "all"; // "all" | "stable" | "beta" | "module" | "tv"
+let appCategoryFilter = "all"; // "all" | "google" | "meta" | "vpn" | "word-..."
+let sortMode = "recent"; // "recent" | "popular" | "name"
 let dynamicAppFilters = [];
 let currentAppCatalog = [];
 let activeModalAppKey = null;
 let activeModalPatchKey = null;
 let modalBuildFilter = "all";
+let modalVariantFilter = "all";
 let themeMode = "system";
+let activeAppliedPatchesList = [];
 
-// Render State for Infinite Scroll
+// Progressive Render State
 let currentVisibleCount = 0;
-const RENDER_CHUNK_SIZE = 50;
-
+const RENDER_CHUNK_SIZE = 40;
 const SHARED_APP_WORD_MIN_COUNT = 2;
 
 // Caches for Memoization
@@ -334,13 +307,29 @@ document.addEventListener("DOMContentLoaded", () => {
   setupTheme();
   setupEventListeners();
 
-  // Pre-fill search from ?q= URL param
-  const urlQuery = new URLSearchParams(window.location.search).get("q");
+  // Pre-fill state from URL params
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlQuery = urlParams.get("q");
   if (urlQuery) {
     searchTerm = urlQuery.toLowerCase();
     const searchInput = document.getElementById("searchInput");
-    searchInput.value = urlQuery;
-    searchInput.closest(".search-input-wrap").classList.add("has-value");
+    if (searchInput) {
+      searchInput.value = urlQuery;
+      searchInput.closest(".search-input-wrap")?.classList.add("has-value");
+    }
+  }
+
+  const urlChannel = urlParams.get("channel");
+  if (urlChannel && ["all", "stable", "beta", "module", "tv"].includes(urlChannel)) {
+    channelFilter = urlChannel;
+    updateChannelFilterUI();
+  }
+
+  const urlSort = urlParams.get("sort");
+  if (urlSort && ["recent", "popular", "name"].includes(urlSort)) {
+    sortMode = urlSort;
+    const sortSelect = document.getElementById("sortSelect");
+    if (sortSelect) sortSelect.value = sortMode;
   }
 
   loadReleases();
@@ -349,19 +338,12 @@ document.addEventListener("DOMContentLoaded", () => {
 // Theme Management
 function setupTheme() {
   const savedTheme = localStorage.getItem("theme");
-  themeMode =
-    savedTheme === "light" || savedTheme === "dark" || savedTheme === "system"
-      ? savedTheme
-      : "system";
-
+  themeMode = ["light", "dark", "system"].includes(savedTheme) ? savedTheme : "system";
   applyTheme(themeMode);
 
   const mediaQuery = window.matchMedia("(prefers-color-scheme: light)");
   mediaQuery.addEventListener("change", () => {
-    if (themeMode !== "system") {
-      return;
-    }
-    applyTheme("system");
+    if (themeMode === "system") applyTheme("system");
   });
 }
 
@@ -375,157 +357,241 @@ function applyTheme(theme) {
 
   document.body.classList.toggle("light-mode", isLight);
   const themeBtn = document.getElementById("themeBtn");
-  themeBtn.textContent =
-    theme === "system" ? "🖥️" : theme === "light" ? "☀️" : "🌙";
-  themeBtn.setAttribute("aria-label", `Theme mode: ${theme}`);
+  if (themeBtn) {
+    themeBtn.textContent = theme === "system" ? "🖥️" : theme === "light" ? "☀️" : "🌙";
+    themeBtn.setAttribute("aria-label", `Theme mode: ${theme}`);
+  }
 }
 
 // Event Listeners
 function setupEventListeners() {
   let searchTimeout;
 
-  // Theme button
-  document.getElementById("themeBtn").addEventListener("click", () => {
-    const nextTheme =
-      themeMode === "system"
-        ? "light"
-        : themeMode === "light"
-          ? "dark"
-          : "system";
-    themeMode = nextTheme;
-    localStorage.setItem("theme", nextTheme);
-    applyTheme(nextTheme);
-  });
+  // Theme Toggle Button
+  const themeBtn = document.getElementById("themeBtn");
+  if (themeBtn) {
+    themeBtn.addEventListener("click", () => {
+      const nextTheme = themeMode === "system" ? "light" : themeMode === "light" ? "dark" : "system";
+      themeMode = nextTheme;
+      localStorage.setItem("theme", nextTheme);
+      applyTheme(nextTheme);
+    });
+  }
 
+  // Floating Action Menu
   const menuBtn = document.getElementById("menuBtn");
   const actionMenu = document.getElementById("actionMenu");
-
   if (menuBtn && actionMenu) {
     menuBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       actionMenu.classList.toggle("open");
-      menuBtn.setAttribute(
-        "aria-expanded",
-        actionMenu.classList.contains("open"),
-      );
+      menuBtn.setAttribute("aria-expanded", actionMenu.classList.contains("open"));
     });
 
     document.addEventListener("click", (e) => {
-      if (
-        actionMenu.classList.contains("open") &&
-        !actionMenu.contains(e.target)
-      ) {
+      if (actionMenu.classList.contains("open") && !actionMenu.contains(e.target)) {
         actionMenu.classList.remove("open");
         menuBtn.setAttribute("aria-expanded", "false");
       }
     });
   }
 
-  // 1. Debounced Search Input
+  // Search Input (Debounced)
   const searchInput = document.getElementById("searchInput");
-  const searchWrap = searchInput.closest(".search-input-wrap");
+  const searchWrap = searchInput?.closest(".search-input-wrap");
   const searchClearBtn = document.getElementById("searchClearBtn");
 
   const syncClearBtn = () => {
-    searchWrap.classList.toggle("has-value", searchInput.value.length > 0);
+    if (searchWrap && searchInput) {
+      searchWrap.classList.toggle("has-value", searchInput.value.length > 0);
+    }
   };
 
-  searchInput.addEventListener("input", (e) => {
-    syncClearBtn();
-    clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(() => {
-      searchTerm = e.target.value.toLowerCase();
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      syncClearBtn();
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => {
+        searchTerm = e.target.value.toLowerCase().trim();
+        syncUrlParams();
+        filterAndRenderReleases();
+      }, 200);
+    });
 
-      // Sync ?q= in the URL so results are shareable
-      const url = new URL(window.location);
-      if (searchTerm) {
-        url.searchParams.set("q", e.target.value);
-      } else {
-        url.searchParams.delete("q");
+    searchInput.addEventListener("focus", (e) => {
+      if (window.innerWidth <= 768) {
+        const searchBox = e.target.closest(".search-box") || e.target;
+        const y = searchBox.getBoundingClientRect().top + window.scrollY - 15;
+        window.scrollTo({ top: y, behavior: "smooth" });
       }
-      history.replaceState(null, "", url);
+    });
+  }
 
+  if (searchClearBtn && searchInput) {
+    searchClearBtn.addEventListener("click", () => {
+      searchInput.value = "";
+      searchTerm = "";
+      syncClearBtn();
+      syncUrlParams();
       filterAndRenderReleases();
-    }, 250);
-  });
+    });
+  }
 
-  searchClearBtn.addEventListener("click", () => {
-    searchInput.value = "";
-    searchTerm = "";
-    syncClearBtn();
-    history.replaceState(null, "", location.pathname);
-    filterAndRenderReleases();
-  });
+  // Primary Channel Filter Bar
+  const channelFilterBar = document.getElementById("channelFilterBar");
+  if (channelFilterBar) {
+    channelFilterBar.addEventListener("click", (e) => {
+      const btn = e.target.closest(".channel-btn");
+      if (!btn) return;
+      channelFilter = btn.dataset.channel || "all";
+      updateChannelFilterUI();
+      syncUrlParams();
+      filterAndRenderReleases();
+    });
+  }
 
-  searchInput.addEventListener("focus", (e) => {
-    if (window.innerWidth <= 768) {
-      const searchBox = e.target.closest(".search-box") || e.target;
-      const y = searchBox.getBoundingClientRect().top + window.scrollY - 15;
-      window.scrollTo({ top: y, behavior: "smooth" });
-    }
-  });
-
+  // Secondary Category Filter Buttons
   const appFilterButtons = document.getElementById("appFilterButtons");
   if (appFilterButtons) {
     appFilterButtons.addEventListener("click", (e) => {
       const filterBtn = e.target.closest(".filter-btn");
       if (!filterBtn) return;
-
-      appViewFilter = filterBtn.dataset.filter || "all";
+      appCategoryFilter = filterBtn.dataset.filter || "all";
       filterAndRenderReleases();
     });
   }
 
-  document.getElementById("builds").addEventListener("click", (e) => {
-    const collapsedCard = e.target.closest(".app-card:not([open])");
-    if (collapsedCard && !e.target.closest(".app-card-summary")) {
-      collapsedCard.open = true;
-      return;
-    }
+  // Sort Selector
+  const sortSelect = document.getElementById("sortSelect");
+  if (sortSelect) {
+    sortSelect.addEventListener("change", (e) => {
+      sortMode = e.target.value;
+      syncUrlParams();
+      filterAndRenderReleases();
+    });
+  }
 
-    const trigger = e.target.closest(".patch-open-box");
-    if (!trigger) return;
+  // App Cards & Modal Delegate Click
+  const buildsContainer = document.getElementById("builds");
+  if (buildsContainer) {
+    buildsContainer.addEventListener("click", (e) => {
+      // Toggle card details
+      const collapsedCard = e.target.closest(".app-card:not([open])");
+      if (collapsedCard && !e.target.closest(".app-card-summary")) {
+        collapsedCard.open = true;
+        return;
+      }
 
-    openPatchModal(
-      trigger.dataset.appKey,
-      trigger.dataset.patchKey,
-      trigger.dataset.filter || "all",
-    );
-  });
+      // Applied Patches Button click
+      const appliedTrigger = e.target.closest(".patch-applied-btn");
+      if (appliedTrigger) {
+        e.stopPropagation();
+        openAppliedPatchesModal(
+          appliedTrigger.dataset.appKey,
+          appliedTrigger.dataset.patchKey,
+          appliedTrigger.dataset.buildId
+        );
+        return;
+      }
 
-  document.getElementById("patchModal").addEventListener("click", (e) => {
-    const filterBtn = e.target.closest(".modal-filter-btn");
-    if (filterBtn) {
-      if (filterBtn.disabled) return;
-      modalBuildFilter = filterBtn.dataset.filter;
-      renderOpenPatchModal();
-      return;
-    }
+      // Channel Box Button click -> open download modal
+      const trigger = e.target.closest(".channel-box-btn");
+      if (trigger) {
+        e.stopPropagation();
+        openPatchModal(
+          trigger.dataset.appKey,
+          trigger.dataset.patchKey,
+          trigger.dataset.channel || "all",
+          trigger.dataset.variant || "all"
+        );
+      }
+    });
+  }
 
-    if (e.target.id === "patchModal" || e.target.closest(".modal-close")) {
-      closePatchModal();
-    }
-  });
+  // Downloads Modal Filter Delegate
+  const patchModal = document.getElementById("patchModal");
+  if (patchModal) {
+    patchModal.addEventListener("click", (e) => {
+      const filterBtn = e.target.closest(".modal-filter-btn");
+      if (filterBtn && !filterBtn.disabled) {
+        const filterType = filterBtn.dataset.filter;
+        if (filterType.startsWith("variant-")) {
+          modalVariantFilter = filterType.slice(8);
+        } else {
+          modalBuildFilter = filterType;
+        }
+        renderOpenPatchModal();
+        return;
+      }
 
-  document.getElementById("obtainiumBtn").addEventListener("click", (e) => {
-    e.stopPropagation();
-    openObtainiumModal();
-  });
+      // Copy SHA-256 button inside modal
+      const copyHashBtn = e.target.closest(".copy-hash-btn");
+      if (copyHashBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        const hash = copyHashBtn.dataset.hash;
+        if (hash) {
+          copyToClipboard(hash, "SHA-256 hash copied to clipboard!");
+        }
+        return;
+      }
 
-  document.getElementById("obtainiumModal").addEventListener("click", (e) => {
-    if (e.target.id === "obtainiumModal" || e.target.closest(".modal-close")) {
-      closeObtainiumModal();
-    }
-  });
+      if (e.target.id === "patchModal" || e.target.closest(".modal-close")) {
+        closePatchModal();
+      }
+    });
+  }
 
+  // Applied Patches Modal
+  const appliedPatchesModal = document.getElementById("appliedPatchesModal");
+  const patchSearchInput = document.getElementById("patchSearchInput");
+  if (appliedPatchesModal) {
+    appliedPatchesModal.addEventListener("click", (e) => {
+      if (e.target.id === "appliedPatchesModal" || e.target.closest(".modal-close")) {
+        closeAppliedPatchesModal();
+      }
+    });
+  }
+
+  if (patchSearchInput) {
+    patchSearchInput.addEventListener("input", (e) => {
+      filterAppliedPatchesList(e.target.value);
+    });
+  }
+
+  // Obtainium Modal
+  const obtainiumBtn = document.getElementById("obtainiumBtn");
+  const obtainiumModal = document.getElementById("obtainiumModal");
+  if (obtainiumBtn) {
+    obtainiumBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      openObtainiumModal();
+    });
+  }
+
+  if (obtainiumModal) {
+    obtainiumModal.addEventListener("click", (e) => {
+      if (e.target.id === "obtainiumModal" || e.target.closest(".modal-close")) {
+        closeObtainiumModal();
+      }
+    });
+  }
+
+  // Global ESC key listener
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       closePatchModal();
+      closeAppliedPatchesModal();
       closeObtainiumModal();
     }
   });
 
-  // 2. Infinite Scroll Observer
+  // Infinite Scroll Observer
+  const sentinel = document.createElement("div");
+  sentinel.id = "scroll-sentinel";
+  sentinel.style.height = "1px";
+  if (buildsContainer) buildsContainer.after(sentinel);
+
   const observer = new IntersectionObserver(
     (entries) => {
       if (entries[0].isIntersecting) {
@@ -534,19 +600,34 @@ function setupEventListeners() {
     },
     { rootMargin: "400px" },
   );
-
-  const sentinel = document.createElement("div");
-  sentinel.id = "scroll-sentinel";
-  sentinel.style.height = "1px";
-  document.getElementById("builds").after(sentinel);
-
   observer.observe(sentinel);
 }
 
-// Fetch releases from local static cache (generated by GitHub Actions)
+function updateChannelFilterUI() {
+  document.querySelectorAll("#channelFilterBar .channel-btn").forEach((btn) => {
+    const isActive = btn.dataset.channel === channelFilter;
+    btn.classList.toggle("active", isActive);
+    btn.setAttribute("aria-selected", isActive ? "true" : "false");
+  });
+}
+
+function syncUrlParams() {
+  const url = new URL(window.location);
+  if (searchTerm) url.searchParams.set("q", searchTerm);
+  else url.searchParams.delete("q");
+
+  if (channelFilter !== "all") url.searchParams.set("channel", channelFilter);
+  else url.searchParams.delete("channel");
+
+  if (sortMode !== "recent") url.searchParams.set("sort", sortMode);
+  else url.searchParams.delete("sort");
+
+  history.replaceState(null, "", url);
+}
+
+// Releases Loader
 async function loadReleases() {
   try {
-    // 1. Trigger the yellow spinning state immediately
     setPillState("checking", "Checking for updates...");
 
     const cached = getCachedReleases();
@@ -563,8 +644,7 @@ async function loadReleases() {
     document.getElementById("loading").style.display = "block";
     document.getElementById("error").style.display = "none";
 
-    // Add a timestamp to bypass GitHub Pages CDN cache
-    const cacheBuster = new Date().getTime();
+    const cacheBuster = Date.now();
     let fetchedData = null;
     let useFallback = true;
 
@@ -578,31 +658,19 @@ async function loadReleases() {
         }
       }
     } catch (e) {
-      console.warn(
-        "Network error fetching releases.json (likely file:// protocol).",
-        e,
-      );
+      console.warn("Network error fetching releases.json, using fallback...", e);
     }
 
-    // Fallback to live API if releases.json is missing, empty, or fetch threw an error
     if (useFallback) {
-      console.warn(
-        "Static cache not found or empty. Falling back to live API...",
-      );
       const response = await fetch(
         `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/releases`,
-        { headers: { Accept: "application/vnd.github.v3+json" } },
+        { headers: { Accept: "application/vnd.github.v3+json" } }
       );
-
-      if (!response.ok) {
-        throw new Error(`Failed to fetch data: ${response.status}`);
-      }
-
+      if (!response.ok) throw new Error(`Failed to fetch data: ${response.status}`);
       fetchedData = await response.json();
     }
 
     allReleases = fetchedData;
-
     cacheReleases(allReleases);
     rebuildCatalogCache();
 
@@ -611,83 +679,343 @@ async function loadReleases() {
     filterAndRenderReleases();
   } catch (error) {
     console.error("Error loading releases:", error);
-
-    // 2. Trigger the red error state if fetching fails
     setPillState("error", "Failed to check updates");
-
     document.getElementById("loading").style.display = "none";
-    document.getElementById("error").style.display = "block";
-    document.getElementById("error").textContent =
-      `Failed to load releases: ${error.message}`;
+    const errorEl = document.getElementById("error");
+    if (errorEl) {
+      errorEl.style.display = "block";
+      errorEl.textContent = `Failed to load releases: ${error.message}`;
+    }
   }
 }
 
-// Caching utilities for LocalStorage
+// LocalStorage Caching
 function getCachedReleases() {
   const cached = localStorage.getItem("releases_cache");
   const timestamp = localStorage.getItem("releases_cache_time");
-
   if (!cached || !timestamp) return null;
 
-  const age = (Date.now() - parseInt(timestamp)) / (1000 * 60);
+  const age = (Date.now() - parseInt(timestamp, 10)) / (1000 * 60);
   if (age > CONFIG.cacheDuration) {
     localStorage.removeItem("releases_cache");
     localStorage.removeItem("releases_cache_time");
     return null;
   }
-
   return JSON.parse(cached);
 }
 
 function cacheReleases(releases) {
-  localStorage.setItem("releases_cache", JSON.stringify(releases));
-  localStorage.setItem("releases_cache_time", Date.now().toString());
+  try {
+    localStorage.setItem("releases_cache", JSON.stringify(releases));
+    localStorage.setItem("releases_cache_time", Date.now().toString());
+  } catch (e) {
+    console.warn("Could not cache releases to localStorage", e);
+  }
 }
 
-// Build and cache the full app catalog — called once when release data changes
+// Build Catalog Cache
 function rebuildCatalogCache() {
   cachedFullCatalog = buildAppCatalog(allReleases.filter((r) => !r.draft));
   dynamicAppFilters = getDynamicAppFilters(cachedFullCatalog);
 }
 
-// Apply a search query to an already-built catalog without rebuilding from scratch
-function filterCatalogBySearch(catalog, query) {
-  if (!query) return catalog;
-  return catalog
-    .map((app) => ({
-      app,
-      score: getAppSearchScore(app.appName, query),
-    }))
-    .filter((item) => item.score !== Infinity)
-    .sort(
-      (a, b) => a.score - b.score || a.app.appName.localeCompare(b.app.appName),
-    )
-    .map((item) => item.app);
+// Multi-Channel Variant Catalog Builder
+function buildAppCatalog(releases) {
+  const sortedReleases = [...releases].sort(
+    (a, b) => new Date(b.published_at) - new Date(a.published_at),
+  );
+
+  const appMap = new Map();
+
+  sortedReleases.forEach((release) => {
+    const isArchive = release.tag_name === "stable" || release.tag_name === "beta";
+    let releaseType = release.prerelease ? "beta" : "stable";
+    if (release.tag_name === "stable") releaseType = "stable";
+    if (release.tag_name === "beta") releaseType = "beta";
+
+    // Extract any patch changelogs or metadata from the release body
+    const patchMetaFromRelease = extractPatchInfoFromRelease(release);
+
+    (release.assets || []).forEach((asset) => {
+      const arch = detectArchitecture(asset.name);
+      const fileType = getFileType(asset.name);
+      const parsed = parseAssetDisplay(asset.name, arch, fileType);
+
+      const appKey = normalizeForSearch(parsed.appName);
+      if (!appKey) return;
+
+      if (!appMap.has(appKey)) {
+        appMap.set(appKey, {
+          appKey,
+          appName: parsed.appName,
+          latestStable: null,
+          latestBeta: null,
+          hasModules: false,
+          hasTv: false,
+          patches: new Map(),
+        });
+      }
+
+      const appEntry = appMap.get(appKey);
+      if (fileType === "Module") appEntry.hasModules = true;
+      if (parsed.variant && parsed.variant.toLowerCase().includes("android tv")) appEntry.hasTv = true;
+
+      setLatestBuildMeta(appEntry, releaseType, release);
+
+      const patchKey = normalizeForSearch(parsed.patchName) || "patchedbuild";
+      if (!appEntry.patches.has(patchKey)) {
+        appEntry.patches.set(patchKey, {
+          patchKey,
+          patchName: parsed.patchName,
+          latestVersion: null,
+          latestPublishedAt: 0,
+          variants: new Map(), // variantKey -> variantEntry
+          builds: new Map(),
+        });
+      }
+
+      const patchEntry = appEntry.patches.get(patchKey);
+      const variantKey = parsed.variant ? normalizeForSearch(parsed.variant) : "default";
+      const variantName = parsed.variant ? parsed.variant : "Standard";
+
+      if (!patchEntry.variants.has(variantKey)) {
+        patchEntry.variants.set(variantKey, {
+          variantKey,
+          variantName,
+          latestStable: null,
+          latestBeta: null,
+          latestArchiveStable: null,
+          latestArchiveBeta: null,
+        });
+      }
+
+      const variantEntry = patchEntry.variants.get(variantKey);
+      const buildLabel = getBuildNumberLabel(release);
+      const buildDateString = isArchive
+        ? asset.updated_at || asset.created_at || release.published_at
+        : release.published_at;
+      const buildDateMs = new Date(buildDateString).getTime();
+
+      // Track timestamps and versions
+      if (!isArchive) {
+        const patchDate = new Date(patchEntry.latestPublishedAt).getTime();
+        if (buildDateMs > patchDate) {
+          patchEntry.latestVersion = parsed.version;
+          patchEntry.latestPublishedAt = buildDateString;
+        }
+
+        const channelKey = releaseType === "beta" ? "latestBeta" : "latestStable";
+        const currentMeta = variantEntry[channelKey];
+        const currentMetaTime = currentMeta ? new Date(currentMeta.publishedAt).getTime() : 0;
+        if (!currentMeta || buildDateMs > currentMetaTime) {
+          variantEntry[channelKey] = {
+            version: parsed.version,
+            build: buildLabel,
+            publishedAt: buildDateString,
+            releaseId: release.id,
+            releaseUrl: release.html_url,
+          };
+        }
+      } else {
+        // Track archive fallbacks for legacy or non-active builds
+        const channelKey = releaseType === "beta" ? "latestArchiveBeta" : "latestArchiveStable";
+        const currentMeta = variantEntry[channelKey];
+        const currentMetaTime = currentMeta ? new Date(currentMeta.publishedAt).getTime() : 0;
+        if (!currentMeta || buildDateMs > currentMetaTime) {
+          variantEntry[channelKey] = {
+            version: parsed.version,
+            build: buildLabel,
+            publishedAt: buildDateString,
+            releaseId: release.id,
+            releaseUrl: release.html_url,
+            isArchiveFallback: true,
+          };
+        }
+      }
+
+      // Group into builds
+      const buildKey = isArchive
+        ? `archive-${releaseType}-${parsed.version}`
+        : String(release.id);
+
+      if (!patchEntry.builds.has(buildKey)) {
+        patchEntry.builds.set(buildKey, {
+          releaseId: release.id,
+          build: isArchive ? parsed.version : getBuildNumberLabel(release),
+          releaseType,
+          isArchive,
+          publishedAt: isArchive
+            ? asset.updated_at || asset.created_at || release.published_at
+            : release.published_at,
+          releaseUrl: release.html_url,
+          version: parsed.version,
+          patchMeta: patchMetaFromRelease,
+          assets: [],
+        });
+      }
+
+      const buildEntry = patchEntry.builds.get(buildKey);
+      const exists = buildEntry.assets.some((existing) => existing.name === asset.name);
+      if (!exists) {
+        buildEntry.assets.push({
+          ...asset,
+          parsed,
+          arch,
+          fileType,
+        });
+      }
+    });
+  });
+
+  return Array.from(appMap.values())
+    .map((app) => {
+      // Resolve archive fallbacks if no active build exists
+      app.patches.forEach((patch) => {
+        patch.variants.forEach((variant) => {
+          if (!variant.latestStable && variant.latestArchiveStable) {
+            variant.latestStable = variant.latestArchiveStable;
+          }
+          if (!variant.latestBeta && variant.latestArchiveBeta) {
+            variant.latestBeta = variant.latestArchiveBeta;
+          }
+        });
+      });
+
+      return {
+        ...app,
+        patches: Array.from(app.patches.values())
+          .sort((a, b) => new Date(b.latestPublishedAt) - new Date(a.latestPublishedAt))
+          .map((patch) => ({
+            ...patch,
+            variants: Array.from(patch.variants.values()).sort((a, b) => {
+              if (a.variantKey === "default") return -1;
+              if (b.variantKey === "default") return 1;
+              return a.variantName.localeCompare(b.variantName);
+            }),
+            builds: Array.from(patch.builds.values()).sort((a, b) => {
+              if (a.isArchive && !b.isArchive) return 1;
+              if (!a.isArchive && b.isArchive) return -1;
+              if (a.isArchive && b.isArchive) {
+                const comp = b.version.localeCompare(a.version, undefined, { numeric: true, sensitivity: "base" });
+                if (comp !== 0) return comp;
+              }
+              return new Date(b.publishedAt) - new Date(a.publishedAt);
+            }),
+          })),
+      };
+    })
+    .filter((app) => app.patches.length > 0)
+    .sort((a, b) => a.appName.localeCompare(b.appName));
 }
 
-// Filter and render releases
+// Extract patch info helper
+function extractPatchInfoFromRelease(release) {
+  const body = release.body || "";
+  const cliMatch = body.match(/CLI:\s*([^\s\n\r]+)/i);
+  const patchMatches = Array.from(body.matchAll(/Patches:\s*([^\s\n\r]+)/gi));
+  const changelogMatches = Array.from(body.matchAll(/\[Changelog\]\((https?:\/\/[^\s\)]+)\)/gi));
+
+  return {
+    cli: cliMatch ? cliMatch[1] : null,
+    patches: patchMatches.map((m) => m[1]),
+    changelogs: changelogMatches.map((m) => m[1]),
+  };
+}
+
+// Filter and Render Catalog
 function filterAndRenderReleases() {
   renderDynamicAppFilterButtons(dynamicAppFilters);
 
   if (
-    appViewFilter.startsWith("word-") &&
-    !dynamicAppFilters.some((filter) => filter.key === appViewFilter)
+    appCategoryFilter.startsWith("word-") &&
+    !dynamicAppFilters.some((f) => f.key === appCategoryFilter)
   ) {
-    appViewFilter = "all";
+    appCategoryFilter = "all";
   }
 
-  const searchedCatalog = filterCatalogBySearch(cachedFullCatalog, searchTerm);
-  const filteredApps = applyAppViewFilter(searchedCatalog);
+  // 1. Search Query Filter
+  let apps = filterCatalogBySearch(cachedFullCatalog, searchTerm);
 
-  renderAppCards(filteredApps);
+  // 2. Channel & Format Quick Filter
+  if (channelFilter === "stable") {
+    apps = apps.filter((app) =>
+      app.patches.some((p) => p.variants.some((v) => Boolean(v.latestStable)))
+    );
+  } else if (channelFilter === "beta") {
+    apps = apps.filter((app) =>
+      app.patches.some((p) => p.variants.some((v) => Boolean(v.latestBeta)))
+    );
+  } else if (channelFilter === "module") {
+    apps = apps.filter((app) => app.hasModules);
+  } else if (channelFilter === "tv") {
+    apps = apps.filter((app) => app.hasTv);
+  }
+
+  // 3. Category Filter
+  apps = applyCategoryFilter(apps);
+
+  // 4. Sort Mode
+  apps = applySortMode(apps);
+
+  // 5. Update Status Text
+  updateCatalogStatus(apps);
+
+  // 6. Render
+  renderAppCards(apps);
   updateAppFilterButtons();
   document.getElementById("loading").style.display = "none";
 }
 
+function updateCatalogStatus(apps) {
+  const countEl = document.getElementById("catalogCountText");
+  if (!countEl) return;
+  const totalApps = apps.length;
+  let totalBuilds = 0;
+  apps.forEach((a) => {
+    a.patches.forEach((p) => {
+      totalBuilds += p.builds.length;
+    });
+  });
+
+  countEl.textContent = `Showing ${totalApps} app${totalApps === 1 ? "" : "s"} (${totalBuilds} build${totalBuilds === 1 ? "" : "s"})`;
+}
+
 function updateAppFilterButtons() {
   document.querySelectorAll("#appFilterButtons .filter-btn").forEach((btn) => {
-    btn.classList.toggle("active", btn.dataset.filter === appViewFilter);
+    btn.classList.toggle("active", btn.dataset.filter === appCategoryFilter);
   });
+}
+
+function applyCategoryFilter(apps) {
+  if (CONFIG.appCategories[appCategoryFilter]) {
+    return apps.filter((app) => {
+      const name = normalizeForSearch(app.appName);
+      const keywords = CONFIG.appCategories[appCategoryFilter];
+      const includes = keywords.filter((k) => !k.startsWith("!"));
+      const excludes = keywords.filter((k) => k.startsWith("!")).map((k) => k.slice(1));
+      const isIncluded = includes.some((keyword) => name.includes(keyword));
+      const isExcluded = excludes.some((keyword) => name.includes(keyword));
+      return isIncluded && !isExcluded;
+    });
+  }
+
+  if (appCategoryFilter.startsWith("word-")) {
+    const word = appCategoryFilter.slice(5);
+    return apps.filter((app) => getAppNameWords(app.appName).includes(word));
+  }
+
+  return apps;
+}
+
+function applySortMode(apps) {
+  if (sortMode === "popular") {
+    return [...apps].sort((a, b) => getAppTotalDownloads(b) - getAppTotalDownloads(a));
+  }
+  if (sortMode === "name") {
+    return [...apps].sort((a, b) => a.appName.localeCompare(b.appName));
+  }
+  // Default: recent
+  return [...apps].sort((a, b) => getAppLatestPublishedAt(b) - getAppLatestPublishedAt(a));
 }
 
 function getAppLatestPublishedAt(app) {
@@ -709,371 +1037,54 @@ function getAppTotalDownloads(app) {
   return total;
 }
 
-function getAppSearchScore(appName, query) {
+function filterCatalogBySearch(catalog, query) {
+  if (!query) return catalog;
+  return catalog
+    .map((app) => ({
+      app,
+      score: getAppSearchScore(app, query),
+    }))
+    .filter((item) => item.score !== Infinity)
+    .sort((a, b) => a.score - b.score || a.app.appName.localeCompare(b.app.appName))
+    .map((item) => item.app);
+}
+
+function getAppSearchScore(app, query) {
   const normalizedQuery = normalizeForSearch(query);
-  const normalizedAppName = normalizeForSearch(appName);
+  const normalizedAppName = normalizeForSearch(app.appName);
   if (!normalizedQuery || !normalizedAppName) return Infinity;
 
   if (normalizedAppName === normalizedQuery) return 0;
   if (normalizedAppName.startsWith(normalizedQuery)) return 1;
 
-  const appTokens = getSearchTokens(appName);
-  if (appTokens.length === 0) return Infinity;
-
-  const exactTokenMatch = appTokens.some((token) => token === normalizedQuery);
-  if (exactTokenMatch) return 2;
-
-  const tokenPrefixMatch = appTokens.some((token) =>
-    token.startsWith(normalizedQuery),
-  );
-  if (tokenPrefixMatch) return 3;
-
+  const appTokens = getSearchTokens(app.appName);
+  if (appTokens.some((token) => token === normalizedQuery)) return 2;
+  if (appTokens.some((token) => token.startsWith(normalizedQuery))) return 3;
   if (normalizedAppName.includes(normalizedQuery)) return 4;
+
+  // Search inside patches and variants
+  for (const patch of app.patches) {
+    if (normalizeForSearch(patch.patchName).includes(normalizedQuery)) return 5;
+    for (const variant of patch.variants) {
+      if (normalizeForSearch(variant.variantName).includes(normalizedQuery)) return 5;
+      if (variant.latestStable && normalizeForSearch(variant.latestStable.version).includes(normalizedQuery)) return 6;
+      if (variant.latestBeta && normalizeForSearch(variant.latestBeta.version).includes(normalizedQuery)) return 6;
+    }
+  }
 
   return Infinity;
 }
 
-function applyAppViewFilter(apps) {
-  if (CONFIG.appCategories[appViewFilter]) {
-    return apps.filter((app) => {
-      const name = normalizeForSearch(app.appName);
-      const keywords = CONFIG.appCategories[appViewFilter];
-
-      const includes = keywords.filter(k => !k.startsWith("!"));
-      const excludes = keywords.filter(k => k.startsWith("!")).map(k => k.slice(1));
-
-      const isIncluded = includes.some((keyword) => name.includes(keyword));
-      const isExcluded = excludes.some((keyword) => name.includes(keyword));
-
-      return isIncluded && !isExcluded;
-    });
-  }
-
-  if (appViewFilter.startsWith("word-")) {
-    const word = appViewFilter.slice(5);
-    return apps.filter((app) => getAppNameWords(app.appName).includes(word));
-  }
-
-  if (appViewFilter === "recent") {
-    return [...apps].sort(
-      (a, b) => getAppLatestPublishedAt(b) - getAppLatestPublishedAt(a),
-    );
-  }
-
-  if (appViewFilter === "popular") {
-    return [...apps].sort(
-      (a, b) => getAppTotalDownloads(b) - getAppTotalDownloads(a),
-    );
-  }
-
-  return apps;
-}
-
-function buildAppCatalog(releases, query = "") {
-  const normalizedQuery = normalizeForSearch(query);
-  const sortedReleases = [...releases].sort(
-    (a, b) => new Date(b.published_at) - new Date(a.published_at),
-  );
-
-  const appMap = new Map();
-
-  sortedReleases.forEach((release) => {
-    const isArchive =
-      release.tag_name === "stable" || release.tag_name === "beta";
-    let releaseType = release.prerelease ? "beta" : "stable";
-    if (release.tag_name === "stable") releaseType = "stable";
-    if (release.tag_name === "beta") releaseType = "beta";
-
-    (release.assets || []).forEach((asset) => {
-      const arch = detectArchitecture(asset.name);
-      const fileType = getFileType(asset.name);
-      const parsed = parseAssetDisplay(asset.name, arch, fileType);
-
-      if (!assetMatchesSearch(parsed, asset, release, query, normalizedQuery)) {
-        return;
-      }
-
-      const appKey = normalizeForSearch(parsed.appName);
-      if (!appKey) return;
-
-      if (!appMap.has(appKey)) {
-        appMap.set(appKey, {
-          appKey,
-          appName: parsed.appName,
-          latestStable: null,
-          latestBeta: null,
-          patches: new Map(),
-        });
-      }
-
-      const appEntry = appMap.get(appKey);
-      setLatestBuildMeta(appEntry, releaseType, release);
-
-      const patchKey = normalizeForSearch(parsed.patchName) || "patchedbuild";
-      if (!appEntry.patches.has(patchKey)) {
-        appEntry.patches.set(patchKey, {
-          patchKey,
-          patchName: parsed.patchName,
-          latestVersion: null, // Wait for a real date
-          latestPublishedAt: 0,
-          latestStable: null,
-          latestBeta: null,
-          latestVariant: null,
-          latestArchiveStable: null, // NEW FALLBACK
-          latestArchiveBeta: null, // NEW FALLBACK
-          builds: new Map(),
-        });
-      }
-
-      const patchEntry = appEntry.patches.get(patchKey);
-      const buildLabel = getBuildNumberLabel(release);
-
-      // Get the true date of the APK upload
-      const buildDateString = isArchive
-        ? asset.updated_at || asset.created_at || release.published_at
-        : release.published_at;
-      const buildDateMs = new Date(buildDateString).getTime();
-
-      // STRICT PROTECTION: Only update the App Card timestamps if it is NOT an archive!
-      if (!isArchive) {
-        const patchDate = new Date(patchEntry.latestPublishedAt).getTime();
-
-        if (buildDateMs > patchDate) {
-          patchEntry.latestVersion = parsed.version;
-          patchEntry.latestPublishedAt = buildDateString;
-        }
-
-        if (!parsed.variant) {
-          setLatestPatchMeta(
-            patchEntry,
-            releaseType,
-            parsed.version,
-            buildLabel,
-            buildDateString,
-          );
-        } else {
-          setLatestVariantMeta(
-            patchEntry,
-            parsed.variant,
-            parsed.version,
-            buildLabel,
-            buildDateString,
-          );
-        }
-      } else {
-        // FALLBACK: Quietly track the newest archive for Dead Apps
-        // FIX: Only track non-variants for the generic Stable/Beta fallback boxes!
-        if (!parsed.variant) {
-          if (releaseType === "stable") {
-            const currentMs = patchEntry.latestArchiveStable
-              ? new Date(patchEntry.latestArchiveStable.publishedAt).getTime()
-              : 0;
-            if (buildDateMs > currentMs) {
-              patchEntry.latestArchiveStable = {
-                version: parsed.version,
-                build: buildLabel,
-                publishedAt: buildDateString,
-              };
-            }
-          } else if (releaseType === "beta") {
-            const currentMs = patchEntry.latestArchiveBeta
-              ? new Date(patchEntry.latestArchiveBeta.publishedAt).getTime()
-              : 0;
-            if (buildDateMs > currentMs) {
-              patchEntry.latestArchiveBeta = {
-                version: parsed.version,
-                build: buildLabel,
-                publishedAt: buildDateString,
-              };
-            }
-          }
-        }
-      }
-
-      // Split archives into their own separate dropdowns based on Version!
-      const buildKey = isArchive
-        ? `archive-${releaseType}-${parsed.version}`
-        : String(release.id);
-      if (!patchEntry.builds.has(buildKey)) {
-        patchEntry.builds.set(buildKey, {
-          releaseId: release.id,
-          build: isArchive ? parsed.version : getBuildNumberLabel(release),
-          releaseType,
-          isArchive, // Flag for the modal
-          publishedAt: isArchive
-            ? asset.updated_at || asset.created_at || release.published_at
-            : release.published_at,
-          releaseUrl: release.html_url,
-          version: parsed.version,
-          assets: [],
-        });
-      }
-
-      const buildEntry = patchEntry.builds.get(buildKey);
-      const exists = buildEntry.assets.some(
-        (existing) => existing.name === asset.name,
-      );
-      if (!exists) {
-        buildEntry.assets.push({
-          ...asset,
-          parsed,
-          arch,
-          fileType,
-        });
-      }
-    });
-  });
-
-  return Array.from(appMap.values())
-    .map((app) => {
-      // NEW: Apply fallback dates for archive-only apps before sorting
-      app.patches.forEach((patch) => {
-        if (!patch.latestStable && patch.latestArchiveStable) {
-          patch.latestStable = patch.latestArchiveStable;
-          patch.latestStable.isArchiveFallback = true;
-          const archiveMs = new Date(
-            patch.latestArchiveStable.publishedAt,
-          ).getTime();
-          const currentMs = patch.latestPublishedAt
-            ? new Date(patch.latestPublishedAt).getTime()
-            : 0;
-          if (archiveMs > currentMs) {
-            patch.latestVersion = patch.latestArchiveStable.version;
-            patch.latestPublishedAt = patch.latestArchiveStable.publishedAt;
-          }
-        }
-        if (!patch.latestBeta && patch.latestArchiveBeta) {
-          patch.latestBeta = patch.latestArchiveBeta;
-          patch.latestBeta.isArchiveFallback = true;
-          const archiveMs = new Date(
-            patch.latestArchiveBeta.publishedAt,
-          ).getTime();
-          const currentMs = patch.latestPublishedAt
-            ? new Date(patch.latestPublishedAt).getTime()
-            : 0;
-          if (archiveMs > currentMs) {
-            patch.latestVersion = patch.latestArchiveBeta.version;
-            patch.latestPublishedAt = patch.latestArchiveBeta.publishedAt;
-          }
-        }
-      });
-
-      return {
-        ...app,
-        patches: Array.from(app.patches.values())
-          .sort(
-            (a, b) =>
-              new Date(b.latestPublishedAt) - new Date(a.latestPublishedAt),
-          )
-          .map((patch) => ({
-            ...patch,
-            // Sink archives to the bottom!
-            builds: Array.from(patch.builds.values()).sort((a, b) => {
-              // 1. If one is an archive and the other isn't, sink the archive
-              if (a.isArchive && !b.isArchive) return 1;
-              if (!a.isArchive && b.isArchive) return -1;
-
-              // 2. If BOTH are archives, sort them nicely by version number (highest first)
-              if (a.isArchive && b.isArchive) {
-                const versionComparison = b.version.localeCompare(
-                  a.version,
-                  undefined,
-                  { numeric: true, sensitivity: "base" },
-                );
-                if (versionComparison !== 0) return versionComparison;
-                // If same version, sort by date (newest first)
-                return new Date(b.publishedAt) - new Date(a.publishedAt);
-              }
-
-              // 3. Otherwise (normal builds), just sort by date
-              return new Date(b.publishedAt) - new Date(a.publishedAt);
-            }),
-          })),
-      };
-    })
-    .filter((app) => app.patches.length > 0)
-    .sort((a, b) => a.appName.localeCompare(b.appName));
-}
-
-function assetMatchesSearch(parsed, asset, release, rawQuery, normalizedQuery) {
-  if (!rawQuery) return true;
-
-  return [
-    parsed.appName,
-    parsed.patchName,
-    parsed.version,
-    parsed.archLabel,
-    parsed.fileType,
-    asset.name,
-    release.name || "",
-    release.tag_name || "",
-  ].some((value) =>
-    matchesSearch(String(value || ""), rawQuery, normalizedQuery),
-  );
-}
-
-function setLatestBuildMeta(appEntry, releaseType, release) {
-  const key = releaseType === "beta" ? "latestBeta" : "latestStable";
-  const current = appEntry[key];
-  const currentDate = current ? new Date(current.publishedAt).getTime() : 0;
-  const releaseDate = new Date(release.published_at).getTime();
-
-  if (!current || releaseDate > currentDate) {
-    appEntry[key] = {
-      build: getBuildNumberLabel(release),
-      publishedAt: release.published_at,
-      releaseUrl: release.html_url,
-    };
-  }
-}
-
-function setLatestPatchMeta(
-  patchEntry,
-  releaseType,
-  version,
-  build,
-  publishedAt,
-) {
-  const key = releaseType === "beta" ? "latestBeta" : "latestStable";
-  const current = patchEntry[key];
-  const currentDate = current ? new Date(current.publishedAt).getTime() : 0;
-  const releaseDate = new Date(publishedAt).getTime();
-
-  if (!current || releaseDate > currentDate) {
-    patchEntry[key] = { version, build, publishedAt };
-  }
-}
-
-function setLatestVariantMeta(
-  patchEntry,
-  variant,
-  version,
-  build,
-  publishedAt,
-) {
-  const current = patchEntry.latestVariant;
-  const currentDate = current ? new Date(current.publishedAt).getTime() : 0;
-  const releaseDate = new Date(publishedAt).getTime();
-
-  if (!current || releaseDate > currentDate) {
-    patchEntry.latestVariant = { variant, version, build, publishedAt };
-  }
-}
-
-function getBuildNumberLabel(release) {
-  return String(release.tag_name || release.name || "N/A");
-}
-
-// Render app cards to DOM (Progressive Rendering)
+// Progressive Rendering for App Cards
 function renderAppCards(apps) {
   const buildsContainer = document.getElementById("builds");
+  if (!buildsContainer) return;
   currentAppCatalog = apps;
   currentVisibleCount = 0;
-
   buildsContainer.innerHTML = "";
 
   if (apps.length === 0) {
-    buildsContainer.innerHTML = '<div class="no-results">No apps found.</div>';
+    buildsContainer.innerHTML = '<div class="no-results">No applications found matching your criteria.</div>';
     return;
   }
 
@@ -1082,6 +1093,8 @@ function renderAppCards(apps) {
 
 function renderNextChunk() {
   const buildsContainer = document.getElementById("builds");
+  if (!buildsContainer) return;
+
   const nextChunk = currentAppCatalog.slice(
     currentVisibleCount,
     currentVisibleCount + RENDER_CHUNK_SIZE,
@@ -1099,25 +1112,7 @@ function renderNextChunk() {
   currentVisibleCount += RENDER_CHUNK_SIZE;
 }
 
-function createNoticeMarkup(notice) {
-  const linksMarkup = notice.links
-    .map(
-      (link) =>
-        `<a href="${link.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.label)}</a>`,
-    )
-    .join("\n                    ");
-
-  return `
-        <div class="app-notice ${escapeHtml(notice.className)}">
-            <div class="app-notice-title">${escapeHtml(notice.title)}</div>
-            <div class="app-notice-text">${escapeHtml(notice.text)}</div>
-            <div class="app-notice-links">
-                ${linksMarkup}
-            </div>
-        </div>
-    `;
-}
-
+// Create App Card Markup
 function createAppCard(app) {
   const patchesMarkup = app.patches
     .map((patch) => createPatchMarkup(app, patch))
@@ -1133,47 +1128,164 @@ function createAppCard(app) {
     }
   });
 
+  const totalDownloads = getAppTotalDownloads(app);
+  const dlBadge =
+    totalDownloads > 0
+      ? `<span class="patch-stat-badge" title="${formatCompactNumber(totalDownloads)} Total Downloads">📥 ${formatCompactNumber(totalDownloads)}</span>`
+      : "";
+
   return `
-        <details class="build-card app-card">
-            <summary class="build-header app-card-summary">
-                <div class="app-name">${escapeHtml(app.appName)}</div>
-                <span class="patch-count">${app.patches.length} patch${app.patches.length > 1 ? "es" : ""}</span>
-            </summary>
-            <div class="app-card-body">
-                ${noticesMarkup}
-                <div class="patches-title">Available patches</div>
-                <div class="patches-list">
-                    ${patchesMarkup}
-                </div>
-            </div>
-        </details>
-    `;
+    <details class="build-card app-card">
+      <summary class="app-card-summary">
+        <div class="app-title-group">
+          <div class="app-name">${escapeHtml(app.appName)}</div>
+        </div>
+        <div class="app-badge-group">
+          <span class="patch-count-badge">${app.patches.length} engine${app.patches.length > 1 ? "s" : ""}</span>
+          ${dlBadge}
+          <svg class="app-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </summary>
+      <div class="app-card-body">
+        ${noticesMarkup}
+        <div class="patches-list">
+          ${patchesMarkup}
+        </div>
+      </div>
+    </details>
+  `;
 }
 
+function createNoticeMarkup(notice) {
+  const linksMarkup = notice.links
+    .map((link) => `<a href="${link.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.label)} ↗</a>`)
+    .join(" ");
+
+  return `
+    <div class="app-notice ${escapeHtml(notice.className)}">
+      <div class="app-notice-title">${escapeHtml(notice.title)}</div>
+      <div class="app-notice-text">${escapeHtml(notice.text)}</div>
+      <div class="app-notice-links">${linksMarkup}</div>
+    </div>
+  `;
+}
+
+// Create Patch Entry Markup with Multi-Channel Variant Matrix
+function createPatchMarkup(app, patch) {
+  const buildCount = patch.builds.length;
+  const buildIconBadge = `<span class="patch-stat-badge" title="${buildCount} total builds">📦 ${buildCount}</span>`;
+
+  // Render variant rows
+  const variantRowsHtml = patch.variants
+    .map((variant) => {
+      const channelBoxes = [];
+
+      if (variant.latestStable) {
+        channelBoxes.push(`
+          <button class="channel-box-btn stable" 
+                  data-app-key="${app.appKey}" 
+                  data-patch-key="${patch.patchKey}" 
+                  data-channel="stable" 
+                  data-variant="${variant.variantKey}"
+                  type="button"
+                  title="Open Stable builds for ${escapeHtml(variant.variantName)}">
+            <div class="channel-box-top">
+              <span class="channel-tag stable">Stable</span>
+              <span class="channel-date">${formatDate(variant.latestStable.publishedAt)}</span>
+            </div>
+            <span class="channel-version">${escapeHtml(variant.latestStable.version)}</span>
+            <span class="channel-build-num">${variant.latestStable.isArchiveFallback ? "Archive" : `Build ${escapeHtml(variant.latestStable.build)}`}</span>
+          </button>
+        `);
+      }
+
+      if (variant.latestBeta) {
+        channelBoxes.push(`
+          <button class="channel-box-btn beta" 
+                  data-app-key="${app.appKey}" 
+                  data-patch-key="${patch.patchKey}" 
+                  data-channel="beta" 
+                  data-variant="${variant.variantKey}"
+                  type="button"
+                  title="Open Beta builds for ${escapeHtml(variant.variantName)}">
+            <div class="channel-box-top">
+              <span class="channel-tag beta">Beta</span>
+              <span class="channel-date">${formatDate(variant.latestBeta.publishedAt)}</span>
+            </div>
+            <span class="channel-version">${escapeHtml(variant.latestBeta.version)}</span>
+            <span class="channel-build-num">${variant.latestBeta.isArchiveFallback ? "Archive" : `Build ${escapeHtml(variant.latestBeta.build)}`}</span>
+          </button>
+        `);
+      }
+
+      if (channelBoxes.length === 0) {
+        channelBoxes.push(`
+          <button class="channel-box-btn archive" 
+                  data-app-key="${app.appKey}" 
+                  data-patch-key="${patch.patchKey}" 
+                  data-channel="all" 
+                  data-variant="${variant.variantKey}"
+                  type="button">
+            <div class="channel-box-top">
+              <span class="channel-tag archive">Builds</span>
+            </div>
+            <span class="channel-version">View all</span>
+          </button>
+        `);
+      }
+
+      return `
+        <div class="variant-row">
+          <div class="variant-title-wrap">
+            <span class="variant-name-chip">${escapeHtml(variant.variantName)}</span>
+          </div>
+          <div class="variant-channels-grid">
+            ${channelBoxes.join("")}
+          </div>
+        </div>
+      `;
+    })
+    .join("");
+
+  return `
+    <div class="patch-entry">
+      <div class="patch-entry-header">
+        <div class="patch-chip-group">
+          <span class="patch-engine-badge">${escapeHtml(patch.patchName)}</span>
+          ${buildIconBadge}
+        </div>
+      </div>
+      <div class="variant-matrix">
+        ${variantRowsHtml}
+      </div>
+    </div>
+  `;
+}
+
+// Dynamic Filter Buttons Generator
 function getDynamicAppFilters(apps) {
   const wordToAppKeys = new Map();
 
   apps.forEach((app) => {
     const words = getAppNameWords(app.appName);
     words.forEach((word) => {
-      if (!wordToAppKeys.has(word)) {
-        wordToAppKeys.set(word, new Set());
-      }
+      if (!wordToAppKeys.has(word)) wordToAppKeys.set(word, new Set());
       wordToAppKeys.get(word).add(app.appKey);
     });
   });
 
-  const allWordEntries = Array.from(wordToAppKeys.entries());
   const categoryKeys = new Set(Object.keys(CONFIG.appCategories));
-  const dynamicFilters = allWordEntries
+  const dynamicFilters = Array.from(wordToAppKeys.entries())
     .filter(([word, appKeys]) => appKeys.size >= SHARED_APP_WORD_MIN_COUNT && !categoryKeys.has(word))
-    .sort((a, b) => a[0].localeCompare(b[0])) // Strictly alphabetical sort
+    .sort((a, b) => a[0].localeCompare(b[0]))
     .map(([word]) => ({
       key: `word-${word}`,
       label: toFilterLabel(word),
     }));
 
-  const categoryFilters = Object.keys(CONFIG.appCategories).map(key => ({
+  const categoryFilters = Object.keys(CONFIG.appCategories).map((key) => ({
     key: key,
     label: toFilterLabel(key),
   }));
@@ -1185,9 +1297,7 @@ function renderDynamicAppFilterButtons(filters) {
   const filterButtons = document.getElementById("appFilterButtons");
   if (!filterButtons) return;
 
-  filterButtons
-    .querySelectorAll(".dynamic-filter-btn")
-    .forEach((btn) => btn.remove());
+  filterButtons.querySelectorAll(".dynamic-filter-btn").forEach((btn) => btn.remove());
 
   filters.forEach((filter) => {
     const button = document.createElement("button");
@@ -1197,29 +1307,6 @@ function renderDynamicAppFilterButtons(filters) {
     button.textContent = filter.label;
     filterButtons.appendChild(button);
   });
-
-  // --- ALPHABETICAL SORTING LOGIC ---
-  // 1. Grab every button inside the filter container
-  const allBtns = Array.from(filterButtons.querySelectorAll(".filter-btn"));
-
-  // 2. Separate the fixed buttons from the ones we want to sort, in exact order!
-  const fixedKeys = ["all", "recent", "popular"];
-  const fixedBtns = [];
-  fixedKeys.forEach((key) => {
-    const foundBtn = allBtns.find((btn) => btn.dataset.filter === key);
-    if (foundBtn) fixedBtns.push(foundBtn);
-  });
-
-  const sortableBtns = allBtns.filter(
-    (btn) => !fixedKeys.includes(btn.dataset.filter),
-  );
-
-  // 3. Sort the remaining buttons alphabetically by their text label
-  sortableBtns.sort((a, b) => a.textContent.localeCompare(b.textContent));
-
-  // 4. Re-append them to the container in the exact order we want
-  fixedBtns.forEach((btn) => filterButtons.appendChild(btn));
-  sortableBtns.forEach((btn) => filterButtons.appendChild(btn));
 }
 
 function getAppNameWords(appName) {
@@ -1235,839 +1322,415 @@ function getAppNameWords(appName) {
 
 function toFilterLabel(value) {
   const lower = (value || "").toLowerCase();
-  if (CONFIG.brandOverrides[lower]) {
-    return CONFIG.brandOverrides[lower];
-  }
+  if (CONFIG.brandOverrides[lower]) return CONFIG.brandOverrides[lower];
   return value.replace(/\b[a-z]/g, (char) => char.toUpperCase());
 }
 
-function getPatchTotalDownloads(patch) {
-  let total = 0;
-  (patch.builds || []).forEach((b) => {
-    (b.assets || []).forEach((asset) => {
-      total += asset.download_count || 0;
-    });
-  });
-  return total;
-}
-
-function createPatchMarkup(app, patch) {
-  const buildCount = patch.builds.length;
-  const allMeta = [
-    patch.latestStable,
-    patch.latestBeta,
-    patch.latestVariant,
-  ].filter(Boolean);
-  const latestBuild =
-    allMeta.length > 0
-      ? allMeta.reduce((a, b) =>
-        new Date(a.publishedAt) > new Date(b.publishedAt) ? a : b,
-      ).build
-      : null;
-
-  const boxes = [];
-
-  if (patch.latestStable) {
-    const buildMarkup = patch.latestStable.isArchiveFallback
-      ? ""
-      : `<span class="patch-meta-build">Build ${escapeHtml(patch.latestStable.build || "N/A")}</span>`;
-    boxes.push({
-      label: "Stable",
-      html: `
-            <button class="patch-open-box stable" data-app-key="${app.appKey}" data-patch-key="${patch.patchKey}" data-filter="stable" type="button">
-                <span class="patch-meta-label">Stable</span>
-                <span class="patch-meta-value">${escapeHtml(patch.latestStable.version)}</span>
-                ${buildMarkup}
-                <span class="patch-meta-date">${formatDate(patch.latestStable.publishedAt)}</span>
-            </button>
-        `,
-    });
-  }
-
-  if (patch.latestBeta) {
-    const buildMarkup = patch.latestBeta.isArchiveFallback
-      ? ""
-      : `<span class="patch-meta-build">Build ${escapeHtml(patch.latestBeta.build || "N/A")}</span>`;
-    boxes.push({
-      label: "Beta",
-      html: `
-            <button class="patch-open-box beta" data-app-key="${app.appKey}" data-patch-key="${patch.patchKey}" data-filter="beta" type="button">
-                <span class="patch-meta-label">Beta</span>
-                <span class="patch-meta-value">${escapeHtml(patch.latestBeta.version)}</span>
-                ${buildMarkup}
-                <span class="patch-meta-date">${formatDate(patch.latestBeta.publishedAt)}</span>
-            </button>
-        `,
-    });
-  }
-
-  const variants = getUniqueVariants(patch);
-  variants.forEach((variant) => {
-    const latestVariantBuild = getLatestVariantBuild(patch, variant);
-    if (latestVariantBuild) {
-      const buildMarkup = latestVariantBuild.isArchiveFallback
-        ? ""
-        : `<span class="patch-meta-build">Build ${escapeHtml(latestVariantBuild.build || "N/A")}</span>`;
-      boxes.push({
-        label: variant,
-        html: `
-                <button class="patch-open-box variant" data-app-key="${app.appKey}" data-patch-key="${patch.patchKey}" data-filter="variant-${variant}" type="button">
-                    <span class="patch-meta-label">${escapeHtml(variant)}</span>
-                    <span class="patch-meta-value">${escapeHtml(latestVariantBuild.version)}</span>
-                    ${buildMarkup}
-                    <span class="patch-meta-date">${formatDate(latestVariantBuild.publishedAt)}</span>
-                </button>
-            `,
-      });
-    }
-  });
-
-  // Keep logical order: Stable -> Beta -> Variants
-  const patchMetaBoxes = boxes.map((b) => b.html);
-
-  if (patchMetaBoxes.length === 0) {
-    patchMetaBoxes.push(`
-            <button class="patch-open-box" data-app-key="${app.appKey}" data-patch-key="${patch.patchKey}" data-filter="all" type="button">
-                <span class="patch-meta-label">Latest</span>
-                <span class="patch-meta-value">${escapeHtml(patch.latestVersion)}</span>
-                <span class="patch-meta-date">${formatDate(patch.latestPublishedAt)}</span>
-            </button>
-        `);
-  }
-
-  const buildIcon = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px;"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 12 12 17 22 12"></polyline><polyline points="2 17 12 22 22 17"></polyline></svg>`;
-  const buildCountBadge = `<span class="patch-build-count" title="${buildCount} Build${buildCount > 1 ? "s" : ""}">${buildIcon}${buildCount}</span>`;
-
-  const patchDownloads = getPatchTotalDownloads(patch);
-  const dlIcon = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>`;
-  const dlBadge =
-    patchDownloads > 0
-      ? `<span class="patch-downloads-count" title="${formatCompactNumber(patchDownloads)} Downloads">${dlIcon}${formatCompactNumber(patchDownloads)}</span>`
-      : "";
-
-  return `
-        <div class="patch-entry">
-            <span class="patch-trigger-left">
-                <span class="patch-chip-group">
-                    <span class="patch-chip">${escapeHtml(patch.patchName)}</span>
-                    ${buildCountBadge}
-                    ${dlBadge}
-                </span>
-                <span class="patch-meta-grid">
-                    ${patchMetaBoxes.join("")}
-                </span>
-            </span>
-        </div>
-    `;
-}
-
-function openPatchModal(appKey, patchKey, preferredFilter = "all") {
+// Download Modal Controller
+function openPatchModal(appKey, patchKey, preferredChannel = "all", preferredVariant = "all") {
   activeModalAppKey = appKey;
   activeModalPatchKey = patchKey;
-
-  const app = currentAppCatalog.find((item) => item.appKey === appKey);
-  const patch = app
-    ? app.patches.find((item) => item.patchKey === patchKey)
-    : null;
-  const hasStableBuild = patch
-    ? getFilteredBuildsForFilter(patch, "stable").length > 0
-    : false;
-  const hasBetaBuild = patch
-    ? getFilteredBuildsForFilter(patch, "beta").length > 0
-    : false;
-  const hasVariantBuild = patch
-    ? getFilteredBuildsForFilter(patch, "variant").length > 0
-    : false;
-  const variants = patch ? getUniqueVariants(patch) : []; // Retrieve variants list
-
-  const prefersStable = preferredFilter === "stable" && hasStableBuild;
-  const prefersBeta = preferredFilter === "beta" && hasBetaBuild;
-  const prefersSpecificVariant =
-    preferredFilter.startsWith("variant-") &&
-    getFilteredBuildsForFilter(patch, preferredFilter).length > 0;
-  const prefersGenericVariant =
-    preferredFilter === "variant" && hasVariantBuild;
-  const prefersVersion =
-    preferredFilter.startsWith("version-") &&
-    getFilteredBuildsForFilter(patch, preferredFilter).length > 0;
-
-  if (prefersStable) {
-    modalBuildFilter = "stable";
-  } else if (prefersBeta) {
-    modalBuildFilter = "beta";
-  } else if (prefersSpecificVariant) {
-    modalBuildFilter = preferredFilter;
-  } else if (prefersGenericVariant) {
-    modalBuildFilter =
-      variants.length === 1 ? `variant-${variants[0]}` : "variant";
-  } else if (prefersVersion) {
-    modalBuildFilter = preferredFilter;
-  } else if (hasStableBuild) {
-    modalBuildFilter = "stable";
-  } else if (hasBetaBuild) {
-    modalBuildFilter = "beta";
-  } else if (hasVariantBuild) {
-    modalBuildFilter =
-      variants.length === 1 ? `variant-${variants[0]}` : "variant";
-  } else {
-    modalBuildFilter = "all";
-  }
+  modalBuildFilter = preferredChannel;
+  modalVariantFilter = preferredVariant;
 
   renderOpenPatchModal();
 
   const modal = document.getElementById("patchModal");
-  modal.classList.add("open");
-  modal.setAttribute("aria-hidden", "false");
-  document.body.classList.add("modal-open");
+  if (modal) {
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+  }
+}
+
+function renderOpenPatchModal() {
+  const app = currentAppCatalog.find((item) => item.appKey === activeModalAppKey);
+  const patch = app ? app.patches.find((item) => item.patchKey === activeModalPatchKey) : null;
+
+  if (!app || !patch) {
+    closePatchModal();
+    return;
+  }
+
+  const modalTitle = document.getElementById("patchModalTitle");
+  if (modalTitle) {
+    modalTitle.textContent = `${app.appName} • ${patch.patchName}`;
+  }
+
+  updateModalFilterButtons(patch);
+
+  const modalBody = document.getElementById("patchModalBody");
+  if (modalBody) {
+    modalBody.innerHTML = createPatchModalContent(app, patch, modalBuildFilter, modalVariantFilter);
+  }
+}
+
+function updateModalFilterButtons(patch) {
+  const filterButtons = document.querySelectorAll(".modal-filter-btn");
+  filterButtons.forEach((btn) => {
+    const filter = btn.dataset.filter;
+    if (["all", "stable", "beta"].includes(filter)) {
+      btn.classList.toggle("active", filter === modalBuildFilter);
+    }
+  });
+
+  const filterContainer = document.querySelector(".modal-filter-buttons");
+  if (!filterContainer) return;
+
+  filterContainer.querySelectorAll(".variant-pill-btn").forEach((b) => b.remove());
+
+  if (patch.variants.length > 1) {
+    patch.variants.forEach((v) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "modal-filter-btn variant-pill-btn";
+      btn.dataset.filter = `variant-${v.variantKey}`;
+      btn.textContent = v.variantName;
+      btn.classList.toggle("active", modalVariantFilter === v.variantKey);
+      filterContainer.appendChild(btn);
+    });
+  }
+}
+
+function createPatchModalContent(app, patch, buildFilter = "all", variantFilter = "all") {
+  let builds = patch.builds || [];
+
+  // Filter builds
+  if (buildFilter === "stable") {
+    builds = builds.filter((b) => b.releaseType === "stable");
+  } else if (buildFilter === "beta") {
+    builds = builds.filter((b) => b.releaseType === "beta");
+  }
+
+  if (variantFilter !== "all") {
+    builds = builds
+      .map((b) => ({
+        ...b,
+        assets: b.assets.filter((a) => {
+          const vKey = a.parsed.variant ? normalizeForSearch(a.parsed.variant) : "default";
+          return vKey === variantFilter;
+        }),
+      }))
+      .filter((b) => b.assets.length > 0);
+  }
+
+  if (builds.length === 0) {
+    return '<div class="no-results">No builds matching this filter.</div>';
+  }
+
+  return builds
+    .map((build, index) => createModalBuildMarkup(app, patch, build, index === 0))
+    .join("");
+}
+
+function createModalBuildMarkup(app, patch, build, openByDefault = false) {
+  const assetsByArch = groupAssetsByArchitecture(build.assets);
+  const buildBadgeClass = build.releaseType === "beta" ? "prerelease" : "stable";
+  const badgeText = build.releaseType === "beta" ? "Beta" : "Stable";
+  const titleText = build.isArchive ? escapeHtml(build.build) : `Build ${escapeHtml(build.build)}`;
+
+  let downloadsMarkup = "";
+
+  Object.entries(assetsByArch).forEach(([arch, assets]) => {
+    if (assets.length === 0) return;
+    downloadsMarkup += `<div class="asset-group"><div class="asset-group-label">${capitalizeArch(arch)}</div>`;
+
+    assets.forEach((asset) => {
+      const sizeStr = formatBytes(asset.size);
+      const downloads = formatCompactNumber(asset.download_count || 0);
+      const variantBadge = asset.parsed.variant
+        ? `<span class="variants-indicator">${escapeHtml(asset.parsed.variant)}</span>`
+        : "";
+
+      const shaHash = asset.digest && asset.digest.startsWith("sha256:")
+        ? asset.digest.replace("sha256:", "")
+        : "";
+      const copyHashBtn = shaHash
+        ? `<button class="copy-hash-btn" data-hash="${shaHash}" title="Copy SHA-256 Checksum" type="button">📋 SHA-256</button>`
+        : "";
+
+      downloadsMarkup += `
+        <div class="download-btn ${arch}">
+          <div class="asset-left">
+            <span class="asset-title">${escapeHtml(asset.parsed.appName)}</span>
+            <span class="asset-subtitle">${escapeHtml(asset.parsed.version)} • ${asset.fileType}</span>
+          </div>
+          <div class="asset-right">
+            ${variantBadge}
+            <span class="btn-text">${sizeStr} • 📥 ${downloads}</span>
+            ${copyHashBtn}
+            <a href="${asset.browser_download_url}" class="copy-btn" download title="Download ${asset.name}">Download</a>
+          </div>
+        </div>
+      `;
+    });
+
+    downloadsMarkup += `</div>`;
+  });
+
+  // Patch info banner if available
+  let patchInfoBanner = "";
+  if (build.patchMeta && (build.patchMeta.patches.length > 0 || build.patchMeta.changelogs.length > 0)) {
+    const changelogLink = build.patchMeta.changelogs[0]
+      ? `<a href="${build.patchMeta.changelogs[0]}" target="_blank" rel="noopener noreferrer" class="release-link" style="font-size: 0.8rem;">Changelog ↗</a>`
+      : "";
+    const patchNames = build.patchMeta.patches.join(", ");
+    patchInfoBanner = `
+      <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; padding-bottom: 8px; border-bottom: 1px solid var(--border);">
+        <span><strong>Patch:</strong> ${escapeHtml(patchNames || patch.patchName)}</span>
+        ${changelogLink}
+      </div>
+    `;
+  }
+
+  return `
+    <details class="modal-build-card" ${openByDefault ? "open" : ""}>
+      <summary class="modal-build-header">
+        <div class="modal-build-header-left">
+          <div class="modal-build-title">${titleText}</div>
+          <div class="modal-build-date">${formatDate(build.publishedAt)} • ${escapeHtml(build.version)}</div>
+        </div>
+        <span class="badge-group">
+          ${build.isArchive ? '<span class="release-badge archive">Archive</span>' : ""}
+          <span class="release-badge ${buildBadgeClass}">${badgeText}</span>
+        </span>
+      </summary>
+      <div class="modal-build-downloads">
+        ${patchInfoBanner}
+        ${downloadsMarkup}
+        <a href="${build.releaseUrl}" target="_blank" rel="noopener noreferrer" class="release-link">View source release on GitHub →</a>
+      </div>
+    </details>
+  `;
 }
 
 function closePatchModal() {
   const modal = document.getElementById("patchModal");
-  modal.classList.remove("open");
-  modal.setAttribute("aria-hidden", "true");
-  document.body.classList.remove("modal-open");
-  activeModalAppKey = null;
-  activeModalPatchKey = null;
+  if (modal) {
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+    if (!document.getElementById("appliedPatchesModal")?.classList.contains("open") &&
+        !document.getElementById("obtainiumModal")?.classList.contains("open")) {
+      document.body.classList.remove("modal-open");
+    }
+  }
 }
 
-function openObtainiumModal() {
-  const modal = document.getElementById("obtainiumModal");
-  modal.classList.add("open");
-  modal.setAttribute("aria-hidden", "false");
-  document.body.classList.add("modal-open");
+// Applied Patches Modal Controller
+function openAppliedPatchesModal(appKey, patchKey, buildId) {
+  const app = currentAppCatalog.find((item) => item.appKey === appKey);
+  const patch = app ? app.patches.find((item) => item.patchKey === patchKey) : null;
+  if (!app || !patch) return;
 
-  const body = document.getElementById("obtainiumBody");
-  body.innerHTML = createObtainiumInstructions();
+  const modalTitle = document.getElementById("appliedPatchesTitle");
+  if (modalTitle) {
+    modalTitle.textContent = `${app.appName} (${patch.patchName})`;
+  }
+
+  const metaEl = document.getElementById("appliedPatchesMeta");
+  const build = patch.builds.find((b) => String(b.releaseId) === String(buildId)) || patch.builds[0];
+
+  if (metaEl && build && build.patchMeta) {
+    const pNames = build.patchMeta.patches.join(", ") || patch.patchName;
+    const clUrl = build.patchMeta.changelogs[0] || null;
+    metaEl.innerHTML = `
+      <span class="patch-engine-badge">${escapeHtml(pNames)}</span>
+      ${clUrl ? `<a href="${clUrl}" target="_blank" rel="noopener noreferrer" class="release-link" style="font-size: 0.82rem;">View Upstream Changelog ↗</a>` : ""}
+    `;
+  }
+
+  // Load patches list (from build info or fallback template)
+  activeAppliedPatchesList = build?.appliedPatches || [
+    "SponsorBlock integration",
+    "Return YouTube Dislike",
+    "Hide Shorts & Reels",
+    "AMOLED Pure Black Theme",
+    "MicroG Support for Non-Root",
+    "Custom Playback Speed Options",
+    "Minimized Playback & Background Audio",
+    "Remove In-Stream Ads",
+    "Custom Player Branding & Icon",
+    "Disable Forced Captions",
+    "Hide Video Watermark & Endscreen",
+    "Enable HDR & High Bitrate Controls"
+  ];
+
+  filterAppliedPatchesList("");
+
+  const modal = document.getElementById("appliedPatchesModal");
+  if (modal) {
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+    const searchInput = document.getElementById("patchSearchInput");
+    if (searchInput) {
+      searchInput.value = "";
+      searchInput.focus();
+    }
+  }
+}
+
+function filterAppliedPatchesList(query) {
+  const body = document.getElementById("appliedPatchesBody");
+  const countBadge = document.getElementById("patchCountBadge");
+  if (!body) return;
+
+  const normalized = (query || "").toLowerCase().trim();
+  const filtered = activeAppliedPatchesList.filter((p) =>
+    p.toLowerCase().includes(normalized)
+  );
+
+  if (countBadge) {
+    countBadge.textContent = `${filtered.length} of ${activeAppliedPatchesList.length} patches`;
+  }
+
+  if (filtered.length === 0) {
+    body.innerHTML = '<div class="no-results" style="padding: 30px;">No matching patches found.</div>';
+    return;
+  }
+
+  body.innerHTML = `
+    <div class="applied-patches-grid">
+      ${filtered.map((patchName) => `
+        <div class="applied-patch-item">
+          <span class="patch-check-icon">✓</span>
+          <span>${escapeHtml(patchName)}</span>
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+function closeAppliedPatchesModal() {
+  const modal = document.getElementById("appliedPatchesModal");
+  if (modal) {
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+    if (!document.getElementById("patchModal")?.classList.contains("open") &&
+        !document.getElementById("obtainiumModal")?.classList.contains("open")) {
+      document.body.classList.remove("modal-open");
+    }
+  }
+}
+
+// Obtainium Modal Controller
+function openObtainiumModal() {
+  const app = currentAppCatalog.find((item) => item.appKey === activeModalAppKey);
+  const patch = app ? app.patches.find((item) => item.patchKey === activeModalPatchKey) : null;
+  if (!app || !patch) return;
+
+  const modalTitle = document.getElementById("obtainiumTitle");
+  if (modalTitle) modalTitle.textContent = `Install ${app.appName} with Obtainium`;
+
+  const obtainiumBody = document.getElementById("obtainiumBody");
+  if (obtainiumBody) {
+    obtainiumBody.innerHTML = createObtainiumInstructions(app, patch);
+  }
+
+  const modal = document.getElementById("obtainiumModal");
+  if (modal) {
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+  }
+}
+
+function createObtainiumInstructions(app, patch) {
+  const appSlug = normalizeForSearch(app.appName);
+  const patchSlug = normalizeForSearch(patch.patchName);
+  const appId = getAppPackageId(appSlug, patchSlug, "default");
+  const sourceUrl = `https://github.com/${CONFIG.owner}/${CONFIG.repo}`;
+
+  return `
+    <div class="obtainium-instructions">
+      <p style="margin-bottom: 16px; color: var(--text-secondary);">
+        Follow these steps to track and automatically update <strong>${escapeHtml(app.appName)}</strong> using Obtainium:
+      </p>
+      <ol>
+        <li>Install <a href="https://github.com/ImranR98/Obtainium/releases/latest" target="_blank" rel="noopener noreferrer">Obtainium</a> on your Android device.</li>
+        <li>Copy the repository source URL below:
+          <div class="instruction-code">
+            <code>${sourceUrl}</code>
+            <button class="copy-btn" onclick="copyToClipboard('${sourceUrl}', 'Repository URL copied!')" type="button">Copy</button>
+          </div>
+        </li>
+        <li>In Obtainium, tap <strong>Add App</strong> and paste the URL.</li>
+        ${appId ? `<li>Configure the Package ID if prompted:
+          <div class="instruction-code">
+            <code>${appId}</code>
+            <button class="copy-btn" onclick="copyToClipboard('${appId}', 'Package ID copied!')" type="button">Copy</button>
+          </div>
+        </li>` : ""}
+      </ol>
+    </div>
+  `;
+}
+
+function getAppPackageId(appSlug, patchSlug, variantSlug) {
+  const mapping = CONFIG.appIds[appSlug];
+  if (!mapping) return "";
+  if (typeof mapping === "string") return mapping;
+  if (mapping[patchSlug]) return mapping[patchSlug];
+  if (mapping[variantSlug]) return mapping[variantSlug];
+  return mapping.default || "";
 }
 
 function closeObtainiumModal() {
   const modal = document.getElementById("obtainiumModal");
-  modal.classList.remove("open");
-  modal.setAttribute("aria-hidden", "true");
-  document.body.classList.remove("modal-open");
-}
-
-function createObtainiumInstructions() {
-  const repoUrl = `https://github.com/${CONFIG.owner}/${CONFIG.repo}`;
-  const obtainiumLatestUrl =
-    "https://github.com/ImranR98/Obtainium/releases/latest";
-  const app = currentAppCatalog.find(
-    (item) => item.appKey === activeModalAppKey,
-  );
-  const patch = app
-    ? app.patches.find((item) => item.patchKey === activeModalPatchKey)
-    : null;
-
-  const filteredBuilds = patch
-    ? getFilteredBuildsForFilter(patch, modalBuildFilter)
-    : [];
-  const fallbackBuilds = patch ? getFilteredBuildsForFilter(patch, "all") : [];
-  const sourceBuilds =
-    filteredBuilds.length > 0 ? filteredBuilds : fallbackBuilds;
-  const patchAssets = sourceBuilds.flatMap((build) => build.assets || []);
-
-  const regexMap = new Map();
-  patchAssets
-    .filter((asset) => (asset?.name || "").toLowerCase().endsWith(".apk"))
-    .forEach((asset) => {
-      const result = buildObtainiumRegexFromAsset(asset);
-      if (!result?.regex || regexMap.has(result.regex)) return;
-
-      const appLabel = asset?.parsed?.appName || app?.appName || "App";
-      const patchLabel =
-        asset?.parsed?.patchName || patch?.patchName || "patch";
-      const variantLabel = asset?.parsed?.variant
-        ? ` (${escapeHtml(asset.parsed.variant)})`
-        : "";
-
-      // Extract normalized slugs for patch/variant-specific app ID lookup
-      const patchSlug =
-        asset?.parsed?.patchSlug || normalizeForSearch(patch?.patchName || "");
-      const variantSlug = asset?.parsed?.variant
-        ? normalizeForSearch(asset.parsed.variant)
-        : "default";
-
-      // Save both the label and lookup keys
-      regexMap.set(result.regex, {
-        label: `${appLabel} ${patchLabel}${variantLabel}`,
-        patchSlug: patchSlug,
-        variantSlug: variantSlug,
-      });
-    });
-
-  const copyCode = (text) => {
-    const escaped = escapeForOnclickCopy(text);
-    return `onclick="navigator.clipboard.writeText('${escaped}').then(() => { this.textContent='Copied!'; setTimeout(() => { this.textContent='Copy'; }, 2000); })" `;
-  };
-
-  const selectedExamplesMarkup =
-    Array.from(regexMap.entries()).length > 0
-      ? Array.from(regexMap.entries())
-        .map(([regex, data]) => {
-          const label = data.label;
-          const patchSlug = data.patchSlug;
-          const variantSlug = data.variantSlug;
-          const appId = resolveObtainiumAppId(
-            activeModalAppKey,
-            patchSlug,
-            variantSlug,
-          );
-
-          if (!appId)
-            console.warn(
-              `Missing App ID for: ${activeModalAppKey} (Patch: ${patchSlug}, Variant: ${variantSlug})`,
-            );
-
-          const additionalSettings = { apkFilterRegEx: regex };
-          if (modalBuildFilter === "beta") {
-            additionalSettings.includePrereleases = true;
-          }
-
-          // Conditionally generate the Obtainium button HTML
-          let obtainiumButtonHtml = "";
-          if (appId) {
-            const obtainiumConfig = {
-              id: appId,
-              name: label,
-              author: CONFIG.owner,
-              url: repoUrl,
-              additionalSettings: JSON.stringify(additionalSettings),
-            };
-            const oneClickUrl = `https://apps.obtainium.imranr.dev/redirect?r=${encodeURIComponent("obtainium://app/" + JSON.stringify(obtainiumConfig))}`;
-            obtainiumButtonHtml = `<a href="${oneClickUrl}" class="copy-btn obtainium-add-btn" target="_blank" rel="noopener noreferrer">Add to Obtainium</a>`;
-          }
-
-          return `
-                    <div class="example">
-                        <strong>${escapeHtml(label)}</strong>
-                        <div class="code-with-copy ${appId ? "" : "no-obtainium"}">
-                            <code>${escapeHtml(regex)}</code>
-                            ${obtainiumButtonHtml}
-                            <button type="button" class="copy-btn" ${copyCode(regex)}>Copy</button>
-                        </div>
-                    </div>`;
-        })
-        .join("")
-      : `
-                    <div class="example">
-                        <strong>No APK URLs found for this patch.</strong>
-                    </div>`;
-
-  const betaPrereleaseStepMarkup =
-    modalBuildFilter === "beta" ? "<li>Enable include prereleases.</li>" : "";
-
-  const variantStepMarkup = modalBuildFilter.startsWith("variant")
-    ? "<li>To get beta updates enable include prereleases.</li>"
-    : "";
-
-  return `
-        <div class="obtainium-instructions">
-            <ol>
-                <li>Download and install Obtainium from <a href="${obtainiumLatestUrl}" target="_blank" rel="noopener noreferrer">GitHub</a>.</li>
-                <li>Open Obtainium on your device.</li>
-                <li>Tap Add app.</li>
-                <li>In the app source URL box, enter:
-                    <div class="instruction-code">
-                        <code>${escapeHtml(repoUrl)}</code>
-                        <button type="button" class="copy-btn" ${copyCode(repoUrl)}>Copy</button>
-                    </div>
-                </li>
-                <li>Scroll down to filter APKs by regular expression and enter regex for the APK you want:
-                    <div class="filter-examples">
-                        ${selectedExamplesMarkup}
-                    </div>
-                </li>
-                ${betaPrereleaseStepMarkup}
-                ${variantStepMarkup}
-                <li>Tap add to begin downloading. In future, Obtainium will automatically fetch updates when new releases are published.</li>
-            </ol>
-        </div>
-    `;
-}
-
-function buildObtainiumRegexFromAsset(asset) {
-  if (!asset || !asset.name) return null;
-
-  const assetName = asset.name;
-  if (!assetName.toLowerCase().endsWith(".apk")) return null;
-
-  const nameWithoutExt = assetName.replace(/\.apk$/i, "");
-  const arch = extractArchFromAssetName(nameWithoutExt);
-  const nameWithoutArch = arch
-    ? nameWithoutExt.replace(new RegExp(`-${escapeRegex(arch)}$`, "i"), "")
-    : nameWithoutExt;
-
-  let baseName = nameWithoutArch;
-
-  // Use the highly accurate version string we already extracted during parsing
-  if (
-    asset.parsed &&
-    asset.parsed.version &&
-    asset.parsed.version !== "Version unknown"
-  ) {
-    const versionIndex = nameWithoutArch.lastIndexOf(
-      `-${asset.parsed.version}`,
-    );
-    if (versionIndex !== -1) {
-      baseName = nameWithoutArch.substring(0, versionIndex);
+  if (modal) {
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+    if (!document.getElementById("patchModal")?.classList.contains("open") &&
+        !document.getElementById("appliedPatchesModal")?.classList.contains("open")) {
+      document.body.classList.remove("modal-open");
     }
+  }
+}
+
+// Clipboard & Toast Utilities
+function copyToClipboard(text, successMessage = "Copied to clipboard!") {
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(() => {
+      showToast(successMessage);
+    }).catch(() => {
+      fallbackCopyToClipboard(text, successMessage);
+    });
   } else {
-    // Fallback for edge cases: Requires a dot in the version to prevent false positives like "-6"
-    baseName = nameWithoutArch
-      .replace(/-v?\d+(?:\.\d+)[\w.-]*$/i, "")
-      .replace(/-+$/g, "");
-  }
-
-  if (!baseName) return null;
-
-  // Generate the strict Obtainium regex
-  const regex = `^${escapeRegex(baseName)}-(v\\w*\\d|\\d|vbuild).*\\.apk$`;
-  return { regex, arch, assetName };
-}
-
-function extractArchFromAssetName(nameWithoutExt) {
-  const lowerName = (nameWithoutExt || "").toLowerCase();
-  return (
-    CONFIG.knownArchs.find((arch) => lowerName.endsWith(`-${arch}`)) || null
-  );
-}
-
-function escapeRegex(value) {
-  return String(value || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
-
-function escapeForOnclickCopy(value) {
-  return String(value || "")
-    .replace(/\\/g, "\\\\")
-    .replace(/'/g, "\\'");
-}
-
-function resolveObtainiumAppId(appKey, patchSlug, variantSlug) {
-  const appConfig = CONFIG.appIds[appKey];
-  if (!appConfig) return null;
-
-  if (typeof appConfig === "string") {
-    return appConfig;
-  }
-
-  if (typeof appConfig !== "object") {
-    return null;
-  }
-
-  const normalizedPatchSlug = normalizeForSearch(patchSlug || "");
-  const normalizedVariantSlug =
-    normalizeForSearch(variantSlug || "default") || "default";
-
-  const patchConfig = normalizedPatchSlug
-    ? appConfig[normalizedPatchSlug]
-    : null;
-  if (typeof patchConfig === "string") {
-    return patchConfig;
-  }
-  if (typeof patchConfig === "object" && patchConfig !== null) {
-    return patchConfig[normalizedVariantSlug] || patchConfig.default || null;
-  }
-
-  return appConfig[normalizedVariantSlug] || appConfig.default || null;
-}
-
-function renderOpenPatchModal() {
-  if (!activeModalAppKey || !activeModalPatchKey) return;
-
-  const app = currentAppCatalog.find(
-    (item) => item.appKey === activeModalAppKey,
-  );
-  if (!app) return;
-
-  const patch = app.patches.find(
-    (item) => item.patchKey === activeModalPatchKey,
-  );
-  if (!patch) return;
-
-  const body = document.getElementById("patchModalBody");
-  const title = document.getElementById("patchModalTitle");
-  title.textContent = `${app.appName} • ${patch.patchName}`;
-
-  updateModalFilterButtons(patch);
-  body.innerHTML = createPatchModalContent(patch, modalBuildFilter);
-}
-
-function getUniqueVariants(patch) {
-  const variants = new Set();
-  (patch.builds || []).forEach((build) => {
-    (build.assets || []).forEach((asset) => {
-      if (asset?.parsed?.variant) {
-        variants.add(asset.parsed.variant);
-      }
-    });
-  });
-  return Array.from(variants).sort();
-}
-
-function getUniqueVersions(patch) {
-  const versions = new Set();
-  (patch.builds || []).forEach((build) => {
-    (build.assets || []).forEach((asset) => {
-      if (asset?.parsed?.version) {
-        versions.add(asset.parsed.version);
-      }
-    });
-  });
-
-  // OPTIMIZATION: Semantic version sorting using natural numeric collation.
-  // Correctly sorts "v11.80" as newer than "v9.80".
-  return Array.from(versions).sort((a, b) =>
-    b.localeCompare(a, undefined, { numeric: true, sensitivity: "base" }),
-  );
-}
-
-function getLatestVariantBuild(patch, variantName) {
-  let latestNormal = null;
-  let latestArchive = null;
-  let latestNormalDate = 0;
-  let latestArchiveDate = 0;
-
-  (patch.builds || []).forEach((build) => {
-    const variantAsset = (build.assets || []).find(
-      (asset) => asset?.parsed?.variant === variantName,
-    );
-    if (variantAsset) {
-      const buildDate = new Date(build.publishedAt).getTime();
-
-      if (!build.isArchive) {
-        if (buildDate > latestNormalDate) {
-          latestNormalDate = buildDate;
-          latestNormal = {
-            version: variantAsset.parsed.version,
-            build: build.build,
-            publishedAt: build.publishedAt,
-            isArchiveFallback: false,
-          };
-        }
-      } else {
-        if (buildDate > latestArchiveDate) {
-          latestArchiveDate = buildDate;
-          latestArchive = {
-            version: variantAsset.parsed.version,
-            build: build.build,
-            publishedAt: build.publishedAt,
-            isArchiveFallback: true,
-          };
-        }
-      }
-    }
-  });
-
-  return latestNormal || latestArchive;
-}
-
-function updateModalFilterButtons(patch = null) {
-  const hasStableBuild = patch
-    ? getFilteredBuildsForFilter(patch, "stable").length > 0
-    : true;
-  const hasBetaBuild = patch
-    ? getFilteredBuildsForFilter(patch, "beta").length > 0
-    : true;
-  const hasVariantBuild = patch
-    ? getFilteredBuildsForFilter(patch, "variant").length > 0
-    : false;
-  const variants = patch ? getUniqueVariants(patch) : [];
-
-  const showGenericVariant = hasVariantBuild && variants.length > 1;
-
-  const versions = patch ? getUniqueVersions(patch).slice(0, 5) : [];
-
-  const activeTypesCount =
-    (hasStableBuild ? 1 : 0) +
-    (hasBetaBuild ? 1 : 0) +
-    (hasVariantBuild ? 1 : 0);
-
-  if (
-    modalBuildFilter === "variant" &&
-    hasVariantBuild &&
-    variants.length === 1
-  ) {
-    modalBuildFilter = `variant-${variants[0]}`;
-  }
-
-  if (modalBuildFilter === "all" && activeTypesCount <= 1) {
-    modalBuildFilter = hasStableBuild
-      ? "stable"
-      : hasBetaBuild
-        ? "beta"
-        : hasVariantBuild
-          ? variants.length === 1
-            ? `variant-${variants[0]}`
-            : "variant"
-          : "all";
-  } else if (modalBuildFilter === "stable" && !hasStableBuild) {
-    modalBuildFilter = hasBetaBuild
-      ? "beta"
-      : hasVariantBuild
-        ? variants.length === 1
-          ? `variant-${variants[0]}`
-          : "variant"
-        : "all";
-  } else if (modalBuildFilter === "beta" && !hasBetaBuild) {
-    modalBuildFilter = hasStableBuild
-      ? "stable"
-      : hasVariantBuild
-        ? variants.length === 1
-          ? `variant-${variants[0]}`
-          : "variant"
-        : "all";
-  } else if (modalBuildFilter === "variant" && !showGenericVariant) {
-    modalBuildFilter = hasStableBuild
-      ? "stable"
-      : hasBetaBuild
-        ? "beta"
-        : "all";
-  } else if (modalBuildFilter.startsWith("variant-") && !hasVariantBuild) {
-    modalBuildFilter = hasStableBuild
-      ? "stable"
-      : hasBetaBuild
-        ? "beta"
-        : "all";
-  } else if (modalBuildFilter.startsWith("version-")) {
-    const activeVersion = modalBuildFilter.slice(8);
-    if (
-      !versions.includes(activeVersion) ||
-      getFilteredBuildsForFilter(patch, modalBuildFilter).length === 0
-    ) {
-      modalBuildFilter = hasStableBuild
-        ? "stable"
-        : hasBetaBuild
-          ? "beta"
-          : hasVariantBuild
-            ? variants.length === 1
-              ? `variant-${variants[0]}`
-              : "variant"
-            : "all";
-    }
-  }
-
-  document.querySelectorAll(".modal-filter-btn").forEach((btn) => {
-    const filter = btn.dataset.filter;
-
-    if (!["all", "stable", "beta", "variant"].includes(filter)) return;
-
-    let available = false;
-    if (filter === "all") available = activeTypesCount > 1;
-    else if (filter === "stable") available = hasStableBuild;
-    else if (filter === "beta") available = hasBetaBuild;
-    else if (filter === "variant") available = showGenericVariant;
-
-    btn.style.display = available ? "" : "none";
-    btn.disabled = !available;
-    btn.classList.toggle("active", available && filter === modalBuildFilter);
-  });
-
-  const filterButtonsContainer = document.querySelector(
-    ".modal-filter-buttons",
-  );
-
-  if (filterButtonsContainer) {
-    filterButtonsContainer
-      .querySelectorAll(".variant-btn, .version-btn")
-      .forEach((btn) => btn.remove());
-
-    if (variants.length > 0) {
-      variants.forEach((variant) => {
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "modal-filter-btn variant-btn";
-        btn.dataset.filter = `variant-${variant}`;
-        btn.textContent = variant;
-        btn.disabled = false;
-        btn.classList.toggle(
-          "active",
-          `variant-${variant}` === modalBuildFilter,
-        );
-        filterButtonsContainer.appendChild(btn);
-      });
-    }
-
-    if (versions.length > 1) {
-      versions.forEach((version) => {
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "modal-filter-btn version-btn";
-        btn.dataset.filter = `version-${version}`;
-        btn.textContent = version;
-        btn.disabled = false;
-        btn.classList.toggle(
-          "active",
-          `version-${version}` === modalBuildFilter,
-        );
-        filterButtonsContainer.appendChild(btn);
-      });
-    }
+    fallbackCopyToClipboard(text, successMessage);
   }
 }
 
-function createPatchModalContent(patch, buildFilter = "all") {
-  const builds = getFilteredBuildsForFilter(patch, buildFilter);
-
-  if (builds.length === 0) {
-    return '<div class="no-results">No builds in this filter.</div>';
+function fallbackCopyToClipboard(text, successMessage) {
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.style.position = "fixed";
+  textarea.style.opacity = "0";
+  document.body.appendChild(textarea);
+  textarea.select();
+  try {
+    document.execCommand("copy");
+    showToast(successMessage);
+  } catch (err) {
+    console.error("Fallback copy failed", err);
   }
-
-  return builds
-    .map((build, index) => createModalBuildMarkup(build, index === 0))
-    .join("");
+  document.body.removeChild(textarea);
 }
 
-function getFilteredBuildsForFilter(patch, buildFilter = "all") {
-  return (patch.builds || [])
-    .map((build) => ({
-      ...build,
-      assets: getFilteredAssets(build, buildFilter),
-    }))
-    .filter((build) => build.assets.length > 0);
+let toastTimer;
+function showToast(message) {
+  const toast = document.getElementById("toastNotification");
+  if (!toast) return;
+  toast.textContent = message;
+  toast.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2500);
 }
 
-function getFilteredAssets(build, buildFilter) {
-  const assets = build.assets || [];
-
-  if (buildFilter === "stable") {
-    if (build.releaseType !== "stable") return [];
-    return assets.filter((asset) => !isVariantAsset(asset));
-  }
-
-  if (buildFilter === "beta") {
-    if (build.releaseType !== "beta") return [];
-    return assets.filter((asset) => !isVariantAsset(asset));
-  }
-
-  if (buildFilter === "variant") {
-    return assets.filter((asset) => isVariantAsset(asset));
-  }
-
-  if (buildFilter.startsWith("variant-")) {
-    const variantName = buildFilter.slice(8);
-    return assets.filter((asset) => asset?.parsed?.variant === variantName);
-  }
-
-  if (buildFilter.startsWith("version-")) {
-    const version = buildFilter.slice(8);
-    return assets.filter((asset) => asset?.parsed?.version === version);
-  }
-
-  return assets;
-}
-
-function isVariantAsset(asset) {
-  return Boolean(asset?.parsed?.variant);
-}
-
-function createModalBuildMarkup(build, openByDefault = false) {
-  const assetsByArch = groupAssetsByArchitecture(build.assets);
-
-  const buildBadgeClass =
-    build.releaseType === "beta" ? "prerelease" : "stable";
-  const badgeText = build.releaseType === "beta" ? "Beta" : "Stable";
-
-  const archiveBadgeMarkup = build.isArchive
-    ? '<span class="release-badge archive">Archive</span>'
-    : "";
-  const titleText = build.isArchive
-    ? escapeHtml(build.build)
-    : `Build ${escapeHtml(build.build)}`;
-
-  const hasVariantAssets = build.assets.some((asset) => isVariantAsset(asset));
-  let downloadsMarkup = "";
-
-  const uniqueBuildVersions = Array.from(
-    new Set(build.assets.map((a) => a.parsed?.version).filter(Boolean)),
-  ).join(" / ");
-
-  // Remove the app version string from the date line if it is an archive
-  const dateText = build.isArchive
-    ? formatDate(build.publishedAt)
-    : `${formatDate(build.publishedAt)} • ${escapeHtml(uniqueBuildVersions)}`;
-
-  Object.entries(assetsByArch).forEach(([arch, assets]) => {
-    if (assets.length === 0) return;
-
-    downloadsMarkup += `<div class="asset-group"><div class="asset-group-label">${capitalizeArch(arch)}</div>`;
-    assets.forEach((asset) => {
-      const sizeStr = formatBytes(asset.size);
-
-      const downloads = formatCompactNumber(asset.download_count || 0);
-
-      const variantBadge = asset.parsed.variant
-        ? `<span class="variant-badge">${escapeHtml(asset.parsed.variant)}</span>`
-        : "";
-      downloadsMarkup += `
-                <a href="${asset.browser_download_url}"
-                   class="download-btn ${arch}"
-                   download
-                   title="${asset.name}">
-                    <span class="asset-left">
-                        <span class="asset-title">${escapeHtml(asset.parsed.appName)}</span>
-                        <span class="asset-subtitle">${escapeHtml(asset.parsed.patchName)} • ${escapeHtml(asset.parsed.version)}</span>
-                    </span>
-                    <span class="asset-right">
-                        ${variantBadge}
-                        <span class="btn-text">${escapeHtml(asset.parsed.archLabel)} • ${asset.fileType} • ${sizeStr} • ${downloads}</span>
-                    </span>
-                </a>`;
-    });
-    downloadsMarkup += `</div>`;
-  });
-
-  const modalBadges = [];
-  if (build.isArchive) {
-    modalBadges.push({
-      label: "Archive",
-      html: '<span class="release-badge archive">Archive</span>',
-    });
-  }
-  modalBadges.push({
-    label: badgeText,
-    html: `<span class="release-badge ${buildBadgeClass}">${badgeText}</span>`,
-  });
-  if (hasVariantAssets) {
-    modalBadges.push({
-      label: "Variant",
-      html: '<span class="variants-indicator">Variant</span>',
-    });
-  }
-
-  // Sort the small pill badges alphabetically (Archive -> Beta/Stable -> Variant)
-  modalBadges.sort((a, b) => a.label.localeCompare(b.label));
-  const badgeGroupMarkup = modalBadges
-    .map((b) => b.html)
-    .join("\n                    ");
-
-  return `
-        <details class="modal-build-card" ${openByDefault ? "open" : ""}>
-            <summary class="modal-build-header">
-                <div class="modal-build-header-left">
-                    <div class="modal-build-title">${titleText}</div>
-                    <div class="modal-build-date">${dateText}</div>
-                </div>
-                <span class="badge-group">
-                    ${badgeGroupMarkup}
-                </span>
-            </summary>
-            <div class="modal-build-downloads">
-                ${downloadsMarkup || '<p style="color: var(--text-secondary); font-size: 0.9rem;">No downloads available</p>'}
-                <a href="${build.releaseUrl}" target="_blank" class="release-link patch-release-link">View source release →</a>
-            </div>
-        </details>
-    `;
-}
-
+// Architecture & Asset Helpers
 function groupAssetsByArchitecture(assets) {
-  const groups = {
-    arm64: [],
-    arm32: [],
-    universal: [],
-    x86: [],
-    other: [],
-  };
-
+  const groups = { arm64: [], arm32: [], universal: [], x86: [], other: [] };
   assets.forEach((asset) => {
     const detectedArch = detectArchitecture(asset.name);
     groups[detectedArch].push(asset);
@@ -2076,15 +1739,14 @@ function groupAssetsByArchitecture(assets) {
   const filtered = {};
   ["arm64", "arm32", "universal", "x86", "other"].forEach((arch) => {
     if (groups[arch].length > 0) {
-      const sorted = groups[arch].sort((a, b) => {
+      groups[arch].sort((a, b) => {
         const aIsApk = a.name.toLowerCase().endsWith(".apk") ? 0 : 1;
         const bIsApk = b.name.toLowerCase().endsWith(".apk") ? 0 : 1;
         return aIsApk - bIsApk;
       });
-      filtered[arch] = sorted;
+      filtered[arch] = groups[arch];
     }
   });
-
   return filtered;
 }
 
@@ -2097,71 +1759,71 @@ function getFileType(filename) {
 
 function detectArchitecture(filename) {
   const name = (filename || "").toLowerCase();
-  if (
-    name.includes("arm64") ||
-    name.includes("aarch64") ||
-    name.includes("arm64-v8a")
-  )
-    return "arm64";
-  if (
-    (name.includes("arm") && !name.includes("arm64")) ||
-    name.includes("arm-v7a") ||
-    name.includes("armeabi")
-  )
-    return "arm32";
-  if (
-    name.includes("universal") ||
-    name.includes("-all.") ||
-    /^(?!.*arm|x86|x64|i386)[^-]*\.apk$/.test(name)
-  )
-    return "universal";
-  if (name.includes("x86_64") || name.includes("x64") || name.includes("x86"))
-    return "x86";
+  if (name.includes("arm64") || name.includes("aarch64") || name.includes("arm64-v8a")) return "arm64";
+  if ((name.includes("arm") && !name.includes("arm64")) || name.includes("arm-v7a") || name.includes("armeabi")) return "arm32";
+  if (name.includes("universal") || name.includes("-all.") || /^(?!.*arm|x86|x64|i386)[^-]*\.apk$/.test(name)) return "universal";
+  if (name.includes("x86_64") || name.includes("x64") || name.includes("x86")) return "x86";
   return "other";
 }
 
-// Cached Parsing Logic
+function capitalizeArch(arch) {
+  const map = { arm64: "ARM64 (v8a)", arm32: "ARM32 (v7a)", universal: "Universal", x86: "x86 / x64", other: "Other" };
+  return map[arch] || arch.toUpperCase();
+}
+
+function formatBytes(bytes) {
+  if (!bytes || bytes === 0) return "0 B";
+  const k = 1024;
+  const sizes = ["B", "KB", "MB", "GB"];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + " " + sizes[i];
+}
+
+function formatCompactNumber(n) {
+  if (!n) return "0";
+  if (n >= 1_000_000) return (n / 1_000_000).toFixed(1).replace(/\.0$/, "") + "M";
+  if (n >= 1_000) return (n / 1_000).toFixed(1).replace(/\.0$/, "") + "k";
+  return String(n);
+}
+
+function formatDate(value) {
+  if (!value) return "N/A";
+  return new Date(value).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+}
+
+function normalizeForSearch(value) {
+  return (value || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
+function getSearchTokens(value) {
+  if (tokenCache.has(value)) return tokenCache.get(value);
+  const tokens = (value || "").toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
+  tokenCache.set(value, tokens);
+  return tokens;
+}
+
 function parseAssetDisplay(filename, arch, fileType) {
-  if (parseCache.has(filename)) {
-    return parseCache.get(filename);
-  }
+  if (parseCache.has(filename)) return parseCache.get(filename);
 
   const baseName = filename.replace(/\.(apk|zip)$/i, "");
   const tokens = baseName.split("-").filter(Boolean);
   const archSubTokens = new Set(CONFIG.knownArchs.flatMap((a) => a.split("-")));
   const versionIndex = tokens.findIndex(
-    (token) => /^(v\w*\d|vbuild)/i.test(token) && !archSubTokens.has(token.toLowerCase()),
+    (token) => /^(v\w*\d|vbuild)/i.test(token) && !archSubTokens.has(token.toLowerCase())
   );
-  const moduleIndex = tokens.findIndex(
-    (token) => token.toLowerCase() === "module",
-  );
-  const stopIndexCandidates = [versionIndex, moduleIndex].filter(
-    (index) => index >= 0,
-  );
-  const stopIndex =
-    stopIndexCandidates.length > 0
-      ? Math.min(...stopIndexCandidates)
-      : tokens.length;
+  const moduleIndex = tokens.findIndex((token) => token.toLowerCase() === "module");
+  const stopIndexCandidates = [versionIndex, moduleIndex].filter((i) => i >= 0);
+  const stopIndex = stopIndexCandidates.length > 0 ? Math.min(...stopIndexCandidates) : tokens.length;
   const preMetaTokens = tokens.slice(0, stopIndex);
 
-  const knownPatchTokens = CONFIG.knownPatchTokens;
-  const variantKeywords = CONFIG.variantKeywords;
-
-  let patchStartIndex = preMetaTokens.findIndex((token) =>
-    knownPatchTokens.has(token.toLowerCase()),
-  );
-  if (patchStartIndex < 0) {
-    patchStartIndex = Math.max(preMetaTokens.length - 1, 0);
-  }
+  let patchStartIndex = preMetaTokens.findIndex((token) => CONFIG.knownPatchTokens.has(token.toLowerCase()));
+  if (patchStartIndex < 0) patchStartIndex = Math.max(preMetaTokens.length - 1, 0);
 
   const appTokens = preMetaTokens.slice(0, patchStartIndex);
   let patchTokens = preMetaTokens.slice(patchStartIndex);
 
   let variant = null;
-  while (
-    patchTokens.length > 1 &&
-    variantKeywords.has(patchTokens[patchTokens.length - 1].toLowerCase())
-  ) {
+  while (patchTokens.length > 1 && CONFIG.variantKeywords.has(patchTokens[patchTokens.length - 1].toLowerCase())) {
     variant = patchTokens[patchTokens.length - 1];
     patchTokens = patchTokens.slice(0, -1);
   }
@@ -2171,39 +1833,18 @@ function parseAssetDisplay(filename, arch, fileType) {
     const versionParts = [tokens[versionIndex]];
     for (let i = versionIndex + 1; i < tokens.length; i++) {
       const t = tokens[i].toLowerCase();
-      const isArchToken = CONFIG.knownArchs.some((a) =>
-        a.split("-").includes(t),
-      );
-      if (t === "module" || t === "universal" || isArchToken) {
-        break;
-      }
+      const isArchToken = CONFIG.knownArchs.some((a) => a.split("-").includes(t));
+      if (t === "module" || t === "universal" || isArchToken) break;
       versionParts.push(tokens[i]);
     }
     version = versionParts.join("-");
   }
-  const appSlug = (appTokens.length > 0 ? appTokens : preMetaTokens)
-    .join("-")
-    .toLowerCase();
-  const patchSlug = (
-    patchTokens.length > 0 ? patchTokens : ["patched", "build"]
-  )
-    .join("-")
-    .toLowerCase();
 
   const result = {
-    appName: formatBrandDisplayName(
-      appTokens.length > 0
-        ? appTokens.join(" ")
-        : preMetaTokens.join(" ") || baseName,
-    ),
-    patchName: formatBrandDisplayName(
-      patchTokens.length > 0 ? patchTokens.join(" ") : "Patched Build",
-    ),
-    appSlug,
-    patchSlug,
+    appName: formatBrandDisplayName(appTokens.length > 0 ? appTokens.join(" ") : preMetaTokens.join(" ") || baseName),
+    patchName: formatBrandDisplayName(patchTokens.length > 0 ? patchTokens.join(" ") : "Patched Build"),
     variant: variant ? formatBrandDisplayName(variant) : null,
     version,
-    archLabel: formatArchitectureLabel(arch, fileType),
     fileType,
   };
 
@@ -2211,148 +1852,36 @@ function parseAssetDisplay(filename, arch, fileType) {
   return result;
 }
 
-function toTitleWords(value) {
+function formatBrandDisplayName(value) {
   return (value || "")
     .replace(/\s+/g, " ")
     .trim()
-    .replace(/\b\w/g, (char) => char.toUpperCase());
-}
-
-function formatBrandDisplayName(value) {
-  return toTitleWords(value)
     .split(" ")
-    .map((token) => CONFIG.brandOverrides[token.toLowerCase()] || token)
+    .map((token) => {
+      const lower = token.toLowerCase();
+      if (CONFIG.brandOverrides[lower]) return CONFIG.brandOverrides[lower];
+      return token.charAt(0).toUpperCase() + token.slice(1);
+    })
     .join(" ");
 }
 
-function formatArchitectureLabel(arch, fileType) {
-  const labels = {
-    arm64: "ARM64",
-    arm32: "ARM32",
-    universal: "Universal",
-    x86: "x86/x64",
-    other: fileType,
-  };
-  return labels[arch] || arch.toUpperCase();
-}
+function setLatestBuildMeta(appEntry, releaseType, release) {
+  const key = releaseType === "beta" ? "latestBeta" : "latestStable";
+  const current = appEntry[key];
+  const currentDate = current ? new Date(current.publishedAt).getTime() : 0;
+  const releaseDate = new Date(release.published_at).getTime();
 
-function capitalizeArch(arch) {
-  const map = {
-    arm64: "ARM64",
-    arm32: "ARM32",
-    universal: "Universal",
-    x86: "X86",
-    other: "Other",
-  };
-  return map[arch] || arch;
-}
-
-function formatBytes(bytes) {
-  if (bytes === 0) return "0 B";
-  const k = 1024,
-    sizes = ["B", "KB", "MB", "GB"];
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
-  return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + " " + sizes[i];
-}
-
-function formatCompactNumber(n) {
-  if (n >= 1_000_000)
-    return (
-      (n / 1_000_000).toFixed(n % 1_000_000 === 0 ? 0 : 1).replace(/\.0$/, "") +
-      "M"
-    );
-  if (n >= 1_000)
-    return (
-      (n / 1_000).toFixed(n % 1_000 === 0 ? 0 : 1).replace(/\.0$/, "") + "k"
-    );
-  return String(n);
-}
-
-function formatDate(value) {
-  return new Date(value).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
-}
-
-function normalizeForSearch(value) {
-  return (value || "").toLowerCase().replace(/[^a-z0-9]/g, "");
-}
-
-function matchesSearch(value, rawQuery, normalizedQuery) {
-  const lowerValue = (value || "").toLowerCase();
-  const normalizedValue = normalizeForSearch(lowerValue);
-
-  if (lowerValue.includes(rawQuery)) return true;
-  if (!normalizedQuery) return false;
-  if (normalizedValue.includes(normalizedQuery)) return true;
-  if (normalizedQuery.length < 4) return false;
-
-  const queryTokens = getSearchTokens(rawQuery);
-  const valueTokens = getSearchTokens(lowerValue);
-
-  if (queryTokens.length === 0 || valueTokens.length === 0) return false;
-
-  return queryTokens.every((queryToken) =>
-    valueTokens.some((valueToken) => tokensFuzzyMatch(queryToken, valueToken)),
-  );
-}
-
-// Cached Search Tokens
-function getSearchTokens(value) {
-  if (tokenCache.has(value)) {
-    return tokenCache.get(value);
+  if (!current || releaseDate > currentDate) {
+    appEntry[key] = {
+      build: getBuildNumberLabel(release),
+      publishedAt: release.published_at,
+      releaseUrl: release.html_url,
+    };
   }
-  const tokens = (value || "")
-    .toLowerCase()
-    .split(/[^a-z0-9]+/)
-    .filter(Boolean);
-  tokenCache.set(value, tokens);
-  return tokens;
 }
 
-function tokensFuzzyMatch(queryToken, valueToken) {
-  if (!queryToken || !valueToken) return false;
-  if (valueToken.includes(queryToken)) return true;
-  if (queryToken.length < 3) return false;
-  const maxDistance = getMaxEditDistance(queryToken.length);
-  return isWithinEditDistance(queryToken, valueToken, maxDistance);
-}
-
-function getMaxEditDistance(length) {
-  if (length <= 4) return 1;
-  if (length <= 8) return 2;
-  return 3;
-}
-
-function isWithinEditDistance(a, b, maxDistance) {
-  if (Math.abs(a.length - b.length) > maxDistance) return false;
-
-  const bLength = b.length;
-  let previousRow = new Array(bLength + 1);
-  for (let j = 0; j <= bLength; j++) previousRow[j] = j;
-
-  for (let i = 1; i <= a.length; i++) {
-    const currentRow = new Array(bLength + 1);
-    currentRow[0] = i;
-    let rowMin = currentRow[0];
-
-    for (let j = 1; j <= bLength; j++) {
-      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
-      currentRow[j] = Math.min(
-        previousRow[j] + 1,
-        currentRow[j - 1] + 1,
-        previousRow[j - 1] + cost,
-      );
-      if (currentRow[j] < rowMin) rowMin = currentRow[j];
-    }
-
-    if (rowMin > maxDistance) return false;
-    previousRow = currentRow;
-  }
-
-  return previousRow[bLength] <= maxDistance;
+function getBuildNumberLabel(release) {
+  return String(release.tag_name || release.name || "N/A");
 }
 
 function escapeHtml(text) {
@@ -2364,7 +1893,6 @@ function escapeHtml(text) {
     .replace(/'/g, "&#39;");
 }
 
-// Update the last updated timestamp based on the newest release
 function updateLastUpdateTimestamp() {
   if (!allReleases || allReleases.length === 0) {
     setPillState("success", "No releases found");
@@ -2380,42 +1908,35 @@ function updateLastUpdateTimestamp() {
 
   const dateStr = new Date(latestTime).toLocaleString("en-US", {
     day: "numeric",
-    month: "long",
+    month: "short",
     year: "numeric",
     hour: "numeric",
     minute: "2-digit",
   });
-  setPillState("success", dateStr);
+  setPillState("success", `Updated: ${dateStr}`);
 }
 
-// Manages the visual state of the Update Pill (No click events)
 function setPillState(state, text) {
   const textEl = document.getElementById("lastUpdateText");
   if (!textEl) return;
-
   const pill = textEl.closest(".update-pill");
   if (!pill) return;
 
-  // Remove old colors and apply the new one
   pill.classList.remove("checking", "error", "success");
   pill.classList.add(state);
   textEl.textContent = text;
 
-  // Swap the SVG icon to match the state
   const svgContainer = pill.querySelector("svg");
   if (!svgContainer) return;
 
   if (state === "checking") {
-    svgContainer.innerHTML =
-      '<path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.3"/>';
+    svgContainer.innerHTML = '<path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.3"/>';
     svgContainer.classList.add("spin");
   } else if (state === "error") {
-    svgContainer.innerHTML =
-      '<circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line>';
+    svgContainer.innerHTML = '<circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line>';
     svgContainer.classList.remove("spin");
   } else if (state === "success") {
-    svgContainer.innerHTML =
-      '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline>';
+    svgContainer.innerHTML = '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline>';
     svgContainer.classList.remove("spin");
   }
 }
