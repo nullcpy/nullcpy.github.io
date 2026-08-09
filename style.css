@@ -46,8 +46,8 @@ body.light-mode {
     --bg-card: rgba(255, 255, 255, 0.98);
     --bg-card-hover: #ffffff;
     --text-primary: #1c1a17;
-    --text-secondary: #56504a;
-    --text-muted: #9c9088;
+    --text-secondary: #3d3730;
+    --text-muted: #7a6e64;
     /* Light mode: coral buttons use white text */
     --btn-on-accent: #ffffff;
 
@@ -680,8 +680,8 @@ main {
 .patch-engine-badge {
     padding: 4px 10px;
     border-radius: var(--radius-full);
-    background: rgba(56, 189, 248, 0.15);
-    border: 1px solid rgba(56, 189, 248, 0.35);
+    background: var(--accent-glow);
+    border: 1px solid var(--accent);
     color: var(--accent);
     font-size: 0.78rem;
     font-weight: 700;
@@ -694,7 +694,7 @@ main {
     gap: 4px;
     padding: 3px 8px;
     border-radius: var(--radius-full);
-    background: rgba(255, 255, 255, 0.04);
+    background: var(--bg-tertiary);
     border: 1px solid var(--border);
     color: var(--text-secondary);
     font-size: 0.74rem;
@@ -705,21 +705,22 @@ main {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    padding: 3px 8px;
+    padding: 4px 10px;
     border-radius: var(--radius-full);
-    background: rgba(168, 85, 247, 0.12);
-    border: 1px solid rgba(168, 85, 247, 0.35);
-    color: var(--accent-beta);
+    background: var(--accent-variant-glow);
+    border: 1px solid var(--accent-variant);
+    color: var(--accent-variant);
     font-size: 0.74rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .patch-applied-btn:hover {
-    background: var(--accent-beta);
+    background: var(--accent-variant);
     color: var(--btn-on-accent);
     transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--accent-variant-glow);
 }
 
 /* Variant Rows & Matrix */
@@ -1368,8 +1369,9 @@ body.modal-open {
     transform: translateY(-1px);
 }
 
+/* Obtainium add button — Zen style: solid accent bg, light text, rounded */
 .obtainium-add-btn {
-    background: var(--accent-beta);
+    background: var(--accent);
     color: var(--btn-on-accent) !important;
     text-decoration: none !important;
     padding: 6px 14px;
@@ -1383,6 +1385,7 @@ body.modal-open {
     flex-shrink: 0;
     border: none;
     transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 2px 8px var(--accent-glow);
 }
 
 .obtainium-add-btn:hover {
@@ -1390,6 +1393,7 @@ body.modal-open {
     color: var(--btn-on-accent) !important;
     text-decoration: none !important;
     transform: translateY(-2px);
+    box-shadow: 0 4px 16px var(--accent-glow);
 }
 
 .code-with-copy {
