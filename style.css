@@ -1103,6 +1103,7 @@ body.modal-open {
 body.light-mode .modal-build-card {
     background: #ffffff;
     border: 1px solid var(--border);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
 }
 
 .modal-build-header {
@@ -1125,20 +1126,20 @@ body.light-mode .modal-build-card {
 }
 
 body.light-mode .modal-build-header {
-    background: var(--bg-primary);
+    background: #ffffff;
 }
 
 body.light-mode .modal-build-header:hover {
-    background: var(--bg-tertiary);
+    background: #f7f4ee;
 }
 
 body.light-mode .download-btn {
-    background: #ffffff;
+    background: #faf8f5;
     border: 1px solid var(--border);
 }
 
 body.light-mode .download-btn:hover {
-    background: var(--bg-primary);
+    background: #f2ede6;
 }
 
 .modal-build-header::-webkit-details-marker {
