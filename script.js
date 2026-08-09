@@ -1511,7 +1511,7 @@ function createModalBuildMarkup(app, patch, build, openByDefault = false) {
 
   const patchInfoBanner = `
     <div class="patch-info-actions">
-      <button class="patch-applied-btn" data-app-key="${app.appKey}" data-patch-key="${patch.patchKey}" data-build-id="${build.releaseId}" type="button">Applied Patches</button>
+      <button class="patch-applied-btn" data-app-key="${app.appKey}" data-patch-key="${patch.patchKey}" data-build-id="${build.releaseId}" type="button">View Applied Patches</button>
       <a href="${build.releaseUrl}" target="_blank" rel="noopener noreferrer" class="release-link-button">View Release Source</a>
     </div>
   `;

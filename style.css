@@ -1545,14 +1545,14 @@ body.modal-open {
 
 /* Obtainium add button — Zen style: solid accent bg, light text, rounded */
 .obtainium-add-btn {
-    background: var(--accent-beta);
+    background: var(--accent);
     color: var(--btn-on-accent) !important;
     text-decoration: none !important;
     border-radius: var(--radius-sm);
     font-weight: 700;
     border: none;
     transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 2px 8px var(--accent-beta-glow);
+    box-shadow: 0 2px 8px var(--accent-glow);
 }
 
 .obtainium-add-btn:hover {
@@ -1560,7 +1560,7 @@ body.modal-open {
     color: var(--btn-on-accent) !important;
     text-decoration: none !important;
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px var(--accent-beta-glow);
+    box-shadow: 0 4px 16px var(--accent-glow);
 }
 
 .code-with-copy {
@@ -1574,11 +1574,8 @@ body.modal-open {
     flex: 1;
     min-width: 0;
     font-family: "JetBrains Mono", monospace;
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-    background: var(--bg-tertiary);
-    padding: 8px 10px;
-    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    color: var(--accent);
     word-break: break-all;
 }
 
