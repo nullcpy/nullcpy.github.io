@@ -1172,7 +1172,6 @@ function createAppCard(app) {
           <div class="app-name">${escapeHtml(app.appName)}</div>
         </div>
         <div class="app-badge-group">
-          <span class="patch-count-badge">${app.patches.length} engine${app.patches.length > 1 ? "s" : ""}</span>
           ${dlBadge}
           <svg class="app-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="6 9 12 15 18 9"></polyline>

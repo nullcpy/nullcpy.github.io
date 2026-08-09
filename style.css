@@ -1636,8 +1636,12 @@ footer a:hover {
         align-items: stretch;
     }
 
+    .filter-buttons {
+        justify-content: center;
+    }
+
     .sort-selector-wrap {
-        justify-content: flex-end;
+        justify-content: center;
     }
 
     .modal-overlay {
