@@ -4,7 +4,7 @@ import os
 import re
 
 MASTER_BUILD_FILE = "master_build.json"
-KNOWN_ENGINES = ["morphe", "revanced", "rvx", "anddea", "inotia00", "rex", "piko", "instafel", "xposed", "default"]
+KNOWN_ENGINES = ["revanced", "morphe", "anddea", "rvx", "xposed", "instafel", "default"]
 
 def load_json(filepath):
     """Load JSON from a local file if it exists."""
