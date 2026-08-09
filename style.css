@@ -525,12 +525,18 @@ body.light-mode .filter-btn.active {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    padding: 20px;
+    padding: 18px 20px;
     box-shadow: var(--shadow);
     transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     backdrop-filter: blur(12px);
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
+}
+
+.build-card:not([open]) {
+    min-height: 86px;
+    justify-content: center;
 }
 
 .build-card:hover {
@@ -544,8 +550,9 @@ body.light-mode .filter-btn.active {
     cursor: pointer;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     gap: 12px;
+    width: 100%;
 }
 
 .app-card-summary::-webkit-details-marker {
@@ -555,14 +562,16 @@ body.light-mode .filter-btn.active {
 .app-title-group {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
+    min-width: 0;
 }
 
 .app-name {
-    font-size: 1.35rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: var(--text-primary);
     letter-spacing: -0.01em;
+    line-height: 1.25;
 }
 
 .app-badge-group {

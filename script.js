@@ -1200,6 +1200,8 @@ function createNoticeMarkup(notice) {
 function createPatchMarkup(app, patch) {
   const buildCount = patch.builds.length;
   const buildIconBadge = `<span class="patch-stat-badge" title="${buildCount} total builds">📦 ${buildCount}</span>`;
+  const downloadCount = patch.totalDownloads || 0;
+  const downloadIconBadge = `<span class="patch-stat-badge" title="${downloadCount.toLocaleString()} total downloads">📥 ${formatCompactNumber(downloadCount)}</span>`;
 
   // Render variant rows
   const variantRowsHtml = patch.variants
@@ -1279,6 +1281,7 @@ function createPatchMarkup(app, patch) {
         <div class="patch-chip-group">
           <span class="patch-engine-badge">${escapeHtml(patch.patchName)}</span>
           ${buildIconBadge}
+          ${downloadIconBadge}
         </div>
       </div>
       <div class="variant-matrix">
@@ -1671,31 +1674,68 @@ function openObtainiumModal() {
 }
 
 function createObtainiumInstructions(app, patch) {
-  const appSlug = normalizeForSearch(app.appName);
-  const patchSlug = normalizeForSearch(patch.patchName);
-  const appId = getAppPackageId(appSlug, patchSlug, "default");
-  const sourceUrl = `https://github.com/${CONFIG.owner}/${CONFIG.repo}`;
+  const repoUrl = `https://github.com/${CONFIG.owner}/${CONFIG.repo}`;
+  const obtainiumLatestUrl = "https://github.com/ImranR98/Obtainium/releases/latest";
+
+  const appNameNorm = normalizeForSearch(app?.appName || "app");
+  const patchNameNorm = normalizeForSearch(patch?.patchName || "patch");
+
+  // If a specific variant is selected (e.g. not "default" / "all")
+  const isSpecificVariant = modalVariantFilter && modalVariantFilter !== "default" && modalVariantFilter !== "all";
+  
+  let regexPattern = `^${appNameNorm}-${patchNameNorm}.*\\.apk$`;
+  if (isSpecificVariant) {
+    regexPattern = `^${appNameNorm}-${patchNameNorm}-${modalVariantFilter}.*\\.apk$`;
+  }
+
+  // Build variant examples list if multiple variants exist
+  let variantExamplesMarkup = "";
+  if (patch && patch.variants && patch.variants.length > 1) {
+    const examples = patch.variants.map((v) => {
+      const vRegex = v.variantKey === "default"
+        ? `^${appNameNorm}-${patchNameNorm}.*\\.apk$`
+        : `^${appNameNorm}-${patchNameNorm}-${v.variantKey}.*\\.apk$`;
+      return `
+        <div style="margin-top: 8px;">
+          <div style="font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px;">
+            ${escapeHtml(app.appName)} (${escapeHtml(patch.patchName)} - ${escapeHtml(v.variantName)}):
+          </div>
+          <div class="instruction-code">
+            <code>${escapeHtml(vRegex)}</code>
+            <button class="copy-btn" onclick="copyToClipboard('${escapeHtml(vRegex)}', 'Regex copied!')" type="button">Copy</button>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    variantExamplesMarkup = `
+      <div style="margin-top: 12px;">
+        <div style="font-size: 0.84rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px;">Variant Regular Expressions:</div>
+        ${examples}
+      </div>
+    `;
+  }
 
   return `
     <div class="obtainium-instructions">
-      <p style="margin-bottom: 16px; color: var(--text-secondary);">
-        Follow these steps to track and automatically update <strong>${escapeHtml(app.appName)}</strong> using Obtainium:
-      </p>
       <ol>
-        <li>Install <a href="https://github.com/ImranR98/Obtainium/releases/latest" target="_blank" rel="noopener noreferrer">Obtainium</a> on your Android device.</li>
-        <li>Copy the repository source URL below:
+        <li>Download and install Obtainium from <a href="${obtainiumLatestUrl}" target="_blank" rel="noopener noreferrer">GitHub</a>.</li>
+        <li>Open Obtainium on your device.</li>
+        <li>Tap <strong>Add App</strong>.</li>
+        <li>In the <strong>App Source URL</strong> box, enter:
           <div class="instruction-code">
-            <code>${sourceUrl}</code>
-            <button class="copy-btn" onclick="copyToClipboard('${sourceUrl}', 'Repository URL copied!')" type="button">Copy</button>
+            <code>${repoUrl}</code>
+            <button class="copy-btn" onclick="copyToClipboard('${repoUrl}', 'Repository URL copied!')" type="button">Copy</button>
           </div>
         </li>
-        <li>In Obtainium, tap <strong>Add App</strong> and paste the URL.</li>
-        ${appId ? `<li>Configure the Package ID if prompted:
+        <li>Scroll down to <strong>Filter APKs by regular expression</strong> and enter:
           <div class="instruction-code">
-            <code>${appId}</code>
-            <button class="copy-btn" onclick="copyToClipboard('${appId}', 'Package ID copied!')" type="button">Copy</button>
+            <code>${escapeHtml(regexPattern)}</code>
+            <button class="copy-btn" onclick="copyToClipboard('${escapeHtml(regexPattern)}', 'Regex copied!')" type="button">Copy</button>
           </div>
-        </li>` : ""}
+          ${variantExamplesMarkup}
+        </li>
+        <li>Tap <strong>Add</strong> to begin downloading. In the future, Obtainium will automatically fetch updates when new releases are published.</li>
       </ol>
     </div>
   `;
