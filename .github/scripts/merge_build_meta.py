@@ -204,40 +204,52 @@ def prune_stale_metadata(builds, releases):
             allowed_versions = live_versions_by_app.get(k, set())
             clean_allowed = {re.sub(r"^v(?=\d)", "", v, flags=re.IGNORECASE) for v in allowed_versions}
 
-            def get_top_versions(version_dict, count=2):
-                versions = list(version_dict.keys())
-                def semver_key(v):
-                    return [int(n) for n in re.findall(r'\d+', v)]
-                versions.sort(key=semver_key, reverse=True)
-                return set(versions[:count])
-            
-            direct_versions = {sk: sv for sk, sv in app_data.items() if sk not in KNOWN_ENGINES}
-            top_2_direct = get_top_versions(direct_versions, 2) if direct_versions else set()
+            # Determine top two versions for this app (non-engine level)
+            version_keys = [vk for vk in app_data.keys() if vk not in KNOWN_ENGINES]
+            top_versions_set = set(sorted(version_keys, reverse=True)[:2])
 
             for sub_k in list(app_data.keys()):
                 sub_val = app_data[sub_k]
+                
                 if isinstance(sub_val, dict) and sub_k in KNOWN_ENGINES:
-                    # Nested engine dict: app_data[engine][version]
-                    top_2_engine = get_top_versions(sub_val, 2)
+                    # Engine dict: sub_val is {version: {tag: data}}
+                    # Determine top two versions within this engine
+                    engine_versions = list(sub_val.keys())
+                    top_engine_versions = set(sorted(engine_versions, reverse=True)[:2])
                     for ver_k in list(sub_val.keys()):
                         clean_ver = re.sub(r"^v(?=\d)", "", ver_k, flags=re.IGNORECASE)
-                        if clean_ver not in clean_allowed and ver_k not in top_2_engine:
+                        keep_version = (clean_ver in clean_allowed) or (ver_k in top_engine_versions)
+                        if not keep_version:
                             del sub_val[ver_k]
                             print(f"[-] Pruned purged version: {k}/{sub_k} v{ver_k}")
-                        elif isinstance(sub_val[ver_k], dict):
-                            for tag_k in list(sub_val[ver_k].keys()):
-                                if isinstance(sub_val[ver_k][tag_k], dict) and tag_k not in live_tags:
+                            continue
+                        # Prune build tags within version, keep live tags or the latest tag
+                        if isinstance(sub_val[ver_k], dict):
+                            tags = list(sub_val[ver_k].keys())
+                            live_or_latest = [t for t in tags if t in live_tags]
+                            if not live_or_latest and tags:
+                                live_or_latest = [max(tags)]
+                            for tag_k in tags:
+                                if tag_k not in live_or_latest:
                                     del sub_val[ver_k][tag_k]
                             if not sub_val[ver_k]:
                                 del sub_val[ver_k]
                 elif sub_k not in KNOWN_ENGINES:
+                    # Direct version dict
                     clean_ver = re.sub(r"^v(?=\d)", "", sub_k, flags=re.IGNORECASE)
-                    if clean_ver not in clean_allowed and sub_k not in top_2_direct:
+                    keep_version = (clean_ver in clean_allowed) or (sub_k in top_versions_set)
+                    if not keep_version:
                         del app_data[sub_k]
                         print(f"[-] Pruned purged version: {k} v{sub_k}")
-                    elif isinstance(app_data[sub_k], dict):
-                        for tag_k in list(app_data[sub_k].keys()):
-                            if isinstance(app_data[sub_k][tag_k], dict) and tag_k not in live_tags:
+                        continue
+                    # Prune tags within this version, keep live tags or the latest tag
+                    if isinstance(app_data[sub_k], dict):
+                        tags = list(app_data[sub_k].keys())
+                        live_or_latest = [t for t in tags if t in live_tags]
+                        if not live_or_latest and tags:
+                            live_or_latest = [max(tags)]
+                        for tag_k in tags:
+                            if tag_k not in live_or_latest:
                                 del app_data[sub_k][tag_k]
                         if not app_data[sub_k]:
                             del app_data[sub_k]
