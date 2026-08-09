@@ -114,14 +114,19 @@ const CONFIG = {
   // Map app slugs to true Android Package IDs for Obtainium
   appIds: {
     "1111warp": "com.cloudflare.onedotonedotonedotone",
+    warp: "com.cloudflare.onedotonedotonedotone",
     acalendar: "org.withouthat.acalendar",
     adguard: "com.adguard.android",
     adobeacrobat: "com.adobe.reader",
+    acrobat: "com.adobe.reader",
     adobelightroom: "com.adobe.lrmobile",
+    lightroom: "com.adobe.lrmobile",
     adobephotoshopmix: "com.adobe.photoshopmix",
+    photoshop: "com.adobe.photoshopmix",
     accuweather: "com.accuweather.android",
     alldocumentreader: "alldocumentsreader.docuemntviewer",
     at4klauncher: "com.overdevs.at4k",
+    at4k: "com.overdevs.at4k",
     automate: "com.llamalab.automate",
     autosync: "com.ttxapps.autosync",
     batteryguru: "com.paget96.batteryguru",
@@ -137,11 +142,17 @@ const CONFIG = {
     disneyplus: "com.disney.disneyplus",
     discord: "com.discord",
     eyeconcalleridspamblock: "com.eyecon.global",
+    eyecon: "com.eyecon.global",
     facebook: "com.facebook.katana",
     fingnetworktools: "com.overlook.android.fing",
+    fing: "com.overlook.android.fing",
     github: "com.github.android",
     goodreads: "com.goodreads",
     googlekeyboard: {
+      default: "com.google.android.inputmethod.latin",
+      clone: "dev.jason.com.google.android.inputmethod.latin"
+    },
+    gboard: {
       default: "com.google.android.inputmethod.latin",
       clone: "dev.jason.com.google.android.inputmethod.latin"
     },
@@ -155,21 +166,26 @@ const CONFIG = {
     hbomax: "com.wbd.hbomax",
     hermit: "com.chimbori.hermitcrab",
     hellochineselearnchinese: "com.hellochinese",
+    hellochinese: "com.hellochinese",
     holavpn: "org.hola.play",
     iconpacker: "cn.ommiao.iconpacker",
     instagram: {
       default: "com.instagram.android",
-      clone: "com.instafel.android"
+      clone: "com.instafel.android",
+      instafel: "com.instafel.android"
     },
     inshot: "com.camerasideas.instashot",
     inshortsnewsin60words: "com.nis.app",
+    inshorts: "com.nis.app",
     imdb: "com.imdb.mobile",
     kinestop: "com.urbandroid.kinestop",
     komoothikebikerun: "de.komoot.android",
+    komoot: "de.komoot.android",
     luminawallpapers: "com.lumina.wallpapers",
     macrodroid: "com.arlosoft.macrodroid",
     medium: "com.medium.reader",
     merriamwebsterdictionary: "com.merriamwebster",
+    merriamwebster: "com.merriamwebster",
     messenger: "com.facebook.orca",
     microsoftlens: "com.microsoft.office.officelens",
     microsoftedge: "com.microsoft.emmx",
@@ -200,7 +216,9 @@ const CONFIG = {
     protonmail: "ch.protonmail.android",
     protonvpn: "ch.protonvpn.android",
     projectivylauncher: "com.spocky.projengmenu",
+    projectivy: "com.spocky.projengmenu",
     sdmaid2se: "eu.darken.sdmse",
+    sdmaid: "eu.darken.sdmse",
     showly: "com.michaldrabik.showly2",
     smartlauncher6: "ginlemon.flowerfree",
     solidexplorer: "pl.solidexplorer2",
@@ -219,6 +237,7 @@ const CONFIG = {
     tiktok: "com.zhiliaoapp.musically",
     todoist: "com.todoist",
     trakttv: "tv.trakt.trakt",
+    trakt: "tv.trakt.trakt",
     truecaller: "com.truecaller",
     tubi: "com.tubitv",
     tumblr: "com.tumblr",
@@ -234,20 +253,26 @@ const CONFIG = {
     waze: "com.waze",
     windscribevpn: "com.windscribe.vpn",
     wpsoffice: "cn.wps.moffice_eng",
+    wps: "cn.wps.moffice_eng",
     twitter: "com.twitter.android",
     xodopdfreadereditor: "com.xodo.pdf.reader",
+    xodo: "com.xodo.pdf.reader",
     xrecorder: "videoeditor.videorecorder.screenrecorder",
     youtube: {
       revanced: "app.revanced.android.youtube",
       rvx: "app.rvx.android.youtube",
+      revancedextended: "app.rvx.android.youtube",
       anddea: "anddea.youtube",
+      revancedadvanced: "anddea.youtube",
       morphe: "app.morphe.android.youtube",
       default: "com.google.android.youtube",
     },
     youtubemusic: {
       revanced: "app.revanced.android.apps.youtube.music",
       rvx: "app.rvx.android.apps.youtube.music",
+      revancedextended: "app.rvx.android.apps.youtube.music",
       anddea: "anddea.youtube.music",
+      revancedadvanced: "anddea.youtube.music",
       morphe: "app.morphe.android.apps.youtube.music",
       default: "com.google.android.apps.youtube.music",
     },
@@ -1736,7 +1761,7 @@ function createObtainiumInstructions(app, patch) {
     regexPattern = `^${appNameNorm}-${patchNameNorm}-${modalVariantFilter}.*\\.apk$`;
   }
 
-  const mainPackageId = getAppPackageId(app?.appKey || appNameNorm, patch?.patchKey || patchNameNorm, modalVariantFilter || "default");
+  const mainPackageId = getAppPackageId(app, patch, modalVariantFilter || "default");
   const mainSafeId = mainPackageId || `${CONFIG.owner}_${app?.appKey || "app"}_${patch?.patchKey || "patch"}`.replace(/[^a-zA-Z0-9_]/g, "_");
   const mainLabel = `${app?.appName || "App"} (${patch?.patchName || "Patch"})`;
   const mainAdditionalSettings = { apkFilterRegEx: regexPattern };
@@ -1760,10 +1785,8 @@ function createObtainiumInstructions(app, patch) {
         ? `^${appNameNorm}-${patchNameNorm}.*\\.apk$`
         : `^${appNameNorm}-${patchNameNorm}-${v.variantKey}.*\\.apk$`;
       const vLabel = `${app.appName} (${patch.patchName} - ${v.variantName})`;
-      const vPackageId = getAppPackageId(app?.appKey || appNameNorm, patch?.patchKey || patchNameNorm, v.variantKey);
-      const vSafeId = vPackageId
-        ? (v.variantKey === "default" ? vPackageId : `${vPackageId}_${v.variantKey}`)
-        : `${CONFIG.owner}_${app.appKey}_${patch.patchKey}_${v.variantKey}_${index}`.replace(/[^a-zA-Z0-9_]/g, "_");
+      const vPackageId = getAppPackageId(app, patch, v.variantKey);
+      const vSafeId = vPackageId || `${CONFIG.owner}_${app.appKey}_${patch.patchKey}_${v.variantKey}_${index}`.replace(/[^a-zA-Z0-9_]/g, "_");
 
       const vAdditionalSettings = { apkFilterRegEx: vRegex };
       if (modalBuildFilter === "beta") {
@@ -1835,13 +1858,101 @@ function createObtainiumInstructions(app, patch) {
   `;
 }
 
-function getAppPackageId(appSlug, patchSlug, variantSlug) {
-  const mapping = CONFIG.appIds[appSlug];
+function getAppPackageId(app, patch, variantKey) {
+  if (!app) return "";
+
+  const appKeyNorm = normalizeForSearch(app.appKey || app.appName || "");
+  const appNameNorm = normalizeForSearch(app.appName || "");
+
+  // Candidate slugs to search in CONFIG.appIds
+  const appCandidates = [app.appKey, appKeyNorm, appNameNorm];
+
+  const sampleAsset = patch?.builds?.[0]?.assets?.[0] || app?.patches?.[0]?.builds?.[0]?.assets?.[0];
+  if (sampleAsset?.name) {
+    const baseName = sampleAsset.name.replace(/\.(apk|zip)$/i, "");
+    const tokens = baseName.split("-").filter(Boolean);
+    const patchIdx = tokens.findIndex((t) => CONFIG.knownPatchTokens.has(t.toLowerCase()));
+    if (patchIdx > 0) {
+      const rawSlug = tokens.slice(0, patchIdx).join("").toLowerCase();
+      appCandidates.push(rawSlug);
+    }
+    if (tokens.length > 0) {
+      appCandidates.push(tokens[0].toLowerCase());
+    }
+  }
+
+  let mapping = null;
+  for (const cand of appCandidates) {
+    if (!cand) continue;
+    if (CONFIG.appIds[cand]) {
+      mapping = CONFIG.appIds[cand];
+      break;
+    }
+    const candNorm = normalizeForSearch(cand);
+    if (CONFIG.appIds[candNorm]) {
+      mapping = CONFIG.appIds[candNorm];
+      break;
+    }
+  }
+
+  if (!mapping) {
+    // Fuzzy matching against CONFIG.appIds
+    for (const [key, val] of Object.entries(CONFIG.appIds)) {
+      const normKey = normalizeForSearch(key);
+      if (normKey === appNameNorm || appNameNorm.includes(normKey) || normKey.includes(appNameNorm) ||
+          normKey === appKeyNorm || appKeyNorm.includes(normKey) || normKey.includes(appKeyNorm)) {
+        mapping = val;
+        break;
+      }
+    }
+  }
+
   if (!mapping) return "";
   if (typeof mapping === "string") return mapping;
-  if (mapping[patchSlug]) return mapping[patchSlug];
-  if (mapping[variantSlug]) return mapping[variantSlug];
-  return mapping.default || "";
+
+  if (typeof mapping === "object") {
+    const patchCandidates = [
+      patch?.patchKey,
+      normalizeForSearch(patch?.patchName || ""),
+    ];
+    if (sampleAsset?.name) {
+      const baseName = sampleAsset.name.replace(/\.(apk|zip)$/i, "");
+      const tokens = baseName.split("-").filter(Boolean);
+      const patchIdx = tokens.findIndex((t) => CONFIG.knownPatchTokens.has(t.toLowerCase()));
+      if (patchIdx >= 0) {
+        patchCandidates.push(tokens[patchIdx].toLowerCase());
+      }
+    }
+
+    const normVariant = normalizeForSearch(variantKey || "");
+
+    // 1. Check variant overrides (e.g. clone, androidtv, foss)
+    if (normVariant && normVariant !== "default" && normVariant !== "all") {
+      if (mapping[normVariant]) return mapping[normVariant];
+      if (normVariant.includes("tv") && mapping["androidtv"]) return mapping["androidtv"];
+      if (normVariant.includes("clone") && mapping["clone"]) return mapping["clone"];
+      if (normVariant.includes("foss") && mapping["foss"]) return mapping["foss"];
+    }
+
+    // 2. Check patch overrides (e.g. revanced, rvx, anddea, morphe)
+    for (const pCand of patchCandidates) {
+      if (!pCand) continue;
+      if (mapping[pCand]) return mapping[pCand];
+      if (pCand === "revancedextended" && mapping["rvx"]) return mapping["rvx"];
+      if (pCand === "revancedadvanced" && mapping["anddea"]) return mapping["anddea"];
+      if (pCand === "rvx" && mapping["revancedextended"]) return mapping["revancedextended"];
+      if (pCand === "anddea" && mapping["revancedadvanced"]) return mapping["revancedadvanced"];
+    }
+
+    // 3. Default fallback
+    if (mapping.default) return mapping.default;
+
+    // 4. First string value fallback
+    const firstVal = Object.values(mapping).find((v) => typeof v === "string");
+    if (firstVal) return firstVal;
+  }
+
+  return "";
 }
 
 function closeObtainiumModal() {
