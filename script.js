@@ -1470,7 +1470,7 @@ function createModalBuildMarkup(app, patch, build, openByDefault = false) {
         </div>
         <div class="modal-build-header-right">
           <span class="badge-group">
-            ${build.isArchive ? `<span class="release-badge archive">Archive${build.releaseType ? ` (${build.releaseType === 'beta' ? 'Beta' : 'Stable'})` : ''}</span>` : ""}
+            ${build.isArchive ? `<span class="release-badge archive">Archive</span>` : ""}
           </span>
         </div>
       </summary>
