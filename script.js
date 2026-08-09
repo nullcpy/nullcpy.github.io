@@ -1567,7 +1567,7 @@ async function openAppliedPatchesModal(appKey, patchKey, buildKey) {
       const tokens = baseName.split("-").filter(Boolean);
       const patchIdx = tokens.findIndex((t) => CONFIG.knownPatchTokens.has(t.toLowerCase()));
       if (patchIdx > 0) {
-        rawSlugNorm = tokens.slice(0, patchIdx).join("").toLowerCase();
+        rawSlugNorm = tokens.slice(0, patchIdx).join("-").toLowerCase();
       }
     }
 
