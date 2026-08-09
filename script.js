@@ -536,6 +536,19 @@ function setupEventListeners() {
         return;
       }
 
+      // Applied Patches button inside downloads modal
+      const appliedTrigger = e.target.closest(".patch-applied-btn");
+      if (appliedTrigger) {
+        e.preventDefault();
+        e.stopPropagation();
+        openAppliedPatchesModal(
+          appliedTrigger.dataset.appKey,
+          appliedTrigger.dataset.patchKey,
+          appliedTrigger.dataset.buildId
+        );
+        return;
+      }
+
       if (e.target.id === "patchModal" || e.target.closest(".modal-close")) {
         closePatchModal();
       }
