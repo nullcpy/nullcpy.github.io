@@ -1641,7 +1641,13 @@ footer a:hover {
     }
 
     .sort-selector-wrap {
+        width: 100%;
         justify-content: center;
+    }
+
+    .catalog-status-bar {
+        justify-content: center;
+        text-align: center;
     }
 
     .modal-overlay {
