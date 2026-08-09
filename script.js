@@ -1510,11 +1510,9 @@ function createModalBuildMarkup(app, patch, build, openByDefault = false) {
   });
 
   const patchInfoBanner = `
-    <div class="patch-info-row">
-      <div class="patch-info-actions">
-        <button class="patch-applied-btn" data-app-key="${app.appKey}" data-patch-key="${patch.patchKey}" data-build-id="${build.releaseId}" type="button">Applied Patches</button>
-        <a href="${build.releaseUrl}" target="_blank" rel="noopener noreferrer" class="release-link release-link-button">View source release on GitHub →</a>
-      </div>
+    <div class="patch-info-actions">
+      <button class="patch-applied-btn" data-app-key="${app.appKey}" data-patch-key="${patch.patchKey}" data-build-id="${build.releaseId}" type="button">Applied Patches</button>
+      <a href="${build.releaseUrl}" target="_blank" rel="noopener noreferrer" class="release-link-button">View Release Source</a>
     </div>
   `;
 
@@ -1525,13 +1523,15 @@ function createModalBuildMarkup(app, patch, build, openByDefault = false) {
           <div class="modal-build-title">${titleText}</div>
           <div class="modal-build-date">${formatDate(build.publishedAt)} • ${escapeHtml(build.version)}</div>
         </div>
-        <span class="badge-group">
-          ${build.isArchive ? '<span class="release-badge archive">Archive</span>' : ""}
-        </span>
+        <div class="modal-build-header-right">
+          <span class="badge-group">
+            ${build.isArchive ? '<span class="release-badge archive">Archive</span>' : ""}
+          </span>
+        </div>
       </summary>
       <div class="modal-build-downloads">
-        ${patchInfoBanner}
         ${downloadsMarkup}
+        ${patchInfoBanner}
       </div>
     </details>
   `;
@@ -1750,8 +1750,10 @@ function createObtainiumInstructions(app, patch) {
 
   return `
     <div class="obtainium-instructions">
+    <div style="margin-bottom: 12px;">
+    Make sure you have <strong>Obtainium</strong> installed, if not install from <a href="${obtainiumLatestUrl}" target="_blank" rel="noopener noreferrer">GitHub</a>. Press the <strong>Add to Obtainium</strong> button to add the app(s) automatically or you can follow the instructions below to add them manually:
+    </div>
       <ol>
-        <li>Download and install Obtainium from <a href="${obtainiumLatestUrl}" target="_blank" rel="noopener noreferrer">GitHub</a>.</li>
         <li>Open Obtainium on your device.</li>
         <li>Tap <strong>Add App</strong>.</li>
         <li>In the <strong>App Source URL</strong> box, enter:
@@ -1767,9 +1769,13 @@ function createObtainiumInstructions(app, patch) {
             <button class="copy-btn" onclick="copyToClipboard('${escapeHtml(regexPattern)}', 'Regex copied!')" type="button">Copy</button>
           </div>
           ${variantExamplesMarkup}
-        </li>
-        <li>Tap <strong>Add</strong> to begin downloading. In the future, Obtainium will automatically fetch updates when new releases are published.</li>
+          </li>
+          <li>To get beta updates, enable the <strong>Include Pre-releases</strong> toggle.</li>
+        <li>Tap <strong>Add</strong> to begin downloading.</li>
       </ol>
+      <div style="margin-top: 12px">
+        In the future, Obtainium will automatically fetch updates when new releases are published.
+      </div>
     </div>
   `;
 }
