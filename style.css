@@ -723,6 +723,9 @@ main {
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0.02em;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
 }
 
 .patch-engine-link {
@@ -733,6 +736,13 @@ main {
 .patch-engine-link:hover {
     opacity: 0.88;
     transform: translateY(-1px);
+}
+
+.patch-link-arrow {
+    width: 11px;
+    height: 11px;
+    flex-shrink: 0;
+    opacity: 0.85;
 }
 
 .patch-stat-badge {
