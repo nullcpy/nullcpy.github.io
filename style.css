@@ -1123,6 +1123,25 @@ body.modal-open {
     line-height: 1.2;
 }
 
+.release-link {
+    display: inline-flex;
+    align-items: center;
+    color: #38bdf8;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.release-link:hover {
+    color: #7dd3fc;
+}
+
+body.light-mode .release-link {
+    color: #0284c7;
+}
+
 /* Asset Download Groups */
 .asset-group {
     display: flex;
@@ -1173,6 +1192,13 @@ body.modal-open {
     min-width: 0;
 }
 
+.asset-title-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
 .asset-title {
     font-size: 1rem;
     font-weight: 700;
@@ -1189,33 +1215,38 @@ body.modal-open {
 .asset-right {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     flex-shrink: 0;
 }
 
 .btn-text {
-    font-size: 0.8rem;
+    font-size: 0.82rem;
     color: var(--text-secondary);
     font-family: "JetBrains Mono", monospace;
 }
 
-.copy-hash-btn {
-    padding: 6px 10px;
-    background: var(--bg-tertiary);
-    border: 1px solid var(--border);
+.download-action-btn {
+    padding: 8px 18px;
+    background: var(--accent);
+    color: #000000 !important;
+    font-weight: 700;
+    font-size: 0.82rem;
     border-radius: var(--radius-sm);
-    color: var(--text-muted);
-    font-size: 0.75rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.15s ease;
-}
-    transition: all 0.15s ease;
+    text-decoration: none !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    transition: opacity 0.2s ease, transform 0.15s ease;
 }
 
-.copy-hash-btn:hover {
-    color: var(--accent);
-    border-color: var(--accent);
+.download-action-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+body.light-mode .download-action-btn {
+    color: #ffffff !important;
 }
 
 /* Applied Patches Modal Specifics */
@@ -1422,21 +1453,65 @@ footer a:hover {
     }
 
     .modal-overlay {
-        padding: 10px;
+        padding: 8px;
     }
 
     .modal-card {
         max-height: 94vh;
+        max-height: 94dvh;
+    }
+
+    .modal-header {
+        position: relative;
+        padding-right: 54px;
+    }
+
+    .modal-header-right {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+    }
+
+    .modal-header-right #obtainiumBtn {
+        display: none;
+    }
+
+    .modal-filter-buttons {
+        display: flex;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        flex-wrap: nowrap;
+        padding-bottom: 4px;
+        max-width: 100%;
+        scrollbar-width: none;
+    }
+
+    .modal-filter-buttons::-webkit-scrollbar {
+        display: none;
+    }
+
+    .modal-filter-btn {
+        flex-shrink: 0;
     }
 
     .download-btn {
         flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
+        align-items: stretch;
+        gap: 10px;
+        padding: 12px 14px;
     }
 
     .asset-right {
         width: 100%;
         justify-content: space-between;
+        align-items: center;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        padding-top: 10px;
+    }
+
+    .download-action-btn {
+        flex: 1;
+        max-width: 140px;
+        text-align: center;
     }
 }

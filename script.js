@@ -1292,9 +1292,6 @@ function createPatchMarkup(app, patch) {
           <span class="patch-engine-badge">${escapeHtml(patch.patchName)}</span>
           ${buildIconBadge}
         </div>
-        <button class="patch-applied-btn" data-app-key="${app.appKey}" data-patch-key="${patch.patchKey}" data-build-id="" type="button" title="View applied patch features">
-          🔍 Patches
-        </button>
       </div>
       <div class="variant-matrix">
         ${variantRowsHtml}
@@ -1481,24 +1478,18 @@ function createModalBuildMarkup(app, patch, build, openByDefault = false) {
         ? `<span class="variants-indicator">${escapeHtml(asset.parsed.variant)}</span>`
         : "";
 
-      const shaHash = asset.digest && asset.digest.startsWith("sha256:")
-        ? asset.digest.replace("sha256:", "")
-        : "";
-      const copyHashBtn = shaHash
-        ? `<button class="copy-hash-btn" data-hash="${shaHash}" title="Copy SHA-256 Checksum" type="button">📋 SHA-256</button>`
-        : "";
-
       downloadsMarkup += `
         <div class="download-btn ${arch}">
           <div class="asset-left">
-            <span class="asset-title">${escapeHtml(asset.parsed.appName)}</span>
+            <div class="asset-title-row">
+              <span class="asset-title">${escapeHtml(asset.parsed.appName)}</span>
+              ${variantBadge}
+            </div>
             <span class="asset-subtitle">${escapeHtml(asset.parsed.version)} • ${asset.fileType}</span>
           </div>
           <div class="asset-right">
-            ${variantBadge}
             <span class="btn-text">${sizeStr} • 📥 ${downloads}</span>
-            ${copyHashBtn}
-            <a href="${asset.browser_download_url}" class="copy-btn" download title="Download ${asset.name}">Download</a>
+            <a href="${asset.browser_download_url}" class="download-action-btn" download title="Download ${asset.name}">Download</a>
           </div>
         </div>
       `;
