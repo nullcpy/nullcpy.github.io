@@ -1256,6 +1256,9 @@ function createPatchMarkup(app, patch) {
           <span class="patch-engine-badge">${escapeHtml(patch.patchName)}</span>
           ${buildIconBadge}
         </div>
+        <button class="patch-applied-btn" data-app-key="${app.appKey}" data-patch-key="${patch.patchKey}" data-build-id="" type="button" title="View applied patch features">
+          🔍 Patches
+        </button>
       </div>
       <div class="variant-matrix">
         ${variantRowsHtml}
@@ -1468,20 +1471,25 @@ function createModalBuildMarkup(app, patch, build, openByDefault = false) {
     downloadsMarkup += `</div>`;
   });
 
-  // Patch info banner if available
-  let patchInfoBanner = "";
-  if (build.patchMeta && (build.patchMeta.patches.length > 0 || build.patchMeta.changelogs.length > 0)) {
-    const changelogLink = build.patchMeta.changelogs[0]
-      ? `<a href="${build.patchMeta.changelogs[0]}" target="_blank" rel="noopener noreferrer" class="release-link" style="font-size: 0.8rem;">Changelog ↗</a>`
-      : "";
-    const patchNames = build.patchMeta.patches.join(", ");
-    patchInfoBanner = `
-      <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; padding-bottom: 8px; border-bottom: 1px solid var(--border);">
-        <span><strong>Patch:</strong> ${escapeHtml(patchNames || patch.patchName)}</span>
+  // Patch info banner
+  const changelogLink = build.patchMeta && build.patchMeta.changelogs[0]
+    ? `<a href="${build.patchMeta.changelogs[0]}" target="_blank" rel="noopener noreferrer" class="release-link" style="font-size: 0.8rem;">Changelog ↗</a>`
+    : "";
+  const patchNames = build.patchMeta && build.patchMeta.patches.length > 0
+    ? build.patchMeta.patches.join(", ")
+    : patch.patchName;
+
+  const patchInfoBanner = `
+    <div style="font-size: 0.82rem; color: var(--text-secondary); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding-bottom: 10px; border-bottom: 1px solid var(--border); margin-bottom: 12px;">
+      <span><strong>Patch Source:</strong> ${escapeHtml(patchNames)}</span>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <button class="patch-applied-btn" data-app-key="${app.appKey}" data-patch-key="${patch.patchKey}" data-build-id="${build.releaseId}" type="button">
+          🔍 Applied Patches
+        </button>
         ${changelogLink}
       </div>
-    `;
-  }
+    </div>
+  `;
 
   return `
     <details class="modal-build-card" ${openByDefault ? "open" : ""}>
