@@ -11,7 +11,7 @@ const CONFIG = {
 
   // App Categories for the filter buttons
   appCategories: {
-    androidtv: ["primevideo", "plutotv", "moviebox", "disneyplus", "hbomax", "tubi", "vix", "at4klauncher", "projectivylauncher"],
+    androidtv: ["primevideo", "plutotv", "moviebox", "disneyplus", "hbomax", "tubi", "vix", "at4klauncher", "projectivylauncher", "peacock"],
     google: ["youtube", "google"],
     meta: ["threads", "instagram", "messenger", "facebook", "!plusmessenger"],
     vpn: ["1111warp", "vpnify", "vpn"]
@@ -753,16 +753,11 @@ function buildAppCatalog(releases) {
           appName: parsed.appName,
           latestStable: null,
           latestBeta: null,
-          hasModules: false,
-          hasTv: false,
           patches: new Map(),
         });
       }
 
       const appEntry = appMap.get(appKey);
-      if (fileType === "Module") appEntry.hasModules = true;
-      if (parsed.variant && parsed.variant.toLowerCase().includes("android tv")) appEntry.hasTv = true;
-
       setLatestBuildMeta(appEntry, releaseType, release);
 
       const patchKey = normalizeForSearch(parsed.patchName) || "patchedbuild";

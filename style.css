@@ -24,11 +24,6 @@
     --accent-obtainium: #c47bd4;
     /* signature lavender purple — Obtainium buttons (dark) */
     --accent-obtainium-glow: rgba(196, 123, 212, 0.25);
-    --accent-module: #d4a04a;
-    /* warm amber — root modules */
-    --accent-module-glow: rgba(212, 160, 74, 0.18);
-    --accent-tv: #3fb950;
-    /* green — Android TV */
     --accent-danger: #f85149;
     /* GitHub red — errors */
     --accent-warning: #d4a04a;
@@ -74,10 +69,6 @@ body.light-mode {
     --accent-obtainium: #8250df;
     /* signature purple — Obtainium buttons (light) */
     --accent-obtainium-glow: rgba(130, 80, 223, 0.20);
-    --accent-module: #b8882e;
-    /* warm amber */
-    --accent-module-glow: rgba(184, 136, 46, 0.12);
-    --accent-tv: #1a7f37;
     --accent-danger: #cf222e;
     /* GitHub danger */
     --accent-warning: #9a6700;
@@ -1363,13 +1354,6 @@ body.light-mode .download-btn:hover {
     gap: 4px;
     flex: 1;
     min-width: 0;
-}
-
-.asset-title-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
 }
 
 .asset-title {
