@@ -846,9 +846,10 @@ function buildAppCatalog(releases) {
           release.build_data[parsed.appName] ||
           release.build_data[parsed.appName.toLowerCase().replace(/\s+/g, "-")];
         if (bd) {
-          buildDataApplied = bd.applied_patches || null;
-          buildDataPatches = bd.patches || null;
-          buildDataChangelog = bd.changlog || null;
+          const entry = (parsed.version && bd[parsed.version]) ? bd[parsed.version] : bd;
+          buildDataApplied = entry.applied_patches || null;
+          buildDataPatches = entry.patches || null;
+          buildDataChangelog = entry.changlog || entry.changelog || null;
         }
       }
 
