@@ -1354,7 +1354,7 @@ body.light-mode .download-action-btn {
     color: var(--text-primary);
 }
 
-.obtainium-instructions a {
+.obtainium-instructions a:not(.obtainium-add-btn) {
     color: var(--accent);
     font-weight: 600;
     text-decoration: underline;
@@ -1362,11 +1362,11 @@ body.light-mode .download-action-btn {
     transition: color 0.2s ease;
 }
 
-.obtainium-instructions a:hover {
+.obtainium-instructions a:not(.obtainium-add-btn):hover {
     color: #7dd3fc;
 }
 
-body.light-mode .obtainium-instructions a {
+body.light-mode .obtainium-instructions a:not(.obtainium-add-btn) {
     color: #0284c7;
 }
 
@@ -1406,6 +1406,8 @@ body.light-mode .obtainium-instructions a {
     font-size: 0.78rem;
     font-weight: 700;
     transition: opacity 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .copy-btn:hover {
@@ -1415,7 +1417,7 @@ body.light-mode .obtainium-instructions a {
 .obtainium-add-btn {
     background: var(--accent-beta);
     color: #ffffff !important;
-    text-decoration: none;
+    text-decoration: none !important;
     padding: 6px 14px;
     border-radius: var(--radius-sm);
     font-size: 0.78rem;
@@ -1423,6 +1425,23 @@ body.light-mode .obtainium-instructions a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    white-space: nowrap;
+    flex-shrink: 0;
+    border: none;
+    transition: opacity 0.2s, transform 0.15s ease;
+}
+
+.obtainium-add-btn:hover {
+    opacity: 0.9;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    transform: translateY(-1px);
+}
+
+body.light-mode .obtainium-add-btn {
+    background: #8b5cf6;
+    color: #ffffff !important;
+    text-decoration: none !important;
 }
 
 .code-with-copy {

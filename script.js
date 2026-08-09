@@ -1686,6 +1686,7 @@ function createObtainiumInstructions(app, patch) {
 
   const appNameNorm = normalizeForSearch(app?.appName || "app");
   const patchNameNorm = normalizeForSearch(patch?.patchName || "patch");
+  const appId = CONFIG.appIds[app?.appKey] || CONFIG.appIds[appNameNorm] || "";
 
   // If a specific variant is selected (e.g. not "default" / "all")
   const isSpecificVariant = modalVariantFilter && modalVariantFilter !== "default" && modalVariantFilter !== "all";
@@ -1696,13 +1697,18 @@ function createObtainiumInstructions(app, patch) {
   }
 
   const mainLabel = `${app?.appName || "App"} (${patch?.patchName || "Patch"})`;
-  const mainSafeId = `${CONFIG.owner}_${app?.appKey || "app"}_${patch?.patchKey || "patch"}`.replace(/[^a-zA-Z0-9_]/g, "_");
+  const mainSafeId = appId ? `${appId}_0` : `${CONFIG.owner}_${app?.appKey || "app"}_${patch?.patchKey || "patch"}`.replace(/[^a-zA-Z0-9_]/g, "_");
+  const mainAdditionalSettings = { apkFilterRegEx: regexPattern };
+  if (modalBuildFilter === "beta") {
+    mainAdditionalSettings.includePrereleases = true;
+  }
+
   const mainConfig = {
     id: mainSafeId,
     name: mainLabel,
     author: CONFIG.owner,
     url: repoUrl,
-    additionalSettings: JSON.stringify({ apkFilterRegEx: regexPattern })
+    additionalSettings: JSON.stringify(mainAdditionalSettings),
   };
   const mainOneClickUrl = `https://apps.obtainium.imranr.dev/redirect?r=${encodeURIComponent("obtainium://app/" + JSON.stringify(mainConfig))}`;
 
@@ -1714,13 +1720,19 @@ function createObtainiumInstructions(app, patch) {
         ? `^${appNameNorm}-${patchNameNorm}.*\\.apk$`
         : `^${appNameNorm}-${patchNameNorm}-${v.variantKey}.*\\.apk$`;
       const vLabel = `${app.appName} (${patch.patchName} - ${v.variantName})`;
-      const vSafeId = `${CONFIG.owner}_${app.appKey}_${patch.patchKey}_${v.variantKey}_${index}`.replace(/[^a-zA-Z0-9_]/g, "_");
+      const vSafeId = appId ? `${appId}_${index + 1}` : `${CONFIG.owner}_${app.appKey}_${patch.patchKey}_${v.variantKey}_${index}`.replace(/[^a-zA-Z0-9_]/g, "_");
+      
+      const vAdditionalSettings = { apkFilterRegEx: vRegex };
+      if (modalBuildFilter === "beta") {
+        vAdditionalSettings.includePrereleases = true;
+      }
+
       const vConfig = {
         id: vSafeId,
         name: vLabel,
         author: CONFIG.owner,
         url: repoUrl,
-        additionalSettings: JSON.stringify({ apkFilterRegEx: vRegex })
+        additionalSettings: JSON.stringify(vAdditionalSettings),
       };
       const vOneClickUrl = `https://apps.obtainium.imranr.dev/redirect?r=${encodeURIComponent("obtainium://app/" + JSON.stringify(vConfig))}`;
 
@@ -1731,8 +1743,8 @@ function createObtainiumInstructions(app, patch) {
           </div>
           <div class="instruction-code">
             <code>${escapeHtml(vRegex)}</code>
-            <button class="copy-btn" onclick="copyToClipboard('${escapeHtml(vRegex)}', 'Regex copied!')" type="button">Copy</button>
             <a href="${vOneClickUrl}" class="obtainium-add-btn" target="_blank" rel="noopener noreferrer">Add to Obtainium</a>
+            <button class="copy-btn" onclick="copyToClipboard('${escapeHtml(vRegex)}', 'Regex copied!')" type="button">Copy</button>
           </div>
         </div>
       `;
@@ -1761,8 +1773,8 @@ function createObtainiumInstructions(app, patch) {
         <li>Scroll down to <strong>Filter APKs by regular expression</strong> and enter:
           <div class="instruction-code">
             <code>${escapeHtml(regexPattern)}</code>
-            <button class="copy-btn" onclick="copyToClipboard('${escapeHtml(regexPattern)}', 'Regex copied!')" type="button">Copy</button>
             <a href="${mainOneClickUrl}" class="obtainium-add-btn" target="_blank" rel="noopener noreferrer">Add to Obtainium</a>
+            <button class="copy-btn" onclick="copyToClipboard('${escapeHtml(regexPattern)}', 'Regex copied!')" type="button">Copy</button>
           </div>
           ${variantExamplesMarkup}
         </li>
