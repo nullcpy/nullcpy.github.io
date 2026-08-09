@@ -24,9 +24,6 @@
     --accent-obtainium: #c47bd4;
     /* signature lavender purple — Obtainium buttons (dark) */
     --accent-obtainium-glow: rgba(196, 123, 212, 0.25);
-    --accent-variant: #58a6ff;
-    /* blue — variant indicator */
-    --accent-variant-glow: rgba(88, 166, 255, 0.15);
     --accent-module: #d4a04a;
     /* warm amber — root modules */
     --accent-module-glow: rgba(212, 160, 74, 0.18);
@@ -77,9 +74,6 @@ body.light-mode {
     --accent-obtainium: #8250df;
     /* signature purple — Obtainium buttons (light) */
     --accent-obtainium-glow: rgba(130, 80, 223, 0.20);
-    --accent-variant: #0969da;
-    /* blue */
-    --accent-variant-glow: rgba(9, 105, 218, 0.10);
     --accent-module: #b8882e;
     /* warm amber */
     --accent-module-glow: rgba(184, 136, 46, 0.12);
@@ -1324,10 +1318,6 @@ body.light-mode .download-btn:hover {
     background: var(--accent-glow);
 }
 
-.patch-applied-btn {
-    box-shadow: var(--shadow);
-}
-
 /* Asset Download Groups */
 .asset-group {
     display: flex;
@@ -1352,6 +1342,7 @@ body.light-mode .download-btn:hover {
     padding: 14px 18px;
     background: var(--bg-secondary);
     border: 1px solid var(--border);
+    border-left: 4px solid transparent;
     border-radius: var(--radius-md);
     color: var(--text-primary);
     text-decoration: none;
@@ -1364,22 +1355,6 @@ body.light-mode .download-btn:hover {
     border-color: var(--border);
     transform: translateY(-1px);
     box-shadow: var(--shadow-hover);
-}
-
-.download-btn.arm64 {
-    border-left: 4px solid transparent;
-}
-
-.download-btn.arm32 {
-    border-left: 4px solid transparent;
-}
-
-.download-btn.universal {
-    border-left: 4px solid transparent;
-}
-
-.download-btn.x86 {
-    border-left: 4px solid transparent;
 }
 
 .asset-left {
@@ -1554,7 +1529,7 @@ body.light-mode .download-btn:hover {
 .instruction-code code {
     flex: 1;
     min-width: 0;
-    font-family: "IBM Plex Mono", monospace;
+    font-family: var(--font-mono);
     font-size: 0.85rem;
     color: var(--accent);
     word-break: break-all;
@@ -1785,10 +1760,6 @@ footer a:hover {
         padding: 8px 10px;
     }
 
-    .instruction-code.code-with-copy {
-        flex-wrap: nowrap;
-    }
-
     .instruction-code code {
         flex: 1 1 100%;
         width: 100%;
@@ -1796,11 +1767,6 @@ footer a:hover {
         text-overflow: ellipsis;
         white-space: nowrap;
         font-size: 0.74rem;
-    }
-
-    .instruction-code.code-with-copy code {
-        flex: 1 1 0;
-        width: auto;
     }
 
     .instruction-code .copy-btn,
@@ -1812,27 +1778,18 @@ footer a:hover {
         font-size: 0.72rem;
     }
 
-    .instruction-code.code-with-copy .copy-btn {
-        flex: 0 0 auto;
-        width: auto;
-    }
-
-    .code-with-copy {
+    .instruction-code.code-with-copy {
         flex-wrap: nowrap;
     }
 
-    .code-with-copy code {
+    .instruction-code.code-with-copy code {
         flex: 1 1 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        font-size: 0.74rem;
+        width: auto;
     }
 
-    .code-with-copy .copy-btn {
+    .instruction-code.code-with-copy .copy-btn {
         flex: 0 0 auto;
         width: auto;
-        min-height: 32px;
         padding: 6px 12px;
     }
 
