@@ -1547,10 +1547,27 @@ function closePatchModal() {
       document.body.classList.remove("modal-open");
     }
   }
+// Master Build Metadata Store
+let masterBuildDataCache = null;
+
+async function fetchMasterBuildData() {
+  if (masterBuildDataCache) return masterBuildDataCache;
+  try {
+    const resp = await fetch("master_build.json");
+    if (resp.ok) {
+      masterBuildDataCache = await resp.json();
+    } else {
+      masterBuildDataCache = {};
+    }
+  } catch (e) {
+    console.warn("Could not load master_build.json:", e);
+    masterBuildDataCache = {};
+  }
+  return masterBuildDataCache;
 }
 
 // Applied Patches Modal Controller
-function openAppliedPatchesModal(appKey, patchKey, buildId) {
+async function openAppliedPatchesModal(appKey, patchKey, buildId) {
   const app = currentAppCatalog.find((item) => item.appKey === appKey);
   const patch = app ? app.patches.find((item) => item.patchKey === patchKey) : null;
   if (!app || !patch) return;
@@ -1563,18 +1580,45 @@ function openAppliedPatchesModal(appKey, patchKey, buildId) {
   const metaEl = document.getElementById("appliedPatchesMeta");
   const build = patch.builds.find((b) => String(b.releaseId) === String(buildId)) || patch.builds[0];
 
-  if (metaEl && build && build.patchMeta) {
-    const pNames = build.patchMeta.patches.join(", ") || patch.patchName;
-    const clUrl = build.patchMeta.changelogs[0] || null;
+  let pNames = build?.patchMeta?.patches?.length > 0 ? build.patchMeta.patches.join(", ") : patch.patchName;
+  let clUrl = build?.patchMeta?.changelogs?.[0] || null;
+  let appliedPatches = (Array.isArray(build?.appliedPatches) && build.appliedPatches.length > 0) ? build.appliedPatches : null;
+
+  // If appliedPatches not embedded on release, resolve from master_build.json
+  if (!appliedPatches) {
+    const masterData = await fetchMasterBuildData();
+    const appKeyNorm = normalizeForSearch(app.appKey || app.appName);
+    const patchKeyNorm = normalizeForSearch(patch.patchKey || patch.patchName);
+    const targetKey = `${appKeyNorm}-${patchKeyNorm}`;
+
+    const resolved =
+      (masterData[appKeyNorm]?.[patchKeyNorm]?.[build?.version]) ||
+      (masterData[targetKey]?.[build?.version]) ||
+      (masterData[appKeyNorm]?.[patchKeyNorm]?.default) ||
+      (masterData[targetKey]?.default) ||
+      (masterData[appKeyNorm]?.default);
+
+    if (resolved) {
+      if (Array.isArray(resolved.applied_patches) && resolved.applied_patches.length > 0) {
+        appliedPatches = resolved.applied_patches;
+      }
+      if ((!pNames || pNames === patch.patchName) && resolved.patches) {
+        pNames = resolved.patches;
+      }
+      if (!clUrl && resolved.changelog) {
+        clUrl = resolved.changelog;
+      }
+    }
+  }
+
+  if (metaEl) {
     metaEl.innerHTML = `
       ${clUrl ? `<a href="${clUrl}" target="_blank" rel="noopener noreferrer" class="patch-engine-badge patch-engine-link" title="Open changelog">${escapeHtml(pNames)}</a>` : `<span class="patch-engine-badge">${escapeHtml(pNames)}</span>`}
     `;
   }
 
-  // Load patches list (from build info or null if unavailable)
-  activeAppliedPatchesList = (Array.isArray(build?.appliedPatches) && build.appliedPatches.length > 0)
-    ? build.appliedPatches
-    : null;
+  // Load patches list (from resolved info or null if unavailable)
+  activeAppliedPatchesList = appliedPatches;
 
   filterAppliedPatchesList("");
 
