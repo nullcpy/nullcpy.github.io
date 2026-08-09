@@ -281,7 +281,6 @@ const CONFIG = {
 let allReleases = [];
 let cachedFullCatalog = [];
 let searchTerm = "";
-let channelFilter = "all"; // "all" | "stable" | "beta" | "module" | "tv"
 let appCategoryFilter = "all"; // "all" | "google" | "meta" | "vpn" | "word-..."
 let sortMode = "recent"; // "recent" | "popular" | "name"
 let dynamicAppFilters = [];
@@ -317,12 +316,6 @@ document.addEventListener("DOMContentLoaded", () => {
       searchInput.value = urlQuery;
       searchInput.closest(".search-input-wrap")?.classList.add("has-value");
     }
-  }
-
-  const urlChannel = urlParams.get("channel");
-  if (urlChannel && ["all", "stable", "beta", "module", "tv"].includes(urlChannel)) {
-    channelFilter = urlChannel;
-    updateChannelFilterUI();
   }
 
   const urlSort = urlParams.get("sort");
@@ -437,19 +430,6 @@ function setupEventListeners() {
     });
   }
 
-  // Primary Channel Filter Bar
-  const channelFilterBar = document.getElementById("channelFilterBar");
-  if (channelFilterBar) {
-    channelFilterBar.addEventListener("click", (e) => {
-      const btn = e.target.closest(".channel-btn");
-      if (!btn) return;
-      channelFilter = btn.dataset.channel || "all";
-      updateChannelFilterUI();
-      syncUrlParams();
-      filterAndRenderReleases();
-    });
-  }
-
   // Secondary Category Filter Buttons
   const appFilterButtons = document.getElementById("appFilterButtons");
   if (appFilterButtons) {
@@ -479,18 +459,6 @@ function setupEventListeners() {
       const collapsedCard = e.target.closest(".app-card:not([open])");
       if (collapsedCard && !e.target.closest(".app-card-summary")) {
         collapsedCard.open = true;
-        return;
-      }
-
-      // Applied Patches Button click
-      const appliedTrigger = e.target.closest(".patch-applied-btn");
-      if (appliedTrigger) {
-        e.stopPropagation();
-        openAppliedPatchesModal(
-          appliedTrigger.dataset.appKey,
-          appliedTrigger.dataset.patchKey,
-          appliedTrigger.dataset.buildId
-        );
         return;
       }
 
@@ -604,21 +572,10 @@ function setupEventListeners() {
   observer.observe(sentinel);
 }
 
-function updateChannelFilterUI() {
-  document.querySelectorAll("#channelFilterBar .channel-btn").forEach((btn) => {
-    const isActive = btn.dataset.channel === channelFilter;
-    btn.classList.toggle("active", isActive);
-    btn.setAttribute("aria-selected", isActive ? "true" : "false");
-  });
-}
-
 function syncUrlParams() {
   const url = new URL(window.location);
   if (searchTerm) url.searchParams.set("q", searchTerm);
   else url.searchParams.delete("q");
-
-  if (channelFilter !== "all") url.searchParams.set("channel", channelFilter);
-  else url.searchParams.delete("channel");
 
   if (sortMode !== "recent") url.searchParams.set("sort", sortMode);
   else url.searchParams.delete("sort");
@@ -968,31 +925,16 @@ function filterAndRenderReleases() {
   // 1. Search Query Filter
   let apps = filterCatalogBySearch(cachedFullCatalog, searchTerm);
 
-  // 2. Channel & Format Quick Filter
-  if (channelFilter === "stable") {
-    apps = apps.filter((app) =>
-      app.patches.some((p) => p.variants.some((v) => Boolean(v.latestStable)))
-    );
-  } else if (channelFilter === "beta") {
-    apps = apps.filter((app) =>
-      app.patches.some((p) => p.variants.some((v) => Boolean(v.latestBeta)))
-    );
-  } else if (channelFilter === "module") {
-    apps = apps.filter((app) => app.hasModules);
-  } else if (channelFilter === "tv") {
-    apps = apps.filter((app) => app.hasTv);
-  }
-
-  // 3. Category Filter
+  // 2. Category Filter
   apps = applyCategoryFilter(apps);
 
-  // 4. Sort Mode
+  // 3. Sort Mode
   apps = applySortMode(apps);
 
-  // 5. Update Status Text
+  // 4. Update Status Text
   updateCatalogStatus(apps);
 
-  // 6. Render
+  // 5. Render
   renderAppCards(apps);
   updateAppFilterButtons();
   document.getElementById("loading").style.display = "none";
@@ -1521,7 +1463,7 @@ function createModalBuildMarkup(app, patch, build, openByDefault = false) {
       <summary class="modal-build-header">
         <div class="modal-build-header-left">
           <div class="modal-build-title">${titleText}</div>
-          <div class="modal-build-date">${formatDate(build.publishedAt)} • ${escapeHtml(build.version)}</div>
+          <div class="modal-build-date">${formatDate(build.publishedAt)}${build.isArchive ? "" : ` • ${escapeHtml(build.version)}`}</div>
         </div>
         <div class="modal-build-header-right">
           <span class="badge-group">
