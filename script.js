@@ -1590,14 +1590,14 @@ async function openAppliedPatchesModal(appKey, patchKey, buildKey) {
       if (isPatchEntry(candidate)) return candidate;
 
       if (typeof candidate === "object") {
-        if (specificTag && !isArchive) {
-          return isPatchEntry(candidate[specificTag]) ? candidate[specificTag] : null;
-        }
         const tagKeys = Object.keys(candidate).sort((a, b) => {
           const na = Number(a), nb = Number(b);
           if (!isNaN(na) && !isNaN(nb)) return nb - na;
           return b.localeCompare(a);
         });
+        if (specificTag && !isArchive && isPatchEntry(candidate[specificTag])) {
+          return candidate[specificTag];
+        }
         for (const tagKey of tagKeys) {
           if (isPatchEntry(candidate[tagKey])) return candidate[tagKey];
         }
