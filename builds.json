@@ -2,6 +2,19 @@
   "imdb": {
     "morphe": {
       "9.3.4": {
+        "260173": {
+          "patches": "jkennethcarino/patches-1.3.0.mpp",
+          "changelog": "https://github.com/jkennethcarino/adobo/releases/tag/v1.3.0",
+          "applied_patches": [
+            "Remove IMDb's ads, trackers, and analytics "
+          ]
+        }
+      }
+    }
+  },
+  "imdb-morphe": {
+    "9.3.4": {
+      "260173": {
         "patches": "jkennethcarino/patches-1.3.0.mpp",
         "changelog": "https://github.com/jkennethcarino/adobo/releases/tag/v1.3.0",
         "applied_patches": [
@@ -10,45 +23,9 @@
       }
     }
   },
-  "imdb-morphe": {
-    "9.3.4": {
-      "patches": "jkennethcarino/patches-1.3.0.mpp",
-      "changelog": "https://github.com/jkennethcarino/adobo/releases/tag/v1.3.0",
-      "applied_patches": [
-        "Remove IMDb's ads, trackers, and analytics "
-      ]
-    }
-  },
   "gboard-morphe-adobo": {
     "17.7.7.932364120-release-arm64-v8a": {
-      "patches": "jkennethcarino/patches-1.3.0.mpp",
-      "changelog": "https://github.com/jkennethcarino/adobo/releases/tag/v1.3.0",
-      "applied_patches": [
-        "Always-incognito mode ",
-        "Enable OCR feature ",
-        "Enable clipboard in incognito "
-      ]
-    }
-  },
-  "reddit-morphe-adobo": {
-    "2026.31.1": {
-      "patches": "jkennethcarino/patches-1.3.0.mpp",
-      "changelog": "https://github.com/jkennethcarino/adobo/releases/tag/v1.3.0",
-      "applied_patches": [
-        "Colorize comment indent lines ",
-        "Disable home screen redirect ",
-        "Disable screenshot banner ",
-        "Hide community menu badge ",
-        "Hide post view counts ",
-        "Open external links directly ",
-        "Remove ads and telemetry ",
-        "Sanitize share links "
-      ]
-    }
-  },
-  "gboard": {
-    "morphe": {
-      "17.7.7.932364120-release-arm64-v8a": {
+      "260173": {
         "patches": "jkennethcarino/patches-1.3.0.mpp",
         "changelog": "https://github.com/jkennethcarino/adobo/releases/tag/v1.3.0",
         "applied_patches": [
@@ -59,9 +36,9 @@
       }
     }
   },
-  "reddit": {
-    "morphe": {
-      "2026.31.1": {
+  "reddit-morphe-adobo": {
+    "2026.31.1": {
+      "260173": {
         "patches": "jkennethcarino/patches-1.3.0.mpp",
         "changelog": "https://github.com/jkennethcarino/adobo/releases/tag/v1.3.0",
         "applied_patches": [
@@ -74,6 +51,41 @@
           "Remove ads and telemetry ",
           "Sanitize share links "
         ]
+      }
+    }
+  },
+  "gboard": {
+    "morphe": {
+      "17.7.7.932364120-release-arm64-v8a": {
+        "260173": {
+          "patches": "jkennethcarino/patches-1.3.0.mpp",
+          "changelog": "https://github.com/jkennethcarino/adobo/releases/tag/v1.3.0",
+          "applied_patches": [
+            "Always-incognito mode ",
+            "Enable OCR feature ",
+            "Enable clipboard in incognito "
+          ]
+        }
+      }
+    }
+  },
+  "reddit": {
+    "morphe": {
+      "2026.31.1": {
+        "260173": {
+          "patches": "jkennethcarino/patches-1.3.0.mpp",
+          "changelog": "https://github.com/jkennethcarino/adobo/releases/tag/v1.3.0",
+          "applied_patches": [
+            "Colorize comment indent lines ",
+            "Disable home screen redirect ",
+            "Disable screenshot banner ",
+            "Hide community menu badge ",
+            "Hide post view counts ",
+            "Open external links directly ",
+            "Remove ads and telemetry ",
+            "Sanitize share links "
+          ]
+        }
       }
     }
   }
