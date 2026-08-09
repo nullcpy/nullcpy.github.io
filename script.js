@@ -1742,8 +1742,8 @@ function createObtainiumInstructions(app, patch) {
   };
   const mainOneClickUrl = `https://apps.obtainium.imranr.dev/redirect?r=${encodeURIComponent("obtainium://app/" + JSON.stringify(mainConfig))}`;
 
-  // Build variant examples list if multiple variants exist
-  let variantExamplesMarkup = "";
+  // Build regex list: if multiple variants exist, show the variant breakdown directly; otherwise show the single regex
+  let step4Content = "";
   if (patch && patch.variants && patch.variants.length > 1) {
     const examples = patch.variants.map((v, index) => {
       const vRegex = v.variantKey === "default"
@@ -1783,10 +1783,17 @@ function createObtainiumInstructions(app, patch) {
       `;
     }).join("");
 
-    variantExamplesMarkup = `
-      <div style="margin-top: 12px;">
-        <div style="font-size: 0.84rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px;">Variant Regular Expressions:</div>
+    step4Content = `
+      <div style="margin-top: 4px;">
         ${examples}
+      </div>
+    `;
+  } else {
+    step4Content = `
+      <div class="instruction-code" style="margin-top: 6px;">
+        <code>${escapeHtml(regexPattern)}</code>
+        <a href="${mainOneClickUrl}" class="obtainium-add-btn" target="_blank" rel="noopener noreferrer">Add to Obtainium</a>
+        <button class="copy-btn" onclick="copyToClipboard('${escapeHtml(regexPattern)}', 'Regex copied!')" type="button">Copy</button>
       </div>
     `;
   }
@@ -1806,14 +1813,9 @@ function createObtainiumInstructions(app, patch) {
           </div>
         </li>
         <li>Scroll down to <strong>Filter APKs by regular expression</strong> and enter:
-          <div class="instruction-code">
-            <code>${escapeHtml(regexPattern)}</code>
-            <a href="${mainOneClickUrl}" class="obtainium-add-btn" target="_blank" rel="noopener noreferrer">Add to Obtainium</a>
-            <button class="copy-btn" onclick="copyToClipboard('${escapeHtml(regexPattern)}', 'Regex copied!')" type="button">Copy</button>
-          </div>
-          ${variantExamplesMarkup}
-          </li>
-          <li>To get beta updates, enable the <strong>Include Pre-releases</strong> toggle.</li>
+          ${step4Content}
+        </li>
+        <li>To get beta updates, enable the <strong>Include Pre-releases</strong> toggle.</li>
         <li>Tap <strong>Add</strong> to begin downloading.</li>
       </ol>
       <div style="margin-top: 12px">
