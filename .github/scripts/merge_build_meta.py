@@ -126,7 +126,15 @@ def prune_stale_metadata(master_build, releases):
     all_stored_keys = list(master_build.keys())
     pruned_apps = []
     for k in all_stored_keys:
-        if k not in live_apps:
+        # Check if app key or target matches live inventory
+        clean_k = k.lower().replace("-", "").replace("_", "")
+        is_live = any(
+            clean_k in live.lower().replace("-", "").replace("_", "") or
+            live.lower().replace("-", "").replace("_", "") in clean_k
+            for live in live_apps
+        )
+
+        if not is_live:
             del master_build[k]
             pruned_apps.append(k)
             continue
@@ -142,13 +150,13 @@ def prune_stale_metadata(master_build, releases):
                     for ver_k in list(sub_val.keys()):
                         if ver_k != "default" and ver_k not in allowed_versions:
                             del sub_val[ver_k]
-                            print(f"🗑️ Pruned purged version: {k}/{sub_k} v{ver_k}")
+                            print(f"[-] Pruned purged version: {k}/{sub_k} v{ver_k}")
                 elif sub_k != "default" and sub_k not in KNOWN_ENGINES and sub_k not in allowed_versions:
                     del app_data[sub_k]
-                    print(f"🗑️ Pruned purged version: {k} v{sub_k}")
+                    print(f"[-] Pruned purged version: {k} v{sub_k}")
 
     if pruned_apps:
-        print(f"🗑️ Cleaned up deleted apps from metadata: {', '.join(pruned_apps)}")
+        print(f"[-] Cleaned up deleted apps from metadata: {', '.join(pruned_apps)}")
 
     return master_build
 
@@ -200,7 +208,7 @@ def main():
                     build_data = json.loads(resp.read().decode("utf-8"))
                     rel["build_data"] = build_data
                     new_build_data_count += 1
-                    print(f"✓ Ingested new build.json for Release {rel.get('tag_name')}")
+                    print(f"[OK] Ingested new build.json for Release {rel.get('tag_name')}")
 
                     if isinstance(build_data, dict):
                         for target_key, info in build_data.items():
@@ -214,12 +222,12 @@ def main():
     # Save clean master_build.json
     with open(MASTER_BUILD_FILE, "w", encoding="utf-8") as f:
         json.dump(master_build, f, indent=2, ensure_ascii=False)
-    print(f"✓ Successfully wrote {MASTER_BUILD_FILE} ({len(master_build)} apps)")
+    print(f"[OK] Successfully wrote {MASTER_BUILD_FILE} ({len(master_build)} apps)")
 
     # Save updated releases.json cache
     with open("releases.json", "w", encoding="utf-8") as f:
         json.dump(releases, f, separators=(",", ":"))
-    print(f"✓ Successfully wrote releases.json ({len(releases)} releases, {new_build_data_count} newly ingested)")
+    print(f"[OK] Successfully wrote releases.json ({len(releases)} releases, {new_build_data_count} newly ingested)")
 
 if __name__ == "__main__":
     main()
