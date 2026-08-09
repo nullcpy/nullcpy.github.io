@@ -517,6 +517,7 @@ body.light-mode .filter-btn.active {
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: 20px;
     margin-bottom: 30px;
+    align-items: start;
 }
 
 /* App Card */
@@ -914,9 +915,17 @@ body.modal-open {
 .modal-header-top {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     gap: 12px;
     width: 100%;
+}
+
+.modal-title-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
 }
 
 .modal-header h2 {
@@ -1334,6 +1343,22 @@ body.light-mode .download-action-btn {
 /* Obtainium Modal */
 .obtainium-instructions {
     color: var(--text-primary);
+}
+
+.obtainium-instructions a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s ease;
+}
+
+.obtainium-instructions a:hover {
+    color: #7dd3fc;
+}
+
+body.light-mode .obtainium-instructions a {
+    color: #0284c7;
 }
 
 .obtainium-instructions ol {

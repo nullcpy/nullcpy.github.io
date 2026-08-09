@@ -183,11 +183,13 @@
     <div id="appliedPatchesModal" class="modal-overlay" aria-hidden="true">
         <div class="modal-card modal-card-wide" role="dialog" aria-modal="true" aria-labelledby="appliedPatchesTitle">
             <div class="modal-header">
-                <div class="modal-title-wrap">
-                    <h2 id="appliedPatchesTitle">Applied Patches</h2>
-                    <div id="appliedPatchesMeta" class="applied-patches-meta"></div>
+                <div class="modal-header-top">
+                    <div class="modal-title-wrap">
+                        <h2 id="appliedPatchesTitle">Applied Patches</h2>
+                        <div id="appliedPatchesMeta" class="applied-patches-meta"></div>
+                    </div>
+                    <button type="button" class="modal-close" aria-label="Close popup">×</button>
                 </div>
-                <button type="button" class="modal-close" aria-label="Close popup">×</button>
             </div>
             <div class="applied-patches-search-wrap">
                 <input type="text" id="patchSearchInput" placeholder="Filter applied patches...">
@@ -201,8 +203,10 @@
     <div id="obtainiumModal" class="modal-overlay" aria-hidden="true">
         <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="obtainiumTitle">
             <div class="modal-header">
-                <h2 id="obtainiumTitle">Install with Obtainium</h2>
-                <button type="button" class="modal-close" aria-label="Close popup">×</button>
+                <div class="modal-header-top">
+                    <h2 id="obtainiumTitle">Install with Obtainium</h2>
+                    <button type="button" class="modal-close" aria-label="Close popup">×</button>
+                </div>
             </div>
             <div id="obtainiumBody" class="modal-body"></div>
         </div>
