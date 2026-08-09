@@ -1686,7 +1686,6 @@ function createObtainiumInstructions(app, patch) {
 
   const appNameNorm = normalizeForSearch(app?.appName || "app");
   const patchNameNorm = normalizeForSearch(patch?.patchName || "patch");
-  const appId = CONFIG.appIds[app?.appKey] || CONFIG.appIds[appNameNorm] || "";
 
   // If a specific variant is selected (e.g. not "default" / "all")
   const isSpecificVariant = modalVariantFilter && modalVariantFilter !== "default" && modalVariantFilter !== "all";
@@ -1696,8 +1695,9 @@ function createObtainiumInstructions(app, patch) {
     regexPattern = `^${appNameNorm}-${patchNameNorm}-${modalVariantFilter}.*\\.apk$`;
   }
 
+  const mainPackageId = getAppPackageId(app?.appKey || appNameNorm, patch?.patchKey || patchNameNorm, modalVariantFilter || "default");
+  const mainSafeId = mainPackageId || `${CONFIG.owner}_${app?.appKey || "app"}_${patch?.patchKey || "patch"}`.replace(/[^a-zA-Z0-9_]/g, "_");
   const mainLabel = `${app?.appName || "App"} (${patch?.patchName || "Patch"})`;
-  const mainSafeId = appId ? `${appId}_0` : `${CONFIG.owner}_${app?.appKey || "app"}_${patch?.patchKey || "patch"}`.replace(/[^a-zA-Z0-9_]/g, "_");
   const mainAdditionalSettings = { apkFilterRegEx: regexPattern };
   if (modalBuildFilter === "beta") {
     mainAdditionalSettings.includePrereleases = true;
@@ -1720,7 +1720,10 @@ function createObtainiumInstructions(app, patch) {
         ? `^${appNameNorm}-${patchNameNorm}.*\\.apk$`
         : `^${appNameNorm}-${patchNameNorm}-${v.variantKey}.*\\.apk$`;
       const vLabel = `${app.appName} (${patch.patchName} - ${v.variantName})`;
-      const vSafeId = appId ? `${appId}_${index + 1}` : `${CONFIG.owner}_${app.appKey}_${patch.patchKey}_${v.variantKey}_${index}`.replace(/[^a-zA-Z0-9_]/g, "_");
+      const vPackageId = getAppPackageId(app?.appKey || appNameNorm, patch?.patchKey || patchNameNorm, v.variantKey);
+      const vSafeId = vPackageId
+        ? (v.variantKey === "default" ? vPackageId : `${vPackageId}_${v.variantKey}`)
+        : `${CONFIG.owner}_${app.appKey}_${patch.patchKey}_${v.variantKey}_${index}`.replace(/[^a-zA-Z0-9_]/g, "_");
       
       const vAdditionalSettings = { apkFilterRegEx: vRegex };
       if (modalBuildFilter === "beta") {
