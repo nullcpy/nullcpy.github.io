@@ -1578,21 +1578,19 @@ async function openAppliedPatchesModal(appKey, patchKey, buildId) {
       );
     }
 
-    function resolveVersionFromDict(dict, rawVer) {
+    function resolveVersionFromDict(dict, rawVer, specificTag, isArchive) {
       if (!dict || typeof dict !== "object") return null;
 
-      // If this dict IS itself a patch entry (e.g. flat target key with single version), return it
+      // If this dict IS itself a patch entry, return it
       if (isPatchEntry(dict)) return dict;
 
       const keys = Object.keys(dict);
       if (keys.length === 0) return null;
 
       if (!rawVer || rawVer === "Version unknown") {
-        // Return first value that looks like a patch entry
         for (const k of keys) {
           const candidate = dict[k];
           if (isPatchEntry(candidate)) return candidate;
-          // Drill one level deeper (engine dict)
           if (candidate && typeof candidate === "object") {
             for (const vk of Object.keys(candidate)) {
               if (isPatchEntry(candidate[vk])) return candidate[vk];
@@ -1604,14 +1602,19 @@ async function openAppliedPatchesModal(appKey, patchKey, buildId) {
 
       const cleanVer = rawVer.toLowerCase().replace(/^v(?=\d)/i, "").trim();
 
-      // 1. Exact match (with and without leading v)
+      // 1. Exact version match
       for (const key of [rawVer, cleanVer, `v${cleanVer}`]) {
         const candidate = dict[key];
         if (!candidate) continue;
-        // Direct patch entry
         if (isPatchEntry(candidate)) return candidate;
-        // Version node containing tag entries — pick the most recent tag
-        if (candidate && typeof candidate === "object") {
+        // Version node with nested tag entries
+        if (typeof candidate === "object") {
+          if (specificTag && !isArchive) {
+            // Non-archive: only return if this build's exact tag is present
+            if (isPatchEntry(candidate[specificTag])) return candidate[specificTag];
+            continue; // tag not found — don't bleed into other tags
+          }
+          // Archive: pick the most recent tag
           const tagKeys = Object.keys(candidate).sort((a, b) => {
             const na = Number(a), nb = Number(b);
             if (!isNaN(na) && !isNaN(nb)) return nb - na;
@@ -1623,16 +1626,13 @@ async function openAppliedPatchesModal(appKey, patchKey, buildId) {
         }
       }
 
-      // 2. Drill into nested engine dict (e.g. masterData["gboard"] = { morphe: { "ver": {...} } })
-      // Only drill one level to avoid version bleeding across unrelated versions
+      // 2. Drill into engine-level keys (non-digit keys like "morphe")
       for (const k of keys) {
         const sub = dict[k];
         if (sub && typeof sub === "object" && !isPatchEntry(sub)) {
-          // Try exact match within this nested dict only
           const cleanK = k.toLowerCase().replace(/^v(?=\d)/i, "").trim();
-          // Skip if this looks like a version key itself (avoid wrong-version drill-in)
           if (/^\d/.test(cleanK)) continue;
-          const result = resolveVersionFromDict(sub, rawVer);
+          const result = resolveVersionFromDict(sub, rawVer, specificTag, isArchive);
           if (result) return result;
         }
       }
@@ -1640,33 +1640,26 @@ async function openAppliedPatchesModal(appKey, patchKey, buildId) {
       return null;
     }
 
-    // For archive builds we only have version info, use it strictly
-    const versionsToTry = [...new Set([build?.build, build?.version].filter(Boolean))];
+    // For non-archive builds, specificTag is the release tag (e.g. "260173") to match exactly.
+    // For archive builds, specificTag is the version string (same as version) — not a numeric tag.
+    const specificTag = isArchiveBuild ? null : (build?.build || null);
+    const versionsToTry = [...new Set([build?.version, build?.build].filter(Boolean))];
 
     let resolved = null;
     if (variantNorm) {
       for (const ver of versionsToTry) {
         resolved =
-          resolveVersionFromDict(masterData[rawVariantTargetKey], ver) ||
-          resolveVersionFromDict(masterData[variantTargetKey], ver);
+          resolveVersionFromDict(masterData[rawVariantTargetKey], ver, specificTag, isArchiveBuild) ||
+          resolveVersionFromDict(masterData[variantTargetKey], ver, specificTag, isArchiveBuild);
         if (resolved) break;
       }
     } else {
       for (const ver of versionsToTry) {
         resolved =
-          resolveVersionFromDict(masterData[rawSlugNorm]?.[patchKeyNorm], ver) ||
-          resolveVersionFromDict(masterData[appKeyNorm]?.[patchKeyNorm], ver) ||
-          resolveVersionFromDict(masterData[rawTargetKey], ver) ||
-          resolveVersionFromDict(masterData[targetKey], ver) ||
-          resolveVersionFromDict(masterData[rawSlugNorm], ver) ||
-          resolveVersionFromDict(masterData[appKeyNorm], ver);
+          resolveVersionFromDict(masterData[rawTargetKey], ver, specificTag, isArchiveBuild) ||
+          resolveVersionFromDict(masterData[targetKey], ver, specificTag, isArchiveBuild);
         if (resolved) break;
       }
-    }
-
-    // If nothing resolved strictly, do NOT fall back to any random entry
-    if (!resolved) {
-      resolved = null;
     }
 
 

@@ -99,14 +99,13 @@ def parse_asset_filename(filename):
 
 def merge_entry_into_master(master_build, target_key, info, release_tag=None):
     """
-    Merge a build_data entry into builds.json.
-    Supports both nested structure builds[app][engine][version][release_tag]
-    and direct target key fallback builds[target][version][release_tag].
+    Merge a build_data entry into builds.json strictly by its exact target_key.
+    Structure: builds[target_key][version][release_tag]
     """
     if not isinstance(info, dict):
         return
 
-    app_key, engine = parse_target_key(target_key)
+    target_key = target_key.lower().strip()
     raw_ver = str(info.get("version") or "").strip()
     version = re.sub(r"^v(?=\d)", "", raw_ver, flags=re.IGNORECASE) if raw_ver else ""
     # Strip trailing arch suffixes so version keys match what JS parses from filenames
@@ -122,31 +121,16 @@ def merge_entry_into_master(master_build, target_key, info, release_tag=None):
         "applied_patches": applied_patches
     }
 
-    # 1. Store under nested structure: master_build[app_key][engine][version]
-    if app_key not in master_build or not isinstance(master_build[app_key], dict):
-        master_build[app_key] = {}
-    if engine not in master_build[app_key]:
-        master_build[app_key][engine] = {}
-
-    if version:
-        if version not in master_build[app_key][engine] or not isinstance(master_build[app_key][engine][version], dict):
-            master_build[app_key][engine][version] = {}
-        if release_tag:
-            master_build[app_key][engine][version][release_tag] = entry_data.copy()
-        else:
-            master_build[app_key][engine][version] = entry_data.copy()
-
-    # 2. Also store under target slug for direct matching (e.g. "youtube-morphe")
     if target_key not in master_build or not isinstance(master_build[target_key], dict):
         master_build[target_key] = {}
-    if isinstance(master_build[target_key], dict):
-        if version:
-            if version not in master_build[target_key] or not isinstance(master_build[target_key][version], dict):
-                master_build[target_key][version] = {}
-            if release_tag:
-                master_build[target_key][version][release_tag] = entry_data.copy()
-            else:
-                master_build[target_key][version] = entry_data.copy()
+
+    if version:
+        if version not in master_build[target_key] or not isinstance(master_build[target_key][version], dict):
+            master_build[target_key][version] = {}
+        if release_tag:
+            master_build[target_key][version][release_tag] = entry_data.copy()
+        else:
+            master_build[target_key][version] = entry_data.copy()
 
 def prune_stale_metadata(builds, releases):
     """
