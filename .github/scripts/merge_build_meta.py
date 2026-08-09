@@ -97,11 +97,11 @@ def parse_asset_filename(filename):
         "version": version
     }
 
-def merge_entry_into_master(master_build, target_key, info):
+def merge_entry_into_master(master_build, target_key, info, release_tag=None):
     """
     Merge a build_data entry into builds.json.
-    Supports both nested structure builds[app][engine][version]
-    and direct target key fallback builds[target][version].
+    Supports both nested structure builds[app][engine][version][release_tag]
+    and direct target key fallback builds[target][version][release_tag].
     """
     if not isinstance(info, dict):
         return
@@ -126,14 +126,24 @@ def merge_entry_into_master(master_build, target_key, info):
         master_build[app_key][engine] = {}
 
     if version:
-        master_build[app_key][engine][version] = entry_data.copy()
+        if version not in master_build[app_key][engine] or not isinstance(master_build[app_key][engine][version], dict):
+            master_build[app_key][engine][version] = {}
+        if release_tag:
+            master_build[app_key][engine][version][release_tag] = entry_data.copy()
+        else:
+            master_build[app_key][engine][version] = entry_data.copy()
 
     # 2. Also store under target slug for direct matching (e.g. "youtube-morphe")
     if target_key not in master_build or not isinstance(master_build[target_key], dict):
         master_build[target_key] = {}
     if isinstance(master_build[target_key], dict):
         if version:
-            master_build[target_key][version] = entry_data.copy()
+            if version not in master_build[target_key] or not isinstance(master_build[target_key][version], dict):
+                master_build[target_key][version] = {}
+            if release_tag:
+                master_build[target_key][version][release_tag] = entry_data.copy()
+            else:
+                master_build[target_key][version] = entry_data.copy()
 
 def prune_stale_metadata(builds, releases):
     """
@@ -142,8 +152,12 @@ def prune_stale_metadata(builds, releases):
     """
     live_apps = set()
     live_versions_by_app = {}
+    live_tags = set()
 
     for rel in releases:
+        tag_name = rel.get("tag_name")
+        if tag_name:
+            live_tags.add(tag_name)
         for asset in rel.get("assets", []):
             name = asset.get("name", "")
             parsed = parse_asset_filename(name)
@@ -190,20 +204,43 @@ def prune_stale_metadata(builds, releases):
             allowed_versions = live_versions_by_app.get(k, set())
             clean_allowed = {re.sub(r"^v(?=\d)", "", v, flags=re.IGNORECASE) for v in allowed_versions}
 
+            def get_top_versions(version_dict, count=2):
+                versions = list(version_dict.keys())
+                def semver_key(v):
+                    return [int(n) for n in re.findall(r'\d+', v)]
+                versions.sort(key=semver_key, reverse=True)
+                return set(versions[:count])
+            
+            direct_versions = {sk: sv for sk, sv in app_data.items() if sk not in KNOWN_ENGINES}
+            top_2_direct = get_top_versions(direct_versions, 2) if direct_versions else set()
+
             for sub_k in list(app_data.keys()):
                 sub_val = app_data[sub_k]
                 if isinstance(sub_val, dict) and sub_k in KNOWN_ENGINES:
                     # Nested engine dict: app_data[engine][version]
+                    top_2_engine = get_top_versions(sub_val, 2)
                     for ver_k in list(sub_val.keys()):
                         clean_ver = re.sub(r"^v(?=\d)", "", ver_k, flags=re.IGNORECASE)
-                        if clean_ver not in clean_allowed:
+                        if clean_ver not in clean_allowed and ver_k not in top_2_engine:
                             del sub_val[ver_k]
                             print(f"[-] Pruned purged version: {k}/{sub_k} v{ver_k}")
+                        elif isinstance(sub_val[ver_k], dict):
+                            for tag_k in list(sub_val[ver_k].keys()):
+                                if isinstance(sub_val[ver_k][tag_k], dict) and tag_k not in live_tags:
+                                    del sub_val[ver_k][tag_k]
+                            if not sub_val[ver_k]:
+                                del sub_val[ver_k]
                 elif sub_k not in KNOWN_ENGINES:
                     clean_ver = re.sub(r"^v(?=\d)", "", sub_k, flags=re.IGNORECASE)
-                    if clean_ver not in clean_allowed:
+                    if clean_ver not in clean_allowed and sub_k not in top_2_direct:
                         del app_data[sub_k]
                         print(f"[-] Pruned purged version: {k} v{sub_k}")
+                    elif isinstance(app_data[sub_k], dict):
+                        for tag_k in list(app_data[sub_k].keys()):
+                            if isinstance(app_data[sub_k][tag_k], dict) and tag_k not in live_tags:
+                                del app_data[sub_k][tag_k]
+                        if not app_data[sub_k]:
+                            del app_data[sub_k]
 
         if isinstance(app_data, dict) and not app_data:
             del builds[k]
@@ -257,7 +294,7 @@ def main():
 
                     if isinstance(build_data, dict):
                         for target_key, info in build_data.items():
-                            merge_entry_into_master(master_build, target_key, info)
+                            merge_entry_into_master(master_build, target_key, info, rel.get('tag_name'))
             except Exception as e:
                 print(f"Warning: Could not fetch build.json for {rel.get('tag_name')}: {e}")
 
