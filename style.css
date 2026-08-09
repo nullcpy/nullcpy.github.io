@@ -801,16 +801,17 @@ main {
 }
 
 .variant-channels-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
 }
 
 .channel-box-btn {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 6px 10px;
+    padding: 8px 12px;
     border-radius: var(--radius-sm);
     border: 1px solid var(--border);
     background: var(--bg-secondary);
@@ -818,6 +819,8 @@ main {
     cursor: pointer;
     text-align: left;
     transition: all 0.15s ease;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .channel-box-btn:hover {
@@ -855,7 +858,7 @@ main {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
 }
 
 .channel-tag {
@@ -878,25 +881,25 @@ main {
 }
 
 .channel-date {
-    font-size: 0.68rem;
+    font-size: 0.7rem;
     color: var(--text-muted);
 }
 
 .channel-version {
-    font-size: 0.82rem;
+    font-size: 0.84rem;
     font-weight: 700;
     font-family: "JetBrains Mono", monospace;
     color: var(--text-primary);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    word-break: break-all;
     width: 100%;
+    line-height: 1.35;
 }
 
 .channel-build-num {
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     color: var(--text-muted);
     font-family: "JetBrains Mono", monospace;
+    margin-top: 2px;
 }
 
 /* Modals */
