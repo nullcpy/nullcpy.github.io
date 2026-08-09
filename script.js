@@ -1547,6 +1547,8 @@ function closePatchModal() {
       document.body.classList.remove("modal-open");
     }
   }
+}
+
 // Master Build Metadata Store
 let masterBuildDataCache = null;
 
