@@ -858,6 +858,7 @@ function buildAppCatalog(releases) {
           build: isArchive ? parsed.version : getBuildNumberLabel(release),
           releaseType,
           isArchive,
+          variantKey,
           publishedAt: isArchive
             ? asset.updated_at || asset.created_at || release.published_at
             : release.published_at,
@@ -1553,10 +1554,14 @@ async function openAppliedPatchesModal(appKey, patchKey, buildKey) {
     const masterData = await fetchMasterBuildData();
     const appKeyNorm = normalizeForSearch(app.appKey || app.appName);
     const patchKeyNorm = normalizeForSearch(patch.patchKey || patch.patchName);
-    const asset = build?.assets?.[0];
-    const variantNorm = asset?.parsed?.variant ? normalizeForSearch(asset.parsed.variant) : "";
+    // Use stored variantKey to get the correct variant — avoids cross-variant asset contamination
+    // (multiple variants share the same buildKey when from the same numbered release)
+    const variantNorm = (build?.variantKey && build.variantKey !== "default")
+      ? normalizeForSearch(build.variantKey)
+      : "";
 
     let rawSlugNorm = appKeyNorm;
+    const asset = build?.assets?.[0];
     if (asset?.name) {
       const baseName = asset.name.replace(/\.(apk|zip)$/i, "");
       const tokens = baseName.split("-").filter(Boolean);
