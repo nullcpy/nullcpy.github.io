@@ -1541,29 +1541,58 @@ async function openAppliedPatchesModal(appKey, patchKey, buildId) {
     const targetKey = `${appKeyNorm}-${patchKeyNorm}`;
     const variantTargetKey = variantNorm ? `${appKeyNorm}-${patchKeyNorm}-${variantNorm}` : targetKey;
 
+    function isPatchEntry(obj) {
+      return obj && typeof obj === "object" && (
+        Array.isArray(obj.applied_patches) || typeof obj.patches === "string" || typeof obj.changelog === "string"
+      );
+    }
+
     function resolveVersionFromDict(dict, rawVer) {
       if (!dict || typeof dict !== "object") return null;
-      const keys = Object.keys(dict).filter((k) => k !== "default");
+
+      // If this dict IS itself a patch entry (e.g. flat target key with single version), return it
+      if (isPatchEntry(dict)) return dict;
+
+      const keys = Object.keys(dict);
       if (keys.length === 0) return null;
 
-      if (!rawVer) return dict[keys[0]];
+      if (!rawVer || rawVer === "Version unknown") {
+        // Return first value that looks like a patch entry
+        for (const k of keys) {
+          const candidate = dict[k];
+          if (isPatchEntry(candidate)) return candidate;
+          // Drill one level deeper (engine dict)
+          if (candidate && typeof candidate === "object") {
+            for (const vk of Object.keys(candidate)) {
+              if (isPatchEntry(candidate[vk])) return candidate[vk];
+            }
+          }
+        }
+        return null;
+      }
 
       const cleanVer = rawVer.toLowerCase().replace(/^v(?=\d)/i, "").trim();
 
-      // 1. Direct or leading-v stripped match
-      if (dict[rawVer]) return dict[rawVer];
-      if (dict[cleanVer]) return dict[cleanVer];
-      if (dict[`v${cleanVer}`]) return dict[`v${cleanVer}`];
+      // 1. Direct match (with and without leading v)
+      for (const candidate of [dict[rawVer], dict[cleanVer], dict[`v${cleanVer}`]]) {
+        if (isPatchEntry(candidate)) return candidate;
+      }
 
-      // 2. Prefix / partial match against dict keys
+      // 2. Prefix / partial match against keys
       const matchedKey = keys.find((k) => {
         const cleanK = k.toLowerCase().replace(/^v(?=\d)/i, "").trim();
         return cleanK.startsWith(cleanVer) || cleanVer.startsWith(cleanK);
       });
-      if (matchedKey) return dict[matchedKey];
+      if (matchedKey && isPatchEntry(dict[matchedKey])) return dict[matchedKey];
 
-      // 3. Fallback if dict has single version entry
-      if (keys.length === 1) return dict[keys[0]];
+      // 3. Drill into nested engine dict (e.g. masterData["gboard"] = { morphe: { "ver": {...} } })
+      for (const k of keys) {
+        const sub = dict[k];
+        if (sub && typeof sub === "object" && !isPatchEntry(sub)) {
+          const result = resolveVersionFromDict(sub, rawVer);
+          if (result) return result;
+        }
+      }
 
       return null;
     }
