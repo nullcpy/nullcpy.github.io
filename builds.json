@@ -267,5 +267,81 @@
         ]
       }
     }
+  },
+  "prime-video-morphe-androidtv": {
+    "6.23.23+v15.5.0.70-armv7a": {
+      "260175": {
+        "patches": "ajstrick81/patches-1.22.0.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.23.0",
+        "applied_patches": [
+          "Bundle native ad-strip hook ",
+          "Disable auto-updates ",
+          "Load native ad-strip hook ",
+          "Override certificate pinning ",
+          "Prime Video extension ",
+          "Skip ads ",
+          "Clone Prime Video "
+        ]
+      }
+    }
+  },
+  "hbomax-morphe-androidtv": {
+    "7.7.0.78": {
+      "260175": {
+        "patches": "ajstrick81/patches-1.22.0.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.23.0",
+        "applied_patches": [
+          "HBO Max - Disable Ads "
+        ]
+      }
+    }
+  },
+  "peacock-morphe-androidtv": {
+    "7.6.100": {
+      "260175": {
+        "patches": "ajstrick81/patches-1.22.0.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.23.0",
+        "applied_patches": [
+          "Disable auto-updates ",
+          "Skip ads "
+        ]
+      }
+    }
+  },
+  "tubi-morphe-androidtv": {
+    "10.28.5000": {
+      "260175": {
+        "patches": "ajstrick81/patches-1.22.0.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.23.0",
+        "applied_patches": [
+          "Skip ads "
+        ]
+      }
+    }
+  },
+  "vix-morphe-androidtv": {
+    "4.46.0_tv": {
+      "260175": {
+        "patches": "ajstrick81/patches-1.22.0.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.23.0",
+        "applied_patches": [
+          "Override certificate pinning ",
+          "Skip ads "
+        ]
+      }
+    }
+  },
+  "plutotv-morphe-androidtv": {
+    "5.66.0-leanback": {
+      "260175": {
+        "patches": "ajstrick81/patches-1.22.0.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.23.0",
+        "applied_patches": [
+          "Disable auto-updates ",
+          "Override certificate pinning ",
+          "Skip ads "
+        ]
+      }
+    }
   }
 }
