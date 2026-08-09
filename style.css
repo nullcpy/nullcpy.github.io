@@ -934,9 +934,26 @@ body.modal-open {
 
 .modal-filter-buttons {
     display: flex;
-    gap: 6px;
+    gap: 8px;
     flex-wrap: wrap;
     align-items: center;
+    width: 100%;
+}
+
+.filter-pill-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.filter-group-divider {
+    display: inline-block;
+    width: 1px;
+    height: 18px;
+    background: var(--border);
+    margin: 0 4px;
+    flex-shrink: 0;
 }
 
 .modal-filter-btn {
@@ -944,14 +961,15 @@ body.modal-open {
     background: var(--bg-secondary);
     color: var(--text-secondary);
     border-radius: var(--radius-full);
-    padding: 4px 12px;
-    font-size: 0.75rem;
+    padding: 5px 14px;
+    font-size: 0.78rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
+    user-select: none;
 }
 
-.modal-filter-btn:hover:not(:disabled) {
+.modal-filter-btn:hover {
     border-color: var(--accent);
     color: var(--accent);
     background: var(--accent-glow);
@@ -959,8 +977,14 @@ body.modal-open {
 
 .modal-filter-btn.active {
     border-color: var(--accent);
-    color: var(--accent);
-    background: var(--accent-glow);
+    color: #000000;
+    background: var(--accent);
+    font-weight: 700;
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+body.light-mode .modal-filter-btn.active {
+    color: #ffffff;
 }
 
 .modal-obtainium-btn {

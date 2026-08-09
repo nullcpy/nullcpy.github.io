@@ -1352,11 +1352,21 @@ function toFilterLabel(value) {
 }
 
 // Download Modal Controller
-function openPatchModal(appKey, patchKey, preferredChannel = "stable", preferredVariant = "all") {
+function openPatchModal(appKey, patchKey, preferredChannel = "stable", preferredVariant = "default") {
   activeModalAppKey = appKey;
   activeModalPatchKey = patchKey;
+  
+  const app = currentAppCatalog.find((item) => item.appKey === activeModalAppKey);
+  const patch = app ? app.patches.find((item) => item.patchKey === activeModalPatchKey) : null;
+
   modalBuildFilter = preferredChannel === "beta" ? "beta" : "stable";
-  modalVariantFilter = preferredVariant;
+
+  if (patch && patch.variants && patch.variants.length > 0) {
+    const validVariant = patch.variants.find((v) => v.variantKey === preferredVariant);
+    modalVariantFilter = validVariant ? validVariant.variantKey : patch.variants[0].variantKey;
+  } else {
+    modalVariantFilter = "default";
+  }
 
   renderOpenPatchModal();
 
@@ -1391,43 +1401,54 @@ function renderOpenPatchModal() {
 }
 
 function updateModalFilterButtons(patch) {
-  const filterButtons = document.querySelectorAll(".modal-filter-btn:not(.variant-pill-btn)");
-  filterButtons.forEach((btn) => {
-    const filter = btn.dataset.filter;
-    if (["stable", "beta"].includes(filter)) {
-      btn.classList.toggle("active", filter === modalBuildFilter);
-    }
-  });
-
   const filterContainer = document.querySelector(".modal-filter-buttons");
   if (!filterContainer) return;
 
-  filterContainer.querySelectorAll(".variant-pill-btn").forEach((b) => b.remove());
+  filterContainer.innerHTML = "";
 
-  if (patch.variants.length > 1) {
+  // Channel group (Stable / Beta)
+  const channelGroup = document.createElement("div");
+  channelGroup.className = "filter-pill-group";
+  channelGroup.innerHTML = `
+    <button class="modal-filter-btn ${modalBuildFilter === "stable" ? "active" : ""}" data-filter="stable" type="button">Stable</button>
+    <button class="modal-filter-btn ${modalBuildFilter === "beta" ? "active" : ""}" data-filter="beta" type="button">Beta</button>
+  `;
+  filterContainer.appendChild(channelGroup);
+
+  // Variant group with divider
+  if (patch.variants && patch.variants.length > 0) {
+    const divider = document.createElement("span");
+    divider.className = "filter-group-divider";
+    filterContainer.appendChild(divider);
+
+    const variantGroup = document.createElement("div");
+    variantGroup.className = "filter-pill-group";
+
     patch.variants.forEach((v) => {
       const btn = document.createElement("button");
       btn.type = "button";
-      btn.className = "modal-filter-btn variant-pill-btn";
+      btn.className = `modal-filter-btn variant-pill-btn ${modalVariantFilter === v.variantKey ? "active" : ""}`;
       btn.dataset.filter = `variant-${v.variantKey}`;
       btn.textContent = v.variantName;
-      btn.classList.toggle("active", modalVariantFilter === v.variantKey);
-      filterContainer.appendChild(btn);
+      variantGroup.appendChild(btn);
     });
+
+    filterContainer.appendChild(variantGroup);
   }
 }
 
-function createPatchModalContent(app, patch, buildFilter = "stable", variantFilter = "all") {
+function createPatchModalContent(app, patch, buildFilter = "stable", variantFilter = "default") {
   let builds = patch.builds || [];
 
-  // Filter builds
+  // Filter builds by channel
   if (buildFilter === "stable") {
     builds = builds.filter((b) => b.releaseType === "stable");
   } else if (buildFilter === "beta") {
     builds = builds.filter((b) => b.releaseType === "beta");
   }
 
-  if (variantFilter !== "all") {
+  // Filter builds by variant
+  if (variantFilter && variantFilter !== "all") {
     builds = builds
       .map((b) => ({
         ...b,
@@ -1440,7 +1461,7 @@ function createPatchModalContent(app, patch, buildFilter = "stable", variantFilt
   }
 
   if (builds.length === 0) {
-    return '<div class="no-results">No builds matching this filter.</div>';
+    return '<div class="no-results" style="padding: 40px 20px;">No builds matching this channel and variant.</div>';
   }
 
   return builds
@@ -1461,17 +1482,11 @@ function createModalBuildMarkup(app, patch, build, openByDefault = false) {
     assets.forEach((asset) => {
       const sizeStr = formatBytes(asset.size);
       const downloads = formatCompactNumber(asset.download_count || 0);
-      const variantBadge = asset.parsed.variant
-        ? `<span class="variants-indicator">${escapeHtml(asset.parsed.variant)}</span>`
-        : "";
 
       downloadsMarkup += `
         <div class="download-btn ${arch}">
           <div class="asset-left">
-            <div class="asset-title-row">
-              <span class="asset-title">${escapeHtml(asset.parsed.appName)}</span>
-              ${variantBadge}
-            </div>
+            <span class="asset-title">${escapeHtml(asset.parsed.appName)}</span>
             <span class="asset-subtitle">${escapeHtml(asset.parsed.version)} • ${asset.fileType}</span>
           </div>
           <div class="asset-right">
