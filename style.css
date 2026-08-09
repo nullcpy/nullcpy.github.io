@@ -1,5 +1,5 @@
 :root {
-    /* Zen-inspired: warm near-black dark backgrounds */
+    /* Zen-inspired warm dark backgrounds — unchanged */
     --bg-primary: #1a1814;
     --bg-secondary: #201e1a;
     --bg-tertiary: #2a2723;
@@ -8,37 +8,37 @@
     --text-primary: #f0ede8;
     --text-secondary: #a89f94;
     --text-muted: #6b6358;
-    /* Dark mode: coral buttons use white text */
-    --btn-on-accent: #f0ede8;
+    /* Buttons on blue/green bg: dark text works on light colors, white on dark */
+    --btn-on-accent: #0d1117;
 
-    /* Zen coral-inspired accent palette */
-    --accent: #e8614a;           /* coral / zen primary */
-    --accent-glow: rgba(232, 97, 74, 0.18);
-    --accent-stable: #6db57e;    /* calm sage green */
-    --accent-stable-glow: rgba(109, 181, 126, 0.18);
-    --accent-beta: #c47bd4;      /* soft lavender */
+    /* NullStore logo: blue #58a6ff → green #3fb950 */
+    --accent: #58a6ff;               /* logo blue — primary CTA, links, filters */
+    --accent-glow: rgba(88, 166, 255, 0.18);
+    --accent-stable: #3fb950;        /* logo green — stable channel */
+    --accent-stable-glow: rgba(63, 185, 80, 0.18);
+    --accent-beta: #c47bd4;          /* soft lavender — beta channel */
     --accent-beta-glow: rgba(196, 123, 212, 0.18);
-    --accent-variant: #5ba8c4;   /* calm teal-blue */
-    --accent-variant-glow: rgba(91, 168, 196, 0.18);
-    --accent-module: #d4a04a;    /* warm amber */
+    --accent-variant: #58a6ff;       /* blue — variant indicator */
+    --accent-variant-glow: rgba(88, 166, 255, 0.15);
+    --accent-module: #d4a04a;        /* warm amber — root modules */
     --accent-module-glow: rgba(212, 160, 74, 0.18);
-    --accent-tv: #5ba8c4;
-    --accent-danger: #e8614a;
+    --accent-tv: #3fb950;            /* green — Android TV */
+    --accent-danger: #f85149;        /* GitHub red — errors */
     --accent-warning: #d4a04a;
 
     --border: rgba(240, 237, 232, 0.08);
-    --border-hover: rgba(232, 97, 74, 0.45);
-    --border-stable: rgba(109, 181, 126, 0.35);
+    --border-hover: rgba(88, 166, 255, 0.45);
+    --border-stable: rgba(63, 185, 80, 0.35);
     --border-beta: rgba(196, 123, 212, 0.35);
     --shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--border);
-    --shadow-hover: 0 16px 32px -6px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(232, 97, 74, 0.25);
+    --shadow-hover: 0 16px 32px -6px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(88, 166, 255, 0.25);
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 16px;
     --radius-full: 9999px;
 }
 
-/* Zen-inspired Light mode: warm off-white paper */
+/* Zen-inspired light mode: warm paper bg, blue+green accents */
 body.light-mode {
     --bg-primary: #faf8f5;
     --bg-secondary: #ffffff;
@@ -48,30 +48,30 @@ body.light-mode {
     --text-primary: #1c1a17;
     --text-secondary: #3d3730;
     --text-muted: #7a6e64;
-    /* Light mode: coral buttons use white text */
+    /* Blue/green buttons: white text for contrast */
     --btn-on-accent: #ffffff;
 
-    /* Light mode: same coral family, slightly deeper */
-    --accent: #d4503a;
-    --accent-glow: rgba(212, 80, 58, 0.12);
-    --accent-stable: #4a9a5c;
-    --accent-stable-glow: rgba(74, 154, 92, 0.12);
-    --accent-beta: #9b57b8;
-    --accent-beta-glow: rgba(155, 87, 184, 0.12);
-    --accent-variant: #3d8fa8;
-    --accent-variant-glow: rgba(61, 143, 168, 0.12);
-    --accent-module: #b8882e;
+    /* Deeper versions of the logo palette for light bg readability */
+    --accent: #0969da;               /* GitHub blue (light) */
+    --accent-glow: rgba(9, 105, 218, 0.12);
+    --accent-stable: #1a7f37;        /* GitHub green (light) */
+    --accent-stable-glow: rgba(26, 127, 55, 0.12);
+    --accent-beta: #8250df;          /* GitHub purple */
+    --accent-beta-glow: rgba(130, 80, 223, 0.12);
+    --accent-variant: #0969da;       /* blue */
+    --accent-variant-glow: rgba(9, 105, 218, 0.10);
+    --accent-module: #b8882e;        /* warm amber */
     --accent-module-glow: rgba(184, 136, 46, 0.12);
-    --accent-tv: #3d8fa8;
-    --accent-danger: #c43a28;
-    --accent-warning: #b8882e;
+    --accent-tv: #1a7f37;
+    --accent-danger: #cf222e;        /* GitHub danger */
+    --accent-warning: #9a6700;
 
     --border: #e8e0d5;
-    --border-hover: #d4503a;
-    --border-stable: rgba(74, 154, 92, 0.4);
-    --border-beta: rgba(155, 87, 184, 0.4);
+    --border-hover: #0969da;
+    --border-stable: rgba(26, 127, 55, 0.4);
+    --border-beta: rgba(130, 80, 223, 0.4);
     --shadow: 0 2px 16px -2px rgba(28, 26, 23, 0.08), 0 0 0 1px var(--border);
-    --shadow-hover: 0 10px 24px -4px rgba(28, 26, 23, 0.14), 0 0 0 1px rgba(212, 80, 58, 0.3);
+    --shadow-hover: 0 10px 24px -4px rgba(28, 26, 23, 0.14), 0 0 0 1px rgba(9, 105, 218, 0.3);
 }
 
 * {
@@ -90,17 +90,17 @@ body {
     font-family: "Bricolage Grotesque", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     line-height: 1.6;
     min-height: 100vh;
-    background-image: 
-        radial-gradient(ellipse at 20% 0%, rgba(232, 97, 74, 0.06) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 90%, rgba(196, 123, 212, 0.04) 0%, transparent 50%);
+    background-image:
+        radial-gradient(ellipse at 20% 0%, rgba(88, 166, 255, 0.07) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 90%, rgba(63, 185, 80, 0.05) 0%, transparent 50%);
     background-attachment: fixed;
     transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 body.light-mode {
-    background-image: 
-        radial-gradient(ellipse at 20% 0%, rgba(212, 80, 58, 0.05) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 90%, rgba(155, 87, 184, 0.03) 0%, transparent 50%);
+    background-image:
+        radial-gradient(ellipse at 20% 0%, rgba(9, 105, 218, 0.05) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 90%, rgba(26, 127, 55, 0.04) 0%, transparent 50%);
 }
 
 button, input, select, textarea {
