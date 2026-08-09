@@ -1543,16 +1543,16 @@ body.modal-open {
     transform: translateY(-1px);
 }
 
-/* Obtainium add button — Zen style: solid accent bg, light text, rounded */
+/* Obtainium add button — signature purple */
 .obtainium-add-btn {
-    background: var(--accent);
+    background: var(--accent-beta);
     color: var(--btn-on-accent) !important;
     text-decoration: none !important;
     border-radius: var(--radius-sm);
     font-weight: 700;
     border: none;
     transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 2px 8px var(--accent-glow);
+    box-shadow: 0 2px 8px var(--accent-beta-glow);
 }
 
 .obtainium-add-btn:hover {
@@ -1560,7 +1560,7 @@ body.modal-open {
     color: var(--btn-on-accent) !important;
     text-decoration: none !important;
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px var(--accent-glow);
+    box-shadow: 0 4px 16px var(--accent-beta-glow);
 }
 
 .code-with-copy {
