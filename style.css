@@ -18,9 +18,9 @@
     --accent-stable: #3fb950;
     /* logo green — stable channel */
     --accent-stable-glow: rgba(63, 185, 80, 0.18);
-    --accent-beta: #c47bd4;
-    /* soft lavender — beta channel */
-    --accent-beta-glow: rgba(196, 123, 212, 0.18);
+    --accent-beta: #e8832a;
+    /* warm orange — beta channel */
+    --accent-beta-glow: rgba(232, 131, 42, 0.18);
     --accent-variant: #58a6ff;
     /* blue — variant indicator */
     --accent-variant-glow: rgba(88, 166, 255, 0.15);
@@ -36,7 +36,7 @@
     --border: rgba(240, 237, 232, 0.08);
     --border-hover: rgba(88, 166, 255, 0.45);
     --border-stable: rgba(63, 185, 80, 0.35);
-    --border-beta: rgba(196, 123, 212, 0.35);
+    --border-beta: rgba(232, 131, 42, 0.35);
     --shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--border);
     --shadow-hover: 0 16px 32px -6px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(88, 166, 255, 0.25);
     --radius-sm: 8px;
@@ -65,9 +65,9 @@ body.light-mode {
     --accent-stable: #1a7f37;
     /* GitHub green (light) */
     --accent-stable-glow: rgba(26, 127, 55, 0.12);
-    --accent-beta: #8250df;
-    /* GitHub purple */
-    --accent-beta-glow: rgba(130, 80, 223, 0.12);
+    --accent-beta: #bc4c00;
+    /* warm orange — beta channel (light) */
+    --accent-beta-glow: rgba(188, 76, 0, 0.12);
     --accent-variant: #0969da;
     /* blue */
     --accent-variant-glow: rgba(9, 105, 218, 0.10);
@@ -82,7 +82,7 @@ body.light-mode {
     --border: #e8e0d5;
     --border-hover: #0969da;
     --border-stable: rgba(26, 127, 55, 0.4);
-    --border-beta: rgba(130, 80, 223, 0.4);
+    --border-beta: rgba(188, 76, 0, 0.4);
     --shadow: 0 2px 16px -2px rgba(28, 26, 23, 0.08), 0 0 0 1px var(--border);
     --shadow-hover: 0 10px 24px -4px rgba(28, 26, 23, 0.14), 0 0 0 1px rgba(9, 105, 218, 0.3);
 }
