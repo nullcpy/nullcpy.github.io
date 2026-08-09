@@ -1570,21 +1570,10 @@ function openAppliedPatchesModal(appKey, patchKey, buildId) {
     `;
   }
 
-  // Load patches list (from build info or fallback template)
-  activeAppliedPatchesList = build?.appliedPatches || [
-    "SponsorBlock integration",
-    "Return YouTube Dislike",
-    "Hide Shorts & Reels",
-    "AMOLED Pure Black Theme",
-    "MicroG Support for Non-Root",
-    "Custom Playback Speed Options",
-    "Minimized Playback & Background Audio",
-    "Remove In-Stream Ads",
-    "Custom Player Branding & Icon",
-    "Disable Forced Captions",
-    "Hide Video Watermark & Endscreen",
-    "Enable HDR & High Bitrate Controls"
-  ];
+  // Load patches list (from build info or null if unavailable)
+  activeAppliedPatchesList = (Array.isArray(build?.appliedPatches) && build.appliedPatches.length > 0)
+    ? build.appliedPatches
+    : null;
 
   filterAppliedPatchesList("");
 
@@ -1606,6 +1595,14 @@ function filterAppliedPatchesList(query) {
   const countBadge = document.getElementById("patchCountBadge");
   if (!body) return;
 
+  if (!activeAppliedPatchesList) {
+    if (countBadge) {
+      countBadge.textContent = "0 patches";
+    }
+    body.innerHTML = '<div class="no-results" style="padding: 36px 20px; text-align: center; color: var(--text-muted);">No applied patches data available for this build.</div>';
+    return;
+  }
+
   const normalized = (query || "").toLowerCase().trim();
   const filtered = activeAppliedPatchesList.filter((p) =>
     p.toLowerCase().includes(normalized)
@@ -1616,7 +1613,7 @@ function filterAppliedPatchesList(query) {
   }
 
   if (filtered.length === 0) {
-    body.innerHTML = '<div class="no-results" style="padding: 30px;">No matching patches found.</div>';
+    body.innerHTML = '<div class="no-results" style="padding: 36px 20px; text-align: center; color: var(--text-muted);">No matching patches found.</div>';
     return;
   }
 
