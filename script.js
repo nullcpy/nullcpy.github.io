@@ -1440,7 +1440,7 @@ function createPatchModalContent(app, patch, buildFilter = "stable", variantFilt
   }
 
   if (builds.length === 0) {
-    return '<div class="no-results" style="padding: 40px 20px;">No builds matching this channel and variant.</div>';
+    return '<div class="no-results" style="padding: 40px 20px;">No builds matching these filters.</div>';
   }
 
   return builds
