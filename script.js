@@ -833,6 +833,24 @@ function buildAppCatalog(releases) {
         }
       }
 
+      // Check for structured build data from builder (e.g. build.json)
+      let buildDataApplied = null;
+      let buildDataPatches = null;
+      let buildDataChangelog = null;
+
+      if (release.build_data) {
+        const appKeyLower = appKey.toLowerCase();
+        const bd = release.build_data[appKeyLower] || 
+                   release.build_data[parsed.appName.toLowerCase()] || 
+                   release.build_data[parsed.appName] ||
+                   release.build_data[parsed.appName.toLowerCase().replace(/\s+/g, "-")];
+        if (bd) {
+          buildDataApplied = bd.applied_patches || null;
+          buildDataPatches = bd.patches || null;
+          buildDataChangelog = bd.changlog || null;
+        }
+      }
+
       // Group into builds
       const buildKey = isArchive
         ? `archive-${releaseType}-${parsed.version}`
@@ -849,7 +867,12 @@ function buildAppCatalog(releases) {
             : release.published_at,
           releaseUrl: release.html_url,
           version: parsed.version,
-          patchMeta: patchMetaFromRelease,
+          patchMeta: {
+            ...patchMetaFromRelease,
+            patches: buildDataPatches ? [buildDataPatches] : patchMetaFromRelease.patches,
+            changelogs: buildDataChangelog ? [buildDataChangelog] : patchMetaFromRelease.changelogs,
+          },
+          appliedPatches: buildDataApplied,
           assets: [],
         });
       }
