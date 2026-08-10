@@ -1471,12 +1471,42 @@
           "Change Home Long Click",
           "Add App Trigger"
         ]
+      },
+      "260184": {
+        "patches": "",
+        "changelog": "",
+        "applied_patches": [
+          "Unlock Developer Options",
+          "Remove Snooze Warning",
+          "Remove Ads",
+          "AMOLED Theme",
+          "Get Generation Info",
+          "Copy Instafel Sources",
+          "Add Initialize Instafel",
+          "Change Home Long Click",
+          "Add App Trigger"
+        ]
       }
     }
   },
   "instagram-instafel-clone": {
     "441.0.0.43.81": {
       "260183": {
+        "patches": "",
+        "changelog": "",
+        "applied_patches": [
+          "Unlock Developer Options",
+          "Remove Snooze Warning",
+          "Remove Ads",
+          "AMOLED Theme",
+          "Get Generation Info",
+          "Copy Instafel Sources",
+          "Add Initialize Instafel",
+          "Change Home Long Click",
+          "Add App Trigger"
+        ]
+      },
+      "260184": {
         "patches": "",
         "changelog": "",
         "applied_patches": [
