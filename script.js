@@ -1388,14 +1388,45 @@ function updateModalFilterButtons(patch) {
 
   filterContainer.innerHTML = "";
 
-  // Channel group (Stable / Beta)
-  const channelGroup = document.createElement("div");
-  channelGroup.className = "filter-pill-group";
-  channelGroup.innerHTML = `
-    <button class="modal-filter-btn ${modalBuildFilter === "stable" ? "active" : ""}" data-filter="stable" type="button">Stable</button>
-    <button class="modal-filter-btn ${modalBuildFilter === "beta" ? "active" : ""}" data-filter="beta" type="button">Beta</button>
-  `;
-  filterContainer.appendChild(channelGroup);
+  let hasStable = false;
+  let hasBeta = false;
+
+  if (patch.builds) {
+    for (const b of patch.builds) {
+      const matchingAssets = b.assets.filter((a) => {
+        const vKey = a.parsed.rawVariant || (a.parsed.variant ? normalizeForSearch(a.parsed.variant) : "default") || "default";
+        return vKey === modalVariantFilter || modalVariantFilter === "all";
+      });
+
+      if (matchingAssets.length > 0) {
+        if (b.releaseType === "stable") hasStable = true;
+        if (b.releaseType === "beta") hasBeta = true;
+      }
+      if (hasStable && hasBeta) break;
+    }
+  }
+
+  // Auto-switch build filter if the currently selected one has no builds
+  if (!hasStable && modalBuildFilter === "stable" && hasBeta) {
+    modalBuildFilter = "beta";
+  } else if (!hasBeta && modalBuildFilter === "beta" && hasStable) {
+    modalBuildFilter = "stable";
+  }
+
+  let channelHtml = "";
+  if (hasStable) {
+    channelHtml += `<button class="modal-filter-btn ${modalBuildFilter === "stable" ? "active" : ""}" data-filter="stable" type="button">Stable</button>\n`;
+  }
+  if (hasBeta) {
+    channelHtml += `<button class="modal-filter-btn ${modalBuildFilter === "beta" ? "active" : ""}" data-filter="beta" type="button">Beta</button>\n`;
+  }
+
+  if (channelHtml) {
+    const channelGroup = document.createElement("div");
+    channelGroup.className = "filter-pill-group";
+    channelGroup.innerHTML = channelHtml;
+    filterContainer.appendChild(channelGroup);
+  }
 
   // Variant group with divider
   if (patch.variants && patch.variants.length > 0) {
