@@ -1583,7 +1583,7 @@ async function openAppliedPatchesModal(appKey, patchKey, buildKey) {
     }
 
     // Direct O(1) version & tag dictionary lookup (no dead engine loops)
-    function resolveVersionFromDict(dict, rawVer, specificTag, isArchive) {
+    function resolveVersionFromDict(dict, rawVer, specificTag, isArchive, preferredReleaseType) {
       if (!dict || typeof dict !== "object") return null;
       if (isPatchEntry(dict)) return dict;
 
@@ -1603,6 +1603,17 @@ async function openAppliedPatchesModal(appKey, patchKey, buildKey) {
           if (!isNaN(na) && !isNaN(nb)) return nb - na;
           return b.localeCompare(a);
         });
+        
+        // If we have a preferred release type (for archives), try to find a matching tag first
+        if (preferredReleaseType) {
+          for (const tagKey of tagKeys) {
+            if (tagToReleaseType[tagKey] === preferredReleaseType && isPatchEntry(candidate[tagKey])) {
+              return candidate[tagKey];
+            }
+          }
+        }
+
+        // Fallback to the latest available if no specific type matched
         for (const tagKey of tagKeys) {
           if (isPatchEntry(candidate[tagKey])) return candidate[tagKey];
         }
@@ -1614,19 +1625,29 @@ async function openAppliedPatchesModal(appKey, patchKey, buildKey) {
     const cleanBuildVer = (build?.version || "").replace(/^v(?=\d)/i, "").trim();
     const versionsToTry = cleanBuildVer ? [cleanBuildVer, `v${cleanBuildVer}`] : [];
 
+    // Map build tag to releaseType to prefer the right patches for archive builds
+    const tagToReleaseType = {};
+    if (patch && patch.builds) {
+      for (const b of patch.builds.values()) {
+        if (b.build && b.releaseType) {
+          tagToReleaseType[b.build] = b.releaseType;
+        }
+      }
+    }
+
     let resolved = null;
     if (variantNorm) {
       for (const ver of versionsToTry) {
         resolved =
-          resolveVersionFromDict(masterData[rawVariantTargetKey], ver, specificTag, isArchiveBuild) ||
-          resolveVersionFromDict(masterData[variantTargetKey], ver, specificTag, isArchiveBuild);
+          resolveVersionFromDict(masterData[rawVariantTargetKey], ver, specificTag, isArchiveBuild, build?.releaseType) ||
+          resolveVersionFromDict(masterData[variantTargetKey], ver, specificTag, isArchiveBuild, build?.releaseType);
         if (resolved) break;
       }
     } else {
       for (const ver of versionsToTry) {
         resolved =
-          resolveVersionFromDict(masterData[rawTargetKey], ver, specificTag, isArchiveBuild) ||
-          resolveVersionFromDict(masterData[targetKey], ver, specificTag, isArchiveBuild);
+          resolveVersionFromDict(masterData[rawTargetKey], ver, specificTag, isArchiveBuild, build?.releaseType) ||
+          resolveVersionFromDict(masterData[targetKey], ver, specificTag, isArchiveBuild, build?.releaseType);
         if (resolved) break;
       }
     }
