@@ -1701,11 +1701,11 @@ async function openAppliedPatchesModal(appKey, patchKey, buildKey) {
   if (DOM.appliedPatchesMeta) {
     const patchNamesList = Array.isArray(pNames)
       ? pNames
-      : (typeof pNames === "string" ? pNames.split(/,\s*/).filter(Boolean) : []);
+      : (typeof pNames === "string" ? pNames.split(/[,\s]+/).filter(Boolean) : []);
 
     const changelogList = Array.isArray(clUrl)
       ? clUrl
-      : (typeof clUrl === "string" ? clUrl.split(/,\s*/).filter(Boolean) : (clUrl ? [clUrl] : []));
+      : (typeof clUrl === "string" ? clUrl.split(/[,\s]+/).filter(Boolean) : (clUrl ? [clUrl] : []));
 
     const badgesHtml = patchNamesList.map((name, index) => {
       const url = changelogList[index] || (changelogList.length === 1 ? changelogList[0] : null);
