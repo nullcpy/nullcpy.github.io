@@ -1433,7 +1433,7 @@ function createPatchModalContent(app, patch, buildFilter = "stable", variantFilt
       .map((b) => ({
         ...b,
         assets: b.assets.filter((a) => {
-          const vKey = a.parsed.variant ? normalizeForSearch(a.parsed.variant) : "default";
+          const vKey = a.parsed.rawVariant || (a.parsed.variant ? normalizeForSearch(a.parsed.variant) : "default") || "default";
           return vKey === variantFilter;
         }),
       }))
