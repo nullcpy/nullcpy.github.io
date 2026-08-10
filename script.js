@@ -1800,7 +1800,6 @@ function createObtainiumInstructions(app, patch) {
   }
 
   const mainPackageId = getAppPackageId(app, patch, modalVariantFilter || "default");
-  const mainSafeId = mainPackageId || `${CONFIG.owner}_${app?.appKey || "app"}_${patch?.patchKey || "patch"}`.replace(/[^a-zA-Z0-9_]/g, "_");
   const mainLabel = `${app?.appName || "App"} (${patch?.patchName || "Patch"})`;
   const mainAdditionalSettings = { apkFilterRegEx: regexPattern };
   if (modalBuildFilter === "beta") {
@@ -1808,7 +1807,7 @@ function createObtainiumInstructions(app, patch) {
   }
 
   const mainConfig = {
-    id: mainSafeId,
+    id: mainPackageId,
     name: mainLabel,
     author: CONFIG.owner,
     url: repoUrl,
@@ -1824,7 +1823,6 @@ function createObtainiumInstructions(app, patch) {
         : `^${appNameNorm}-${patchNameNorm}-${v.variantKey}.*\\.apk$`;
       const vLabel = `${app.appName} (${patch.patchName} - ${v.variantName})`;
       const vPackageId = getAppPackageId(app, patch, v.variantKey);
-      const vSafeId = vPackageId || `${CONFIG.owner}_${app.appKey}_${patch.patchKey}_${v.variantKey}_${index}`.replace(/[^a-zA-Z0-9_]/g, "_");
 
       const vAdditionalSettings = { apkFilterRegEx: vRegex };
       if (modalBuildFilter === "beta") {
@@ -1832,7 +1830,7 @@ function createObtainiumInstructions(app, patch) {
       }
 
       const vConfig = {
-        id: vSafeId,
+        id: vPackageId,
         name: vLabel,
         author: CONFIG.owner,
         url: repoUrl,
