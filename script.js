@@ -1814,7 +1814,7 @@ function createObtainiumInstructions(app, patch) {
     url: repoUrl,
     additionalSettings: JSON.stringify(mainAdditionalSettings),
   };
-  const mainOneClickUrl = `https://apps.obtainium.imranr.dev/redirect?r=${encodeURIComponent("obtainium://app/" + JSON.stringify(mainConfig))}`;
+  const mainOneClickUrl = mainPackageId ? `https://apps.obtainium.imranr.dev/redirect?r=${encodeURIComponent("obtainium://app/" + JSON.stringify(mainConfig))}` : null;
 
   let step4Content = "";
   if (patch && patch.variants && patch.variants.length > 1) {
@@ -1838,7 +1838,7 @@ function createObtainiumInstructions(app, patch) {
         url: repoUrl,
         additionalSettings: JSON.stringify(vAdditionalSettings),
       };
-      const vOneClickUrl = `https://apps.obtainium.imranr.dev/redirect?r=${encodeURIComponent("obtainium://app/" + JSON.stringify(vConfig))}`;
+      const vOneClickUrl = vPackageId ? `https://apps.obtainium.imranr.dev/redirect?r=${encodeURIComponent("obtainium://app/" + JSON.stringify(vConfig))}` : null;
 
       return `
         <div style="margin-top: 8px;">
@@ -1847,7 +1847,7 @@ function createObtainiumInstructions(app, patch) {
           </div>
           <div class="instruction-code">
             <code>${escapeHtml(vRegex)}</code>
-            <a href="${vOneClickUrl}" class="obtainium-add-btn" target="_blank" rel="noopener noreferrer">Add to Obtainium</a>
+            ${vOneClickUrl ? `<a href="${vOneClickUrl}" class="obtainium-add-btn" target="_blank" rel="noopener noreferrer">Add to Obtainium</a>` : ''}
             <button class="copy-btn" onclick="copyToClipboard('${escapeHtml(vRegex)}', 'Regex copied!')" type="button">Copy</button>
           </div>
         </div>
@@ -1863,7 +1863,7 @@ function createObtainiumInstructions(app, patch) {
     step4Content = `
       <div class="instruction-code" style="margin-top: 6px;">
         <code>${escapeHtml(regexPattern)}</code>
-        <a href="${mainOneClickUrl}" class="obtainium-add-btn" target="_blank" rel="noopener noreferrer">Add to Obtainium</a>
+        ${mainOneClickUrl ? `<a href="${mainOneClickUrl}" class="obtainium-add-btn" target="_blank" rel="noopener noreferrer">Add to Obtainium</a>` : ''}
         <button class="copy-btn" onclick="copyToClipboard('${escapeHtml(regexPattern)}', 'Regex copied!')" type="button">Copy</button>
       </div>
     `;
