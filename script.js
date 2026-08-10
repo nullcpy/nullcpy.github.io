@@ -1870,7 +1870,7 @@ function createObtainiumInstructions(app, patch) {
   return `
     <div class="obtainium-instructions">
     <div style="margin-bottom: 12px;">
-    Make sure you have <strong>Obtainium</strong> installed, if not install from <a href="${obtainiumLatestUrl}" target="_blank" rel="noopener noreferrer">GitHub</a>. Press the <strong>Add to Obtainium</strong> button to add the app(s) automatically or you can follow the instructions below to add them manually:
+      Ensure that you have <strong>Obtainium</strong> installed (available on <a href="${obtainiumLatestUrl}" target="_blank" rel="noopener noreferrer">GitHub</a>). Use the <strong>Add to Obtainium</strong> button for a quick setup if it's available, or follow the steps below to add the app manually:
     </div>
       <ol>
         <li>Open Obtainium on your device.</li>
