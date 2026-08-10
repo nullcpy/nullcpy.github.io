@@ -848,8 +848,8 @@ function buildAppCatalog(releases) {
       }
 
       const buildKey = isArchive
-        ? `archive-${releaseType}-${parsed.version}`
-        : String(release.id);
+        ? `archive-${releaseType}-${parsed.version}-${variantKey}`
+        : `${release.id}-${variantKey}`;
 
       if (!patchEntry.builds.has(buildKey)) {
         patchEntry.builds.set(buildKey, {
