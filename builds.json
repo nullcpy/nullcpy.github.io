@@ -2306,5 +2306,41 @@
         ]
       }
     }
+  },
+  "accuweather-morphe": {
+    "21.1.14-5-rc": {
+      "260192": {
+        "patches": "rushiranpise/patches-1.17.0.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.17.0",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Premium+ "
+        ]
+      }
+    }
+  },
+  "moviebox-morphe-androidtv": {
+    "1.1.6.0723.03": {
+      "260192": {
+        "patches": "rushiranpise/patches-1.17.0.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.17.0",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock VIP "
+        ]
+      }
+    }
+  },
+  "the-weather-channel-morphe": {
+    "16.16.0": {
+      "260192": {
+        "patches": "rushiranpise/patches-1.17.0.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.17.0",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Premium "
+        ]
+      }
+    }
   }
 }
