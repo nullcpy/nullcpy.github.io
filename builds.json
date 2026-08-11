@@ -2193,5 +2193,118 @@
         ]
       }
     }
+  },
+  "adguard-morphe-nightly": {
+    "4.14.68": {
+      "260191": {
+        "patches": "rushiranpise/patches-1.17.0.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.17.0",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Lifetime Premium ",
+          "Unlock Lifetime Premium "
+        ]
+      }
+    }
+  },
+  "waze-morphe": {
+    "5.22.0.3": {
+      "260191": {
+        "patches": "rushiranpise/patches-1.17.0.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.17.0",
+        "applied_patches": [
+          "Alert Distances ",
+          "AutoZoom ",
+          "Disable Ads ",
+          "Disable Advil Ad Requests ",
+          "Enlarged Speedometer ",
+          "GmsCore support (MicroG) ",
+          "Map Skin (Vitamin C) ",
+          "Navigation & Map ",
+          "Popup Suppression ",
+          "Radar Sound (Any Speed) ",
+          "Report Speed Limit ",
+          "Speed Limit Sign ",
+          "Uncensored Radar / Camera Display "
+        ]
+      }
+    }
+  },
+  "warp-morphe": {
+    "6.38.8": {
+      "260191": {
+        "patches": "rushiranpise/patches-1.17.0.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.17.0",
+        "applied_patches": [
+          "Disable Analytics / Telemetry ",
+          "GmsCore support (MicroG) ",
+          "Spoof WARP+ Unlimited UI "
+        ]
+      }
+    }
+  },
+  "ninja-vpn-morphe": {
+    "1.4.7": {
+      "260191": {
+        "patches": "rushiranpise/patches-1.17.0.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.17.0",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Premium "
+        ]
+      }
+    }
+  },
+  "windscribe-vpn-morphe": {
+    "4.2.2328": {
+      "260191": {
+        "patches": "rushiranpise/patches-1.17.0.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.17.0",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Premium "
+        ]
+      }
+    }
+  },
+  "terabox-morphe": {
+    "4.22.6": {
+      "260191": {
+        "patches": "rushiranpise/patches-1.17.0.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.17.0",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock VIP "
+        ]
+      }
+    }
+  },
+  "beta-maniac-morphe": {
+    "0.9.4": {
+      "260191": {
+        "patches": "rushiranpise/patches-1.17.0.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.17.0",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Premium "
+        ]
+      }
+    }
+  },
+  "google-photos-morphe-alt": {
+    "7.87.0.957333026": {
+      "260191": {
+        "patches": "rushiranpise/patches-1.17.0.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.17.0",
+        "applied_patches": [
+          "AMOLED dark theme ",
+          "Change package name ",
+          "Enable DCIM folders backup control ",
+          "Fix DCIM folder classification ",
+          "GmsCore support ",
+          "GmsCore support (MicroG) "
+        ]
+      }
+    }
   }
 }
