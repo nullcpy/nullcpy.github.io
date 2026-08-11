@@ -1618,7 +1618,7 @@ async function openAppliedPatchesModal(appKey, patchKey, buildKey) {
       if (!dict || typeof dict !== "object") return null;
       if (isPatchEntry(dict)) return dict;
 
-      const cleanVer = (rawVer || "").toLowerCase().replace(/^v(?=\d)/i, "").trim();
+      const cleanVer = (rawVer || "").toLowerCase().replace(/^v(?=[a-z0-9])/i, "").trim();
       if (!cleanVer) return null;
 
       const candidate = dict[cleanVer] || dict[`v${cleanVer}`] || dict[rawVer];
@@ -1655,7 +1655,7 @@ async function openAppliedPatchesModal(appKey, patchKey, buildKey) {
     }
 
     const specificTag = isArchiveBuild ? null : (build?.build || null);
-    const cleanBuildVer = (build?.version || "").replace(/^v(?=\d)/i, "").trim();
+    const cleanBuildVer = (build?.version || "").replace(/^v(?=[a-z0-9])/i, "").trim();
     const versionsToTry = cleanBuildVer ? [cleanBuildVer, `v${cleanBuildVer}`] : [];
 
     // Map build tag to releaseType to prefer the right patches for archive builds
@@ -2149,7 +2149,7 @@ function parseAssetDisplay(filename, arch, fileType) {
 
   let version = "Version unknown";
   if (versionIndex >= 0) {
-    const versionParts = [tokens[versionIndex].replace(/^v(?=\d)/i, "")];
+    const versionParts = [tokens[versionIndex].replace(/^v(?=[a-z0-9])/i, "")];
     for (let i = versionIndex + 1; i < tokens.length; i++) {
       const t = tokens[i].toLowerCase();
       const isArchToken = CONFIG.knownArchs.some((a) => a.split("-").includes(t));

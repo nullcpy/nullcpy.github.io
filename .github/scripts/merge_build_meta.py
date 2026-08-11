@@ -10,7 +10,7 @@ ARCH_SUFFIXES_REGEX = re.compile(
     r"(?:-(arm64-v8a|armeabi-v7a|arm64|aarch64|arm-v7a|arm32|x86_64|x86|universal|all))+$",
     re.IGNORECASE
 )
-VERSION_PREFIX_REGEX = re.compile(r"^v(?=\d)", re.IGNORECASE)
+VERSION_PREFIX_REGEX = re.compile(r"^v(?=[a-z0-9])", re.IGNORECASE)
 ASSET_FILENAME_REGEX = re.compile(
     r"^([a-z0-9-]+)-v([a-zA-Z0-9._-]+?)(?:-(?:arm64-v8a|armeabi-v7a|x86_64|x86|universal|all))?\.(?:apk|zip)$"
 )
