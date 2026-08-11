@@ -1825,6 +1825,28 @@
           "Show view count ",
           "Spoof signature "
         ]
+      },
+      "260189": {
+        "patches": "MorpheApp/patches-1.40.0-dev.3.mpp",
+        "changelog": "https://github.com/MorpheApp/morphe-patches/releases/tag/v1.40.0-dev.3",
+        "applied_patches": [
+          "Custom font ",
+          "Disable modern home ",
+          "Disable screenshot popup ",
+          "Force system font ",
+          "Hide Ask button ",
+          "Hide Trending shelves ",
+          "Hide ads ",
+          "Hide communities shelf ",
+          "Hide navigation buttons ",
+          "Hide sidebar components ",
+          "Open links directly ",
+          "Open links externally ",
+          "Remove subreddit dialog ",
+          "Sanitize sharing links ",
+          "Show view count ",
+          "Spoof signature "
+        ]
       }
     }
   },
