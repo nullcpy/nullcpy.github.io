@@ -2342,5 +2342,17 @@
         ]
       }
     }
+  },
+  "hola-vpn-morphe": {
+    "AARCH64_1.248.400": {
+      "260192": {
+        "patches": "rushiranpise/patches-1.17.0.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.17.0",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Premium "
+        ]
+      }
+    }
   }
 }
