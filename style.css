@@ -530,6 +530,7 @@ main {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+    will-change: transform;
 }
 
 .build-card:not([open]) {

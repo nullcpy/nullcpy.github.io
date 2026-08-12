@@ -599,6 +599,20 @@ function setupEventListeners() {
     }
   });
 
+  // Auto-scroll expanded cards
+  document.addEventListener("toggle", (e) => {
+    if (e.target.tagName === "DETAILS" && e.target.classList.contains("app-card") && e.target.open) {
+      setTimeout(() => {
+        const rect = e.target.getBoundingClientRect();
+        if (rect.height > window.innerHeight) {
+          window.scrollBy({ top: rect.top - 20, behavior: "smooth" });
+        } else if (rect.bottom > window.innerHeight) {
+          window.scrollBy({ top: rect.bottom - window.innerHeight + 20, behavior: "smooth" });
+        }
+      }, 50);
+    }
+  }, true);
+
   // Infinite Scroll Observer
   const sentinel = document.createElement("div");
   sentinel.id = "scroll-sentinel";
