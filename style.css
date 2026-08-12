@@ -185,7 +185,8 @@ textarea {
 
 #themeBtn {
     font-size: 20px;
-}
+}@media (hover: hover) {
+
 
 #menuBtn:hover,
 #themeBtn:hover,
@@ -194,6 +195,7 @@ textarea {
     transform: scale(1.08);
     border-color: var(--accent);
     box-shadow: 0 0 15px var(--accent-glow);
+}
 }
 
 /* Header */
@@ -238,7 +240,8 @@ header h1 {
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     background: var(--bg-tertiary);
-}
+}@media (hover: hover) {
+
 
 .top-link:hover {
     color: var(--accent);
@@ -246,17 +249,20 @@ header h1 {
     background: var(--accent-glow);
     transform: translateY(-2px);
 }
+}
 
 .top-link-icon {
     width: 18px;
     height: 18px;
     display: block;
-}
+}@media (hover: hover) {
+
 
 .top-links a.donate-link:hover {
     color: #f43f5e;
     border-color: #f43f5e;
     background: rgba(244, 63, 94, 0.12);
+}
 }
 
 /* Update Status Pill */
@@ -371,11 +377,13 @@ main {
     opacity: 1;
     pointer-events: auto;
     transform: scale(1);
-}
+}@media (hover: hover) {
+
 
 #searchClearBtn:hover {
     background: var(--accent-danger);
     color: #ffffff;
+}
 }
 
 /* Channel filter bar removed — use .filter-toolbar for all filters */
@@ -408,13 +416,15 @@ main {
     cursor: pointer;
     transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow: var(--shadow);
-}
+}@media (hover: hover) {
+
 
 .filter-btn:hover {
     border-color: var(--accent);
     color: var(--accent);
     background: var(--accent-glow);
     transform: translateY(-1px);
+}
 }
 
 /* Dark mode active: colored bg → use dark text for readability */
@@ -536,12 +546,14 @@ main {
 .build-card:not(.open) {
     min-height: 86px;
     justify-content: center;
-}
+}@media (hover: hover) {
+
 
 .build-card:hover {
     border-color: var(--border-hover);
     box-shadow: var(--shadow-hover);
     transform: translateY(-4px);
+}
 }
 
 .app-card-summary {
@@ -671,11 +683,13 @@ main {
 .microg-note .app-notice-links a {
     border: 1px solid var(--border-hover);
     color: var(--accent);
-}
+}@media (hover: hover) {
+
 
 .microg-note .app-notice-links a:hover {
     background: var(--accent);
     color: var(--btn-on-accent);
+}
 }
 
 .twitter-login-note {
@@ -690,11 +704,13 @@ main {
 .twitter-login-note .app-notice-links a {
     border: 1px solid var(--accent-warning);
     color: var(--accent-warning);
-}
+}@media (hover: hover) {
+
 
 .twitter-login-note .app-notice-links a:hover {
     background: var(--accent-warning);
     color: var(--btn-on-accent);
+}
 }
 
 /* Patch Entries & Variant Matrix */
@@ -746,11 +762,13 @@ main {
 .patch-engine-link {
     text-decoration: none;
     transition: opacity 0.2s ease, transform 0.2s ease;
-}
+}@media (hover: hover) {
+
 
 .patch-engine-link:hover {
     opacity: 0.88;
     transform: translateY(-1px);
+}
 }
 
 .patch-link-arrow {
@@ -789,11 +807,13 @@ main {
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow: 0 4px 12px var(--accent-variant-glow);
-}
+}@media (hover: hover) {
+
 
 .patch-applied-btn:hover {
     opacity: 0.92;
     transform: translateY(-1px);
+}
 }
 
 /* Variant Rows & Matrix */
@@ -852,37 +872,45 @@ body.light-mode .variant-row {
     transition: all 0.15s ease;
     width: 100%;
     box-sizing: border-box;
-}
+}@media (hover: hover) {
+
 
 .channel-box-btn:hover {
     transform: translateY(-1px);
 }
+}
 
 .channel-box-btn.stable {
     border-color: var(--border-stable);
-}
+}@media (hover: hover) {
+
 
 .channel-box-btn.stable:hover {
     background: var(--accent-stable-glow);
     border-color: var(--accent-stable);
 }
+}
 
 .channel-box-btn.beta {
     border-color: var(--border-beta);
-}
+}@media (hover: hover) {
+
 
 .channel-box-btn.beta:hover {
     background: var(--accent-beta-glow);
     border-color: var(--accent-beta);
 }
+}
 
 .channel-box-btn.archive {
     border-color: var(--accent-archive-border);
-}
+}@media (hover: hover) {
+
 
 .channel-box-btn.archive:hover {
     background: var(--accent-archive-bg);
     border-color: var(--accent-archive);
+}
 }
 
 .channel-box-top {
@@ -1085,12 +1113,14 @@ body.modal-open {
     transition: all 0.2s ease;
     user-select: none;
     box-shadow: var(--shadow);
-}
+}@media (hover: hover) {
+
 
 .modal-filter-btn:hover {
     border-color: var(--accent);
     color: var(--accent);
     background: var(--accent-glow);
+}
 }
 
 .modal-filter-btn.active {
@@ -1118,11 +1148,13 @@ body.modal-open {
     align-items: center;
     justify-content: center;
     line-height: 1;
-}
+}@media (hover: hover) {
+
 
 .modal-obtainium-btn:hover {
     opacity: 0.92;
     transform: translateY(-1px);
+}
 }
 
 .modal-close {
@@ -1139,11 +1171,13 @@ body.modal-open {
     justify-content: center;
     transition: all 0.2s ease;
     flex: 0 0 40px;
-}
+}@media (hover: hover) {
+
 
 .modal-close:hover {
     border-color: var(--accent-danger);
     color: var(--accent-danger);
+}
 }
 
 .modal-body {
@@ -1184,27 +1218,33 @@ body.light-mode .modal-build-card {
     min-height: 56px;
     box-sizing: border-box;
     transition: background-color 0.2s ease;
-}
+}@media (hover: hover) {
+
 
 .modal-build-header:hover {
     background: rgba(0, 0, 0, 0.18);
 }
+}
 
 body.light-mode .modal-build-header {
     background: #ffffff;
-}
+}@media (hover: hover) {
+
 
 body.light-mode .modal-build-header:hover {
     background: #f7f4ee;
+}
 }
 
 body.light-mode .download-btn {
     background: #faf8f5;
     border: 1px solid var(--border);
-}
+}@media (hover: hover) {
+
 
 body.light-mode .download-btn:hover {
     background: #f2ede6;
+}
 }
 
 
@@ -1307,10 +1347,12 @@ body.light-mode .download-btn:hover {
     font-size: 0.85rem;
     font-weight: 600;
     transition: color 0.2s ease, opacity 0.2s ease;
-}
+}@media (hover: hover) {
+
 
 .release-link:hover {
     opacity: 0.8;
+}
 }
 
 .release-link-button {
@@ -1327,13 +1369,15 @@ body.light-mode .download-btn:hover {
     white-space: nowrap;
     font-size: 0.82rem;
     font-weight: 600;
-}
+}@media (hover: hover) {
+
 
 .release-link-button:hover {
     opacity: 1;
     border-color: var(--accent);
     color: var(--accent);
     background: var(--accent-glow);
+}
 }
 
 .patch-applied-btn,
@@ -1355,13 +1399,15 @@ body.light-mode .download-btn:hover {
     text-decoration: none;
     box-shadow: var(--shadow);
     white-space: nowrap;
-}
+}@media (hover: hover) {
+
 
 .patch-applied-btn:hover,
 .release-link-button:hover {
     border-color: var(--accent);
     color: var(--accent);
     background: var(--accent-glow);
+}
 }
 
 /* Asset Download Groups */
@@ -1394,13 +1440,15 @@ body.light-mode .download-btn:hover {
     text-decoration: none;
     transition: all 0.2s ease;
     box-sizing: border-box;
-}
+}@media (hover: hover) {
+
 
 .download-btn:hover {
     background: var(--bg-card-hover);
     border-color: var(--border);
     transform: translateY(-1px);
     box-shadow: var(--shadow-hover);
+}
 }
 
 .asset-left {
@@ -1452,11 +1500,13 @@ body.light-mode .download-btn:hover {
     justify-content: center;
     white-space: nowrap;
     transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
+}@media (hover: hover) {
+
 
 .download-action-btn:hover {
     opacity: 0.9;
     transform: translateY(-2px);
+}
 }
 
 /* Applied Patches Modal Specifics */
@@ -1540,10 +1590,12 @@ body.light-mode .download-btn:hover {
     text-decoration: underline;
     text-underline-offset: 3px;
     transition: color 0.2s ease, opacity 0.2s ease;
-}
+}@media (hover: hover) {
+
 
 .obtainium-instructions a:not(.obtainium-add-btn):hover {
     opacity: 0.8;
+}
 }
 
 .obtainium-instructions ol {
@@ -1595,11 +1647,13 @@ body.light-mode .download-btn:hover {
     cursor: pointer;
     font-weight: 700;
     transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
+}@media (hover: hover) {
+
 
 .copy-btn:hover {
     opacity: 0.85;
     transform: translateY(-1px);
+}
 }
 
 /* Obtainium add button — signature purple */
@@ -1612,7 +1666,8 @@ body.light-mode .download-btn:hover {
     border: none;
     transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow: 0 2px 8px var(--accent-obtainium-glow);
-}
+}@media (hover: hover) {
+
 
 .obtainium-add-btn:hover {
     opacity: 0.88;
@@ -1620,6 +1675,7 @@ body.light-mode .download-btn:hover {
     text-decoration: none !important;
     transform: translateY(-2px);
     box-shadow: 0 4px 16px var(--accent-obtainium-glow);
+}
 }
 
 .code-with-copy {
@@ -1677,10 +1733,12 @@ footer {
 footer a {
     color: var(--accent);
     text-decoration: none;
-}
+}@media (hover: hover) {
+
 
 footer a:hover {
     text-decoration: underline;
+}
 }
 
 /* Responsive Styles */
