@@ -2868,6 +2868,24 @@
           "GmsCore support ",
           "Spoof features "
         ]
+      },
+      "260205": {
+        "patches": "RookieEnough/patches-1.2.0.mpp",
+        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.0",
+        "applied_patches": [
+          "Fix selected account persistence ",
+          "GmsCore support ",
+          "Spoof features "
+        ]
+      },
+      "260204": {
+        "patches": "RookieEnough/patches-1.2.1-dev.1.mpp",
+        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.1-dev.1",
+        "applied_patches": [
+          "Fix selected account persistence ",
+          "GmsCore support ",
+          "Spoof features "
+        ]
       }
     }
   },
@@ -2946,6 +2964,13 @@
         "applied_patches": [
           "Remove device restrictions "
         ]
+      },
+      "260205": {
+        "patches": "RookieEnough/patches-1.2.0.mpp",
+        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.0",
+        "applied_patches": [
+          "Remove device restrictions "
+        ]
       }
     }
   },
@@ -2954,6 +2979,15 @@
       "260202": {
         "patches": "RookieEnough/patches-1.1.1.mpp",
         "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.1.1",
+        "applied_patches": [
+          "Hide update popup ",
+          "Spoof device ID ",
+          "Unlock plus "
+        ]
+      },
+      "260205": {
+        "patches": "RookieEnough/patches-1.2.0.mpp",
+        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.0",
         "applied_patches": [
           "Hide update popup ",
           "Spoof device ID ",
@@ -2986,6 +3020,13 @@
         "applied_patches": [
           "Hide Ads "
         ]
+      },
+      "260205": {
+        "patches": "RookieEnough/patches-1.2.0.mpp",
+        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.0",
+        "applied_patches": [
+          "Hide Ads "
+        ]
       }
     }
   },
@@ -2994,6 +3035,13 @@
       "260202": {
         "patches": "RookieEnough/patches-1.1.1.mpp",
         "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.1.1",
+        "applied_patches": [
+          "Hide ads "
+        ]
+      },
+      "260205": {
+        "patches": "RookieEnough/patches-1.2.0.mpp",
+        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.0",
         "applied_patches": [
           "Hide ads "
         ]
