@@ -528,7 +528,7 @@ function setupEventListeners() {
               } else if (rect.bottom > window.innerHeight) {
                 window.scrollBy({ top: rect.bottom - window.innerHeight + 20, behavior: "smooth" });
               }
-            }, 150);
+            }, 360);
           } else {
             card.classList.remove("open");
           }
