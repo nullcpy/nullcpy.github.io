@@ -602,6 +602,14 @@ function setupEventListeners() {
   // Auto-scroll expanded cards
   document.addEventListener("toggle", (e) => {
     if (e.target.tagName === "DETAILS" && e.target.classList.contains("app-card") && e.target.open) {
+      
+      // Close all other open cards (Accordion behavior)
+      document.querySelectorAll("details.app-card[open]").forEach(card => {
+        if (card !== e.target) {
+          card.open = false;
+        }
+      });
+
       setTimeout(() => {
         const rect = e.target.getBoundingClientRect();
         if (rect.height > window.innerHeight) {
