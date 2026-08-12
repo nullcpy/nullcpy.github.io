@@ -612,12 +612,12 @@ function setupEventListeners() {
 
       setTimeout(() => {
         const rect = e.target.getBoundingClientRect();
-        if (rect.height > window.innerHeight) {
+        if (rect.top < 20 || rect.height > window.innerHeight) {
           window.scrollBy({ top: rect.top - 20, behavior: "smooth" });
         } else if (rect.bottom > window.innerHeight) {
           window.scrollBy({ top: rect.bottom - window.innerHeight + 20, behavior: "smooth" });
         }
-      }, 50);
+      }, 150);
     }
   }, true);
 
