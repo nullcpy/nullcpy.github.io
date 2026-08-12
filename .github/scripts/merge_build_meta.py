@@ -241,10 +241,20 @@ def main():
         print("Releases is empty or not a list.")
         return
 
+    # Load old releases to extract previously processed asset IDs
+    old_releases = load_json("releases.json") or []
+    processed_asset_ids = set()
+    if isinstance(old_releases, list):
+        for old_r in old_releases:
+            for a in old_r.get("assets", []):
+                if a.get("name") in ["build.json", "manifest.json"]:
+                    processed_asset_ids.add(a.get("id"))
+
     # Load existing master build metadata
     master_build = load_json(MASTER_BUILD_FILE) or {}
 
     new_build_data_count = 0
+    skipped_count = 0
 
     for rel in releases:
         # Strip any legacy embedded build_data so releases.json remains a clean GitHub API dump
@@ -257,6 +267,11 @@ def main():
             None
         )
         if build_json_asset and "browser_download_url" in build_json_asset:
+            asset_id = build_json_asset.get("id")
+            if asset_id in processed_asset_ids:
+                skipped_count += 1
+                continue
+
             try:
                 url = build_json_asset["browser_download_url"]
                 req = urllib.request.Request(
@@ -285,7 +300,7 @@ def main():
     # Save 100% clean releases.json cache
     with open("releases.json", "w", encoding="utf-8") as f:
         json.dump(releases, f, separators=(",", ":"))
-    print(f"[OK] Successfully wrote clean releases.json ({len(releases)} releases, {new_build_data_count} newly ingested)")
+    print(f"[OK] Successfully wrote clean releases.json ({len(releases)} releases, {new_build_data_count} newly ingested, {skipped_count} skipped)")
 
 if __name__ == "__main__":
     main()
