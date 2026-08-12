@@ -533,7 +533,7 @@ main {
     will-change: transform;
 }
 
-.build-card:not([open]) {
+.build-card:not(.open) {
     min-height: 86px;
     justify-content: center;
 }
@@ -554,9 +554,7 @@ main {
     width: 100%;
 }
 
-.app-card-summary::-webkit-details-marker {
-    display: none;
-}
+
 
 .app-title-group {
     display: flex;
@@ -600,12 +598,24 @@ main {
     transition: transform 0.2s ease;
 }
 
-.app-card[open] .app-card-chevron {
+.app-card.open .app-card-chevron {
     transform: rotate(180deg);
 }
 
+.app-card-body-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.app-card.open .app-card-body-wrapper,
+.modal-build-card.open .app-card-body-wrapper {
+    grid-template-rows: 1fr;
+}
 .app-card-body {
-    margin-top: 16px;
+    overflow: hidden;
+}
+.app-card-body-inner {
+    padding-top: 16px;
     display: flex;
     flex-direction: column;
     gap: 14px;
@@ -1164,11 +1174,9 @@ body.light-mode .download-btn:hover {
     background: #f2ede6;
 }
 
-.modal-build-header::-webkit-details-marker {
-    display: none;
-}
 
-.modal-build-card[open] .modal-build-header {
+
+.modal-build-card.open .modal-build-header {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     border-bottom: 1px solid var(--border);
@@ -1209,6 +1217,9 @@ body.light-mode .download-btn:hover {
 }
 
 .modal-build-downloads {
+    overflow: hidden;
+}
+.modal-build-downloads-inner {
     padding: 18px;
     display: flex;
     flex-direction: column;
