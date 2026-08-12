@@ -413,6 +413,12 @@ function showModal(modalEl) {
 function hideModal(modalEl) {
   if (!modalEl) return;
   modalEl.classList.add("closing");
+  
+  // Prevent accessibility warnings by removing focus from modal elements before hiding
+  if (document.activeElement && modalEl.contains(document.activeElement)) {
+    document.activeElement.blur();
+  }
+
   setTimeout(() => {
     modalEl.classList.remove("open");
     modalEl.classList.remove("closing");
