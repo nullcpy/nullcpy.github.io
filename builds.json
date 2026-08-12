@@ -2886,6 +2886,15 @@
           "GmsCore support ",
           "Spoof features "
         ]
+      },
+      "260206": {
+        "patches": "RookieEnough/patches-1.2.1.mpp",
+        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.1",
+        "applied_patches": [
+          "Fix selected account persistence ",
+          "GmsCore support ",
+          "Spoof features "
+        ]
       }
     }
   },
@@ -2954,6 +2963,18 @@
           "Hide ads "
         ]
       }
+    },
+    "434.0.0.41.74": {
+      "260206": {
+        "patches": "durgesh0505/patches-1.18.0.mpp",
+        "changelog": "https://github.com/durgesh0505/chiggi_morphe_patches/releases/tag/v1.18.0",
+        "applied_patches": [
+          "Change app name ",
+          "Hide ads ",
+          "Remove AD_ID permission ",
+          "Change package name "
+        ]
+      }
     }
   },
   "google-recorder-morphe": {
@@ -2968,6 +2989,13 @@
       "260205": {
         "patches": "RookieEnough/patches-1.2.0.mpp",
         "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.0",
+        "applied_patches": [
+          "Remove device restrictions "
+        ]
+      },
+      "260206": {
+        "patches": "RookieEnough/patches-1.2.1.mpp",
+        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.1",
         "applied_patches": [
           "Remove device restrictions "
         ]
@@ -2988,6 +3016,15 @@
       "260205": {
         "patches": "RookieEnough/patches-1.2.0.mpp",
         "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.0",
+        "applied_patches": [
+          "Hide update popup ",
+          "Spoof device ID ",
+          "Unlock plus "
+        ]
+      },
+      "260206": {
+        "patches": "RookieEnough/patches-1.2.1.mpp",
+        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.1",
         "applied_patches": [
           "Hide update popup ",
           "Spoof device ID ",
@@ -3027,6 +3064,13 @@
         "applied_patches": [
           "Hide Ads "
         ]
+      },
+      "260206": {
+        "patches": "RookieEnough/patches-1.2.1.mpp",
+        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.1",
+        "applied_patches": [
+          "Hide Ads "
+        ]
       }
     }
   },
@@ -3042,6 +3086,13 @@
       "260205": {
         "patches": "RookieEnough/patches-1.2.0.mpp",
         "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.0",
+        "applied_patches": [
+          "Hide ads "
+        ]
+      },
+      "260206": {
+        "patches": "RookieEnough/patches-1.2.1.mpp",
+        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.1",
         "applied_patches": [
           "Hide ads "
         ]
