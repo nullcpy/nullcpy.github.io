@@ -2609,5 +2609,17 @@
         ]
       }
     }
+  },
+  "pocket-casts-morphe": {
+    "8.16": {
+      "260200": {
+        "patches": "rushiranpise/patches-1.17.0.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.17.0",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Patron "
+        ]
+      }
+    }
   }
 }
