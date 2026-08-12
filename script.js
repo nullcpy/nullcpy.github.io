@@ -404,6 +404,7 @@ function applyTheme(theme) {
 // Modal Generic Controller
 function showModal(modalEl) {
   if (!modalEl) return;
+  modalEl.classList.remove("closing");
   modalEl.classList.add("open");
   modalEl.setAttribute("aria-hidden", "false");
   document.body.classList.add("modal-open");
@@ -411,11 +412,15 @@ function showModal(modalEl) {
 
 function hideModal(modalEl) {
   if (!modalEl) return;
-  modalEl.classList.remove("open");
-  modalEl.setAttribute("aria-hidden", "true");
-  if (!document.querySelector(".modal-overlay.open")) {
-    document.body.classList.remove("modal-open");
-  }
+  modalEl.classList.add("closing");
+  setTimeout(() => {
+    modalEl.classList.remove("open");
+    modalEl.classList.remove("closing");
+    modalEl.setAttribute("aria-hidden", "true");
+    if (!document.querySelector(".modal-overlay.open:not(.closing)")) {
+      document.body.classList.remove("modal-open");
+    }
+  }, 180);
 }
 
 // Event Listeners
