@@ -507,20 +507,30 @@ function setupEventListeners() {
   // App Cards & Modal Delegate Click
   if (DOM.builds) {
     DOM.builds.addEventListener("click", (e) => {
-      const summary = e.target.closest(".app-card-summary");
-      if (summary) {
-        const card = summary.closest(".app-card");
-        if (card) {
-          const isOpen = card.classList.contains("open");
-          
+      const trigger = e.target.closest(".channel-box-btn");
+      if (trigger) {
+        e.stopPropagation();
+        openPatchModal(
+          trigger.dataset.appKey,
+          trigger.dataset.patchKey,
+          trigger.dataset.channel || "all",
+          trigger.dataset.variant || "all"
+        );
+        return;
+      }
+
+      const card = e.target.closest(".app-card");
+      if (card) {
+        const isSummaryClick = e.target.closest(".app-card-summary");
+        const isOpen = card.classList.contains("open");
+        
+        if (isSummaryClick || !isOpen) {
           if (!isOpen) {
-            // Accordion: close all other open cards
             document.querySelectorAll(".app-card.open").forEach(c => {
               if (c !== card) c.classList.remove("open");
             });
             card.classList.add("open");
             
-            // Auto-scroll logic
             setTimeout(() => {
               const rect = card.getBoundingClientRect();
               if (rect.top < 20 || rect.height > window.innerHeight) {
@@ -533,24 +543,6 @@ function setupEventListeners() {
             card.classList.remove("open");
           }
         }
-        return;
-      }
-
-      const collapsedCard = e.target.closest(".app-card:not(.open)");
-      if (collapsedCard && !e.target.closest(".app-card-summary")) {
-        collapsedCard.classList.add("open");
-        return;
-      }
-
-      const trigger = e.target.closest(".channel-box-btn");
-      if (trigger) {
-        e.stopPropagation();
-        openPatchModal(
-          trigger.dataset.appKey,
-          trigger.dataset.patchKey,
-          trigger.dataset.channel || "all",
-          trigger.dataset.variant || "all"
-        );
       }
     });
   }
