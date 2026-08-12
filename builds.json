@@ -2582,6 +2582,31 @@
           "Open links externally ",
           "Remove Meta AI "
         ]
+      },
+      "260199": {
+        "patches": "rushiranpise/patches-1.18.0-dev.3.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.0-dev.3",
+        "applied_patches": [
+          "Disable media transcoding ",
+          "Disable typing indicator ",
+          "GmsCore support (MicroG) ",
+          "Hide inbox ads ",
+          "Open links externally "
+        ]
+      },
+      "260198": {
+        "patches": "rushiranpise/patches-1.18.0-dev.3.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.0-dev.3",
+        "applied_patches": [
+          "Disable media transcoding ",
+          "Disable typing indicator ",
+          "GmsCore support (MicroG) ",
+          "Hide Facebook buttons ",
+          "Hide inbox ads ",
+          "Hide inbox stories and notes tray ",
+          "Hide inbox subtabs ",
+          "Open links externally "
+        ]
       }
     }
   }
