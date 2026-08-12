@@ -2513,5 +2513,24 @@
         ]
       }
     }
+  },
+  "messenger-morphe": {
+    "573.0.0.44.88": {
+      "260196": {
+        "patches": "rushiranpise/patches-1.18.0-dev.2.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.0-dev.2",
+        "applied_patches": [
+          "Disable media transcoding ",
+          "Disable typing indicator ",
+          "GmsCore support (MicroG) ",
+          "Hide Facebook buttons ",
+          "Hide inbox ads ",
+          "Hide inbox stories and notes tray ",
+          "Hide inbox subtabs ",
+          "Open links externally ",
+          "Remove Meta AI "
+        ]
+      }
+    }
   }
 }
