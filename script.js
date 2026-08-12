@@ -562,13 +562,43 @@ function setupEventListeners() {
   // Downloads Modal Filter Delegate
   if (DOM.patchModal) {
     DOM.patchModal.addEventListener("click", (e) => {
-      const modalHeader = e.target.closest(".modal-build-header");
-      if (modalHeader) {
-        const card = modalHeader.closest(".modal-build-card");
-        if (card) {
-          card.classList.toggle("open");
+      const card = e.target.closest(".modal-build-card");
+      if (card) {
+        const isHeaderClick = e.target.closest(".modal-build-header");
+        const isOpen = card.classList.contains("open");
+        const isInteractive = e.target.closest("a, button, .patch-applied-btn");
+        
+        if (isHeaderClick || (!isOpen && !isInteractive)) {
+          if (!isOpen) {
+            const modalBody = card.closest(".modal-body");
+            if (modalBody) {
+              modalBody.querySelectorAll(".modal-build-card.open").forEach(c => {
+                if (c !== card) c.classList.remove("open");
+              });
+            }
+            card.classList.add("open");
+            
+            setTimeout(() => {
+              const modalBody = card.closest(".modal-body");
+              if (modalBody) {
+                const containerRect = modalBody.getBoundingClientRect();
+                const rect = card.getBoundingClientRect();
+                
+                const offsetTop = rect.top - containerRect.top;
+                const offsetBottom = rect.bottom - containerRect.bottom;
+                
+                if (offsetTop < 0 || rect.height > containerRect.height) {
+                  modalBody.scrollBy({ top: offsetTop - 8, behavior: "smooth" });
+                } else if (offsetBottom > 0) {
+                  modalBody.scrollBy({ top: offsetBottom + 8, behavior: "smooth" });
+                }
+              }
+            }, 360);
+          } else if (isHeaderClick) {
+            card.classList.remove("open");
+          }
+          if (isHeaderClick || !isInteractive) return;
         }
-        return;
       }
 
       const filterBtn = e.target.closest(".modal-filter-btn");
