@@ -2999,5 +2999,33 @@
         ]
       }
     }
+  },
+  "proton-mail-morphe": {
+    "7.10.4": {
+      "260203": {
+        "patches": "hxreborn/patches-1.4.0.mpp",
+        "changelog": "https://github.com/hxreborn/morphe-patches/releases/tag/v1.4.0",
+        "applied_patches": [
+          "AMOLED dark theme ",
+          "Hide upgrade upselling ",
+          "Remove 'Sent from' signature ",
+          "Remove free accounts limit ",
+          "Spoof signature ",
+          "Unlock custom time picker "
+        ]
+      }
+    }
+  },
+  "showly-morphe": {
+    "3.70.0": {
+      "260203": {
+        "patches": "hxreborn/patches-1.4.0.mpp",
+        "changelog": "https://github.com/hxreborn/morphe-patches/releases/tag/v1.4.0",
+        "applied_patches": [
+          "AMOLED dark theme ",
+          "Unlock premium "
+        ]
+      }
+    }
   }
 }
