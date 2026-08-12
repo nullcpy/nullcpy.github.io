@@ -195,6 +195,7 @@ const CONFIG = {
     pixiv: "jp.pxv.android",
     plusmessenger: "org.telegram.plus",
     plutotv: { androidtv: "tv.pluto.android" },
+    pocketcasts: "au.com.shiftyjelly.pocketcasts",
     podcastaddict: "com.bambuna.podcastaddict",
     poweramp: "com.maxmpz.audioplayer",
     primevideo: {
