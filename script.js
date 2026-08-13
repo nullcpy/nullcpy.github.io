@@ -1629,7 +1629,8 @@ function closePatchModal() {
 async function fetchMasterBuildData() {
   if (masterBuildDataCache) return masterBuildDataCache;
   try {
-    const resp = await fetch("builds.json");
+    const cacheBuster = Date.now();
+    const resp = await fetch(`builds.json?v=${cacheBuster}`);
     if (resp.ok) {
       masterBuildDataCache = await resp.json();
     } else {
