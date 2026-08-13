@@ -3108,6 +3108,21 @@
           "Disable in-app update "
         ]
       }
+    },
+    "45.0.0.109": {
+      "260208": {
+        "patches": "arandomhooman/patches-1.43.4.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.43.4",
+        "applied_patches": [
+          "Disable Tumblr TV ",
+          "Disable ad-free banner ",
+          "Disable blog notification reminder ",
+          "Disable gift message popup ",
+          "Disable in-app update ",
+          "Enable premium UI ",
+          "Remove ads "
+        ]
+      }
     }
   },
   "viber-morphe": {
