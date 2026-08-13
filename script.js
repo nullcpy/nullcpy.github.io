@@ -1675,13 +1675,17 @@ async function openAppliedPatchesModal(appKey, patchKey, buildKey) {
       : "";
 
     let rawSlugNorm = appKeyNorm;
+    let rawPatchNorm = patchKeyNorm;
     const asset = build?.assets?.[0];
     if (asset?.name) {
       const baseName = asset.name.replace(/\.(apk|zip)$/i, "");
       const tokens = baseName.split("-").filter(Boolean);
       const patchIdx = tokens.findIndex((t) => CONFIG.knownPatchTokens.has(t.toLowerCase()));
-      if (patchIdx > 0) {
-        rawSlugNorm = tokens.slice(0, patchIdx).join("-").toLowerCase();
+      if (patchIdx >= 0) {
+        if (patchIdx > 0) {
+          rawSlugNorm = tokens.slice(0, patchIdx).join("-").toLowerCase();
+        }
+        rawPatchNorm = tokens[patchIdx].toLowerCase();
       }
     }
 
@@ -1689,6 +1693,8 @@ async function openAppliedPatchesModal(appKey, patchKey, buildKey) {
     const variantTargetKey = variantNorm ? `${appKeyNorm}-${patchKeyNorm}-${variantNorm}` : targetKey;
     const rawTargetKey = `${rawSlugNorm}-${patchKeyNorm}`;
     const rawVariantTargetKey = variantNorm ? `${rawSlugNorm}-${patchKeyNorm}-${variantNorm}` : rawTargetKey;
+    const rawPatchTargetKey = `${rawSlugNorm}-${rawPatchNorm}`;
+    const rawPatchVariantTargetKey = variantNorm ? `${rawSlugNorm}-${rawPatchNorm}-${variantNorm}` : rawPatchTargetKey;
 
     function isPatchEntry(obj) {
       return obj && typeof obj === "object" && (
@@ -1755,6 +1761,7 @@ async function openAppliedPatchesModal(appKey, patchKey, buildKey) {
     if (variantNorm) {
       for (const ver of versionsToTry) {
         resolved =
+          resolveVersionFromDict(masterData[rawPatchVariantTargetKey], ver, specificTag, isArchiveBuild, build?.releaseType) ||
           resolveVersionFromDict(masterData[rawVariantTargetKey], ver, specificTag, isArchiveBuild, build?.releaseType) ||
           resolveVersionFromDict(masterData[variantTargetKey], ver, specificTag, isArchiveBuild, build?.releaseType);
         if (resolved) break;
@@ -1762,6 +1769,7 @@ async function openAppliedPatchesModal(appKey, patchKey, buildKey) {
     } else {
       for (const ver of versionsToTry) {
         resolved =
+          resolveVersionFromDict(masterData[rawPatchTargetKey], ver, specificTag, isArchiveBuild, build?.releaseType) ||
           resolveVersionFromDict(masterData[rawTargetKey], ver, specificTag, isArchiveBuild, build?.releaseType) ||
           resolveVersionFromDict(masterData[targetKey], ver, specificTag, isArchiveBuild, build?.releaseType);
         if (resolved) break;
