@@ -2957,6 +2957,17 @@
           "Spoof features "
         ]
       }
+    },
+    "7.88.0.963667563": {
+      "260214": {
+        "patches": "RookieEnough/patches-1.2.1.mpp",
+        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.1",
+        "applied_patches": [
+          "Fix selected account persistence ",
+          "GmsCore support ",
+          "Spoof features "
+        ]
+      }
     }
   },
   "messenger-morphe": {
@@ -3375,6 +3386,17 @@
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.44.0",
         "applied_patches": [
           "Unlock Pro "
+        ]
+      }
+    }
+  },
+  "poweramp-morphe": {
+    "build-1025-bundle-play": {
+      "260213": {
+        "patches": "arandomhooman/patches-1.44.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.44.0",
+        "applied_patches": [
+          "Unlock Premium "
         ]
       }
     }
