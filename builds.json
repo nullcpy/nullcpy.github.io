@@ -3051,6 +3051,14 @@
           "Hide ads ",
           "Remove AD_ID permission "
         ]
+      },
+      "260211": {
+        "patches": "durgesh0505/patches-1.18.0.mpp",
+        "changelog": "https://github.com/durgesh0505/chiggi_morphe_patches/releases/tag/v1.18.0",
+        "applied_patches": [
+          "Hide ads ",
+          "Remove AD_ID permission "
+        ]
       }
     }
   },
@@ -3153,6 +3161,19 @@
         ]
       },
       "260210": {
+        "patches": "arandomhooman/patches-1.43.4.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.43.4",
+        "applied_patches": [
+          "Disable Tumblr TV ",
+          "Disable ad-free banner ",
+          "Disable blog notification reminder ",
+          "Disable gift message popup ",
+          "Disable in-app update ",
+          "Enable premium UI ",
+          "Remove ads "
+        ]
+      },
+      "260211": {
         "patches": "arandomhooman/patches-1.43.4.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.43.4",
         "applied_patches": [
