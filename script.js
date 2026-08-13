@@ -903,24 +903,6 @@ function buildAppCatalog(releases) {
         }
       }
 
-      let buildDataApplied = null;
-      let buildDataPatches = null;
-      let buildDataChangelog = null;
-
-      if (release.build_data) {
-        const appKeyLower = appKey.toLowerCase();
-        const bd = release.build_data[appKeyLower] ||
-          release.build_data[parsed.appName.toLowerCase()] ||
-          release.build_data[parsed.appName] ||
-          release.build_data[parsed.appName.toLowerCase().replace(/\s+/g, "-")];
-        if (bd) {
-          const entry = (parsed.version && bd[parsed.version]) ? bd[parsed.version] : bd;
-          buildDataApplied = entry.applied_patches || null;
-          buildDataPatches = entry.patches || null;
-          buildDataChangelog = entry.changlog || entry.changelog || null;
-        }
-      }
-
       const buildKey = isArchive
         ? `archive-${releaseType}-${parsed.version}-${variantKey}`
         : `${release.id}-${variantKey}`;
@@ -940,10 +922,8 @@ function buildAppCatalog(releases) {
           version: parsed.version,
           patchMeta: {
             ...patchMetaFromRelease,
-            patches: buildDataPatches ? [buildDataPatches] : patchMetaFromRelease.patches,
-            changelogs: buildDataChangelog ? [buildDataChangelog] : patchMetaFromRelease.changelogs,
           },
-          appliedPatches: buildDataApplied,
+          appliedPatches: null,
           assets: [],
         });
       }
@@ -1678,15 +1658,9 @@ async function openAppliedPatchesModal(appKey, patchKey, buildKey) {
     let rawPatchNorm = patchKeyNorm;
     const asset = build?.assets?.[0];
     if (asset?.name) {
-      const baseName = asset.name.replace(/\.(apk|zip)$/i, "");
-      const tokens = baseName.split("-").filter(Boolean);
-      const patchIdx = tokens.findIndex((t) => CONFIG.knownPatchTokens.has(t.toLowerCase()));
-      if (patchIdx >= 0) {
-        if (patchIdx > 0) {
-          rawSlugNorm = tokens.slice(0, patchIdx).join("-").toLowerCase();
-        }
-        rawPatchNorm = tokens[patchIdx].toLowerCase();
-      }
+      const parsedAsset = parseAssetDisplay(asset.name);
+      if (parsedAsset.rawAppSlug) rawSlugNorm = parsedAsset.rawAppSlug;
+      if (parsedAsset.rawPatchToken) rawPatchNorm = parsedAsset.rawPatchToken;
     }
 
     const targetKey = `${appKeyNorm}-${patchKeyNorm}`;
@@ -1988,28 +1962,22 @@ function createObtainiumInstructions(app, patch) {
 function getAppPackageId(app, patch, variantKey) {
   if (!app) return "";
 
+  const sampleAsset = patch?.builds?.[0]?.assets?.[0] || app?.patches?.[0]?.builds?.[0]?.assets?.[0];
+  let rawSlug = "";
+  let rawPatch = "";
+
+  if (sampleAsset?.name) {
+    const parsedAsset = parseAssetDisplay(sampleAsset.name);
+    rawSlug = parsedAsset.rawAppSlug || "";
+    rawPatch = parsedAsset.rawPatchToken || "";
+  }
+  
   const appKeyNorm = normalizeForSearch(app.appKey || app.appName || "");
   const appNameNorm = normalizeForSearch(app.appName || "");
 
-  // Candidate slugs to search in CONFIG.appIds
-  const appCandidates = [app.appKey, appKeyNorm, appNameNorm];
-
-  const sampleAsset = patch?.builds?.[0]?.assets?.[0] || app?.patches?.[0]?.builds?.[0]?.assets?.[0];
-  if (sampleAsset?.name) {
-    const baseName = sampleAsset.name.replace(/\.(apk|zip)$/i, "");
-    const tokens = baseName.split("-").filter(Boolean);
-    const patchIdx = tokens.findIndex((t) => CONFIG.knownPatchTokens.has(t.toLowerCase()));
-    if (patchIdx > 0) {
-      const rawSlug = tokens.slice(0, patchIdx).join("").toLowerCase();
-      appCandidates.push(rawSlug);
-    }
-    if (tokens.length > 0) {
-      appCandidates.push(tokens[0].toLowerCase());
-    }
-  }
-
   let mapping = null;
-  for (const cand of appCandidates) {
+  const candidates = [rawSlug, app.appKey, appKeyNorm, appNameNorm];
+  for (const cand of candidates) {
     if (!cand) continue;
     if (CONFIG.appIds[cand]) {
       mapping = CONFIG.appIds[cand];
@@ -2039,17 +2007,10 @@ function getAppPackageId(app, patch, variantKey) {
 
   if (typeof mapping === "object") {
     const patchCandidates = [
+      rawPatch,
       patch?.patchKey,
       normalizeForSearch(patch?.patchName || ""),
     ];
-    if (sampleAsset?.name) {
-      const baseName = sampleAsset.name.replace(/\.(apk|zip)$/i, "");
-      const tokens = baseName.split("-").filter(Boolean);
-      const patchIdx = tokens.findIndex((t) => CONFIG.knownPatchTokens.has(t.toLowerCase()));
-      if (patchIdx >= 0) {
-        patchCandidates.push(tokens[patchIdx].toLowerCase());
-      }
-    }
 
     const normVariant = normalizeForSearch(variantKey || "");
 
@@ -2250,6 +2211,9 @@ function parseAssetDisplay(filename, arch, fileType) {
     version = versionParts.join("-");
   }
 
+  const rawAppSlug = appTokens.length > 0 ? appTokens.join("-").toLowerCase() : (preMetaTokens.join("-").toLowerCase() || baseName.toLowerCase());
+  const rawPatchToken = patchTokens.length > 0 ? patchTokens[0].toLowerCase() : "";
+
   const result = {
     appName: formatBrandDisplayName(appTokens.length > 0 ? appTokens.join(" ") : preMetaTokens.join(" ") || baseName),
     patchName: formatBrandDisplayName(patchTokens.length > 0 ? patchTokens.join(" ") : "Patched Build"),
@@ -2257,6 +2221,8 @@ function parseAssetDisplay(filename, arch, fileType) {
     rawVariant: variant ? variant.toLowerCase() : null,
     version,
     fileType,
+    rawAppSlug,
+    rawPatchToken,
   };
 
   parseCache.set(filename, result);
