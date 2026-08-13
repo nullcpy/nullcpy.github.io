@@ -3185,6 +3185,19 @@
           "Enable premium UI ",
           "Remove ads "
         ]
+      },
+      "260212": {
+        "patches": "arandomhooman/patches-1.44.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.44.0",
+        "applied_patches": [
+          "Disable Tumblr TV ",
+          "Disable ad-free banner ",
+          "Disable blog notification reminder ",
+          "Disable gift message popup ",
+          "Disable in-app update ",
+          "Enable premium UI ",
+          "Remove ads "
+        ]
       }
     }
   },
@@ -3272,6 +3285,97 @@
         "patches": "revenge-mod/app-release.apk",
         "changelog": "https://github.com/revenge-mod/revenge-xposed/releases/tag/1601",
         "applied_patches": []
+      }
+    }
+  },
+  "rumble-morphe": {
+    "3.14.5": {
+      "260212": {
+        "patches": "arandomhooman/patches-1.44.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.44.0",
+        "applied_patches": [
+          "Unlock Premium "
+        ]
+      }
+    }
+  },
+  "twitch-morphe": {
+    "29.9.1": {
+      "260212": {
+        "patches": "arandomhooman/patches-1.44.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.44.0",
+        "applied_patches": [
+          "Auto claim channel points ",
+          "Block live ads ",
+          "Hide display ads ",
+          "Show deleted messages "
+        ]
+      }
+    }
+  },
+  "money-manager-morphe": {
+    "4.11.1GF": {
+      "260212": {
+        "patches": "arandomhooman/patches-1.44.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.44.0",
+        "applied_patches": [
+          "Unlock Premium "
+        ]
+      }
+    }
+  },
+  "at4k-launcher-morphe": {
+    "0.99": {
+      "260212": {
+        "patches": "arandomhooman/patches-1.44.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.44.0",
+        "applied_patches": [
+          "Unlock Premium "
+        ]
+      }
+    }
+  },
+  "projectivy-launcher-morphe": {
+    "4.70": {
+      "260212": {
+        "patches": "arandomhooman/patches-1.44.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.44.0",
+        "applied_patches": [
+          "Unlock Premium "
+        ]
+      }
+    }
+  },
+  "adobe-acrobat-morphe": {
+    "26.5.0.45958": {
+      "260212": {
+        "patches": "arandomhooman/patches-1.44.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.44.0",
+        "applied_patches": [
+          "Unlock Pro "
+        ]
+      }
+    }
+  },
+  "inshot-morphe": {
+    "2.214.1539": {
+      "260212": {
+        "patches": "arandomhooman/patches-1.44.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.44.0",
+        "applied_patches": [
+          "Unlock Pro "
+        ]
+      }
+    }
+  },
+  "todoist-morphe": {
+    "12190": {
+      "260212": {
+        "patches": "arandomhooman/patches-1.44.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.44.0",
+        "applied_patches": [
+          "Unlock Pro "
+        ]
       }
     }
   }
