@@ -754,6 +754,19 @@
           "Skip ads ",
           "Clone Prime Video "
         ]
+      },
+      "260219": {
+        "patches": "ajstrick81/patches-1.25.0.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.0",
+        "applied_patches": [
+          "Bundle native ad-strip hook ",
+          "Disable auto-updates ",
+          "Load native ad-strip hook ",
+          "Override certificate pinning ",
+          "Prime Video extension ",
+          "Skip ads ",
+          "Clone Prime Video "
+        ]
       }
     }
   },
@@ -776,6 +789,13 @@
       "260197": {
         "patches": "ajstrick81/patches-1.24.0.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.25.0",
+        "applied_patches": [
+          "HBO Max - Disable Ads "
+        ]
+      },
+      "260219": {
+        "patches": "ajstrick81/patches-1.25.0.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.0",
         "applied_patches": [
           "HBO Max - Disable Ads "
         ]
@@ -807,6 +827,14 @@
           "Disable auto-updates ",
           "Skip ads "
         ]
+      },
+      "260219": {
+        "patches": "ajstrick81/patches-1.25.0.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.0",
+        "applied_patches": [
+          "Disable auto-updates ",
+          "Skip ads "
+        ]
       }
     }
   },
@@ -829,6 +857,13 @@
       "260197": {
         "patches": "ajstrick81/patches-1.24.0.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.25.0",
+        "applied_patches": [
+          "Skip ads "
+        ]
+      },
+      "260219": {
+        "patches": "ajstrick81/patches-1.25.0.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.0",
         "applied_patches": [
           "Skip ads "
         ]
@@ -860,6 +895,14 @@
           "Override certificate pinning ",
           "Skip ads "
         ]
+      },
+      "260219": {
+        "patches": "ajstrick81/patches-1.25.0.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.0",
+        "applied_patches": [
+          "Override certificate pinning ",
+          "Skip ads "
+        ]
       }
     }
   },
@@ -886,6 +929,15 @@
       "260197": {
         "patches": "ajstrick81/patches-1.24.0.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.25.0",
+        "applied_patches": [
+          "Disable auto-updates ",
+          "Override certificate pinning ",
+          "Skip ads "
+        ]
+      },
+      "260219": {
+        "patches": "ajstrick81/patches-1.25.0.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.0",
         "applied_patches": [
           "Disable auto-updates ",
           "Override certificate pinning ",
