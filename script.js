@@ -185,6 +185,7 @@ const CONFIG = {
     },
     mxplayer: "com.mxtech.videoplayer.pro",
     myfitnesspal: "com.myfitnesspal.android",
+    netflix: { androidtv: "com.netflix.ninja" },
     niagaralauncher: "bitpit.launcher",
     ninjavpn: "app.ninjavpn.android",
     novalauncher: "com.teslacoilsw.launcher",
@@ -414,7 +415,7 @@ function showModal(modalEl) {
 function hideModal(modalEl) {
   if (!modalEl) return;
   modalEl.classList.add("closing");
-  
+
   // Prevent accessibility warnings by removing focus from modal elements before hiding
   if (document.activeElement && modalEl.contains(document.activeElement)) {
     document.activeElement.blur();
@@ -535,14 +536,14 @@ function setupEventListeners() {
       if (card) {
         const isSummaryClick = e.target.closest(".app-card-summary");
         const isOpen = card.classList.contains("open");
-        
+
         if (isSummaryClick || !isOpen) {
           if (!isOpen) {
             document.querySelectorAll(".app-card.open").forEach(c => {
               if (c !== card) c.classList.remove("open");
             });
             card.classList.add("open");
-            
+
             setTimeout(() => {
               const rect = card.getBoundingClientRect();
               if (rect.top < 20 || rect.height > window.innerHeight) {
@@ -567,7 +568,7 @@ function setupEventListeners() {
         const isHeaderClick = e.target.closest(".modal-build-header");
         const isOpen = card.classList.contains("open");
         const isInteractive = e.target.closest("a, button, .patch-applied-btn");
-        
+
         if (isHeaderClick || (!isOpen && !isInteractive)) {
           if (!isOpen) {
             const modalBody = card.closest(".modal-body");
@@ -577,16 +578,16 @@ function setupEventListeners() {
               });
             }
             card.classList.add("open");
-            
+
             setTimeout(() => {
               const modalBody = card.closest(".modal-body");
               if (modalBody) {
                 const containerRect = modalBody.getBoundingClientRect();
                 const rect = card.getBoundingClientRect();
-                
+
                 const offsetTop = rect.top - containerRect.top;
                 const offsetBottom = rect.bottom - containerRect.bottom;
-                
+
                 if (offsetTop < 0 || rect.height > containerRect.height) {
                   modalBody.scrollBy({ top: offsetTop - 8, behavior: "smooth" });
                 } else if (offsetBottom > 0) {
@@ -1697,7 +1698,7 @@ async function openAppliedPatchesModal(appKey, patchKey, buildKey) {
           if (!isNaN(na) && !isNaN(nb)) return nb - na;
           return b.localeCompare(a);
         });
-        
+
         // If we have a preferred release type (for archives), try to find a matching tag first
         if (preferredReleaseType) {
           for (const tagKey of tagKeys) {
@@ -1971,7 +1972,7 @@ function getAppPackageId(app, patch, variantKey) {
     rawSlug = parsedAsset.rawAppSlug || "";
     rawPatch = parsedAsset.rawPatchToken || "";
   }
-  
+
   const appKeyNorm = normalizeForSearch(app.appKey || app.appName || "");
   const appNameNorm = normalizeForSearch(app.appName || "");
 
