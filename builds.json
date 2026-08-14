@@ -4005,5 +4005,19 @@
         ]
       }
     }
+  },
+  "netflix-morphe-androidtv": {
+    "13.0.1build25028": {
+      "260220": {
+        "patches": "ajstrick81/patches-1.25.0.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.0",
+        "applied_patches": [
+          "Disable Netflix CertCheck ",
+          "Remove Netflix ads (bundle engine) ",
+          "Remove Netflix ads (loader) ",
+          "Clone Netflix "
+        ]
+      }
+    }
   }
 }
