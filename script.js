@@ -213,6 +213,7 @@ const CONFIG = {
     soundcloud: "com.soundcloud.android",
     snorelab: "com.snorelab.app",
     speedtest: "org.zwanoo.android.speedtest",
+    strava: "com.strava",
     symfonium: "app.symfonik.music.player",
     telegram: {
       default: "org.telegram.messenger",
