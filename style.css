@@ -340,6 +340,9 @@ main {
     background: var(--bg-secondary);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
+    box-sizing: border-box;
+    appearance: none;
+    -webkit-appearance: none;
     color: var(--text-primary);
     font-size: 1.05rem;
     box-shadow: var(--shadow);
@@ -367,6 +370,10 @@ main {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    box-sizing: border-box;
+    appearance: none;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
 
     /* Hidden state */
     width: 0;
