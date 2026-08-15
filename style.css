@@ -370,6 +370,8 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 1.4rem;
+    line-height: 1;
     opacity: 0;
     pointer-events: none;
     transform: scale(0.8);
@@ -385,12 +387,6 @@ main {
     opacity: 1;
     pointer-events: auto;
     transform: scale(1);
-}
-
-#searchClearBtn svg {
-    width: 18px;
-    height: 18px;
-    pointer-events: none;
 }@media (hover: hover) {
 
 
