@@ -328,6 +328,8 @@ main {
 .search-icon {
     position: absolute;
     left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
     color: var(--text-muted);
     pointer-events: none;
 }
@@ -360,6 +362,7 @@ main {
 #searchClearBtn {
     position: absolute;
     right: 12px;
+    top: 50%;
     width: 36px;
     height: 36px;
     border-radius: var(--radius-full);
@@ -374,7 +377,7 @@ main {
     line-height: 1;
     opacity: 0;
     pointer-events: none;
-    transform: scale(0.8);
+    transform: translateY(-50%) scale(0.8);
     transition: all 0.2s ease;
     z-index: 5;
     box-sizing: border-box;
@@ -386,7 +389,7 @@ main {
 .search-input-wrap.has-value #searchClearBtn {
     opacity: 1;
     pointer-events: auto;
-    transform: scale(1);
+    transform: translateY(-50%) scale(1);
 }@media (hover: hover) {
 
 
