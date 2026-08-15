@@ -490,12 +490,19 @@ function setupEventListeners() {
   }
 
   if (DOM.searchClearBtn && DOM.searchInput) {
+    const preventFocusLoss = (e) => {
+      // Prevent blur so the mobile keyboard doesn't close
+      e.preventDefault();
+    };
+    DOM.searchClearBtn.addEventListener("mousedown", preventFocusLoss);
+    DOM.searchClearBtn.addEventListener("touchstart", preventFocusLoss, { passive: false });
     DOM.searchClearBtn.addEventListener("click", () => {
       DOM.searchInput.value = "";
       searchTerm = "";
       syncClearBtn();
       syncUrlParams();
       filterAndRenderReleases();
+      DOM.searchInput.focus();
     });
   }
 
