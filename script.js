@@ -1914,8 +1914,9 @@ function createObtainiumInstructions(app, patch) {
 
       return `
         <div style="margin-top: 8px;">
-          <div style="font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px;">
-            ${escapeHtml(vLabel)}:
+          <div style="font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px; display: flex; justify-content: space-between; align-items: center;">
+            <span>${escapeHtml(vLabel)}:</span>
+            ${vPackageId ? `<span style="font-family: monospace; opacity: 0.8; font-weight: normal;" title="Package ID">${escapeHtml(vPackageId)}</span>` : ''}
           </div>
           <div class="instruction-code">
             <code>${escapeHtml(vRegex)}</code>
@@ -1933,10 +1934,18 @@ function createObtainiumInstructions(app, patch) {
     `;
   } else {
     step4Content = `
-      <div class="instruction-code" style="margin-top: 6px;">
-        <code>${escapeHtml(regexPattern)}</code>
-        ${mainOneClickUrl ? `<a href="${mainOneClickUrl}" class="obtainium-add-btn" target="_blank" rel="noopener noreferrer">Add to Obtainium</a>` : ''}
-        <button class="copy-btn" onclick="copyToClipboard('${escapeHtml(regexPattern)}', 'Regex copied!')" type="button">Copy</button>
+      <div style="margin-top: 6px;">
+        ${mainPackageId ? `
+        <div style="font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px; display: flex; justify-content: space-between; align-items: center;">
+          <span>${escapeHtml(mainLabel)}:</span>
+          <span style="font-family: monospace; opacity: 0.8; font-weight: normal;" title="Package ID">${escapeHtml(mainPackageId)}</span>
+        </div>
+        ` : ''}
+        <div class="instruction-code">
+          <code>${escapeHtml(regexPattern)}</code>
+          ${mainOneClickUrl ? `<a href="${mainOneClickUrl}" class="obtainium-add-btn" target="_blank" rel="noopener noreferrer">Add to Obtainium</a>` : ''}
+          <button class="copy-btn" onclick="copyToClipboard('${escapeHtml(regexPattern)}', 'Regex copied!')" type="button">Copy</button>
+        </div>
       </div>
     `;
   }
