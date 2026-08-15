@@ -356,9 +356,9 @@ main {
 
 #searchClearBtn {
     position: absolute;
-    right: 14px;
-    width: 28px;
-    height: 28px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
     border-radius: var(--radius-full);
     border: none;
     background: var(--bg-tertiary);
@@ -371,6 +371,7 @@ main {
     pointer-events: none;
     transform: scale(0.8);
     transition: all 0.2s ease;
+    z-index: 5;
 }
 
 .search-input-wrap.has-value #searchClearBtn {
