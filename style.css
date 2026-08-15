@@ -335,7 +335,6 @@ main {
 #searchInput {
     flex: 1;
     min-width: 0;
-    width: 100%;
     padding: 16px 16px 16px 48px;
     background: var(--bg-secondary);
     border: 1px solid var(--border);
