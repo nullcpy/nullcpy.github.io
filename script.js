@@ -1916,7 +1916,7 @@ function createObtainiumInstructions(app, patch) {
         <div style="margin-top: 8px;">
           <div style="font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px; display: flex; flex-direction: column;">
             <span>${escapeHtml(vLabel)}</span>
-            ${vPackageId ? `<span style="font-family: monospace; opacity: 0.8; font-weight: normal; margin-top: 2px; cursor: pointer; width: fit-content;" onclick="copyToClipboard('${escapeHtml(vPackageId)}', 'Package ID copied!')" title="Click to copy Package ID">${escapeHtml(vPackageId)}</span>` : ''}
+            ${vPackageId ? `<span style="font-family: monospace; opacity: 0.8; font-weight: normal; margin-top: 2px; cursor: pointer; width: fit-content; word-break: break-all;" onclick="copyToClipboard('${escapeHtml(vPackageId)}', 'Package ID copied!')" title="Click to copy Package ID">${escapeHtml(vPackageId)}</span>` : ''}
           </div>
           <div class="instruction-code">
             <code>${escapeHtml(vRegex)}</code>
@@ -1937,7 +1937,7 @@ function createObtainiumInstructions(app, patch) {
       <div style="margin-top: 6px;">
         ${mainPackageId ? `
         <div style="font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px; display: flex; flex-direction: column;">
-          <span style="font-family: monospace; opacity: 0.8; font-weight: normal; cursor: pointer; width: fit-content;" onclick="copyToClipboard('${escapeHtml(mainPackageId)}', 'Package ID copied!')" title="Click to copy Package ID">${escapeHtml(mainPackageId)}</span>
+          <span style="font-family: monospace; opacity: 0.8; font-weight: normal; cursor: pointer; width: fit-content; word-break: break-all;" onclick="copyToClipboard('${escapeHtml(mainPackageId)}', 'Package ID copied!')" title="Click to copy Package ID">${escapeHtml(mainPackageId)}</span>
         </div>
         ` : ''}
         <div class="instruction-code">
