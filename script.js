@@ -490,19 +490,14 @@ function setupEventListeners() {
   }
 
   if (DOM.searchClearBtn && DOM.searchInput) {
-    const handleClear = (e) => {
-      // Prevent blur so the mobile keyboard doesn't close, and stop duplicate click events
-      e.preventDefault();
-      
+    DOM.searchClearBtn.addEventListener("click", () => {
       DOM.searchInput.value = "";
       searchTerm = "";
       syncClearBtn();
       syncUrlParams();
       filterAndRenderReleases();
       DOM.searchInput.focus();
-    };
-    DOM.searchClearBtn.addEventListener("mousedown", handleClear);
-    DOM.searchClearBtn.addEventListener("touchstart", handleClear, { passive: false });
+    });
   }
 
   // Secondary Category Filter Buttons
