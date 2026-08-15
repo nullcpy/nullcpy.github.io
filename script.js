@@ -1856,14 +1856,21 @@ function createObtainiumInstructions(app, patch) {
   const repoUrl = `https://github.com/${CONFIG.owner}/${CONFIG.repo}`;
   const obtainiumLatestUrl = "https://github.com/ImranR98/Obtainium/releases/latest";
 
-  const appNameNorm = normalizeForSearch(app?.appName || "app");
-  const patchNameNorm = normalizeForSearch(patch?.patchName || "patch");
+  const sampleAsset = patch?.builds?.[0]?.assets?.[0] || app?.patches?.[0]?.builds?.[0]?.assets?.[0];
+  let rawSlug = normalizeForSearch(app?.appName || "app");
+  let rawPatch = normalizeForSearch(patch?.patchName || "patch");
+
+  if (sampleAsset?.name) {
+    const parsedAsset = parseAssetDisplay(sampleAsset.name);
+    if (parsedAsset.rawAppSlug) rawSlug = parsedAsset.rawAppSlug;
+    if (parsedAsset.rawPatchToken) rawPatch = parsedAsset.rawPatchToken;
+  }
 
   const isSpecificVariant = modalVariantFilter && modalVariantFilter !== "default" && modalVariantFilter !== "all";
 
-  let regexPattern = `^${appNameNorm}-${patchNameNorm}.*\\.apk$`;
+  let regexPattern = `^${rawSlug}-${rawPatch}.*\\.apk$`;
   if (isSpecificVariant) {
-    regexPattern = `^${appNameNorm}-${patchNameNorm}-${modalVariantFilter}.*\\.apk$`;
+    regexPattern = `^${rawSlug}-${rawPatch}-${modalVariantFilter}.*\\.apk$`;
   }
 
   const mainPackageId = getAppPackageId(app, patch, modalVariantFilter || "default");
@@ -1886,8 +1893,8 @@ function createObtainiumInstructions(app, patch) {
   if (patch && patch.variants && patch.variants.length > 1) {
     const examples = patch.variants.map((v, index) => {
       const vRegex = v.variantKey === "default"
-        ? `^${appNameNorm}-${patchNameNorm}.*\\.apk$`
-        : `^${appNameNorm}-${patchNameNorm}-${v.variantKey}.*\\.apk$`;
+        ? `^${rawSlug}-${rawPatch}.*\\.apk$`
+        : `^${rawSlug}-${rawPatch}-${v.variantKey}.*\\.apk$`;
       const vLabel = `${app.appName} (${patch.patchName} - ${v.variantName})`;
       const vPackageId = getAppPackageId(app, patch, v.variantKey);
 
