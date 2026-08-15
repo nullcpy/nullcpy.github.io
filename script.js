@@ -490,14 +490,17 @@ function setupEventListeners() {
   }
 
   if (DOM.searchClearBtn && DOM.searchInput) {
-    DOM.searchClearBtn.addEventListener("click", () => {
+    const handleClear = (e) => {
+      e.preventDefault(); // Prevent input blur, keeping keyboard open and stopping layout shifts
+      if (DOM.searchInput.value === "") return;
       DOM.searchInput.value = "";
       searchTerm = "";
       syncClearBtn();
       syncUrlParams();
       filterAndRenderReleases();
-      DOM.searchInput.focus();
-    });
+    };
+    DOM.searchClearBtn.addEventListener("pointerdown", handleClear);
+    DOM.searchClearBtn.addEventListener("click", handleClear);
   }
 
   // Secondary Category Filter Buttons
