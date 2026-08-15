@@ -333,9 +333,8 @@ main {
 }
 
 #searchInput {
-    flex: 1;
-    min-width: 0;
-    padding: 16px 16px 16px 48px;
+    width: 100%;
+    padding: 16px 48px 16px 48px;
     background: var(--bg-secondary);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
@@ -359,35 +358,39 @@ main {
 }
 
 #searchClearBtn {
-    position: static;
-    height: 48px;
-    width: 48px;
-    border-radius: var(--radius-lg);
-    background: var(--bg-secondary);
-    border: 1px solid var(--border);
-    color: var(--text-primary);
+    position: absolute;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-full);
+    border: none;
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
     cursor: pointer;
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.8);
+    transition: all 0.2s ease;
+    z-index: 5;
     box-sizing: border-box;
     appearance: none;
     -webkit-appearance: none;
     -webkit-tap-highlight-color: transparent;
-    margin-left: 10px;
 }
 
 .search-input-wrap.has-value #searchClearBtn {
-    display: flex;
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
 }
 
 #searchClearBtn svg {
-    min-width: 18px;
-    min-height: 18px;
     width: 18px;
     height: 18px;
-    flex-shrink: 0;
+    pointer-events: none;
 }@media (hover: hover) {
 
 
