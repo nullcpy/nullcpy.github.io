@@ -483,7 +483,7 @@ function setupEventListeners() {
     DOM.searchInput.addEventListener("focus", (e) => {
       if (window.innerWidth <= 768) {
         const searchBox = e.target.closest(".search-box") || e.target;
-        const y = searchBox.getBoundingClientRect().top + window.scrollY - 15;
+        const y = searchBox.getBoundingClientRect().top + window.scrollY - 85;
         window.scrollTo({ top: y, behavior: "smooth" });
       }
     });
