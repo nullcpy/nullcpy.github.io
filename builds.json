@@ -4400,6 +4400,19 @@
           "Enable premium UI ",
           "Remove ads "
         ]
+      },
+      "260231": {
+        "patches": "arandomhooman/patches-1.45.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.45.0",
+        "applied_patches": [
+          "Disable Tumblr TV ",
+          "Disable ad-free banner ",
+          "Disable blog notification reminder ",
+          "Disable gift message popup ",
+          "Disable in-app update ",
+          "Enable premium UI ",
+          "Remove ads "
+        ]
       }
     }
   },
@@ -4466,6 +4479,18 @@
           "Spoof signature ",
           "Unlock custom time picker "
         ]
+      },
+      "260231": {
+        "patches": "hxreborn/patches-1.5.0.mpp",
+        "changelog": "https://github.com/hxreborn/morphe-patches/releases/tag/v1.5.0",
+        "applied_patches": [
+          "AMOLED dark theme ",
+          "Hide upgrade upselling ",
+          "Remove 'Sent from' signature ",
+          "Remove free accounts limit ",
+          "Spoof signature ",
+          "Unlock custom time picker "
+        ]
       }
     }
   },
@@ -4474,6 +4499,14 @@
       "260203": {
         "patches": "hxreborn/patches-1.4.0.mpp",
         "changelog": "https://github.com/hxreborn/morphe-patches/releases/tag/v1.4.0",
+        "applied_patches": [
+          "AMOLED dark theme ",
+          "Unlock premium "
+        ]
+      },
+      "260231": {
+        "patches": "hxreborn/patches-1.5.0.mpp",
+        "changelog": "https://github.com/hxreborn/morphe-patches/releases/tag/v1.5.0",
         "applied_patches": [
           "AMOLED dark theme ",
           "Unlock premium "
@@ -4498,6 +4531,13 @@
         "applied_patches": [
           "Unlock Premium "
         ]
+      },
+      "260231": {
+        "patches": "arandomhooman/patches-1.45.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.45.0",
+        "applied_patches": [
+          "Unlock Premium "
+        ]
       }
     }
   },
@@ -4506,6 +4546,16 @@
       "260212": {
         "patches": "arandomhooman/patches-1.44.0.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.44.0",
+        "applied_patches": [
+          "Auto claim channel points ",
+          "Block live ads ",
+          "Hide display ads ",
+          "Show deleted messages "
+        ]
+      },
+      "260231": {
+        "patches": "arandomhooman/patches-1.45.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.45.0",
         "applied_patches": [
           "Auto claim channel points ",
           "Block live ads ",
@@ -4523,6 +4573,13 @@
         "applied_patches": [
           "Unlock Premium "
         ]
+      },
+      "260231": {
+        "patches": "arandomhooman/patches-1.45.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.45.0",
+        "applied_patches": [
+          "Unlock Premium "
+        ]
       }
     }
   },
@@ -4531,6 +4588,13 @@
       "260212": {
         "patches": "arandomhooman/patches-1.44.0.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.44.0",
+        "applied_patches": [
+          "Unlock Premium "
+        ]
+      },
+      "260231": {
+        "patches": "arandomhooman/patches-1.45.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.45.0",
         "applied_patches": [
           "Unlock Premium "
         ]
@@ -4545,6 +4609,13 @@
         "applied_patches": [
           "Unlock Premium "
         ]
+      },
+      "260231": {
+        "patches": "arandomhooman/patches-1.45.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.45.0",
+        "applied_patches": [
+          "Unlock Premium "
+        ]
       }
     }
   },
@@ -4553,6 +4624,13 @@
       "260212": {
         "patches": "arandomhooman/patches-1.44.0.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.44.0",
+        "applied_patches": [
+          "Unlock Pro "
+        ]
+      },
+      "260231": {
+        "patches": "arandomhooman/patches-1.45.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.45.0",
         "applied_patches": [
           "Unlock Pro "
         ]
@@ -4567,6 +4645,13 @@
         "applied_patches": [
           "Unlock Pro "
         ]
+      },
+      "260231": {
+        "patches": "arandomhooman/patches-1.45.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.45.0",
+        "applied_patches": [
+          "Unlock Pro "
+        ]
       }
     }
   },
@@ -4578,6 +4663,13 @@
         "applied_patches": [
           "Unlock Pro "
         ]
+      },
+      "260231": {
+        "patches": "arandomhooman/patches-1.45.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.45.0",
+        "applied_patches": [
+          "Unlock Pro "
+        ]
       }
     }
   },
@@ -4586,6 +4678,13 @@
       "260213": {
         "patches": "arandomhooman/patches-1.44.0.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.44.0",
+        "applied_patches": [
+          "Unlock Premium "
+        ]
+      },
+      "260231": {
+        "patches": "arandomhooman/patches-1.45.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.45.0",
         "applied_patches": [
           "Unlock Premium "
         ]
