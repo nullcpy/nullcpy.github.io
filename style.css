@@ -362,11 +362,13 @@ main {
 #searchClearBtn {
     position: static;
     height: 48px;
+    width: 48px;
     border-radius: var(--radius-lg);
     background: var(--bg-secondary);
+    border: 1px solid var(--border);
     color: var(--text-primary);
     cursor: pointer;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
@@ -374,24 +376,11 @@ main {
     appearance: none;
     -webkit-appearance: none;
     -webkit-tap-highlight-color: transparent;
-
-    /* Hidden state */
-    width: 0;
-    opacity: 0;
-    margin-left: 0;
-    border: 0 solid var(--border);
-    padding: 0;
-    overflow: hidden;
-    pointer-events: none;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    margin-left: 10px;
 }
 
 .search-input-wrap.has-value #searchClearBtn {
-    width: 48px;
-    opacity: 1;
-    margin-left: 10px;
-    border-width: 1px;
-    pointer-events: auto;
+    display: flex;
 }
 
 #searchClearBtn svg {
