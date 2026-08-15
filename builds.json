@@ -793,6 +793,19 @@
           "Skip ads ",
           "Clone Prime Video "
         ]
+      },
+      "260229": {
+        "patches": "ajstrick81/patches-1.26.2.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.3",
+        "applied_patches": [
+          "Bundle native ad-strip hook ",
+          "Disable auto-updates ",
+          "Load native ad-strip hook ",
+          "Override certificate pinning ",
+          "Prime Video extension ",
+          "Skip ads ",
+          "Clone Prime Video "
+        ]
       }
     }
   },
@@ -836,6 +849,13 @@
       "260227": {
         "patches": "ajstrick81/patches-1.26.1.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.2",
+        "applied_patches": [
+          "HBO Max - Disable Ads "
+        ]
+      },
+      "260229": {
+        "patches": "ajstrick81/patches-1.26.2.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.3",
         "applied_patches": [
           "HBO Max - Disable Ads "
         ]
@@ -891,6 +911,14 @@
           "Disable auto-updates ",
           "Skip ads "
         ]
+      },
+      "260229": {
+        "patches": "ajstrick81/patches-1.26.2.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.3",
+        "applied_patches": [
+          "Disable auto-updates ",
+          "Skip ads "
+        ]
       }
     }
   },
@@ -934,6 +962,13 @@
       "260227": {
         "patches": "ajstrick81/patches-1.26.1.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.2",
+        "applied_patches": [
+          "Skip ads "
+        ]
+      },
+      "260229": {
+        "patches": "ajstrick81/patches-1.26.2.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.3",
         "applied_patches": [
           "Skip ads "
         ]
@@ -985,6 +1020,14 @@
       "260227": {
         "patches": "ajstrick81/patches-1.26.1.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.2",
+        "applied_patches": [
+          "Override certificate pinning ",
+          "Skip ads "
+        ]
+      },
+      "260229": {
+        "patches": "ajstrick81/patches-1.26.2.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.3",
         "applied_patches": [
           "Override certificate pinning ",
           "Skip ads "
@@ -1042,6 +1085,15 @@
       "260227": {
         "patches": "ajstrick81/patches-1.26.1.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.2",
+        "applied_patches": [
+          "Disable auto-updates ",
+          "Override certificate pinning ",
+          "Skip ads "
+        ]
+      },
+      "260229": {
+        "patches": "ajstrick81/patches-1.26.2.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.3",
         "applied_patches": [
           "Disable auto-updates ",
           "Override certificate pinning ",
@@ -3263,6 +3315,78 @@
           "Zhuyin Quick Traditional/Simplified Toggle ",
           "Zhuyin Slide Input "
         ]
+      },
+      "260229": {
+        "patches": "jasonwu1994/patches-2.10.0.mpp",
+        "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v2.10.0",
+        "applied_patches": [
+          "AI Writing Tools ",
+          "Access Points menu style ",
+          "Add Gboard Signature Bypass ",
+          "Advanced Voice Typing ",
+          "Change emoji size ",
+          "Clipboard Custom Character Limit ",
+          "Clipboard Enhancements ",
+          "Custom Symbols ",
+          "Developer options ",
+          "Emojis, stickers & GIFs Tab Order ",
+          "Enable Inline Autofill Suggestions ",
+          "Enable OCR / Scan Text ",
+          "Enable accessibility layout ",
+          "Enable cursor trackpad mode ",
+          "Enable split keyboard ",
+          "English QWERTY Up-Flick Uppercase ",
+          "G Logo on Spacebar ",
+          "Grammar Checker ",
+          "Incognito Mode Toggle ",
+          "Inline Suggestions ",
+          "Key Shape Selection ",
+          "Latin Globe Key Ignore Interval ",
+          "Long-Press Editing Shortcuts ",
+          "Settings Homepage Override ",
+          "Swipeable Custom Top Row ",
+          "Use Bluetooth Microphone ",
+          "Web Clipboard ",
+          "Zhuyin Bottom Row Key Sizes ",
+          "Zhuyin Quick Traditional/Simplified Toggle ",
+          "Zhuyin Slide Input "
+        ]
+      },
+      "260228": {
+        "patches": "jasonwu1994/patches-2.11.0-dev.1.mpp",
+        "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v2.11.0-dev.1",
+        "applied_patches": [
+          "AI Writing Tools ",
+          "Access Points menu style ",
+          "Add Gboard Signature Bypass ",
+          "Advanced Voice Typing ",
+          "Change emoji size ",
+          "Clipboard Custom Character Limit ",
+          "Clipboard Enhancements ",
+          "Custom Symbols ",
+          "Developer options ",
+          "Emojis, stickers & GIFs Tab Order ",
+          "Enable Inline Autofill Suggestions ",
+          "Enable OCR / Scan Text ",
+          "Enable accessibility layout ",
+          "Enable cursor trackpad mode ",
+          "Enable split keyboard ",
+          "English QWERTY Up-Flick Uppercase ",
+          "G Logo on Spacebar ",
+          "Grammar Checker ",
+          "Incognito Mode Toggle ",
+          "Inline Suggestions ",
+          "Key Shape Selection ",
+          "Latin Globe Key Ignore Interval ",
+          "Long-Press Editing Shortcuts ",
+          "Settings Homepage Override ",
+          "Swipeable Custom Top Row ",
+          "Use Bluetooth Microphone ",
+          "Web Clipboard ",
+          "Zhuyin Bottom Row Key Sizes ",
+          "Zhuyin Quick Traditional/Simplified Toggle ",
+          "Zhuyin Slide Input "
+        ]
       }
     }
   },
@@ -3471,6 +3595,80 @@
       "260221": {
         "patches": "jasonwu1994/patches-2.10.0-dev.1.mpp",
         "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v2.10.0-dev.1",
+        "applied_patches": [
+          "AI Writing Tools ",
+          "Access Points menu style ",
+          "Add Gboard Signature Bypass ",
+          "Advanced Voice Typing ",
+          "Change emoji size ",
+          "Clipboard Custom Character Limit ",
+          "Clipboard Enhancements ",
+          "Custom Symbols ",
+          "Developer options ",
+          "Emojis, stickers & GIFs Tab Order ",
+          "Enable Inline Autofill Suggestions ",
+          "Enable OCR / Scan Text ",
+          "Enable accessibility layout ",
+          "Enable cursor trackpad mode ",
+          "Enable split keyboard ",
+          "English QWERTY Up-Flick Uppercase ",
+          "G Logo on Spacebar ",
+          "Grammar Checker ",
+          "Incognito Mode Toggle ",
+          "Inline Suggestions ",
+          "Key Shape Selection ",
+          "Latin Globe Key Ignore Interval ",
+          "Long-Press Editing Shortcuts ",
+          "Package Rename ",
+          "Settings Homepage Override ",
+          "Swipeable Custom Top Row ",
+          "Use Bluetooth Microphone ",
+          "Web Clipboard ",
+          "Zhuyin Bottom Row Key Sizes ",
+          "Zhuyin Quick Traditional/Simplified Toggle ",
+          "Zhuyin Slide Input "
+        ]
+      },
+      "260229": {
+        "patches": "jasonwu1994/patches-2.10.0.mpp",
+        "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v2.10.0",
+        "applied_patches": [
+          "AI Writing Tools ",
+          "Access Points menu style ",
+          "Add Gboard Signature Bypass ",
+          "Advanced Voice Typing ",
+          "Change emoji size ",
+          "Clipboard Custom Character Limit ",
+          "Clipboard Enhancements ",
+          "Custom Symbols ",
+          "Developer options ",
+          "Emojis, stickers & GIFs Tab Order ",
+          "Enable Inline Autofill Suggestions ",
+          "Enable OCR / Scan Text ",
+          "Enable accessibility layout ",
+          "Enable cursor trackpad mode ",
+          "Enable split keyboard ",
+          "English QWERTY Up-Flick Uppercase ",
+          "G Logo on Spacebar ",
+          "Grammar Checker ",
+          "Incognito Mode Toggle ",
+          "Inline Suggestions ",
+          "Key Shape Selection ",
+          "Latin Globe Key Ignore Interval ",
+          "Long-Press Editing Shortcuts ",
+          "Package Rename ",
+          "Settings Homepage Override ",
+          "Swipeable Custom Top Row ",
+          "Use Bluetooth Microphone ",
+          "Web Clipboard ",
+          "Zhuyin Bottom Row Key Sizes ",
+          "Zhuyin Quick Traditional/Simplified Toggle ",
+          "Zhuyin Slide Input "
+        ]
+      },
+      "260228": {
+        "patches": "jasonwu1994/patches-2.11.0-dev.1.mpp",
+        "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v2.11.0-dev.1",
         "applied_patches": [
           "AI Writing Tools ",
           "Access Points menu style ",
@@ -4469,6 +4667,16 @@
       "260227": {
         "patches": "ajstrick81/patches-1.26.1.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.2",
+        "applied_patches": [
+          "Disable Netflix CertCheck ",
+          "Remove Netflix ads (bundle engine) ",
+          "Remove Netflix ads (loader) ",
+          "Clone Netflix "
+        ]
+      },
+      "260229": {
+        "patches": "ajstrick81/patches-1.26.2.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.3",
         "applied_patches": [
           "Disable Netflix CertCheck ",
           "Remove Netflix ads (bundle engine) ",
