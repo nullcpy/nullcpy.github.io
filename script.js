@@ -480,7 +480,18 @@ function setupEventListeners() {
       }, 180);
     });
 
-
+    DOM.searchInput.addEventListener("focus", (e) => {
+      if (window.innerWidth <= 768) {
+        // Wait for the virtual keyboard to finish animating (usually ~300ms)
+        // Otherwise, the programmatic smooth scroll conflicts with the keyboard scroll,
+        // permanently breaking hit-testing areas on mobile Chrome/Safari.
+        setTimeout(() => {
+          const searchBox = e.target.closest(".search-box") || e.target;
+          const y = searchBox.getBoundingClientRect().top + window.scrollY - 85;
+          window.scrollTo({ top: y, behavior: "smooth" });
+        }, 300);
+      }
+    });
   }
 
   if (DOM.searchClearBtn && DOM.searchInput) {
