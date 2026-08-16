@@ -4815,6 +4815,18 @@
           "Spoof signature ",
           "Unlock custom time picker "
         ]
+      },
+      "260235": {
+        "patches": "hxreborn/patches-1.6.0.mpp",
+        "changelog": "https://github.com/hxreborn/morphe-patches/releases/tag/v1.6.0",
+        "applied_patches": [
+          "AMOLED dark theme ",
+          "Hide upgrade upselling ",
+          "Remove 'Sent from' signature ",
+          "Remove free accounts limit ",
+          "Spoof signature ",
+          "Unlock custom time picker "
+        ]
       }
     }
   },
@@ -4839,6 +4851,14 @@
       "260232": {
         "patches": "hxreborn/patches-1.5.1.mpp",
         "changelog": "https://github.com/hxreborn/morphe-patches/releases/tag/v1.5.1",
+        "applied_patches": [
+          "AMOLED dark theme ",
+          "Unlock premium "
+        ]
+      },
+      "260235": {
+        "patches": "hxreborn/patches-1.6.0.mpp",
+        "changelog": "https://github.com/hxreborn/morphe-patches/releases/tag/v1.6.0",
         "applied_patches": [
           "AMOLED dark theme ",
           "Unlock premium "
