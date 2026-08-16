@@ -1028,6 +1028,19 @@
           "Skip ads ",
           "Clone Prime Video "
         ]
+      },
+      "260239": {
+        "patches": "ajstrick81/patches-1.26.3.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.27.0",
+        "applied_patches": [
+          "Bundle native ad-strip hook ",
+          "Disable auto-updates ",
+          "Load native ad-strip hook ",
+          "Override certificate pinning ",
+          "Prime Video extension ",
+          "Skip ads ",
+          "Clone Prime Video "
+        ]
       }
     }
   },
@@ -1078,6 +1091,13 @@
       "260229": {
         "patches": "ajstrick81/patches-1.26.2.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.3",
+        "applied_patches": [
+          "HBO Max - Disable Ads "
+        ]
+      },
+      "260239": {
+        "patches": "ajstrick81/patches-1.26.3.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.27.0",
         "applied_patches": [
           "HBO Max - Disable Ads "
         ]
@@ -1141,6 +1161,14 @@
           "Disable auto-updates ",
           "Skip ads "
         ]
+      },
+      "260239": {
+        "patches": "ajstrick81/patches-1.26.3.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.27.0",
+        "applied_patches": [
+          "Disable auto-updates ",
+          "Skip ads "
+        ]
       }
     }
   },
@@ -1191,6 +1219,13 @@
       "260229": {
         "patches": "ajstrick81/patches-1.26.2.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.3",
+        "applied_patches": [
+          "Skip ads "
+        ]
+      },
+      "260239": {
+        "patches": "ajstrick81/patches-1.26.3.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.27.0",
         "applied_patches": [
           "Skip ads "
         ]
@@ -1250,6 +1285,14 @@
       "260229": {
         "patches": "ajstrick81/patches-1.26.2.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.3",
+        "applied_patches": [
+          "Override certificate pinning ",
+          "Skip ads "
+        ]
+      },
+      "260239": {
+        "patches": "ajstrick81/patches-1.26.3.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.27.0",
         "applied_patches": [
           "Override certificate pinning ",
           "Skip ads "
@@ -1316,6 +1359,15 @@
       "260229": {
         "patches": "ajstrick81/patches-1.26.2.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.3",
+        "applied_patches": [
+          "Disable auto-updates ",
+          "Override certificate pinning ",
+          "Skip ads "
+        ]
+      },
+      "260239": {
+        "patches": "ajstrick81/patches-1.26.3.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.27.0",
         "applied_patches": [
           "Disable auto-updates ",
           "Override certificate pinning ",
@@ -4360,6 +4412,23 @@
           "Add App Trigger"
         ]
       }
+    },
+    "stub(133.0.33)": {
+      "260239": {
+        "patches": "",
+        "changelog": "",
+        "applied_patches": [
+          "Unlock Developer Options",
+          "Remove Snooze Warning",
+          "Remove Ads",
+          "AMOLED Theme",
+          "Get Generation Info",
+          "Copy Instafel Sources",
+          "Add Initialize Instafel",
+          "Change Home Long Click",
+          "Add App Trigger"
+        ]
+      }
     }
   },
   "instagram-instafel-clone": {
@@ -4412,6 +4481,23 @@
         ]
       },
       "260194": {
+        "patches": "",
+        "changelog": "",
+        "applied_patches": [
+          "Unlock Developer Options",
+          "Remove Snooze Warning",
+          "Remove Ads",
+          "AMOLED Theme",
+          "Get Generation Info",
+          "Copy Instafel Sources",
+          "Add Initialize Instafel",
+          "Change Home Long Click",
+          "Add App Trigger"
+        ]
+      }
+    },
+    "stub(133.0.33)": {
+      "260239": {
         "patches": "",
         "changelog": "",
         "applied_patches": [
@@ -5063,6 +5149,18 @@
           "Spoof signature ",
           "Unlock custom time picker "
         ]
+      },
+      "260239": {
+        "patches": "hxreborn/patches-1.7.0.mpp",
+        "changelog": "https://github.com/hxreborn/morphe-patches/releases/tag/v1.7.0",
+        "applied_patches": [
+          "AMOLED dark theme ",
+          "Hide upgrade upselling ",
+          "Remove 'Sent from' signature ",
+          "Remove free accounts limit ",
+          "Spoof signature ",
+          "Unlock custom time picker "
+        ]
       }
     }
   },
@@ -5095,6 +5193,14 @@
       "260235": {
         "patches": "hxreborn/patches-1.6.0.mpp",
         "changelog": "https://github.com/hxreborn/morphe-patches/releases/tag/v1.6.0",
+        "applied_patches": [
+          "AMOLED dark theme ",
+          "Unlock premium "
+        ]
+      },
+      "260239": {
+        "patches": "hxreborn/patches-1.7.0.mpp",
+        "changelog": "https://github.com/hxreborn/morphe-patches/releases/tag/v1.7.0",
         "applied_patches": [
           "AMOLED dark theme ",
           "Unlock premium "
@@ -5574,6 +5680,16 @@
       "260229": {
         "patches": "ajstrick81/patches-1.26.2.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.3",
+        "applied_patches": [
+          "Disable Netflix CertCheck ",
+          "Remove Netflix ads (bundle engine) ",
+          "Remove Netflix ads (loader) ",
+          "Clone Netflix "
+        ]
+      },
+      "260239": {
+        "patches": "ajstrick81/patches-1.26.3.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.27.0",
         "applied_patches": [
           "Disable Netflix CertCheck ",
           "Remove Netflix ads (bundle engine) ",
