@@ -4710,6 +4710,22 @@
           "Remove ads "
         ]
       }
+    },
+    "45.8.0.110": {
+      "260234": {
+        "patches": "arandomhooman/patches-1.47.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.47.0",
+        "applied_patches": [
+          "Disable Tumblr TV ",
+          "Disable ad-free banner ",
+          "Disable blog notification reminder ",
+          "Disable gift message popup ",
+          "Disable in-app update ",
+          "Disable screenshot sharing ",
+          "Enable premium UI ",
+          "Remove ads "
+        ]
+      }
     }
   },
   "viber-morphe": {
@@ -4854,6 +4870,13 @@
         "applied_patches": [
           "Unlock Premium "
         ]
+      },
+      "260234": {
+        "patches": "arandomhooman/patches-1.47.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.47.0",
+        "applied_patches": [
+          "Unlock Premium "
+        ]
       }
     }
   },
@@ -4879,6 +4902,19 @@
           "Show deleted messages "
         ]
       }
+    },
+    "30.7.2": {
+      "260234": {
+        "patches": "arandomhooman/patches-1.47.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.47.0",
+        "applied_patches": [
+          "7TV and BTTV emotes ",
+          "Auto claim channel points ",
+          "Block live ads ",
+          "Hide display ads ",
+          "Show deleted messages "
+        ]
+      }
     }
   },
   "money-manager-morphe": {
@@ -4893,6 +4929,13 @@
       "260231": {
         "patches": "arandomhooman/patches-1.45.0.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.45.0",
+        "applied_patches": [
+          "Unlock Premium "
+        ]
+      },
+      "260234": {
+        "patches": "arandomhooman/patches-1.47.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.47.0",
         "applied_patches": [
           "Unlock Premium "
         ]
@@ -4914,6 +4957,13 @@
         "applied_patches": [
           "Unlock Premium "
         ]
+      },
+      "260234": {
+        "patches": "arandomhooman/patches-1.47.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.47.0",
+        "applied_patches": [
+          "Unlock Premium "
+        ]
       }
     }
   },
@@ -4929,6 +4979,13 @@
       "260231": {
         "patches": "arandomhooman/patches-1.45.0.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.45.0",
+        "applied_patches": [
+          "Unlock Premium "
+        ]
+      },
+      "260234": {
+        "patches": "arandomhooman/patches-1.47.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.47.0",
         "applied_patches": [
           "Unlock Premium "
         ]
@@ -4950,6 +5007,13 @@
         "applied_patches": [
           "Unlock Pro "
         ]
+      },
+      "260234": {
+        "patches": "arandomhooman/patches-1.47.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.47.0",
+        "applied_patches": [
+          "Unlock Pro "
+        ]
       }
     }
   },
@@ -4965,6 +5029,13 @@
       "260231": {
         "patches": "arandomhooman/patches-1.45.0.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.45.0",
+        "applied_patches": [
+          "Unlock Pro "
+        ]
+      },
+      "260234": {
+        "patches": "arandomhooman/patches-1.47.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.47.0",
         "applied_patches": [
           "Unlock Pro "
         ]
@@ -4986,6 +5057,13 @@
         "applied_patches": [
           "Unlock Pro "
         ]
+      },
+      "260234": {
+        "patches": "arandomhooman/patches-1.47.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.47.0",
+        "applied_patches": [
+          "Unlock Pro "
+        ]
       }
     }
   },
@@ -5001,6 +5079,13 @@
       "260231": {
         "patches": "arandomhooman/patches-1.45.0.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.45.0",
+        "applied_patches": [
+          "Unlock Premium "
+        ]
+      },
+      "260234": {
+        "patches": "arandomhooman/patches-1.47.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.47.0",
         "applied_patches": [
           "Unlock Premium "
         ]
@@ -5198,6 +5283,17 @@
           "Hide distractions ",
           "Overwrite media upload parameters ",
           "Unlock subscription features "
+        ]
+      }
+    }
+  },
+  "battery-guru-morphe": {
+    "2.5.0.6": {
+      "260234": {
+        "patches": "arandomhooman/patches-1.47.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.47.0",
+        "applied_patches": [
+          "Unlock PRO "
         ]
       }
     }
