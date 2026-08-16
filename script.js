@@ -109,7 +109,8 @@ const CONFIG = {
     pixiv: "pixiv",
     mxplayer: "MX Player",
     moviebox: "MovieBox",
-    kinestop: "KineStop"
+    kinestop: "KineStop",
+    byair: "ByAir"
   },
 
   // Map app slugs to true Android Package IDs for Obtainium
@@ -125,9 +126,11 @@ const CONFIG = {
     at4klauncher: "com.overdevs.at4k",
     automate: "com.llamalab.automate",
     autosync: "com.ttxapps.autosync",
+    backdrops: "com.backdrops.wallpapers",
     batteryguru: "com.paget96.batteryguru",
     betamaniac: "it.mirko.beta",
     bravebrowser: "com.brave.browser",
+    byair: "com.byairapp.android",
     calcnote: "com.appumstudios.calcnote",
     caloriecounter: "com.fatsecret.android",
     camscanner: "com.intsig.camscanner",
