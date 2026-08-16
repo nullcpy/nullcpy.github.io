@@ -5317,5 +5317,27 @@
         ]
       }
     }
+  },
+  "backdrops-morphe": {
+    "6.1.2": {
+      "260236": {
+        "patches": "BholeyKaBhakt/patches-2.12.0.mpp",
+        "changelog": "https://github.com/BholeyKaBhakt/revanced-patches-xtra/releases/tag/v2.12.0",
+        "applied_patches": [
+          "Unlock Premium "
+        ]
+      }
+    }
+  },
+  "byair-morphe": {
+    "2.38.2": {
+      "260236": {
+        "patches": "franticg33k/patches-1.3.7.mpp",
+        "changelog": "https://github.com/franticg33k/morphe-patches/releases/tag/v1.3.7",
+        "applied_patches": [
+          "Enable Pro "
+        ]
+      }
+    }
   }
 }
