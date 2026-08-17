@@ -6146,5 +6146,16 @@
         ]
       }
     }
+  },
+  "google-phone-morphe": {
+    "161.0.726587057": {
+      "260244": {
+        "patches": "arandomhooman/patches-1.49.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.49.0",
+        "applied_patches": [
+          "Enable call recording "
+        ]
+      }
+    }
   }
 }
