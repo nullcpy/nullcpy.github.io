@@ -6301,6 +6301,13 @@
         "applied_patches": [
           "Enable call recording "
         ]
+      },
+      "260247": {
+        "patches": "arandomhooman/patches-1.49.1.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.49.1",
+        "applied_patches": [
+          "Enable call recording "
+        ]
       }
     }
   }
