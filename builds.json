@@ -364,6 +364,83 @@
           "Show sensitive media ",
           "Support external downloader "
         ]
+      },
+      "260242": {
+        "patches": "crimera/patches-3.9.0-dev.9.mpp",
+        "changelog": "https://github.com/crimera/piko/releases/tag/v3.9.0-dev.9",
+        "applied_patches": [
+          "Add ability to copy media link ",
+          "Block redirecting to X Lite ",
+          "Block update screen ",
+          "Change app icon ",
+          "Change version code ",
+          "Clear tracking params ",
+          "Control video auto scroll ",
+          "Custom download folder ",
+          "Custom emoji font ",
+          "Custom font ",
+          "Custom share menu ",
+          "Custom sharing domain ",
+          "Customise post font size ",
+          "Customize Inline action Bar items ",
+          "Customize Navigation Bar items ",
+          "Customize default reply sorting ",
+          "Customize explore tabs ",
+          "Customize notification tabs ",
+          "Customize profile tabs ",
+          "Customize search suggestions ",
+          "Customize search tab items ",
+          "Customize side bar items ",
+          "Customize timeline top bar ",
+          "Delete from database ",
+          "Disable auto timeline scroll on launch ",
+          "Disable chirp font ",
+          "Download patch ",
+          "Enable PiP mode automatically ",
+          "Enable Undo Posts ",
+          "Enable debug menu for posts ",
+          "Enable force HD videos ",
+          "Force enable translate ",
+          "Handle custom twitter links ",
+          "Hide Banner ",
+          "Hide Community Notes ",
+          "Hide FAB ",
+          "Hide FAB Menu Buttons ",
+          "Hide Live Threads ",
+          "Hide Recommended Users ",
+          "Hide badges from navigation bar icons ",
+          "Hide bookmark icon in timeline ",
+          "Hide community badges ",
+          "Hide followed by context ",
+          "Hide hidden replies ",
+          "Hide immersive player ",
+          "Hide nudge button ",
+          "Hide post metrics ",
+          "Hide promote button ",
+          "Hide recommendation items ",
+          "Hook feature flag ",
+          "Import/Export login token ",
+          "Legacy share links ",
+          "Log server response ",
+          "More information on profile ",
+          "Native downloader ",
+          "Native reader mode ",
+          "Native translator ",
+          "No shortened URL ",
+          "Pause search suggestions ",
+          "Remove Ads ",
+          "Remove premium upsell ",
+          "Remove search suggestions ",
+          "Remove view count ",
+          "Round off numbers ",
+          "Selectable Text ",
+          "Share Tweet as Image ",
+          "Show changelogs ",
+          "Show poll results ",
+          "Show post source label ",
+          "Show sensitive media ",
+          "Support external downloader "
+        ]
       }
     }
   },
@@ -682,6 +759,85 @@
           "Show sensitive media ",
           "Support external downloader "
         ]
+      },
+      "260242": {
+        "patches": "crimera/patches-3.9.0-dev.9.mpp",
+        "changelog": "https://github.com/crimera/piko/releases/tag/v3.9.0-dev.9",
+        "applied_patches": [
+          "Add ability to copy media link ",
+          "Block redirecting to X Lite ",
+          "Block update screen ",
+          "Bring back twitter ",
+          "Change app icon ",
+          "Change version code ",
+          "Clear tracking params ",
+          "Control video auto scroll ",
+          "Custom download folder ",
+          "Custom emoji font ",
+          "Custom font ",
+          "Custom share menu ",
+          "Custom sharing domain ",
+          "Customise post font size ",
+          "Customize Inline action Bar items ",
+          "Customize Navigation Bar items ",
+          "Customize default reply sorting ",
+          "Customize explore tabs ",
+          "Customize notification tabs ",
+          "Customize profile tabs ",
+          "Customize search suggestions ",
+          "Customize search tab items ",
+          "Customize side bar items ",
+          "Customize timeline top bar ",
+          "Delete from database ",
+          "Disable auto timeline scroll on launch ",
+          "Disable chirp font ",
+          "Download patch ",
+          "Dynamic color ",
+          "Enable PiP mode automatically ",
+          "Enable Undo Posts ",
+          "Enable debug menu for posts ",
+          "Enable force HD videos ",
+          "Force enable translate ",
+          "Handle custom twitter links ",
+          "Hide Banner ",
+          "Hide Community Notes ",
+          "Hide FAB ",
+          "Hide FAB Menu Buttons ",
+          "Hide Live Threads ",
+          "Hide Recommended Users ",
+          "Hide badges from navigation bar icons ",
+          "Hide bookmark icon in timeline ",
+          "Hide community badges ",
+          "Hide followed by context ",
+          "Hide hidden replies ",
+          "Hide immersive player ",
+          "Hide nudge button ",
+          "Hide post metrics ",
+          "Hide promote button ",
+          "Hide recommendation items ",
+          "Hook feature flag ",
+          "Import/Export login token ",
+          "Legacy share links ",
+          "Log server response ",
+          "More information on profile ",
+          "Native downloader ",
+          "Native reader mode ",
+          "Native translator ",
+          "No shortened URL ",
+          "Pause search suggestions ",
+          "Remove Ads ",
+          "Remove premium upsell ",
+          "Remove search suggestions ",
+          "Remove view count ",
+          "Round off numbers ",
+          "Selectable Text ",
+          "Share Tweet as Image ",
+          "Show changelogs ",
+          "Show poll results ",
+          "Show post source label ",
+          "Show sensitive media ",
+          "Support external downloader "
+        ]
       }
     }
   },
@@ -873,6 +1029,70 @@
       "260238": {
         "patches": "crimera/patches-3.9.0-dev.8.mpp",
         "changelog": "https://github.com/crimera/piko/releases/tag/v3.9.0-dev.8",
+        "applied_patches": [
+          "Add settings ",
+          "Allow user network certificate ",
+          "Change like animation ",
+          "Change version code ",
+          "Copy comment ",
+          "Custom sharing domain ",
+          "Customise story ring size ",
+          "Customise story timestamp ",
+          "Disable Reels scrolling ",
+          "Disable ads ",
+          "Disable analytics ",
+          "Disable comments ",
+          "Disable discover people ",
+          "Disable double tap like ",
+          "Disable explore ",
+          "Disable highlights ",
+          "Disable onboarding permission prompts ",
+          "Disable screenshot detection ",
+          "Disable stories ",
+          "Disable story flipping ",
+          "Disable swipe to create ",
+          "Disable typing status ",
+          "Disable video autoplay ",
+          "Download media ",
+          "Download voice message ",
+          "External downloader ",
+          "Filter stories ",
+          "Friendship status indicator ",
+          "Hide group creation button on sharesheet ",
+          "Hide navigation buttons ",
+          "Hide notes tray ",
+          "Hide reshare button ",
+          "Hide stories tray ",
+          "Hide suggested content ",
+          "Improve image viewing ",
+          "Limit feed to following profiles ",
+          "Loop story ",
+          "Make ephemeral media permanent ",
+          "Mark chat as read manually ",
+          "More options on post ",
+          "More options on profile ",
+          "Open links externally ",
+          "Recommended flags ",
+          "Remove build expired popup ",
+          "Remove empty bottom space ",
+          "Sanitize share links ",
+          "Save deleted messages ",
+          "Save media comment ",
+          "Stories audio autoplay ",
+          "Theme ",
+          "Unlock Plus benefits ",
+          "Unlock developer options ",
+          "Unlock employee options ",
+          "Validate links ",
+          "View DMs anonymously ",
+          "View live anonymously ",
+          "View stories anonymously ",
+          "View story mentions "
+        ]
+      },
+      "260242": {
+        "patches": "crimera/patches-3.9.0-dev.9.mpp",
+        "changelog": "https://github.com/crimera/piko/releases/tag/v3.9.0-dev.9",
         "applied_patches": [
           "Add settings ",
           "Allow user network certificate ",
@@ -5111,6 +5331,20 @@
           "Enable premium UI ",
           "Remove ads "
         ]
+      },
+      "260243": {
+        "patches": "arandomhooman/patches-1.49.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.49.0",
+        "applied_patches": [
+          "Disable Tumblr TV ",
+          "Disable ad-free banner ",
+          "Disable blog notification reminder ",
+          "Disable gift message popup ",
+          "Disable in-app update ",
+          "Disable screenshot sharing ",
+          "Enable premium UI ",
+          "Remove ads "
+        ]
       }
     }
   },
@@ -5310,6 +5544,13 @@
         "applied_patches": [
           "Unlock Premium "
         ]
+      },
+      "260243": {
+        "patches": "arandomhooman/patches-1.49.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.49.0",
+        "applied_patches": [
+          "Unlock Premium "
+        ]
       }
     }
   },
@@ -5359,6 +5600,18 @@
           "Hide display ads ",
           "Show deleted messages "
         ]
+      },
+      "260243": {
+        "patches": "arandomhooman/patches-1.49.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.49.0",
+        "applied_patches": [
+          "7TV and BTTV emotes ",
+          "Auto claim channel points ",
+          "Block live ads ",
+          "Fix login ",
+          "Hide display ads ",
+          "Show deleted messages "
+        ]
       }
     }
   },
@@ -5388,6 +5641,13 @@
       "260237": {
         "patches": "arandomhooman/patches-1.48.0.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.48.0",
+        "applied_patches": [
+          "Unlock Premium "
+        ]
+      },
+      "260243": {
+        "patches": "arandomhooman/patches-1.49.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.49.0",
         "applied_patches": [
           "Unlock Premium "
         ]
@@ -5423,6 +5683,13 @@
         "applied_patches": [
           "Unlock Premium "
         ]
+      },
+      "260243": {
+        "patches": "arandomhooman/patches-1.49.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.49.0",
+        "applied_patches": [
+          "Unlock Premium "
+        ]
       }
     }
   },
@@ -5452,6 +5719,13 @@
       "260237": {
         "patches": "arandomhooman/patches-1.48.0.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.48.0",
+        "applied_patches": [
+          "Unlock Premium "
+        ]
+      },
+      "260243": {
+        "patches": "arandomhooman/patches-1.49.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.49.0",
         "applied_patches": [
           "Unlock Premium "
         ]
@@ -5487,6 +5761,13 @@
         "applied_patches": [
           "Unlock Pro "
         ]
+      },
+      "260243": {
+        "patches": "arandomhooman/patches-1.49.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.49.0",
+        "applied_patches": [
+          "Unlock Pro "
+        ]
       }
     }
   },
@@ -5516,6 +5797,13 @@
       "260237": {
         "patches": "arandomhooman/patches-1.48.0.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.48.0",
+        "applied_patches": [
+          "Unlock Pro "
+        ]
+      },
+      "260243": {
+        "patches": "arandomhooman/patches-1.49.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.49.0",
         "applied_patches": [
           "Unlock Pro "
         ]
@@ -5551,6 +5839,13 @@
         "applied_patches": [
           "Unlock Pro "
         ]
+      },
+      "260243": {
+        "patches": "arandomhooman/patches-1.49.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.49.0",
+        "applied_patches": [
+          "Unlock Pro "
+        ]
       }
     }
   },
@@ -5580,6 +5875,13 @@
       "260237": {
         "patches": "arandomhooman/patches-1.48.0.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.48.0",
+        "applied_patches": [
+          "Unlock Premium "
+        ]
+      },
+      "260243": {
+        "patches": "arandomhooman/patches-1.49.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.49.0",
         "applied_patches": [
           "Unlock Premium "
         ]
@@ -5803,6 +6105,13 @@
       "260237": {
         "patches": "arandomhooman/patches-1.48.0.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.48.0",
+        "applied_patches": [
+          "Unlock PRO "
+        ]
+      },
+      "260243": {
+        "patches": "arandomhooman/patches-1.49.0.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.49.0",
         "applied_patches": [
           "Unlock PRO "
         ]
