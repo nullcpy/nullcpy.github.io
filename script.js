@@ -150,6 +150,7 @@ const CONFIG = {
       clone: "dev.jason.com.google.android.inputmethod.latin"
     },
     googlenews: "com.google.android.apps.magazines",
+    googlephone: "com.google.android.dialer",
     googlephotos: {
       revanced: "app.revanced.android.apps.photos",
       morphe: "app.morphe.android.apps.photos",
