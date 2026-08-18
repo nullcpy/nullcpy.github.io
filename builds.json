@@ -6522,6 +6522,13 @@
         "applied_patches": [
           "Unlock Pro "
         ]
+      },
+      "260254": {
+        "patches": "arandomhooman/patches-1.50.1.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
+        "applied_patches": [
+          "Unlock Pro "
+        ]
       }
     }
   },
@@ -7179,6 +7186,24 @@
         "applied_patches": [
           "Unlock premium features "
         ]
+      }
+    }
+  },
+  "camscanner-morphe": {
+    "7.20.0.2606230000": {
+      "260254": {
+        "patches": "hoo-dles/patches-1.41.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.41.0",
+        "applied_patches": []
+      }
+    }
+  },
+  "prime-video-morphe": {
+    "3.0.452.1047": {
+      "260254": {
+        "patches": "hoo-dles/patches-1.41.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.41.0",
+        "applied_patches": []
       }
     }
   }
