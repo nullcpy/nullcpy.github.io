@@ -5421,6 +5421,19 @@
           "GmsCore support (MicroG) ",
           "Spoof features "
         ]
+      },
+      "260251": {
+        "patches": "rushiranpise/patches-1.18.3.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.3",
+        "applied_patches": [
+          "AMOLED dark theme ",
+          "Change package name ",
+          "Enable DCIM folders backup control ",
+          "Fix DCIM folder classification ",
+          "GmsCore support ",
+          "GmsCore support (MicroG) ",
+          "Spoof features "
+        ]
       }
     }
   },
@@ -5608,6 +5621,17 @@
         ]
       },
       "260222": {
+        "patches": "RookieEnough/patches-1.2.1.mpp",
+        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.1",
+        "applied_patches": [
+          "Fix selected account persistence ",
+          "GmsCore support ",
+          "Spoof features "
+        ]
+      }
+    },
+    "7.88.0.966185373": {
+      "260251": {
         "patches": "RookieEnough/patches-1.2.1.mpp",
         "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.1",
         "applied_patches": [
