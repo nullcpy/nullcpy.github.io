@@ -1274,6 +1274,19 @@
           "Skip ads ",
           "Clone Prime Video "
         ]
+      },
+      "260260": {
+        "patches": "ajstrick81/patches-1.29.0.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.29.0",
+        "applied_patches": [
+          "Bundle native ad-strip hook ",
+          "Disable auto-updates ",
+          "Load native ad-strip hook ",
+          "Override certificate pinning ",
+          "Prime Video extension ",
+          "Skip ads ",
+          "Clone Prime Video "
+        ]
       }
     }
   },
@@ -1338,6 +1351,15 @@
       "260252": {
         "patches": "ajstrick81/patches-1.28.0.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.28.0",
+        "applied_patches": [
+          "HBO Max - Disable Ads "
+        ]
+      }
+    },
+    "7.9.0.61": {
+      "260260": {
+        "patches": "ajstrick81/patches-1.29.0.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.29.0",
         "applied_patches": [
           "HBO Max - Disable Ads "
         ]
@@ -1417,6 +1439,14 @@
           "Disable auto-updates ",
           "Skip ads "
         ]
+      },
+      "260260": {
+        "patches": "ajstrick81/patches-1.29.0.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.29.0",
+        "applied_patches": [
+          "Disable auto-updates ",
+          "Skip ads "
+        ]
       }
     }
   },
@@ -1481,6 +1511,13 @@
       "260252": {
         "patches": "ajstrick81/patches-1.28.0.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.28.0",
+        "applied_patches": [
+          "Skip ads "
+        ]
+      },
+      "260260": {
+        "patches": "ajstrick81/patches-1.29.0.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.29.0",
         "applied_patches": [
           "Skip ads "
         ]
@@ -1556,6 +1593,14 @@
       "260252": {
         "patches": "ajstrick81/patches-1.28.0.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.28.0",
+        "applied_patches": [
+          "Override certificate pinning ",
+          "Skip ads "
+        ]
+      },
+      "260260": {
+        "patches": "ajstrick81/patches-1.29.0.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.29.0",
         "applied_patches": [
           "Override certificate pinning ",
           "Skip ads "
@@ -1640,6 +1685,15 @@
       "260252": {
         "patches": "ajstrick81/patches-1.28.0.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.28.0",
+        "applied_patches": [
+          "Disable auto-updates ",
+          "Override certificate pinning ",
+          "Skip ads "
+        ]
+      },
+      "260260": {
+        "patches": "ajstrick81/patches-1.29.0.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.29.0",
         "applied_patches": [
           "Disable auto-updates ",
           "Override certificate pinning ",
@@ -6671,6 +6725,20 @@
           "Enable premium UI ",
           "Remove ads "
         ]
+      },
+      "260260": {
+        "patches": "arandomhooman/patches-1.50.2.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.2",
+        "applied_patches": [
+          "Disable Tumblr TV ",
+          "Disable ad-free banner ",
+          "Disable blog notification reminder ",
+          "Disable gift message popup ",
+          "Disable in-app update ",
+          "Disable screenshot sharing ",
+          "Enable premium UI ",
+          "Remove ads "
+        ]
       }
     }
   },
@@ -6923,6 +6991,13 @@
         "applied_patches": [
           "Unlock Premium "
         ]
+      },
+      "260260": {
+        "patches": "arandomhooman/patches-1.50.2.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.2",
+        "applied_patches": [
+          "Unlock Premium "
+        ]
       }
     }
   },
@@ -6996,6 +7071,18 @@
           "Hide display ads ",
           "Show deleted messages "
         ]
+      },
+      "260260": {
+        "patches": "arandomhooman/patches-1.50.2.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.2",
+        "applied_patches": [
+          "7TV and BTTV emotes ",
+          "Auto claim channel points ",
+          "Block live ads ",
+          "Fix login ",
+          "Hide display ads ",
+          "Show deleted messages "
+        ]
       }
     }
   },
@@ -7039,6 +7126,13 @@
       "260253": {
         "patches": "arandomhooman/patches-1.50.1.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
+        "applied_patches": [
+          "Unlock Premium "
+        ]
+      },
+      "260260": {
+        "patches": "arandomhooman/patches-1.50.2.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.2",
         "applied_patches": [
           "Unlock Premium "
         ]
@@ -7088,6 +7182,13 @@
         "applied_patches": [
           "Unlock Premium "
         ]
+      },
+      "260260": {
+        "patches": "arandomhooman/patches-1.50.2.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.2",
+        "applied_patches": [
+          "Unlock Premium "
+        ]
       }
     }
   },
@@ -7131,6 +7232,13 @@
       "260253": {
         "patches": "arandomhooman/patches-1.50.1.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
+        "applied_patches": [
+          "Unlock Premium "
+        ]
+      },
+      "260260": {
+        "patches": "arandomhooman/patches-1.50.2.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.2",
         "applied_patches": [
           "Unlock Premium "
         ]
@@ -7189,6 +7297,13 @@
         "applied_patches": [
           "Unlock Pro "
         ]
+      },
+      "260260": {
+        "patches": "arandomhooman/patches-1.50.2.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.2",
+        "applied_patches": [
+          "Unlock Pro "
+        ]
       }
     }
   },
@@ -7232,6 +7347,13 @@
       "260253": {
         "patches": "arandomhooman/patches-1.50.1.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
+        "applied_patches": [
+          "Unlock Pro "
+        ]
+      },
+      "260260": {
+        "patches": "arandomhooman/patches-1.50.2.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.2",
         "applied_patches": [
           "Unlock Pro "
         ]
@@ -7281,6 +7403,13 @@
         "applied_patches": [
           "Unlock Pro "
         ]
+      },
+      "260260": {
+        "patches": "arandomhooman/patches-1.50.2.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.2",
+        "applied_patches": [
+          "Unlock Pro "
+        ]
       }
     }
   },
@@ -7324,6 +7453,13 @@
       "260253": {
         "patches": "arandomhooman/patches-1.50.1.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
+        "applied_patches": [
+          "Unlock Premium "
+        ]
+      },
+      "260260": {
+        "patches": "arandomhooman/patches-1.50.2.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.2",
         "applied_patches": [
           "Unlock Premium "
         ]
@@ -7514,6 +7650,16 @@
           "Remove Netflix ads (loader) ",
           "Clone Netflix "
         ]
+      },
+      "260260": {
+        "patches": "ajstrick81/patches-1.29.0.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.29.0",
+        "applied_patches": [
+          "Disable Netflix CertCheck ",
+          "Remove Netflix ads (bundle engine) ",
+          "Remove Netflix ads (loader) ",
+          "Clone Netflix "
+        ]
       }
     }
   },
@@ -7581,6 +7727,13 @@
         "applied_patches": [
           "Unlock PRO "
         ]
+      },
+      "260260": {
+        "patches": "arandomhooman/patches-1.50.2.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.2",
+        "applied_patches": [
+          "Unlock PRO "
+        ]
       }
     }
   },
@@ -7632,6 +7785,13 @@
       "260253": {
         "patches": "arandomhooman/patches-1.50.1.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
+        "applied_patches": [
+          "Enable call recording "
+        ]
+      },
+      "260260": {
+        "patches": "arandomhooman/patches-1.50.2.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.2",
         "applied_patches": [
           "Enable call recording "
         ]
