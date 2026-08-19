@@ -6739,6 +6739,20 @@
           "Enable premium UI ",
           "Remove ads "
         ]
+      },
+      "260261": {
+        "patches": "arandomhooman/patches-1.50.3.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.3",
+        "applied_patches": [
+          "Disable Tumblr TV ",
+          "Disable ad-free banner ",
+          "Disable blog notification reminder ",
+          "Disable gift message popup ",
+          "Disable in-app update ",
+          "Disable screenshot sharing ",
+          "Enable premium UI ",
+          "Remove ads "
+        ]
       }
     }
   },
@@ -7083,6 +7097,18 @@
           "Hide display ads ",
           "Show deleted messages "
         ]
+      },
+      "260261": {
+        "patches": "arandomhooman/patches-1.50.3.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.3",
+        "applied_patches": [
+          "7TV and BTTV emotes ",
+          "Auto claim channel points ",
+          "Block live ads ",
+          "Fix login ",
+          "Hide display ads ",
+          "Show deleted messages "
+        ]
       }
     }
   },
@@ -7301,6 +7327,13 @@
       "260260": {
         "patches": "arandomhooman/patches-1.50.2.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.2",
+        "applied_patches": [
+          "Unlock Pro "
+        ]
+      },
+      "260261": {
+        "patches": "arandomhooman/patches-1.50.3.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.3",
         "applied_patches": [
           "Unlock Pro "
         ]
