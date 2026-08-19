@@ -6904,6 +6904,18 @@
           "Spoof signature ",
           "Unlock custom time picker "
         ]
+      },
+      "260263": {
+        "patches": "hxreborn/patches-1.9.1.mpp",
+        "changelog": "https://github.com/hxreborn/morphe-patches/releases/tag/v1.9.1",
+        "applied_patches": [
+          "AMOLED dark theme ",
+          "Hide upgrade upselling ",
+          "Remove 'Sent from' signature ",
+          "Remove free accounts limit ",
+          "Spoof signature ",
+          "Unlock custom time picker "
+        ]
       }
     }
   },
@@ -6952,6 +6964,14 @@
       "260257": {
         "patches": "hxreborn/patches-1.8.0.mpp",
         "changelog": "https://github.com/hxreborn/morphe-patches/releases/tag/v1.8.0",
+        "applied_patches": [
+          "AMOLED dark theme ",
+          "Unlock premium "
+        ]
+      },
+      "260263": {
+        "patches": "hxreborn/patches-1.9.1.mpp",
+        "changelog": "https://github.com/hxreborn/morphe-patches/releases/tag/v1.9.1",
         "applied_patches": [
           "AMOLED dark theme ",
           "Unlock premium "
@@ -8075,6 +8095,19 @@
         "patches": "hoo-dles/patches-1.41.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.41.0",
         "applied_patches": []
+      }
+    }
+  },
+  "microsoft-edge-morphe": {
+    "151.0.4129.70": {
+      "260263": {
+        "patches": "quantavil/patches-1.35.0.mpp",
+        "changelog": "https://github.com/quantavil/edge-morphe-patches/releases/tag/v1.35.0",
+        "applied_patches": [
+          "Copilot feature toggle ",
+          "Disable news notifications ",
+          "Telemetry elimination "
+        ]
       }
     }
   }
