@@ -8437,5 +8437,37 @@
         ]
       }
     }
+  },
+  "amazon-india-morphe": {
+    "32.12.4.300": {
+      "260267": {
+        "patches": "rushiranpise/patches-1.18.3.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.3",
+        "applied_patches": [
+          "Dark mode ",
+          "Disable search suggestions tracking ",
+          "Disable video autoplay ",
+          "Disable video autoplay ",
+          "Fix Amazon manifest conflicts ",
+          "GmsCore support (MicroG) ",
+          "Hide Rufus tab ",
+          "Open links in browser ",
+          "Price history charts ",
+          "Remove ads "
+        ]
+      }
+    }
+  },
+  "rar-morphe": {
+    "7.23.build134": {
+      "260267": {
+        "patches": "rushiranpise/patches-1.18.3.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.3",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Pro "
+        ]
+      }
+    }
   }
 }
