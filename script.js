@@ -124,6 +124,7 @@ const CONFIG = {
     adobephotoshopmix: "com.adobe.photoshopmix",
     accuweather: "com.accuweather.android",
     alldocumentreader: "alldocumentsreader.docuemntviewer",
+    amazonindia: "in.amazon.mShop.android.shopping",
     at4klauncher: "com.overdevs.at4k",
     automate: "com.llamalab.automate",
     autosync: "com.ttxapps.autosync",
