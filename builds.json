@@ -6349,6 +6349,17 @@
           "Spoof features "
         ]
       }
+    },
+    "7.89.0.966319819": {
+      "260262": {
+        "patches": "RookieEnough/patches-1.2.2.mpp",
+        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.2",
+        "applied_patches": [
+          "Fix selected account persistence ",
+          "GmsCore support ",
+          "Spoof features "
+        ]
+      }
     }
   },
   "messenger-morphe": {
