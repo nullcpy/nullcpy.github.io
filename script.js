@@ -39,7 +39,8 @@ const CONFIG = {
     "nightly",
     "androidtv",
     "alt",
-    "clone"
+    "clone",
+    "beta"
   ]),
 
   // Known architectures (used for regex parsing)
@@ -129,7 +130,11 @@ const CONFIG = {
     backdrops: "com.backdrops.wallpapers",
     batteryguru: "com.paget96.batteryguru",
     betamaniac: "it.mirko.beta",
-    bravebrowser: "com.brave.browser",
+    bravebrowser: {
+      default: "com.brave.browser",
+      beta: "com.brave.browser_beta",
+      nightly: "com.brave.browser_nightly"
+    },
     byair: "com.byairapp.android",
     calcnote: "com.appumstudios.calcnote",
     caloriecounter: "com.fatsecret.android",
