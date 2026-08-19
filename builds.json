@@ -8426,5 +8426,16 @@
         ]
       }
     }
+  },
+  "brave-browser-morphe-beta": {
+    "1.94.112": {
+      "260266": {
+        "patches": "dh6k/patches-1.2.0.mpp",
+        "changelog": "https://github.com/dh6k/morphe-patches/releases/tag/v1.2.0",
+        "applied_patches": [
+          "Brave Origin "
+        ]
+      }
+    }
   }
 }
