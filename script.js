@@ -184,7 +184,7 @@ const CONFIG = {
     macrodroid: "com.arlosoft.macrodroid",
     medium: "com.medium.reader",
     merriamwebsterdictionary: "com.merriamwebster",
-    messenger: "com.facebook.orca",
+    messenger: { default: "com.facebook.orca", morphe: "app.morphe.messenger.orca" },
     microsoftlens: "com.microsoft.office.officelens",
     microsoftedge: "com.microsoft.emmx",
     moonreader: "com.flyersoft.moonreader",
