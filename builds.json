@@ -7326,6 +7326,18 @@
           "Spoof signature ",
           "Unlock custom time picker "
         ]
+      },
+      "260270": {
+        "patches": "hxreborn/patches-1.9.2.mpp",
+        "changelog": "https://github.com/hxreborn/morphe-patches/releases/tag/v1.9.2",
+        "applied_patches": [
+          "AMOLED dark theme ",
+          "Hide upgrade upselling ",
+          "Remove 'Sent from' signature ",
+          "Remove free accounts limit ",
+          "Spoof signature ",
+          "Unlock custom time picker "
+        ]
       }
     }
   },
