@@ -59,82 +59,6 @@
   },
   "twitter-morphe": {
     "12.11.0-release.0": {
-      "260174": {
-        "patches": "crimera/patches-3.9.0-dev.5.mpp",
-        "changelog": "https://github.com/crimera/piko/releases/tag/v3.9.0-dev.5",
-        "applied_patches": [
-          "Add ability to copy media link ",
-          "Block redirecting to X Lite ",
-          "Change app icon ",
-          "Change version code ",
-          "Clear tracking params ",
-          "Control video auto scroll ",
-          "Custom download folder ",
-          "Custom emoji font ",
-          "Custom font ",
-          "Custom share menu ",
-          "Custom sharing domain ",
-          "Customise post font size ",
-          "Customize Inline action Bar items ",
-          "Customize Navigation Bar items ",
-          "Customize default reply sorting ",
-          "Customize explore tabs ",
-          "Customize notification tabs ",
-          "Customize profile tabs ",
-          "Customize search suggestions ",
-          "Customize search tab items ",
-          "Customize side bar items ",
-          "Customize timeline top bar ",
-          "Delete from database ",
-          "Disable auto timeline scroll on launch ",
-          "Disable chirp font ",
-          "Download patch ",
-          "Enable PiP mode automatically ",
-          "Enable Undo Posts ",
-          "Enable debug menu for posts ",
-          "Enable force HD videos ",
-          "Force enable translate ",
-          "Handle custom twitter links ",
-          "Hide Banner ",
-          "Hide Community Notes ",
-          "Hide FAB ",
-          "Hide FAB Menu Buttons ",
-          "Hide Live Threads ",
-          "Hide Recommended Users ",
-          "Hide badges from navigation bar icons ",
-          "Hide bookmark icon in timeline ",
-          "Hide community badges ",
-          "Hide followed by context ",
-          "Hide hidden replies ",
-          "Hide immersive player ",
-          "Hide nudge button ",
-          "Hide post metrics ",
-          "Hide promote button ",
-          "Hide recommendation items ",
-          "Hook feature flag ",
-          "Import/Export login token ",
-          "Legacy share links ",
-          "Log server response ",
-          "More information on profile ",
-          "Native downloader ",
-          "Native reader mode ",
-          "Native translator ",
-          "No shortened URL ",
-          "Pause search suggestions ",
-          "Remove Ads ",
-          "Remove premium upsell ",
-          "Remove search suggestions ",
-          "Remove view count ",
-          "Round off numbers ",
-          "Selectable Text ",
-          "Share Tweet as Image ",
-          "Show changelogs ",
-          "Show poll results ",
-          "Show post source label ",
-          "Show sensitive media ",
-          "Support external downloader "
-        ]
-      },
       "260176": {
         "patches": "crimera/patches-3.9.0-dev.6.mpp",
         "changelog": "https://github.com/crimera/piko/releases/tag/v3.9.0-dev.6",
@@ -446,84 +370,6 @@
   },
   "twitter-morphe-materialu": {
     "12.11.0-release.0": {
-      "260174": {
-        "patches": "crimera/patches-3.9.0-dev.5.mpp",
-        "changelog": "https://github.com/crimera/piko/releases/tag/v3.9.0-dev.5",
-        "applied_patches": [
-          "Add ability to copy media link ",
-          "Block redirecting to X Lite ",
-          "Bring back twitter ",
-          "Change app icon ",
-          "Change version code ",
-          "Clear tracking params ",
-          "Control video auto scroll ",
-          "Custom download folder ",
-          "Custom emoji font ",
-          "Custom font ",
-          "Custom share menu ",
-          "Custom sharing domain ",
-          "Customise post font size ",
-          "Customize Inline action Bar items ",
-          "Customize Navigation Bar items ",
-          "Customize default reply sorting ",
-          "Customize explore tabs ",
-          "Customize notification tabs ",
-          "Customize profile tabs ",
-          "Customize search suggestions ",
-          "Customize search tab items ",
-          "Customize side bar items ",
-          "Customize timeline top bar ",
-          "Delete from database ",
-          "Disable auto timeline scroll on launch ",
-          "Disable chirp font ",
-          "Download patch ",
-          "Dynamic color ",
-          "Enable PiP mode automatically ",
-          "Enable Undo Posts ",
-          "Enable debug menu for posts ",
-          "Enable force HD videos ",
-          "Force enable translate ",
-          "Handle custom twitter links ",
-          "Hide Banner ",
-          "Hide Community Notes ",
-          "Hide FAB ",
-          "Hide FAB Menu Buttons ",
-          "Hide Live Threads ",
-          "Hide Recommended Users ",
-          "Hide badges from navigation bar icons ",
-          "Hide bookmark icon in timeline ",
-          "Hide community badges ",
-          "Hide followed by context ",
-          "Hide hidden replies ",
-          "Hide immersive player ",
-          "Hide nudge button ",
-          "Hide post metrics ",
-          "Hide promote button ",
-          "Hide recommendation items ",
-          "Hook feature flag ",
-          "Import/Export login token ",
-          "Legacy share links ",
-          "Log server response ",
-          "More information on profile ",
-          "Native downloader ",
-          "Native reader mode ",
-          "Native translator ",
-          "No shortened URL ",
-          "Pause search suggestions ",
-          "Remove Ads ",
-          "Remove premium upsell ",
-          "Remove search suggestions ",
-          "Remove view count ",
-          "Round off numbers ",
-          "Selectable Text ",
-          "Share Tweet as Image ",
-          "Show changelogs ",
-          "Show poll results ",
-          "Show post source label ",
-          "Show sensitive media ",
-          "Support external downloader "
-        ]
-      },
       "260176": {
         "patches": "crimera/patches-3.9.0-dev.6.mpp",
         "changelog": "https://github.com/crimera/piko/releases/tag/v3.9.0-dev.6",
@@ -843,67 +689,6 @@
   },
   "instagram-morphe-piko": {
     "439.0.0.37.89": {
-      "260174": {
-        "patches": "crimera/patches-3.9.0-dev.5.mpp",
-        "changelog": "https://github.com/crimera/piko/releases/tag/v3.9.0-dev.5",
-        "applied_patches": [
-          "Add settings ",
-          "Allow user network certificate ",
-          "Change like animation ",
-          "Change version code ",
-          "Copy comment ",
-          "Customise story ring size ",
-          "Customise story timestamp ",
-          "Disable Reels scrolling ",
-          "Disable ads ",
-          "Disable analytics ",
-          "Disable comments ",
-          "Disable discover people ",
-          "Disable double tap like ",
-          "Disable explore ",
-          "Disable highlights ",
-          "Disable onboarding permission prompts ",
-          "Disable screenshot detection ",
-          "Disable stories ",
-          "Disable story flipping ",
-          "Disable swipe to create ",
-          "Disable typing status ",
-          "Disable video autoplay ",
-          "Download media ",
-          "Download voice message ",
-          "External downloader ",
-          "Filter stories ",
-          "Friendship status indicator ",
-          "Hide group creation button on sharesheet ",
-          "Hide navigation buttons ",
-          "Hide notes tray ",
-          "Hide reshare button ",
-          "Hide stories tray ",
-          "Hide suggested content ",
-          "Improve image viewing ",
-          "Limit feed to following profiles ",
-          "Make ephemeral media permanent ",
-          "Mark chat as read manually ",
-          "More options on post ",
-          "More options on profile ",
-          "Open links externally ",
-          "Recommended flags ",
-          "Remove build expired popup ",
-          "Remove empty bottom space ",
-          "Sanitize share links ",
-          "Save media comment ",
-          "Stories audio autoplay ",
-          "Theme ",
-          "Unlock Plus benefits ",
-          "Unlock developer options ",
-          "Unlock employee options ",
-          "Validate links ",
-          "View DMs anonymously ",
-          "View live anonymously ",
-          "View stories anonymously ",
-          "View story mentions "
-        ]
-      },
       "260176": {
         "patches": "crimera/patches-3.9.0-dev.6.mpp",
         "changelog": "https://github.com/crimera/piko/releases/tag/v3.9.0-dev.6",
@@ -1158,19 +943,6 @@
   },
   "prime-video-morphe-androidtv": {
     "6.23.23+v15.5.0.70-armv7a": {
-      "260175": {
-        "patches": "ajstrick81/patches-1.22.0.mpp",
-        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.23.0",
-        "applied_patches": [
-          "Bundle native ad-strip hook ",
-          "Disable auto-updates ",
-          "Load native ad-strip hook ",
-          "Override certificate pinning ",
-          "Prime Video extension ",
-          "Skip ads ",
-          "Clone Prime Video "
-        ]
-      },
       "260179": {
         "patches": "ajstrick81/patches-1.23.0.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.24.0",
@@ -1292,13 +1064,6 @@
   },
   "hbomax-morphe-androidtv": {
     "7.7.0.78": {
-      "260175": {
-        "patches": "ajstrick81/patches-1.22.0.mpp",
-        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.23.0",
-        "applied_patches": [
-          "HBO Max - Disable Ads "
-        ]
-      },
       "260179": {
         "patches": "ajstrick81/patches-1.23.0.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.24.0",
@@ -1368,14 +1133,6 @@
   },
   "peacock-morphe-androidtv": {
     "7.6.100": {
-      "260175": {
-        "patches": "ajstrick81/patches-1.22.0.mpp",
-        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.23.0",
-        "applied_patches": [
-          "Disable auto-updates ",
-          "Skip ads "
-        ]
-      },
       "260179": {
         "patches": "ajstrick81/patches-1.23.0.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.24.0",
@@ -1452,13 +1209,6 @@
   },
   "tubi-morphe-androidtv": {
     "10.28.5000": {
-      "260175": {
-        "patches": "ajstrick81/patches-1.22.0.mpp",
-        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.23.0",
-        "applied_patches": [
-          "Skip ads "
-        ]
-      },
       "260179": {
         "patches": "ajstrick81/patches-1.23.0.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.24.0",
@@ -1526,14 +1276,6 @@
   },
   "vix-morphe-androidtv": {
     "4.46.0_tv": {
-      "260175": {
-        "patches": "ajstrick81/patches-1.22.0.mpp",
-        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.23.0",
-        "applied_patches": [
-          "Override certificate pinning ",
-          "Skip ads "
-        ]
-      },
       "260179": {
         "patches": "ajstrick81/patches-1.23.0.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.24.0",
@@ -1610,15 +1352,6 @@
   },
   "plutotv-morphe-androidtv": {
     "5.66.0-leanback": {
-      "260175": {
-        "patches": "ajstrick81/patches-1.22.0.mpp",
-        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.23.0",
-        "applied_patches": [
-          "Disable auto-updates ",
-          "Override certificate pinning ",
-          "Skip ads "
-        ]
-      },
       "260179": {
         "patches": "ajstrick81/patches-1.23.0.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.24.0",
@@ -1951,6 +1684,41 @@
           "Custom offline videos limit ",
           "Disable login requirement ",
           "Disable long-press quick share ",
+          "Downloads ",
+          "Enable Live search ",
+          "Enable non-personalized search ",
+          "Feature Gate Lab ",
+          "Feed filter ",
+          "Feed tab navigation ",
+          "Fix Google login ",
+          "Hide CAPTCHA popups ",
+          "Hide floating promotions ",
+          "Hide quick comment reactions ",
+          "Hold-and-slide 2x lock ",
+          "Open external links directly ",
+          "Playback speed ",
+          "Remember clear display ",
+          "Resume videos after scrolling ",
+          "SIM spoof ",
+          "Sanitize sharing links ",
+          "Settings ",
+          "Show seekbar ",
+          "Show seekbar thumbnail ",
+          "Stop video looping ",
+          "Translate comments ",
+          "Disable screen capture detection "
+        ]
+      },
+      "260272": {
+        "patches": "icysymmetra/patches-0.7.0-dev.7.mpp",
+        "changelog": "https://github.com/icysymmetra/tiktok-patches-for-morphe/releases/tag/v0.7.0-dev.7",
+        "applied_patches": [
+          "Always show publish date ",
+          "Copy comments without username ",
+          "Custom offline videos limit ",
+          "Disable login requirement ",
+          "Disable long-press quick share ",
+          "Disable long-press repost ",
           "Downloads ",
           "Enable Live search ",
           "Enable non-personalized search ",
@@ -7206,6 +6974,14 @@
       "260211": {
         "patches": "durgesh0505/patches-1.18.0.mpp",
         "changelog": "https://github.com/durgesh0505/chiggi_morphe_patches/releases/tag/v1.18.0",
+        "applied_patches": [
+          "Hide ads ",
+          "Remove AD_ID permission "
+        ]
+      },
+      "260273": {
+        "patches": "durgesh0505/patches-1.19.0.mpp",
+        "changelog": "https://github.com/durgesh0505/chiggi_morphe_patches/releases/tag/v1.19.0",
         "applied_patches": [
           "Hide ads ",
           "Remove AD_ID permission "
