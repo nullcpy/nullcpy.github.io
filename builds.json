@@ -6210,6 +6210,14 @@
           "GmsCore support (MicroG) ",
           "Unlock Lifetime Premium "
         ]
+      },
+      "260269": {
+        "patches": "rushiranpise/patches-1.19.0.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.19.0",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Lifetime Premium "
+        ]
       }
     }
   },
@@ -6283,6 +6291,15 @@
           "GmsCore support (MicroG) ",
           "Spoof WARP+ Unlimited UI "
         ]
+      },
+      "260269": {
+        "patches": "rushiranpise/patches-1.19.0.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.19.0",
+        "applied_patches": [
+          "Disable Analytics / Telemetry ",
+          "GmsCore support (MicroG) ",
+          "Spoof WARP+ Unlimited UI "
+        ]
       }
     }
   },
@@ -6311,6 +6328,14 @@
           "GmsCore support (MicroG) ",
           "Unlock Premium "
         ]
+      },
+      "260269": {
+        "patches": "rushiranpise/patches-1.19.0.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.19.0",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Premium "
+        ]
       }
     }
   },
@@ -6335,6 +6360,14 @@
       "260249": {
         "patches": "rushiranpise/patches-1.18.2.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.2",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Premium "
+        ]
+      },
+      "260269": {
+        "patches": "rushiranpise/patches-1.19.0.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.19.0",
         "applied_patches": [
           "GmsCore support (MicroG) ",
           "Unlock Premium "
@@ -6403,6 +6436,14 @@
           "GmsCore support (MicroG) ",
           "Unlock Premium "
         ]
+      },
+      "260269": {
+        "patches": "rushiranpise/patches-1.19.0.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.19.0",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Premium "
+        ]
       }
     }
   },
@@ -6458,6 +6499,19 @@
           "GmsCore support (MicroG) ",
           "Spoof features "
         ]
+      },
+      "260269": {
+        "patches": "rushiranpise/patches-1.19.0.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.19.0",
+        "applied_patches": [
+          "AMOLED dark theme ",
+          "Change package name ",
+          "Enable DCIM folders backup control ",
+          "Fix DCIM folder classification ",
+          "GmsCore support ",
+          "GmsCore support (MicroG) ",
+          "Spoof features "
+        ]
       }
     }
   },
@@ -6482,6 +6536,14 @@
       "260249": {
         "patches": "rushiranpise/patches-1.18.2.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.2",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Premium+ "
+        ]
+      },
+      "260269": {
+        "patches": "rushiranpise/patches-1.19.0.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.19.0",
         "applied_patches": [
           "GmsCore support (MicroG) ",
           "Unlock Premium+ "
@@ -6526,6 +6588,14 @@
           "GmsCore support (MicroG) ",
           "Unlock Premium "
         ]
+      },
+      "260269": {
+        "patches": "rushiranpise/patches-1.19.0.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.19.0",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Premium "
+        ]
       }
     }
   },
@@ -6558,6 +6628,14 @@
       "260249": {
         "patches": "rushiranpise/patches-1.18.2.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.2",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Premium "
+        ]
+      },
+      "260269": {
+        "patches": "rushiranpise/patches-1.19.0.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.19.0",
         "applied_patches": [
           "GmsCore support (MicroG) ",
           "Unlock Premium "
@@ -6781,6 +6859,14 @@
       "260249": {
         "patches": "rushiranpise/patches-1.18.2.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.2",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Patron "
+        ]
+      },
+      "260269": {
+        "patches": "rushiranpise/patches-1.19.0.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.19.0",
         "applied_patches": [
           "GmsCore support (MicroG) ",
           "Unlock Patron "
@@ -8485,6 +8571,22 @@
           "Price history charts ",
           "Remove ads "
         ]
+      },
+      "260269": {
+        "patches": "rushiranpise/patches-1.19.0.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.19.0",
+        "applied_patches": [
+          "Dark mode ",
+          "Disable search suggestions tracking ",
+          "Disable video autoplay ",
+          "Disable video autoplay ",
+          "Fix Amazon manifest conflicts ",
+          "GmsCore support (MicroG) ",
+          "Hide Rufus tab ",
+          "Open links in browser ",
+          "Price history charts ",
+          "Remove ads "
+        ]
       }
     }
   },
@@ -8493,6 +8595,14 @@
       "260267": {
         "patches": "rushiranpise/patches-1.18.3.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.3",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Pro "
+        ]
+      },
+      "260269": {
+        "patches": "rushiranpise/patches-1.19.0.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.19.0",
         "applied_patches": [
           "GmsCore support (MicroG) ",
           "Unlock Pro "
