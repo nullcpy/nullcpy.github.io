@@ -41,9 +41,9 @@
       }
     },
     "2026.32.0": {
-      "260178": {
-        "patches": "jkennethcarino/patches-1.3.1-dev.1.mpp",
-        "changelog": "https://github.com/jkennethcarino/adobo/releases/tag/v1.3.1-dev.1",
+      "260277": {
+        "patches": "jkennethcarino/patches-1.3.1-dev.2.mpp",
+        "changelog": "https://github.com/jkennethcarino/adobo/releases/tag/v1.3.1-dev.2",
         "applied_patches": [
           "Colorize comment indent lines ",
           "Disable home screen redirect ",
@@ -728,19 +728,6 @@
   },
   "prime-video-morphe-androidtv": {
     "6.23.23+v15.5.0.70-armv7a": {
-      "260179": {
-        "patches": "ajstrick81/patches-1.23.0.mpp",
-        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.24.0",
-        "applied_patches": [
-          "Bundle native ad-strip hook ",
-          "Disable auto-updates ",
-          "Load native ad-strip hook ",
-          "Override certificate pinning ",
-          "Prime Video extension ",
-          "Skip ads ",
-          "Clone Prime Video "
-        ]
-      },
       "260197": {
         "patches": "ajstrick81/patches-1.24.0.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.25.0",
@@ -849,13 +836,6 @@
   },
   "hbomax-morphe-androidtv": {
     "7.7.0.78": {
-      "260179": {
-        "patches": "ajstrick81/patches-1.23.0.mpp",
-        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.24.0",
-        "applied_patches": [
-          "HBO Max - Disable Ads "
-        ]
-      },
       "260197": {
         "patches": "ajstrick81/patches-1.24.0.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.25.0",
@@ -918,14 +898,6 @@
   },
   "peacock-morphe-androidtv": {
     "7.6.100": {
-      "260179": {
-        "patches": "ajstrick81/patches-1.23.0.mpp",
-        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.24.0",
-        "applied_patches": [
-          "Disable auto-updates ",
-          "Skip ads "
-        ]
-      },
       "260197": {
         "patches": "ajstrick81/patches-1.24.0.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.25.0",
@@ -994,13 +966,6 @@
   },
   "tubi-morphe-androidtv": {
     "10.28.5000": {
-      "260179": {
-        "patches": "ajstrick81/patches-1.23.0.mpp",
-        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.24.0",
-        "applied_patches": [
-          "Skip ads "
-        ]
-      },
       "260197": {
         "patches": "ajstrick81/patches-1.24.0.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.25.0",
@@ -1061,14 +1026,6 @@
   },
   "vix-morphe-androidtv": {
     "4.46.0_tv": {
-      "260179": {
-        "patches": "ajstrick81/patches-1.23.0.mpp",
-        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.24.0",
-        "applied_patches": [
-          "Override certificate pinning ",
-          "Skip ads "
-        ]
-      },
       "260197": {
         "patches": "ajstrick81/patches-1.24.0.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.25.0",
@@ -1137,15 +1094,6 @@
   },
   "plutotv-morphe-androidtv": {
     "5.66.0-leanback": {
-      "260179": {
-        "patches": "ajstrick81/patches-1.23.0.mpp",
-        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.24.0",
-        "applied_patches": [
-          "Disable auto-updates ",
-          "Override certificate pinning ",
-          "Skip ads "
-        ]
-      },
       "260197": {
         "patches": "ajstrick81/patches-1.24.0.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.25.0",
@@ -1222,40 +1170,6 @@
   },
   "tiktok-morphe": {
     "46.2.3": {
-      "260179": {
-        "patches": "icysymmetra/patches-0.6.1.mpp",
-        "changelog": "https://github.com/icysymmetra/tiktok-patches-for-morphe/releases/tag/v0.6.1",
-        "applied_patches": [
-          "Always show publish date ",
-          "Copy comments without username ",
-          "Custom offline videos limit ",
-          "Disable login requirement ",
-          "Disable long-press quick share ",
-          "Downloads ",
-          "Enable Live search ",
-          "Enable non-personalized search ",
-          "Feature Gate Lab ",
-          "Feed filter ",
-          "Feed tab navigation ",
-          "Fix Google login ",
-          "Hide CAPTCHA popups ",
-          "Hide floating promotions ",
-          "Hide quick comment reactions ",
-          "Hold-and-slide 2x lock ",
-          "Open external links directly ",
-          "Playback speed ",
-          "Remember clear display ",
-          "Resume videos after scrolling ",
-          "SIM spoof ",
-          "Sanitize sharing links ",
-          "Settings ",
-          "Show seekbar ",
-          "Show seekbar thumbnail ",
-          "Stop video looping ",
-          "Translate comments ",
-          "Disable screen capture detection "
-        ]
-      },
       "260185": {
         "patches": "icysymmetra/patches-0.6.2-dev.1.mpp",
         "changelog": "https://github.com/icysymmetra/tiktok-patches-for-morphe/releases/tag/v0.6.2-dev.1",
@@ -5054,39 +4968,6 @@
   },
   "gboard-morphe": {
     "17.7.7.932364120-release": {
-      "260180": {
-        "patches": "jasonwu1994/patches-2.7.0.mpp jkennethcarino/patches-1.3.0.mpp",
-        "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v2.7.0 https://github.com/jkennethcarino/adobo/releases/tag/v1.3.0",
-        "applied_patches": [
-          "AI Writing Tools ",
-          "Add Gboard Signature Bypass ",
-          "Advanced Voice Typing ",
-          "Always-incognito mode ",
-          "Clipboard Custom Character Limit ",
-          "Clipboard Enhancements ",
-          "Custom Symbols ",
-          "Developer options ",
-          "Emojis, stickers & GIFs Tab Order ",
-          "Enable Inline Autofill Suggestions ",
-          "Enable OCR / Scan Text ",
-          "Enable OCR feature ",
-          "Enable clipboard in incognito ",
-          "Enable voice typing in incognito ",
-          "English QWERTY Up-Flick Uppercase ",
-          "Grammar Checker ",
-          "Inline Suggestions ",
-          "Key Shape Selection ",
-          "Latin Globe Key Ignore Interval ",
-          "Long-Press Editing Shortcuts ",
-          "Settings Homepage Override ",
-          "Swipeable Custom Top Row ",
-          "Use Bluetooth Microphone ",
-          "Web Clipboard ",
-          "Zhuyin Bottom Row Key Sizes ",
-          "Zhuyin Quick Traditional/Simplified Toggle ",
-          "Zhuyin Slide Input "
-        ]
-      },
       "260181": {
         "patches": "jasonwu1994/patches-2.7.0.mpp jkennethcarino/patches-1.3.0.mpp",
         "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v2.7.0 https://github.com/jkennethcarino/adobo/releases/tag/v1.3.0",
@@ -5396,40 +5277,6 @@
   },
   "gboard-morphe-clone": {
     "17.7.7.932364120-release": {
-      "260180": {
-        "patches": "jasonwu1994/patches-2.7.0.mpp jkennethcarino/patches-1.3.0.mpp",
-        "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v2.7.0 https://github.com/jkennethcarino/adobo/releases/tag/v1.3.0",
-        "applied_patches": [
-          "AI Writing Tools ",
-          "Add Gboard Signature Bypass ",
-          "Advanced Voice Typing ",
-          "Always-incognito mode ",
-          "Clipboard Custom Character Limit ",
-          "Clipboard Enhancements ",
-          "Custom Symbols ",
-          "Developer options ",
-          "Emojis, stickers & GIFs Tab Order ",
-          "Enable Inline Autofill Suggestions ",
-          "Enable OCR / Scan Text ",
-          "Enable OCR feature ",
-          "Enable clipboard in incognito ",
-          "Enable voice typing in incognito ",
-          "English QWERTY Up-Flick Uppercase ",
-          "Grammar Checker ",
-          "Inline Suggestions ",
-          "Key Shape Selection ",
-          "Latin Globe Key Ignore Interval ",
-          "Long-Press Editing Shortcuts ",
-          "Package Rename ",
-          "Settings Homepage Override ",
-          "Swipeable Custom Top Row ",
-          "Use Bluetooth Microphone ",
-          "Web Clipboard ",
-          "Zhuyin Bottom Row Key Sizes ",
-          "Zhuyin Quick Traditional/Simplified Toggle ",
-          "Zhuyin Slide Input "
-        ]
-      },
       "260181": {
         "patches": "jasonwu1994/patches-2.7.0.mpp jkennethcarino/patches-1.3.0.mpp",
         "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v2.7.0 https://github.com/jkennethcarino/adobo/releases/tag/v1.3.0",
@@ -5888,6 +5735,21 @@
           "Change Home Long Click",
           "Add App Trigger"
         ]
+      },
+      "260278": {
+        "patches": "",
+        "changelog": "",
+        "applied_patches": [
+          "Unlock Developer Options",
+          "Remove Snooze Warning",
+          "Remove Ads",
+          "AMOLED Theme",
+          "Get Generation Info",
+          "Copy Instafel Sources",
+          "Add Initialize Instafel",
+          "Change Home Long Click",
+          "Add App Trigger"
+        ]
       }
     }
   },
@@ -6020,6 +5882,21 @@
         ]
       },
       "260268": {
+        "patches": "",
+        "changelog": "",
+        "applied_patches": [
+          "Unlock Developer Options",
+          "Remove Snooze Warning",
+          "Remove Ads",
+          "AMOLED Theme",
+          "Get Generation Info",
+          "Copy Instafel Sources",
+          "Add Initialize Instafel",
+          "Change Home Long Click",
+          "Add App Trigger"
+        ]
+      },
+      "260278": {
         "patches": "",
         "changelog": "",
         "applied_patches": [
@@ -6608,6 +6485,17 @@
     },
     "7.89.0.966319819": {
       "260262": {
+        "patches": "RookieEnough/patches-1.2.2.mpp",
+        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.2",
+        "applied_patches": [
+          "Fix selected account persistence ",
+          "GmsCore support ",
+          "Spoof features "
+        ]
+      }
+    },
+    "7.89.0.968035987": {
+      "260278": {
         "patches": "RookieEnough/patches-1.2.2.mpp",
         "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.2",
         "applied_patches": [
@@ -7898,6 +7786,78 @@
           "Reload video ",
           "Settings for YouTube "
         ]
+      },
+      "260277": {
+        "patches": "anddea/patches-4.3.0-dev.2.mpp",
+        "changelog": "https://github.com/anddea/revanced-patches/releases/tag/v4.3.0-dev.2",
+        "applied_patches": [
+          "Alternative thumbnails ",
+          "Ambient mode control ",
+          "Bypass URL redirects ",
+          "Bypass image region restrictions ",
+          "Change form factor ",
+          "Change player flyout menu toggles ",
+          "Change share sheet ",
+          "Change start page ",
+          "Custom DPI ",
+          "Custom Shorts action buttons ",
+          "Custom branding for YouTube ",
+          "Custom double tap length ",
+          "Description components ",
+          "Disable QUIC protocol ",
+          "Disable forced auto captions ",
+          "Disable haptic feedback ",
+          "Disable layout updates ",
+          "Disable resuming Miniplayer on startup ",
+          "Disable resuming Shorts on startup ",
+          "Disable sign in to TV popup ",
+          "Enable debug logging ",
+          "Enable gradient loading screen ",
+          "Force original audio ",
+          "Force player buttons background ",
+          "Fullscreen components ",
+          "GmsCore support ",
+          "Hide action buttons ",
+          "Hide ads ",
+          "Hide comments components ",
+          "Hide feed components ",
+          "Hide feed flyout menu ",
+          "Hide layout components ",
+          "Hide player buttons ",
+          "Hide player flyout menu ",
+          "Hook download actions ",
+          "Miniplayer ",
+          "Navigation bar components ",
+          "Open links externally ",
+          "Overlay buttons ",
+          "Override YouTube Music buttons ",
+          "Playback in feeds ",
+          "Player components ",
+          "Remove background playback restrictions ",
+          "Remove viewer discretion dialog ",
+          "Return YouTube Dislike ",
+          "Return YouTube Username ",
+          "Sanitize sharing links ",
+          "Seekbar components ",
+          "Set transcript cookies ",
+          "Settings menu filter ",
+          "Shorts components ",
+          "Snack bar components ",
+          "SponsorBlock ",
+          "Spoof app version ",
+          "Spoof video streams ",
+          "Spoof watch history ",
+          "Swipe controls ",
+          "Theme ",
+          "Toolbar components ",
+          "Translations for YouTube ",
+          "Video playback ",
+          "Voice Over Translation ",
+          "Wide search bar ",
+          "Visual preferences icons for YouTube ",
+          "Reload video ",
+          "Settings for YouTube "
+        ]
       }
     }
   },
@@ -7938,6 +7898,52 @@
           "SponsorBlock ",
           "Spoof app version for lyrics ",
           "Spoof video streams ",
+          "Third-party lyrics ",
+          "Track crossfade ",
+          "Translations for YouTube Music ",
+          "Video playback ",
+          "Watch history ",
+          "Visual preferences icons for YouTube Music ",
+          "Settings for YouTube Music "
+        ]
+      },
+      "260277": {
+        "patches": "anddea/patches-4.3.0-dev.2.mpp",
+        "changelog": "https://github.com/anddea/revanced-patches/releases/tag/v4.3.0-dev.2",
+        "applied_patches": [
+          "Bitrate default value ",
+          "Bypass image region restrictions ",
+          "Certificate spoof ",
+          "Change share sheet ",
+          "Change start page ",
+          "Custom branding for YouTube Music ",
+          "Disable Cairo splash animation ",
+          "Disable QUIC protocol ",
+          "Disable dislike redirection ",
+          "Disable forced auto captions ",
+          "Enable debug logging ",
+          "Enable landscape mode ",
+          "Flyout menu components ",
+          "Force original audio ",
+          "GmsCore support ",
+          "Hide account components ",
+          "Hide action bar components ",
+          "Hide ads ",
+          "Hide layout components ",
+          "Navigation bar components ",
+          "Player components ",
+          "Remove background playback restrictions ",
+          "Remove viewer discretion dialog ",
+          "Restore old style library shelf ",
+          "Return YouTube Dislike ",
+          "Return YouTube Username ",
+          "Sanitize sharing links ",
+          "Settings menu filter ",
+          "SponsorBlock ",
+          "Spoof app version ",
+          "Spoof app version for lyrics ",
+          "Spoof video streams ",
+          "Theme ",
           "Third-party lyrics ",
           "Track crossfade ",
           "Translations for YouTube Music ",
