@@ -5857,23 +5857,6 @@
     }
   },
   "instagram-instafel": {
-    "441.0.0.43.81": {
-      "260184": {
-        "patches": "",
-        "changelog": "",
-        "applied_patches": [
-          "Unlock Developer Options",
-          "Remove Snooze Warning",
-          "Remove Ads",
-          "AMOLED Theme",
-          "Get Generation Info",
-          "Copy Instafel Sources",
-          "Add Initialize Instafel",
-          "Change Home Long Click",
-          "Add App Trigger"
-        ]
-      }
-    },
     "442.0.0.46.79": {
       "260188": {
         "patches": "",
@@ -6002,23 +5985,6 @@
     }
   },
   "instagram-instafel-clone": {
-    "441.0.0.43.81": {
-      "260184": {
-        "patches": "",
-        "changelog": "",
-        "applied_patches": [
-          "Unlock Developer Options",
-          "Remove Snooze Warning",
-          "Remove Ads",
-          "AMOLED Theme",
-          "Get Generation Info",
-          "Copy Instafel Sources",
-          "Add Initialize Instafel",
-          "Change Home Long Click",
-          "Add App Trigger"
-        ]
-      }
-    },
     "442.0.0.46.79": {
       "260188": {
         "patches": "",
@@ -8676,6 +8642,18 @@
     },
     "1.93.138": {
       "260281": {
+        "patches": "kveld9/patches-1.3.0.mpp",
+        "changelog": "https://github.com/kveld9/kveld-morphe-patches/releases/tag/v1.3.0",
+        "applied_patches": [
+          "Block Brave Telemetry ",
+          "Brave In-Product Notification Scheduler Optimization ",
+          "Brave Origin ",
+          "Brave Startup Performance Optimization ",
+          "Locale PAK Slimmer ",
+          "Skip First Run "
+        ]
+      },
+      "260282": {
         "patches": "kveld9/patches-1.3.0.mpp",
         "changelog": "https://github.com/kveld9/kveld-morphe-patches/releases/tag/v1.3.0",
         "applied_patches": [
