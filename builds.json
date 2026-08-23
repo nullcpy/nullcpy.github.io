@@ -848,6 +848,13 @@
         "applied_patches": [
           "HBO Max - Disable Ads "
         ]
+      },
+      "260291": {
+        "patches": "ajstrick81/patches-1.29.1.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.29.1",
+        "applied_patches": [
+          "HBO Max - Disable Ads "
+        ]
       }
     }
   },
@@ -1125,40 +1132,6 @@
   },
   "tiktok-morphe": {
     "46.2.3": {
-      "260193": {
-        "patches": "icysymmetra/patches-0.7.0-dev.3.mpp",
-        "changelog": "https://github.com/icysymmetra/tiktok-patches-for-morphe/releases/tag/v0.7.0-dev.3",
-        "applied_patches": [
-          "Always show publish date ",
-          "Copy comments without username ",
-          "Custom offline videos limit ",
-          "Disable login requirement ",
-          "Disable long-press quick share ",
-          "Downloads ",
-          "Enable Live search ",
-          "Enable non-personalized search ",
-          "Feature Gate Lab ",
-          "Feed filter ",
-          "Feed tab navigation ",
-          "Fix Google login ",
-          "Hide CAPTCHA popups ",
-          "Hide floating promotions ",
-          "Hide quick comment reactions ",
-          "Hold-and-slide 2x lock ",
-          "Open external links directly ",
-          "Playback speed ",
-          "Remember clear display ",
-          "Resume videos after scrolling ",
-          "SIM spoof ",
-          "Sanitize sharing links ",
-          "Settings ",
-          "Show seekbar ",
-          "Show seekbar thumbnail ",
-          "Stop video looping ",
-          "Translate comments ",
-          "Disable screen capture detection "
-        ]
-      },
       "260217": {
         "patches": "icysymmetra/patches-0.7.0-dev.4.mpp",
         "changelog": "https://github.com/icysymmetra/tiktok-patches-for-morphe/releases/tag/v0.7.0-dev.4",
@@ -6073,6 +6046,45 @@
           "Zhuyin Quick Traditional/Simplified Toggle ",
           "Zhuyin Slide Input "
         ]
+      },
+      "260290": {
+        "patches": "jasonwu1994/patches-3.1.0-dev.1.mpp",
+        "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v3.1.0-dev.1",
+        "applied_patches": [
+          "AI Writing Tools ",
+          "Access Points menu style ",
+          "Add Gboard Signature Bypass ",
+          "Advanced Voice Typing ",
+          "Change emoji size ",
+          "Clipboard Custom Character Limit ",
+          "Clipboard Enhancements ",
+          "Close Proactive Suggestions ",
+          "Custom Symbols ",
+          "Developer options ",
+          "Emojis, stickers & GIFs Tab Order ",
+          "Enable Inline Autofill Suggestions ",
+          "Enable OCR / Scan Text ",
+          "Enable accessibility layout ",
+          "Enable cursor trackpad mode ",
+          "Enable split keyboard ",
+          "English QWERTY Up-Flick Uppercase ",
+          "G Logo on Spacebar ",
+          "Grammar Checker ",
+          "Hyperspeed Typing Animation ",
+          "Incognito Mode Toggle ",
+          "Inline Suggestions ",
+          "Key Shape Selection ",
+          "Latin Globe Key Ignore Interval ",
+          "Long-Press Editing Shortcuts ",
+          "Quick Insert ",
+          "Settings Homepage Override ",
+          "Swipeable Custom Top Row ",
+          "Use Bluetooth Microphone ",
+          "Web Clipboard ",
+          "Zhuyin Bottom Row Key Sizes ",
+          "Zhuyin Quick Traditional/Simplified Toggle ",
+          "Zhuyin Slide Input "
+        ]
       }
     }
   },
@@ -6427,6 +6439,46 @@
           "Latin Globe Key Ignore Interval ",
           "Long-Press Editing Shortcuts ",
           "Package Rename ",
+          "Settings Homepage Override ",
+          "Swipeable Custom Top Row ",
+          "Use Bluetooth Microphone ",
+          "Web Clipboard ",
+          "Zhuyin Bottom Row Key Sizes ",
+          "Zhuyin Quick Traditional/Simplified Toggle ",
+          "Zhuyin Slide Input "
+        ]
+      },
+      "260290": {
+        "patches": "jasonwu1994/patches-3.1.0-dev.1.mpp",
+        "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v3.1.0-dev.1",
+        "applied_patches": [
+          "AI Writing Tools ",
+          "Access Points menu style ",
+          "Add Gboard Signature Bypass ",
+          "Advanced Voice Typing ",
+          "Change emoji size ",
+          "Clipboard Custom Character Limit ",
+          "Clipboard Enhancements ",
+          "Close Proactive Suggestions ",
+          "Custom Symbols ",
+          "Developer options ",
+          "Emojis, stickers & GIFs Tab Order ",
+          "Enable Inline Autofill Suggestions ",
+          "Enable OCR / Scan Text ",
+          "Enable accessibility layout ",
+          "Enable cursor trackpad mode ",
+          "Enable split keyboard ",
+          "English QWERTY Up-Flick Uppercase ",
+          "G Logo on Spacebar ",
+          "Grammar Checker ",
+          "Hyperspeed Typing Animation ",
+          "Incognito Mode Toggle ",
+          "Inline Suggestions ",
+          "Key Shape Selection ",
+          "Latin Globe Key Ignore Interval ",
+          "Long-Press Editing Shortcuts ",
+          "Package Rename ",
+          "Quick Insert ",
           "Settings Homepage Override ",
           "Swipeable Custom Top Row ",
           "Use Bluetooth Microphone ",
@@ -6927,14 +6979,6 @@
   },
   "accuweather-morphe": {
     "21.1.14-5-rc": {
-      "260192": {
-        "patches": "rushiranpise/patches-1.17.0.mpp",
-        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.17.0",
-        "applied_patches": [
-          "GmsCore support (MicroG) ",
-          "Unlock Premium+ "
-        ]
-      },
       "260245": {
         "patches": "rushiranpise/patches-1.18.0.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.0",
@@ -6975,14 +7019,6 @@
   },
   "the-weather-channel-morphe": {
     "16.16.0": {
-      "260192": {
-        "patches": "rushiranpise/patches-1.17.0.mpp",
-        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.17.0",
-        "applied_patches": [
-          "GmsCore support (MicroG) ",
-          "Unlock Premium "
-        ]
-      },
       "260245": {
         "patches": "rushiranpise/patches-1.18.0.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.0",
@@ -7011,14 +7047,6 @@
   },
   "hola-vpn-morphe": {
     "AARCH64_1.248.400": {
-      "260192": {
-        "patches": "rushiranpise/patches-1.17.0.mpp",
-        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.17.0",
-        "applied_patches": [
-          "GmsCore support (MicroG) ",
-          "Unlock Premium "
-        ]
-      },
       "260245": {
         "patches": "rushiranpise/patches-1.18.0.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.0",
@@ -7070,15 +7098,6 @@
       "260194": {
         "patches": "RookieEnough/patches-1.1.0.mpp",
         "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.1.0",
-        "applied_patches": [
-          "Fix selected account persistence ",
-          "GmsCore support ",
-          "Spoof features "
-        ]
-      },
-      "260193": {
-        "patches": "RookieEnough/patches-1.1.1-dev.1.mpp",
-        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.1.1-dev.1",
         "applied_patches": [
           "Fix selected account persistence ",
           "GmsCore support ",
