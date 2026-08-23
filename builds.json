@@ -1261,6 +1261,41 @@
           "Translate comments ",
           "Disable screen capture detection "
         ]
+      },
+      "260289": {
+        "patches": "icysymmetra/patches-0.7.0.mpp",
+        "changelog": "https://github.com/icysymmetra/tiktok-patches-for-morphe/releases/tag/v0.7.0",
+        "applied_patches": [
+          "Always show publish date ",
+          "Copy comments without username ",
+          "Custom offline videos limit ",
+          "Disable login requirement ",
+          "Disable long-press quick share ",
+          "Disable long-press repost ",
+          "Downloads ",
+          "Enable Live search ",
+          "Enable non-personalized search ",
+          "Feature Gate Lab ",
+          "Feed filter ",
+          "Feed tab navigation ",
+          "Fix Google login ",
+          "Hide CAPTCHA popups ",
+          "Hide floating promotions ",
+          "Hide quick comment reactions ",
+          "Hold-and-slide 2x lock ",
+          "Open external links directly ",
+          "Playback speed ",
+          "Remember clear display ",
+          "Resume videos after scrolling ",
+          "SIM spoof ",
+          "Sanitize sharing links ",
+          "Settings ",
+          "Show seekbar ",
+          "Show seekbar thumbnail ",
+          "Stop video looping ",
+          "Translate comments ",
+          "Disable screen capture detection "
+        ]
       }
     }
   },
@@ -6002,6 +6037,42 @@
           "Zhuyin Quick Traditional/Simplified Toggle ",
           "Zhuyin Slide Input "
         ]
+      },
+      "260289": {
+        "patches": "jasonwu1994/patches-3.0.0.mpp",
+        "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v3.0.0",
+        "applied_patches": [
+          "AI Writing Tools ",
+          "Access Points menu style ",
+          "Add Gboard Signature Bypass ",
+          "Advanced Voice Typing ",
+          "Change emoji size ",
+          "Clipboard Custom Character Limit ",
+          "Clipboard Enhancements ",
+          "Custom Symbols ",
+          "Developer options ",
+          "Emojis, stickers & GIFs Tab Order ",
+          "Enable Inline Autofill Suggestions ",
+          "Enable OCR / Scan Text ",
+          "Enable accessibility layout ",
+          "Enable cursor trackpad mode ",
+          "Enable split keyboard ",
+          "English QWERTY Up-Flick Uppercase ",
+          "G Logo on Spacebar ",
+          "Grammar Checker ",
+          "Incognito Mode Toggle ",
+          "Inline Suggestions ",
+          "Key Shape Selection ",
+          "Latin Globe Key Ignore Interval ",
+          "Long-Press Editing Shortcuts ",
+          "Settings Homepage Override ",
+          "Swipeable Custom Top Row ",
+          "Use Bluetooth Microphone ",
+          "Web Clipboard ",
+          "Zhuyin Bottom Row Key Sizes ",
+          "Zhuyin Quick Traditional/Simplified Toggle ",
+          "Zhuyin Slide Input "
+        ]
       }
     }
   },
@@ -6327,6 +6398,43 @@
           "Zhuyin Quick Traditional/Simplified Toggle ",
           "Zhuyin Slide Input "
         ]
+      },
+      "260289": {
+        "patches": "jasonwu1994/patches-3.0.0.mpp",
+        "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v3.0.0",
+        "applied_patches": [
+          "AI Writing Tools ",
+          "Access Points menu style ",
+          "Add Gboard Signature Bypass ",
+          "Advanced Voice Typing ",
+          "Change emoji size ",
+          "Clipboard Custom Character Limit ",
+          "Clipboard Enhancements ",
+          "Custom Symbols ",
+          "Developer options ",
+          "Emojis, stickers & GIFs Tab Order ",
+          "Enable Inline Autofill Suggestions ",
+          "Enable OCR / Scan Text ",
+          "Enable accessibility layout ",
+          "Enable cursor trackpad mode ",
+          "Enable split keyboard ",
+          "English QWERTY Up-Flick Uppercase ",
+          "G Logo on Spacebar ",
+          "Grammar Checker ",
+          "Incognito Mode Toggle ",
+          "Inline Suggestions ",
+          "Key Shape Selection ",
+          "Latin Globe Key Ignore Interval ",
+          "Long-Press Editing Shortcuts ",
+          "Package Rename ",
+          "Settings Homepage Override ",
+          "Swipeable Custom Top Row ",
+          "Use Bluetooth Microphone ",
+          "Web Clipboard ",
+          "Zhuyin Bottom Row Key Sizes ",
+          "Zhuyin Quick Traditional/Simplified Toggle ",
+          "Zhuyin Slide Input "
+        ]
       }
     }
   },
@@ -6597,25 +6705,6 @@
   },
   "waze-morphe": {
     "5.22.0.3": {
-      "260191": {
-        "patches": "rushiranpise/patches-1.17.0.mpp",
-        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.17.0",
-        "applied_patches": [
-          "Alert Distances ",
-          "AutoZoom ",
-          "Disable Ads ",
-          "Disable Advil Ad Requests ",
-          "Enlarged Speedometer ",
-          "GmsCore support (MicroG) ",
-          "Map Skin (Vitamin C) ",
-          "Navigation & Map ",
-          "Popup Suppression ",
-          "Radar Sound (Any Speed) ",
-          "Report Speed Limit ",
-          "Speed Limit Sign ",
-          "Uncensored Radar / Camera Display "
-        ]
-      },
       "260245": {
         "patches": "rushiranpise/patches-1.18.0.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.0",
@@ -6639,15 +6728,6 @@
   },
   "warp-morphe": {
     "6.38.8": {
-      "260191": {
-        "patches": "rushiranpise/patches-1.17.0.mpp",
-        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.17.0",
-        "applied_patches": [
-          "Disable Analytics / Telemetry ",
-          "GmsCore support (MicroG) ",
-          "Spoof WARP+ Unlimited UI "
-        ]
-      },
       "260245": {
         "patches": "rushiranpise/patches-1.18.0.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.0",
@@ -6679,14 +6759,6 @@
   },
   "ninja-vpn-morphe": {
     "1.4.7": {
-      "260191": {
-        "patches": "rushiranpise/patches-1.17.0.mpp",
-        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.17.0",
-        "applied_patches": [
-          "GmsCore support (MicroG) ",
-          "Unlock Premium "
-        ]
-      },
       "260245": {
         "patches": "rushiranpise/patches-1.18.0.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.0",
@@ -6715,14 +6787,6 @@
   },
   "windscribe-vpn-morphe": {
     "4.2.2328": {
-      "260191": {
-        "patches": "rushiranpise/patches-1.17.0.mpp",
-        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.17.0",
-        "applied_patches": [
-          "GmsCore support (MicroG) ",
-          "Unlock Premium "
-        ]
-      },
       "260245": {
         "patches": "rushiranpise/patches-1.18.0.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.0",
@@ -6751,14 +6815,6 @@
   },
   "terabox-morphe": {
     "4.22.6": {
-      "260191": {
-        "patches": "rushiranpise/patches-1.17.0.mpp",
-        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.17.0",
-        "applied_patches": [
-          "GmsCore support (MicroG) ",
-          "Unlock VIP "
-        ]
-      },
       "260245": {
         "patches": "rushiranpise/patches-1.18.0.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.0",
@@ -6787,14 +6843,6 @@
   },
   "beta-maniac-morphe": {
     "0.9.4": {
-      "260191": {
-        "patches": "rushiranpise/patches-1.17.0.mpp",
-        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.17.0",
-        "applied_patches": [
-          "GmsCore support (MicroG) ",
-          "Unlock Premium "
-        ]
-      },
       "260245": {
         "patches": "rushiranpise/patches-1.18.0.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.0",
@@ -6823,18 +6871,6 @@
   },
   "google-photos-morphe-alt": {
     "7.87.0.957333026": {
-      "260191": {
-        "patches": "rushiranpise/patches-1.17.0.mpp",
-        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.17.0",
-        "applied_patches": [
-          "AMOLED dark theme ",
-          "Change package name ",
-          "Enable DCIM folders backup control ",
-          "Fix DCIM folder classification ",
-          "GmsCore support ",
-          "GmsCore support (MicroG) "
-        ]
-      },
       "260245": {
         "patches": "rushiranpise/patches-1.18.0.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.0",
