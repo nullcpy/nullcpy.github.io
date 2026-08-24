@@ -6359,6 +6359,84 @@
           "Zhuyin Quick Traditional/Simplified Toggle ",
           "Zhuyin Slide Input "
         ]
+      },
+      "260298": {
+        "patches": "jasonwu1994/patches-3.1.0.mpp",
+        "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v3.1.0",
+        "applied_patches": [
+          "AI Writing Tools ",
+          "Access Points menu style ",
+          "Add Gboard Signature Bypass ",
+          "Advanced Voice Typing ",
+          "Change emoji size ",
+          "Clipboard Custom Character Limit ",
+          "Clipboard Enhancements ",
+          "Close Proactive Suggestions ",
+          "Custom Symbols ",
+          "Developer options ",
+          "Emojis, stickers & GIFs Tab Order ",
+          "Enable Inline Autofill Suggestions ",
+          "Enable OCR / Scan Text ",
+          "Enable accessibility layout ",
+          "Enable cursor trackpad mode ",
+          "Enable split keyboard ",
+          "English QWERTY Up-Flick Uppercase ",
+          "G Logo on Spacebar ",
+          "Grammar Checker ",
+          "Hyperspeed Typing Animation ",
+          "Incognito Mode Toggle ",
+          "Inline Suggestions ",
+          "Key Shape Selection ",
+          "Latin Globe Key Ignore Interval ",
+          "Long-Press Editing Shortcuts ",
+          "Quick Insert ",
+          "Settings Homepage Override ",
+          "Swipeable Custom Top Row ",
+          "Use Bluetooth Microphone ",
+          "Web Clipboard ",
+          "Zhuyin Bottom Row Key Sizes ",
+          "Zhuyin Quick Traditional/Simplified Toggle ",
+          "Zhuyin Slide Input "
+        ]
+      },
+      "260297": {
+        "patches": "jasonwu1994/patches-3.2.0-dev.1.mpp",
+        "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v3.2.0-dev.1",
+        "applied_patches": [
+          "AI Writing Tools ",
+          "Access Points menu style ",
+          "Add Gboard Signature Bypass ",
+          "Advanced Voice Typing ",
+          "Change emoji size ",
+          "Clipboard Custom Character Limit ",
+          "Clipboard Enhancements ",
+          "Close Proactive Suggestions ",
+          "Custom Symbols ",
+          "Developer options ",
+          "Emojis, stickers & GIFs Tab Order ",
+          "Enable Inline Autofill Suggestions ",
+          "Enable OCR / Scan Text ",
+          "Enable accessibility layout ",
+          "Enable cursor trackpad mode ",
+          "Enable split keyboard ",
+          "English QWERTY Up-Flick Uppercase ",
+          "G Logo on Spacebar ",
+          "Grammar Checker ",
+          "Hyperspeed Typing Animation ",
+          "Incognito Mode Toggle ",
+          "Inline Suggestions ",
+          "Key Shape Selection ",
+          "Latin Globe Key Ignore Interval ",
+          "Long-Press Editing Shortcuts ",
+          "Quick Insert ",
+          "Settings Homepage Override ",
+          "Swipeable Custom Top Row ",
+          "Use Bluetooth Microphone ",
+          "Web Clipboard ",
+          "Zhuyin Bottom Row Key Sizes ",
+          "Zhuyin Quick Traditional/Simplified Toggle ",
+          "Zhuyin Slide Input "
+        ]
       }
     }
   },
@@ -6766,6 +6844,86 @@
           "Zhuyin Bottom Row Key Sizes ",
           "Zhuyin Quick Traditional/Simplified Toggle ",
           "Zhuyin Slide Input "
+        ]
+      },
+      "260298": {
+        "patches": "jasonwu1994/patches-3.1.0.mpp",
+        "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v3.1.0",
+        "applied_patches": [
+          "AI Writing Tools ",
+          "Access Points menu style ",
+          "Add Gboard Signature Bypass ",
+          "Advanced Voice Typing ",
+          "Change emoji size ",
+          "Clipboard Custom Character Limit ",
+          "Clipboard Enhancements ",
+          "Close Proactive Suggestions ",
+          "Custom Symbols ",
+          "Developer options ",
+          "Emojis, stickers & GIFs Tab Order ",
+          "Enable Inline Autofill Suggestions ",
+          "Enable OCR / Scan Text ",
+          "Enable accessibility layout ",
+          "Enable cursor trackpad mode ",
+          "Enable split keyboard ",
+          "English QWERTY Up-Flick Uppercase ",
+          "G Logo on Spacebar ",
+          "Grammar Checker ",
+          "Hyperspeed Typing Animation ",
+          "Incognito Mode Toggle ",
+          "Inline Suggestions ",
+          "Key Shape Selection ",
+          "Latin Globe Key Ignore Interval ",
+          "Long-Press Editing Shortcuts ",
+          "Package Rename ",
+          "Quick Insert ",
+          "Settings Homepage Override ",
+          "Swipeable Custom Top Row ",
+          "Use Bluetooth Microphone ",
+          "Web Clipboard ",
+          "Zhuyin Bottom Row Key Sizes ",
+          "Zhuyin Quick Traditional/Simplified Toggle ",
+          "Zhuyin Slide Input "
+        ]
+      },
+      "260297": {
+        "patches": "jasonwu1994/patches-3.2.0-dev.1.mpp",
+        "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v3.2.0-dev.1",
+        "applied_patches": [
+          "AI Writing Tools ",
+          "Access Points menu style ",
+          "Add Gboard Signature Bypass ",
+          "Advanced Voice Typing ",
+          "Change emoji size ",
+          "Clipboard Custom Character Limit ",
+          "Clipboard Enhancements ",
+          "Close Proactive Suggestions ",
+          "Custom Symbols ",
+          "Developer options ",
+          "Emojis, stickers & GIFs Tab Order ",
+          "Enable Inline Autofill Suggestions ",
+          "Enable OCR / Scan Text ",
+          "Enable accessibility layout ",
+          "Enable cursor trackpad mode ",
+          "Enable split keyboard ",
+          "English QWERTY Up-Flick Uppercase ",
+          "G Logo on Spacebar ",
+          "Grammar Checker ",
+          "Hyperspeed Typing Animation ",
+          "Incognito Mode Toggle ",
+          "Inline Suggestions ",
+          "Key Shape Selection ",
+          "Latin Globe Key Ignore Interval ",
+          "Long-Press Editing Shortcuts ",
+          "Quick Insert ",
+          "Settings Homepage Override ",
+          "Swipeable Custom Top Row ",
+          "Use Bluetooth Microphone ",
+          "Web Clipboard ",
+          "Zhuyin Bottom Row Key Sizes ",
+          "Zhuyin Quick Traditional/Simplified Toggle ",
+          "Zhuyin Slide Input ",
+          "Package Rename "
         ]
       }
     }
@@ -7545,17 +7703,6 @@
   },
   "messenger-morphe": {
     "573.0.0.44.88": {
-      "260199": {
-        "patches": "rushiranpise/patches-1.18.0-dev.3.mpp",
-        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.0-dev.3",
-        "applied_patches": [
-          "Disable media transcoding ",
-          "Disable typing indicator ",
-          "GmsCore support (MicroG) ",
-          "Hide inbox ads ",
-          "Open links externally "
-        ]
-      },
       "260245": {
         "patches": "rushiranpise/patches-1.18.0.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.0",
@@ -7607,14 +7754,6 @@
   },
   "pocket-casts-morphe": {
     "8.16": {
-      "260200": {
-        "patches": "rushiranpise/patches-1.17.0.mpp",
-        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.17.0",
-        "applied_patches": [
-          "GmsCore support (MicroG) ",
-          "Unlock Patron "
-        ]
-      },
       "260245": {
         "patches": "rushiranpise/patches-1.18.0.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.0",
@@ -9527,6 +9666,21 @@
           "Brave In-Product Notification Scheduler Optimization ",
           "Brave Origin ",
           "Brave Startup Performance Optimization ",
+          "Locale PAK Slimmer ",
+          "Skip First Run "
+        ]
+      },
+      "260298": {
+        "patches": "kveld9/patches-1.5.0.mpp",
+        "changelog": "https://github.com/kveld9/kveld-morphe-patches/releases/tag/v1.5.0",
+        "applied_patches": [
+          "Block Brave Telemetry ",
+          "Brave In-Product Notification Scheduler Optimization ",
+          "Brave Origin ",
+          "Brave Startup Performance Optimization ",
+          "Disable Background Sync & Periodic Sync ",
+          "Disable Battery Status API & OS Listener ",
+          "Disable Pull To Refresh ",
           "Locale PAK Slimmer ",
           "Skip First Run "
         ]
