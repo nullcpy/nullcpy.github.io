@@ -6796,6 +6796,45 @@
           "Zhuyin Quick Traditional/Simplified Toggle ",
           "Zhuyin Slide Input "
         ]
+      },
+      "260304": {
+        "patches": "jasonwu1994/patches-3.3.0.mpp",
+        "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v3.3.0",
+        "applied_patches": [
+          "AI Writing Tools ",
+          "Access Points menu style ",
+          "Add Gboard Signature Bypass ",
+          "Advanced Voice Typing ",
+          "Change emoji size ",
+          "Clipboard Custom Character Limit ",
+          "Clipboard Enhancements ",
+          "Close Proactive Suggestions ",
+          "Custom Symbols ",
+          "Developer options ",
+          "Emojis, stickers & GIFs Tab Order ",
+          "Enable Inline Autofill Suggestions ",
+          "Enable OCR / Scan Text ",
+          "Enable accessibility layout ",
+          "Enable cursor trackpad mode ",
+          "Enable split keyboard ",
+          "English QWERTY Up-Flick Uppercase ",
+          "G Logo on Spacebar ",
+          "Grammar Checker ",
+          "Hyperspeed Typing Animation ",
+          "Incognito Mode Toggle ",
+          "Inline Suggestions ",
+          "Key Shape Selection ",
+          "Latin Globe Key Ignore Interval ",
+          "Long-Press Editing Shortcuts ",
+          "Quick Insert ",
+          "Settings Homepage Override ",
+          "Swipeable Custom Top Row ",
+          "Use Bluetooth Microphone ",
+          "Web Clipboard ",
+          "Zhuyin Bottom Row Key Sizes ",
+          "Zhuyin Quick Traditional/Simplified Toggle ",
+          "Zhuyin Slide Input "
+        ]
       }
     }
   },
@@ -7328,6 +7367,46 @@
       "260302": {
         "patches": "jasonwu1994/patches-3.3.0-dev.1.mpp",
         "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v3.3.0-dev.1",
+        "applied_patches": [
+          "AI Writing Tools ",
+          "Access Points menu style ",
+          "Add Gboard Signature Bypass ",
+          "Advanced Voice Typing ",
+          "Change emoji size ",
+          "Clipboard Custom Character Limit ",
+          "Clipboard Enhancements ",
+          "Close Proactive Suggestions ",
+          "Custom Symbols ",
+          "Developer options ",
+          "Emojis, stickers & GIFs Tab Order ",
+          "Enable Inline Autofill Suggestions ",
+          "Enable OCR / Scan Text ",
+          "Enable accessibility layout ",
+          "Enable cursor trackpad mode ",
+          "Enable split keyboard ",
+          "English QWERTY Up-Flick Uppercase ",
+          "G Logo on Spacebar ",
+          "Grammar Checker ",
+          "Hyperspeed Typing Animation ",
+          "Incognito Mode Toggle ",
+          "Inline Suggestions ",
+          "Key Shape Selection ",
+          "Latin Globe Key Ignore Interval ",
+          "Long-Press Editing Shortcuts ",
+          "Quick Insert ",
+          "Settings Homepage Override ",
+          "Swipeable Custom Top Row ",
+          "Use Bluetooth Microphone ",
+          "Web Clipboard ",
+          "Zhuyin Bottom Row Key Sizes ",
+          "Zhuyin Quick Traditional/Simplified Toggle ",
+          "Zhuyin Slide Input ",
+          "Package Rename "
+        ]
+      },
+      "260304": {
+        "patches": "jasonwu1994/patches-3.3.0.mpp",
+        "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v3.3.0",
         "applied_patches": [
           "AI Writing Tools ",
           "Access Points menu style ",
@@ -8245,16 +8324,6 @@
       }
     },
     "434.0.0.41.74": {
-      "260206": {
-        "patches": "durgesh0505/patches-1.18.0.mpp",
-        "changelog": "https://github.com/durgesh0505/chiggi_morphe_patches/releases/tag/v1.18.0",
-        "applied_patches": [
-          "Change app name ",
-          "Hide ads ",
-          "Remove AD_ID permission ",
-          "Change package name "
-        ]
-      },
       "260209": {
         "patches": "durgesh0505/patches-1.18.0.mpp",
         "changelog": "https://github.com/durgesh0505/chiggi_morphe_patches/releases/tag/v1.18.0",
@@ -8311,15 +8380,6 @@
   },
   "photomath-morphe": {
     "8.48.0": {
-      "260206": {
-        "patches": "RookieEnough/patches-1.2.1.mpp",
-        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.1",
-        "applied_patches": [
-          "Hide update popup ",
-          "Spoof device ID ",
-          "Unlock plus "
-        ]
-      },
       "260256": {
         "patches": "RookieEnough/patches-1.2.2.mpp",
         "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.2",
@@ -8515,13 +8575,6 @@
   },
   "viber-morphe": {
     "26.1.2.0": {
-      "260206": {
-        "patches": "RookieEnough/patches-1.2.1.mpp",
-        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.1",
-        "applied_patches": [
-          "Hide Ads "
-        ]
-      },
       "260256": {
         "patches": "RookieEnough/patches-1.2.2.mpp",
         "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.2",
@@ -8533,13 +8586,6 @@
   },
   "pixiv-morphe": {
     "6.141.1": {
-      "260206": {
-        "patches": "RookieEnough/patches-1.2.1.mpp",
-        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.1",
-        "applied_patches": [
-          "Hide ads "
-        ]
-      },
       "260256": {
         "patches": "RookieEnough/patches-1.2.2.mpp",
         "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.2",
