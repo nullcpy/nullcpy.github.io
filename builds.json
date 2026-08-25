@@ -835,6 +835,14 @@
         "applied_patches": [
           "HBO Max - Disable Ads "
         ]
+      },
+      "260306": {
+        "patches": "ajstrick81/patches-1.29.3.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.29.3",
+        "applied_patches": [
+          "HBO Max - Block SSAI Ad Origins ",
+          "HBO Max - Disable Ads "
+        ]
       }
     }
   },
@@ -8427,19 +8435,6 @@
       }
     },
     "45.0.0.109": {
-      "260208": {
-        "patches": "arandomhooman/patches-1.43.4.mpp",
-        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.43.4",
-        "applied_patches": [
-          "Disable Tumblr TV ",
-          "Disable ad-free banner ",
-          "Disable blog notification reminder ",
-          "Disable gift message popup ",
-          "Disable in-app update ",
-          "Enable premium UI ",
-          "Remove ads "
-        ]
-      },
       "260209": {
         "patches": "arandomhooman/patches-1.43.4.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.43.4",
@@ -8790,6 +8785,13 @@
   "discord-xposed": {
     "341.13-Stable": {
       "260259": {
+        "patches": "revenge-mod/app-release.apk",
+        "changelog": "https://github.com/revenge-mod/revenge-xposed/releases/tag/1602",
+        "applied_patches": []
+      }
+    },
+    "342.16-Stable": {
+      "260306": {
         "patches": "revenge-mod/app-release.apk",
         "changelog": "https://github.com/revenge-mod/revenge-xposed/releases/tag/1602",
         "applied_patches": []
@@ -9275,6 +9277,14 @@
         "patches": "arandomhooman/patches-1.50.2.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.2",
         "applied_patches": [
+          "Unlock Pro "
+        ]
+      },
+      "260306": {
+        "patches": "arandomhooman/patches-1.51.1.mpp",
+        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.51.1",
+        "applied_patches": [
+          "No date first ",
           "Unlock Pro "
         ]
       }
