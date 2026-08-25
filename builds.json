@@ -7463,6 +7463,23 @@
           "Add App Trigger"
         ]
       }
+    },
+    "444.0.0.46.85": {
+      "260303": {
+        "patches": "",
+        "changelog": "",
+        "applied_patches": [
+          "Unlock Developer Options",
+          "Remove Snooze Warning",
+          "Remove Ads",
+          "AMOLED Theme",
+          "Get Generation Info",
+          "Copy Instafel Sources",
+          "Add Initialize Instafel",
+          "Change Home Long Click",
+          "Add App Trigger"
+        ]
+      }
     }
   },
   "instagram-instafel-clone": {
@@ -7547,6 +7564,23 @@
         ]
       },
       "260278": {
+        "patches": "",
+        "changelog": "",
+        "applied_patches": [
+          "Unlock Developer Options",
+          "Remove Snooze Warning",
+          "Remove Ads",
+          "AMOLED Theme",
+          "Get Generation Info",
+          "Copy Instafel Sources",
+          "Add Initialize Instafel",
+          "Change Home Long Click",
+          "Add App Trigger"
+        ]
+      }
+    },
+    "444.0.0.46.85": {
+      "260303": {
         "patches": "",
         "changelog": "",
         "applied_patches": [
@@ -8031,15 +8065,6 @@
   },
   "google-photos-morphe": {
     "7.87.0.957333026": {
-      "260205": {
-        "patches": "RookieEnough/patches-1.2.0.mpp",
-        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.0",
-        "applied_patches": [
-          "Fix selected account persistence ",
-          "GmsCore support ",
-          "Spoof features "
-        ]
-      },
       "260206": {
         "patches": "RookieEnough/patches-1.2.1.mpp",
         "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.1",
@@ -8266,13 +8291,6 @@
   },
   "google-recorder-morphe": {
     "4.2.20260118.867906508": {
-      "260205": {
-        "patches": "RookieEnough/patches-1.2.0.mpp",
-        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.0",
-        "applied_patches": [
-          "Remove device restrictions "
-        ]
-      },
       "260206": {
         "patches": "RookieEnough/patches-1.2.1.mpp",
         "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.1",
@@ -8293,15 +8311,6 @@
   },
   "photomath-morphe": {
     "8.48.0": {
-      "260205": {
-        "patches": "RookieEnough/patches-1.2.0.mpp",
-        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.0",
-        "applied_patches": [
-          "Hide update popup ",
-          "Spoof device ID ",
-          "Unlock plus "
-        ]
-      },
       "260206": {
         "patches": "RookieEnough/patches-1.2.1.mpp",
         "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.1",
@@ -8506,13 +8515,6 @@
   },
   "viber-morphe": {
     "26.1.2.0": {
-      "260205": {
-        "patches": "RookieEnough/patches-1.2.0.mpp",
-        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.0",
-        "applied_patches": [
-          "Hide Ads "
-        ]
-      },
       "260206": {
         "patches": "RookieEnough/patches-1.2.1.mpp",
         "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.1",
@@ -8531,13 +8533,6 @@
   },
   "pixiv-morphe": {
     "6.141.1": {
-      "260205": {
-        "patches": "RookieEnough/patches-1.2.0.mpp",
-        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.0",
-        "applied_patches": [
-          "Hide ads "
-        ]
-      },
       "260206": {
         "patches": "RookieEnough/patches-1.2.1.mpp",
         "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.1",
