@@ -843,6 +843,13 @@
           "HBO Max - Block SSAI Ad Origins ",
           "HBO Max - Disable Ads "
         ]
+      },
+      "260308": {
+        "patches": "ajstrick81/patches-1.29.4.mpp",
+        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.29.4",
+        "applied_patches": [
+          "HBO Max - Disable Ads "
+        ]
       }
     }
   },
@@ -6853,6 +6860,46 @@
           "Zhuyin Quick Traditional/Simplified Toggle ",
           "Zhuyin Slide Input "
         ]
+      },
+      "260308": {
+        "patches": "jasonwu1994/patches-3.4.0.mpp",
+        "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v3.4.0",
+        "applied_patches": [
+          "AI Writing Tools ",
+          "Access Points menu style ",
+          "Add Gboard Signature Bypass ",
+          "Advanced Voice Typing ",
+          "Change emoji size ",
+          "Clipboard Custom Character Limit ",
+          "Clipboard Enhancements ",
+          "Close Proactive Suggestions ",
+          "Custom Symbols ",
+          "Developer options ",
+          "Emojis, stickers & GIFs Tab Order ",
+          "Enable Inline Autofill Suggestions ",
+          "Enable OCR / Scan Text ",
+          "Enable accessibility layout ",
+          "Enable cursor trackpad mode ",
+          "Enable split keyboard ",
+          "English QWERTY Up-Flick Uppercase ",
+          "G Logo on Spacebar ",
+          "Grammar Checker ",
+          "Hyperspeed Typing Animation ",
+          "Incognito Mode Toggle ",
+          "Inline Suggestions ",
+          "Key Shape Selection ",
+          "Latin Globe Key Ignore Interval ",
+          "Long-Press Editing Shortcuts ",
+          "Quick Insert ",
+          "Rounded Keyboard Panel ",
+          "Settings Homepage Override ",
+          "Swipeable Custom Top Row ",
+          "Use Bluetooth Microphone ",
+          "Web Clipboard ",
+          "Zhuyin Bottom Row Key Sizes ",
+          "Zhuyin Quick Traditional/Simplified Toggle ",
+          "Zhuyin Slide Input "
+        ]
       }
     }
   },
@@ -7434,6 +7481,47 @@
       "260305": {
         "patches": "jasonwu1994/patches-3.4.0-dev.1.mpp",
         "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v3.4.0-dev.1",
+        "applied_patches": [
+          "AI Writing Tools ",
+          "Access Points menu style ",
+          "Add Gboard Signature Bypass ",
+          "Advanced Voice Typing ",
+          "Change emoji size ",
+          "Clipboard Custom Character Limit ",
+          "Clipboard Enhancements ",
+          "Close Proactive Suggestions ",
+          "Custom Symbols ",
+          "Developer options ",
+          "Emojis, stickers & GIFs Tab Order ",
+          "Enable Inline Autofill Suggestions ",
+          "Enable OCR / Scan Text ",
+          "Enable accessibility layout ",
+          "Enable cursor trackpad mode ",
+          "Enable split keyboard ",
+          "English QWERTY Up-Flick Uppercase ",
+          "G Logo on Spacebar ",
+          "Grammar Checker ",
+          "Hyperspeed Typing Animation ",
+          "Incognito Mode Toggle ",
+          "Inline Suggestions ",
+          "Key Shape Selection ",
+          "Latin Globe Key Ignore Interval ",
+          "Long-Press Editing Shortcuts ",
+          "Quick Insert ",
+          "Rounded Keyboard Panel ",
+          "Settings Homepage Override ",
+          "Swipeable Custom Top Row ",
+          "Use Bluetooth Microphone ",
+          "Web Clipboard ",
+          "Zhuyin Bottom Row Key Sizes ",
+          "Zhuyin Quick Traditional/Simplified Toggle ",
+          "Zhuyin Slide Input ",
+          "Package Rename "
+        ]
+      },
+      "260308": {
+        "patches": "jasonwu1994/patches-3.4.0.mpp",
+        "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v3.4.0",
         "applied_patches": [
           "AI Writing Tools ",
           "Access Points menu style ",
@@ -8171,17 +8259,6 @@
     }
   },
   "google-photos-morphe": {
-    "7.87.0.957333026": {
-      "260206": {
-        "patches": "RookieEnough/patches-1.2.1.mpp",
-        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.1",
-        "applied_patches": [
-          "Fix selected account persistence ",
-          "GmsCore support ",
-          "Spoof features "
-        ]
-      }
-    },
     "7.88.0.963667563": {
       "260214": {
         "patches": "RookieEnough/patches-1.2.1.mpp",
@@ -8244,6 +8321,26 @@
         ]
       },
       "260294": {
+        "patches": "RookieEnough/patches-1.3.0-dev.1.mpp",
+        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.3.0-dev.1",
+        "applied_patches": [
+          "Fix selected account persistence ",
+          "GmsCore support ",
+          "Spoof features "
+        ]
+      }
+    },
+    "7.90.0.970693120": {
+      "260308": {
+        "patches": "RookieEnough/patches-1.2.2.mpp",
+        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.2.2",
+        "applied_patches": [
+          "Fix selected account persistence ",
+          "GmsCore support ",
+          "Spoof features "
+        ]
+      },
+      "260307": {
         "patches": "RookieEnough/patches-1.3.0-dev.1.mpp",
         "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.3.0-dev.1",
         "applied_patches": [
@@ -8352,22 +8449,6 @@
       }
     },
     "434.0.0.41.74": {
-      "260209": {
-        "patches": "durgesh0505/patches-1.18.0.mpp",
-        "changelog": "https://github.com/durgesh0505/chiggi_morphe_patches/releases/tag/v1.18.0",
-        "applied_patches": [
-          "Hide ads ",
-          "Remove AD_ID permission "
-        ]
-      },
-      "260210": {
-        "patches": "durgesh0505/patches-1.18.0.mpp",
-        "changelog": "https://github.com/durgesh0505/chiggi_morphe_patches/releases/tag/v1.18.0",
-        "applied_patches": [
-          "Hide ads ",
-          "Remove AD_ID permission "
-        ]
-      },
       "260211": {
         "patches": "durgesh0505/patches-1.18.0.mpp",
         "changelog": "https://github.com/durgesh0505/chiggi_morphe_patches/releases/tag/v1.18.0",
@@ -8435,32 +8516,6 @@
       }
     },
     "45.0.0.109": {
-      "260209": {
-        "patches": "arandomhooman/patches-1.43.4.mpp",
-        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.43.4",
-        "applied_patches": [
-          "Disable Tumblr TV ",
-          "Disable ad-free banner ",
-          "Disable blog notification reminder ",
-          "Disable gift message popup ",
-          "Disable in-app update ",
-          "Enable premium UI ",
-          "Remove ads "
-        ]
-      },
-      "260210": {
-        "patches": "arandomhooman/patches-1.43.4.mpp",
-        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.43.4",
-        "applied_patches": [
-          "Disable Tumblr TV ",
-          "Disable ad-free banner ",
-          "Disable blog notification reminder ",
-          "Disable gift message popup ",
-          "Disable in-app update ",
-          "Enable premium UI ",
-          "Remove ads "
-        ]
-      },
       "260211": {
         "patches": "arandomhooman/patches-1.43.4.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.43.4",
@@ -10047,6 +10102,13 @@
       "260265": {
         "patches": "IMXEren/patches-1.5.0.mpp",
         "changelog": "https://gitlab.com/IMXEren/mix-patches/-/releases/v1.5.0",
+        "applied_patches": [
+          "Unlock pro "
+        ]
+      },
+      "260308": {
+        "patches": "IMXEren/patches-1.6.0.mpp",
+        "changelog": "https://gitlab.com/IMXEren/mix-patches/-/releases/v1.6.0",
         "applied_patches": [
           "Unlock pro "
         ]
