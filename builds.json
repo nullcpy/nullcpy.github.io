@@ -305,6 +305,83 @@
           "Show sensitive media ",
           "Support external downloader "
         ]
+      },
+      "260316": {
+        "patches": "crimera/patches-3.9.0-dev.10.mpp",
+        "changelog": "https://github.com/crimera/piko/releases/tag/v3.9.0-dev.10",
+        "applied_patches": [
+          "Add ability to copy media link ",
+          "Block redirecting to X Lite ",
+          "Block update screen ",
+          "Change app icon ",
+          "Change version code ",
+          "Clear tracking params ",
+          "Control video auto scroll ",
+          "Custom download folder ",
+          "Custom emoji font ",
+          "Custom font ",
+          "Custom share menu ",
+          "Custom sharing domain ",
+          "Customise post font size ",
+          "Customize Inline action Bar items ",
+          "Customize Navigation Bar items ",
+          "Customize default reply sorting ",
+          "Customize explore tabs ",
+          "Customize notification tabs ",
+          "Customize profile tabs ",
+          "Customize search suggestions ",
+          "Customize search tab items ",
+          "Customize side bar items ",
+          "Customize timeline top bar ",
+          "Delete from database ",
+          "Disable auto timeline scroll on launch ",
+          "Disable chirp font ",
+          "Download patch ",
+          "Enable PiP mode automatically ",
+          "Enable Undo Posts ",
+          "Enable debug menu for posts ",
+          "Enable force HD videos ",
+          "Force enable translate ",
+          "Handle custom twitter links ",
+          "Hide Banner ",
+          "Hide Community Notes ",
+          "Hide FAB ",
+          "Hide FAB Menu Buttons ",
+          "Hide Live Threads ",
+          "Hide Recommended Users ",
+          "Hide badges from navigation bar icons ",
+          "Hide bookmark icon in timeline ",
+          "Hide community badges ",
+          "Hide followed by context ",
+          "Hide hidden replies ",
+          "Hide immersive player ",
+          "Hide nudge button ",
+          "Hide post metrics ",
+          "Hide promote button ",
+          "Hide recommendation items ",
+          "Hook feature flag ",
+          "Import/Export login token ",
+          "Legacy share links ",
+          "Log server response ",
+          "More information on profile ",
+          "Native downloader ",
+          "Native reader mode ",
+          "Native translator ",
+          "No shortened URL ",
+          "Pause search suggestions ",
+          "Remove Ads ",
+          "Remove premium upsell ",
+          "Remove search suggestions ",
+          "Remove view count ",
+          "Round off numbers ",
+          "Selectable Text ",
+          "Share Tweet as Image ",
+          "Show changelogs ",
+          "Show poll results ",
+          "Show post source label ",
+          "Show sensitive media ",
+          "Support external downloader "
+        ]
       }
     }
   },
@@ -546,6 +623,85 @@
           "Show sensitive media ",
           "Support external downloader "
         ]
+      },
+      "260316": {
+        "patches": "crimera/patches-3.9.0-dev.10.mpp",
+        "changelog": "https://github.com/crimera/piko/releases/tag/v3.9.0-dev.10",
+        "applied_patches": [
+          "Add ability to copy media link ",
+          "Block redirecting to X Lite ",
+          "Block update screen ",
+          "Bring back twitter ",
+          "Change app icon ",
+          "Change version code ",
+          "Clear tracking params ",
+          "Control video auto scroll ",
+          "Custom download folder ",
+          "Custom emoji font ",
+          "Custom font ",
+          "Custom share menu ",
+          "Custom sharing domain ",
+          "Customise post font size ",
+          "Customize Inline action Bar items ",
+          "Customize Navigation Bar items ",
+          "Customize default reply sorting ",
+          "Customize explore tabs ",
+          "Customize notification tabs ",
+          "Customize profile tabs ",
+          "Customize search suggestions ",
+          "Customize search tab items ",
+          "Customize side bar items ",
+          "Customize timeline top bar ",
+          "Delete from database ",
+          "Disable auto timeline scroll on launch ",
+          "Disable chirp font ",
+          "Download patch ",
+          "Dynamic color ",
+          "Enable PiP mode automatically ",
+          "Enable Undo Posts ",
+          "Enable debug menu for posts ",
+          "Enable force HD videos ",
+          "Force enable translate ",
+          "Handle custom twitter links ",
+          "Hide Banner ",
+          "Hide Community Notes ",
+          "Hide FAB ",
+          "Hide FAB Menu Buttons ",
+          "Hide Live Threads ",
+          "Hide Recommended Users ",
+          "Hide badges from navigation bar icons ",
+          "Hide bookmark icon in timeline ",
+          "Hide community badges ",
+          "Hide followed by context ",
+          "Hide hidden replies ",
+          "Hide immersive player ",
+          "Hide nudge button ",
+          "Hide post metrics ",
+          "Hide promote button ",
+          "Hide recommendation items ",
+          "Hook feature flag ",
+          "Import/Export login token ",
+          "Legacy share links ",
+          "Log server response ",
+          "More information on profile ",
+          "Native downloader ",
+          "Native reader mode ",
+          "Native translator ",
+          "No shortened URL ",
+          "Pause search suggestions ",
+          "Remove Ads ",
+          "Remove premium upsell ",
+          "Remove search suggestions ",
+          "Remove view count ",
+          "Round off numbers ",
+          "Selectable Text ",
+          "Share Tweet as Image ",
+          "Show changelogs ",
+          "Show poll results ",
+          "Show post source label ",
+          "Show sensitive media ",
+          "Support external downloader "
+        ]
       }
     }
   },
@@ -683,19 +839,6 @@
   },
   "prime-video-morphe-androidtv": {
     "6.23.23+v15.5.0.70-armv7a": {
-      "260219": {
-        "patches": "ajstrick81/patches-1.25.0.mpp",
-        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.0",
-        "applied_patches": [
-          "Bundle native ad-strip hook ",
-          "Disable auto-updates ",
-          "Load native ad-strip hook ",
-          "Override certificate pinning ",
-          "Prime Video extension ",
-          "Skip ads ",
-          "Clone Prime Video "
-        ]
-      },
       "260226": {
         "patches": "ajstrick81/patches-1.26.0.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.1",
@@ -791,13 +934,6 @@
   },
   "hbomax-morphe-androidtv": {
     "7.7.0.78": {
-      "260219": {
-        "patches": "ajstrick81/patches-1.25.0.mpp",
-        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.0",
-        "applied_patches": [
-          "HBO Max - Disable Ads "
-        ]
-      },
       "260226": {
         "patches": "ajstrick81/patches-1.26.0.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.1",
@@ -876,14 +1012,6 @@
   },
   "peacock-morphe-androidtv": {
     "7.6.100": {
-      "260219": {
-        "patches": "ajstrick81/patches-1.25.0.mpp",
-        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.0",
-        "applied_patches": [
-          "Disable auto-updates ",
-          "Skip ads "
-        ]
-      },
       "260226": {
         "patches": "ajstrick81/patches-1.26.0.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.1",
@@ -944,13 +1072,6 @@
   },
   "tubi-morphe-androidtv": {
     "10.28.5000": {
-      "260219": {
-        "patches": "ajstrick81/patches-1.25.0.mpp",
-        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.0",
-        "applied_patches": [
-          "Skip ads "
-        ]
-      },
       "260226": {
         "patches": "ajstrick81/patches-1.26.0.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.1",
@@ -1004,14 +1125,6 @@
   },
   "vix-morphe-androidtv": {
     "4.46.0_tv": {
-      "260219": {
-        "patches": "ajstrick81/patches-1.25.0.mpp",
-        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.0",
-        "applied_patches": [
-          "Override certificate pinning ",
-          "Skip ads "
-        ]
-      },
       "260226": {
         "patches": "ajstrick81/patches-1.26.0.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.1",
@@ -1072,15 +1185,6 @@
   },
   "plutotv-morphe-androidtv": {
     "5.66.0-leanback": {
-      "260219": {
-        "patches": "ajstrick81/patches-1.25.0.mpp",
-        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.0",
-        "applied_patches": [
-          "Disable auto-updates ",
-          "Override certificate pinning ",
-          "Skip ads "
-        ]
-      },
       "260226": {
         "patches": "ajstrick81/patches-1.26.0.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.1",
@@ -6657,41 +6761,6 @@
   },
   "gboard-morphe": {
     "17.7.7.932364120-release": {
-      "260218": {
-        "patches": "jasonwu1994/patches-2.9.0.mpp",
-        "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v2.9.0",
-        "applied_patches": [
-          "AI Writing Tools ",
-          "Access Points menu style ",
-          "Add Gboard Signature Bypass ",
-          "Advanced Voice Typing ",
-          "Change emoji size ",
-          "Clipboard Custom Character Limit ",
-          "Clipboard Enhancements ",
-          "Custom Symbols ",
-          "Developer options ",
-          "Emojis, stickers & GIFs Tab Order ",
-          "Enable Inline Autofill Suggestions ",
-          "Enable OCR / Scan Text ",
-          "Enable accessibility layout ",
-          "Enable cursor trackpad mode ",
-          "Enable split keyboard ",
-          "English QWERTY Up-Flick Uppercase ",
-          "Grammar Checker ",
-          "Incognito Mode Toggle ",
-          "Inline Suggestions ",
-          "Key Shape Selection ",
-          "Latin Globe Key Ignore Interval ",
-          "Long-Press Editing Shortcuts ",
-          "Settings Homepage Override ",
-          "Swipeable Custom Top Row ",
-          "Use Bluetooth Microphone ",
-          "Web Clipboard ",
-          "Zhuyin Bottom Row Key Sizes ",
-          "Zhuyin Quick Traditional/Simplified Toggle ",
-          "Zhuyin Slide Input "
-        ]
-      },
       "260221": {
         "patches": "jasonwu1994/patches-2.10.0-dev.1.mpp",
         "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v2.10.0-dev.1",
@@ -7383,14 +7452,10 @@
           "Zhuyin Quick Traditional/Simplified Toggle ",
           "Zhuyin Slide Input "
         ]
-      }
-    }
-  },
-  "gboard-morphe-clone": {
-    "17.7.7.932364120-release": {
-      "260218": {
-        "patches": "jasonwu1994/patches-2.9.0.mpp",
-        "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v2.9.0",
+      },
+      "260317": {
+        "patches": "jasonwu1994/patches-3.6.0.mpp",
+        "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v3.6.0",
         "applied_patches": [
           "AI Writing Tools ",
           "Access Points menu style ",
@@ -7399,6 +7464,7 @@
           "Change emoji size ",
           "Clipboard Custom Character Limit ",
           "Clipboard Enhancements ",
+          "Close Proactive Suggestions ",
           "Custom Symbols ",
           "Developer options ",
           "Emojis, stickers & GIFs Tab Order ",
@@ -7408,22 +7474,31 @@
           "Enable cursor trackpad mode ",
           "Enable split keyboard ",
           "English QWERTY Up-Flick Uppercase ",
+          "Floating Web Search ",
+          "G Logo on Spacebar ",
           "Grammar Checker ",
+          "Hyperspeed Typing Animation ",
           "Incognito Mode Toggle ",
           "Inline Suggestions ",
           "Key Shape Selection ",
           "Latin Globe Key Ignore Interval ",
           "Long-Press Editing Shortcuts ",
-          "Package Rename ",
+          "Quick Insert ",
+          "Rounded Keyboard Panel ",
           "Settings Homepage Override ",
           "Swipeable Custom Top Row ",
+          "Top Toolbar Item Count ",
           "Use Bluetooth Microphone ",
           "Web Clipboard ",
           "Zhuyin Bottom Row Key Sizes ",
           "Zhuyin Quick Traditional/Simplified Toggle ",
           "Zhuyin Slide Input "
         ]
-      },
+      }
+    }
+  },
+  "gboard-morphe-clone": {
+    "17.7.7.932364120-release": {
       "260221": {
         "patches": "jasonwu1994/patches-2.10.0-dev.1.mpp",
         "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v2.10.0-dev.1",
@@ -8094,6 +8169,49 @@
       "260312": {
         "patches": "jasonwu1994/patches-3.6.0-dev.1.mpp",
         "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v3.6.0-dev.1",
+        "applied_patches": [
+          "AI Writing Tools ",
+          "Access Points menu style ",
+          "Add Gboard Signature Bypass ",
+          "Advanced Voice Typing ",
+          "Change emoji size ",
+          "Clipboard Custom Character Limit ",
+          "Clipboard Enhancements ",
+          "Close Proactive Suggestions ",
+          "Custom Symbols ",
+          "Developer options ",
+          "Emojis, stickers & GIFs Tab Order ",
+          "Enable Inline Autofill Suggestions ",
+          "Enable OCR / Scan Text ",
+          "Enable accessibility layout ",
+          "Enable cursor trackpad mode ",
+          "Enable split keyboard ",
+          "English QWERTY Up-Flick Uppercase ",
+          "Floating Web Search ",
+          "G Logo on Spacebar ",
+          "Grammar Checker ",
+          "Hyperspeed Typing Animation ",
+          "Incognito Mode Toggle ",
+          "Inline Suggestions ",
+          "Key Shape Selection ",
+          "Latin Globe Key Ignore Interval ",
+          "Long-Press Editing Shortcuts ",
+          "Quick Insert ",
+          "Rounded Keyboard Panel ",
+          "Settings Homepage Override ",
+          "Swipeable Custom Top Row ",
+          "Top Toolbar Item Count ",
+          "Use Bluetooth Microphone ",
+          "Web Clipboard ",
+          "Zhuyin Bottom Row Key Sizes ",
+          "Zhuyin Quick Traditional/Simplified Toggle ",
+          "Zhuyin Slide Input ",
+          "Package Rename "
+        ]
+      },
+      "260317": {
+        "patches": "jasonwu1994/patches-3.6.0.mpp",
+        "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v3.6.0",
         "applied_patches": [
           "AI Writing Tools ",
           "Access Points menu style ",
