@@ -11,14 +11,14 @@ const CONFIG = {
 
   // App Categories for the filter buttons
   appCategories: {
-    androidtv: ["primevideo", "plutotv", "moviebox", "disneyplus", "hbomax", "tubi", "vix", "at4klauncher", "projectivylauncher", "peacock", "netflix"],
+    androidtv: ["primevideo", "plutotv", "moviebox", "disneyplus", "hbomax", "tubi", "vix", "at4klauncher", "projectivylauncher", "peacock", "netflix", "nuvio"],
     google: ["youtube", "google"],
     meta: ["threads", "instagram", "messenger", "facebook", "!plusmessenger"],
     vpn: ["1111warp", "vpnify", "vpn"]
   },
 
   // Words ignored in the dynamic app filters (must be lowercase)
-  sharedAppWordStoplist: new Set(["messenger", "document", "reader"]),
+  sharedAppWordStoplist: new Set(["messenger", "document", "reader", "keyboard"]),
 
   // Known tokens indicating a patch name starts (must be lowercase)
   knownPatchTokens: new Set(["revanced", "morphe", "anddea", "rvx", "xposed", "instafel"]),
