@@ -839,19 +839,6 @@
   },
   "prime-video-morphe-androidtv": {
     "6.23.23+v15.5.0.70-armv7a": {
-      "260227": {
-        "patches": "ajstrick81/patches-1.26.1.mpp",
-        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.2",
-        "applied_patches": [
-          "Bundle native ad-strip hook ",
-          "Disable auto-updates ",
-          "Load native ad-strip hook ",
-          "Override certificate pinning ",
-          "Prime Video extension ",
-          "Skip ads ",
-          "Clone Prime Video "
-        ]
-      },
       "260229": {
         "patches": "ajstrick81/patches-1.26.2.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.3",
@@ -934,13 +921,6 @@
   },
   "hbomax-morphe-androidtv": {
     "7.7.0.78": {
-      "260227": {
-        "patches": "ajstrick81/patches-1.26.1.mpp",
-        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.2",
-        "applied_patches": [
-          "HBO Max - Disable Ads "
-        ]
-      },
       "260229": {
         "patches": "ajstrick81/patches-1.26.2.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.3",
@@ -1013,14 +993,6 @@
   },
   "peacock-morphe-androidtv": {
     "7.6.100": {
-      "260227": {
-        "patches": "ajstrick81/patches-1.26.1.mpp",
-        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.2",
-        "applied_patches": [
-          "Disable auto-updates ",
-          "Skip ads "
-        ]
-      },
       "260229": {
         "patches": "ajstrick81/patches-1.26.2.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.3",
@@ -1073,13 +1045,6 @@
   },
   "tubi-morphe-androidtv": {
     "10.28.5000": {
-      "260227": {
-        "patches": "ajstrick81/patches-1.26.1.mpp",
-        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.2",
-        "applied_patches": [
-          "Skip ads "
-        ]
-      },
       "260229": {
         "patches": "ajstrick81/patches-1.26.2.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.3",
@@ -1126,14 +1091,6 @@
   },
   "vix-morphe-androidtv": {
     "4.46.0_tv": {
-      "260227": {
-        "patches": "ajstrick81/patches-1.26.1.mpp",
-        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.2",
-        "applied_patches": [
-          "Override certificate pinning ",
-          "Skip ads "
-        ]
-      },
       "260229": {
         "patches": "ajstrick81/patches-1.26.2.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.3",
@@ -1186,15 +1143,6 @@
   },
   "plutotv-morphe-androidtv": {
     "5.66.0-leanback": {
-      "260227": {
-        "patches": "ajstrick81/patches-1.26.1.mpp",
-        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.2",
-        "applied_patches": [
-          "Disable auto-updates ",
-          "Override certificate pinning ",
-          "Skip ads "
-        ]
-      },
       "260229": {
         "patches": "ajstrick81/patches-1.26.2.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.3",
@@ -10359,16 +10307,6 @@
   },
   "netflix-morphe-androidtv": {
     "13.0.1build25028": {
-      "260227": {
-        "patches": "ajstrick81/patches-1.26.1.mpp",
-        "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.2",
-        "applied_patches": [
-          "Disable Netflix CertCheck ",
-          "Remove Netflix ads (bundle engine) ",
-          "Remove Netflix ads (loader) ",
-          "Clone Netflix "
-        ]
-      },
       "260229": {
         "patches": "ajstrick81/patches-1.26.2.mpp",
         "changelog": "https://github.com/ajstrick81/morphe-androidtv-patches/releases/tag/v1.26.3",
@@ -11611,6 +11549,20 @@
         "changelog": "https://github.com/liongalahad/nuviotv-morphe-patches/releases/tag/v1.0.0-dev.29",
         "applied_patches": [
           "Side-by-side installation "
+        ]
+      },
+      "260325": {
+        "patches": "liongalahad/patches-1.0.0-dev.29.mpp",
+        "changelog": "https://github.com/liongalahad/nuviotv-morphe-patches/releases/tag/v1.0.0-dev.29",
+        "applied_patches": [
+          "Allow Importing Subs from Local Storage ",
+          "Library Mode Focus Fix ",
+          "Local Downloads ",
+          "Local Media ",
+          "Mark SDH Subtitles ",
+          "Random Episode ",
+          "Remove SDH Annotations ",
+          "Restore Source Selection "
         ]
       }
     }
