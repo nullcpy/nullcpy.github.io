@@ -111,7 +111,12 @@ const CONFIG = {
     mxplayer: "MX Player",
     moviebox: "MovieBox",
     kinestop: "KineStop",
-    byair: "ByAir"
+    byair: "ByAir",
+    drofus: "DROFUS - ISO 2 USB",
+    calm: "Calm - Meditate, Sleep, Relax",
+    sendfilestotv: "Send Files to TV",
+    bluetoothkeyboardandmouse: "Bluetooth Keyboard & Mouse",
+    swiftkeyboard: "Microsoft SwiftKey AI Keyboard"
   },
 
   // Map app slugs to true Android Package IDs for Obtainium
@@ -131,6 +136,7 @@ const CONFIG = {
     backdrops: "com.backdrops.wallpapers",
     batteryguru: "com.paget96.batteryguru",
     betamaniac: "it.mirko.beta",
+    bluetoothkeyboardmouse: "io.appground.blek",
     bravebrowser: {
       default: "com.brave.browser",
       beta: "com.brave.browser_beta",
@@ -139,6 +145,7 @@ const CONFIG = {
     byair: "com.byairapp.android",
     calcnote: "com.appumstudios.calcnote",
     caloriecounter: "com.fatsecret.android",
+    calm: "com.calm.android",
     camscanner: "com.intsig.camscanner",
     cricbuzz: "com.cricbuzz.android",
     cryptomator: "org.cryptomator",
@@ -146,6 +153,7 @@ const CONFIG = {
     duolingo: "com.duolingo",
     disneyplus: "com.disney.disneyplus",
     discord: "com.discord",
+    drofus: "com.mixapplications.rufus",
     eyeconcalleridspamblock: "com.eyecon.global",
     facebook: "com.facebook.katana",
     fingnetworktools: "com.overlook.android.fing",
@@ -187,6 +195,7 @@ const CONFIG = {
     messenger: { default: "com.facebook.orca", morphe: "app.morphe.messenger.orca" },
     microsoftlens: "com.microsoft.office.officelens",
     microsoftedge: "com.microsoft.emmx",
+    microsoftswiftkeyaikeyboard: "com.microsoft.swiftkey",
     moonreader: "com.flyersoft.moonreader",
     moneymanager: "com.realbyteapps.moneymanagerfree",
     moviebox: {
@@ -199,6 +208,7 @@ const CONFIG = {
     niagaralauncher: "bitpit.launcher",
     ninjavpn: "app.ninjavpn.android",
     novalauncher: "com.teslacoilsw.launcher",
+    nuvio: { androidtv: "com.nuvio.tv" },
     pandora: "com.pandora.android",
     peacock: "com.peacocktv.peacockandroid",
     photomath: "com.microblink.photomath",
@@ -217,6 +227,7 @@ const CONFIG = {
     protonvpn: "ch.protonvpn.android",
     projectivylauncher: "com.spocky.projengmenu",
     sdmaid2se: "eu.darken.sdmse",
+    sendfilestotv: "com.yablio.sendfilestotv",
     showly: "com.michaldrabik.showly2",
     smartlauncher6: "ginlemon.flowerfree",
     solidexplorer: "pl.solidexplorer2",
@@ -234,6 +245,7 @@ const CONFIG = {
     threads: "com.instagram.barcelona",
     ticktick: "com.ticktick.task",
     tiktok: "com.zhiliaoapp.musically",
+    titaniumbrowser: "io.github.jqssun.helium",
     todoist: "com.todoist",
     trakttv: "tv.trakt.trakt",
     truecaller: "com.truecaller",
