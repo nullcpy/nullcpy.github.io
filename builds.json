@@ -11656,6 +11656,13 @@
         "patches": "dh6k/patches-1.4.0.mpp",
         "changelog": "https://github.com/dh6k/morphe-patches/releases/tag/v1.4.0",
         "applied_patches": []
+      },
+      "260323": {
+        "patches": "dh6k/patches-1.4.0.mpp",
+        "changelog": "https://github.com/dh6k/morphe-patches/releases/tag/v1.4.0",
+        "applied_patches": [
+          "Keep Helium Child Processes Alive "
+        ]
       }
     }
   }
