@@ -2278,9 +2278,14 @@ function parseAssetDisplay(filename, arch, fileType) {
 }
 
 function formatBrandDisplayName(value) {
-  return (value || "")
-    .replace(/\s+/g, " ")
-    .trim()
+  const normalized = (value || "").replace(/\s+/g, " ").trim();
+  const noSpaceLower = normalized.replace(/\s+/g, "").toLowerCase();
+  const exactLower = normalized.toLowerCase();
+
+  if (CONFIG.brandOverrides[noSpaceLower]) return CONFIG.brandOverrides[noSpaceLower];
+  if (CONFIG.brandOverrides[exactLower]) return CONFIG.brandOverrides[exactLower];
+
+  return normalized
     .split(" ")
     .map((token) => {
       const lower = token.toLowerCase();
