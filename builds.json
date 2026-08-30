@@ -9778,18 +9778,6 @@
   },
   "proton-mail-morphe": {
     "7.10.4": {
-      "260232": {
-        "patches": "hxreborn/patches-1.5.1.mpp",
-        "changelog": "https://github.com/hxreborn/morphe-patches/releases/tag/v1.5.1",
-        "applied_patches": [
-          "AMOLED dark theme ",
-          "Hide upgrade upselling ",
-          "Remove 'Sent from' signature ",
-          "Remove free accounts limit ",
-          "Spoof signature ",
-          "Unlock custom time picker "
-        ]
-      },
       "260235": {
         "patches": "hxreborn/patches-1.6.0.mpp",
         "changelog": "https://github.com/hxreborn/morphe-patches/releases/tag/v1.6.0",
@@ -9914,14 +9902,6 @@
   },
   "showly-morphe": {
     "3.70.0": {
-      "260232": {
-        "patches": "hxreborn/patches-1.5.1.mpp",
-        "changelog": "https://github.com/hxreborn/morphe-patches/releases/tag/v1.5.1",
-        "applied_patches": [
-          "AMOLED dark theme ",
-          "Unlock premium "
-        ]
-      },
       "260235": {
         "patches": "hxreborn/patches-1.6.0.mpp",
         "changelog": "https://github.com/hxreborn/morphe-patches/releases/tag/v1.6.0",
@@ -10859,6 +10839,15 @@
           "Disable telemetry ",
           "Enable SoundCloud Go "
         ]
+      },
+      "260330": {
+        "patches": "hoo-dles/patches-1.43.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.43.0",
+        "applied_patches": [
+          "AMOLED dark theme ",
+          "Disable telemetry ",
+          "Enable SoundCloud Go "
+        ]
       }
     }
   },
@@ -10874,6 +10863,13 @@
       "260315": {
         "patches": "hoo-dles/patches-1.42.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.42.0",
+        "applied_patches": [
+          "Enable Premium "
+        ]
+      },
+      "260330": {
+        "patches": "hoo-dles/patches-1.43.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.43.0",
         "applied_patches": [
           "Enable Premium "
         ]
@@ -10897,6 +10893,14 @@
           "Disable anti-tamper ",
           "Enable Pro "
         ]
+      },
+      "260330": {
+        "patches": "hoo-dles/patches-1.43.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.43.0",
+        "applied_patches": [
+          "Disable anti-tamper ",
+          "Enable Pro "
+        ]
       }
     }
   },
@@ -10912,6 +10916,13 @@
       "260315": {
         "patches": "hoo-dles/patches-1.42.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.42.0",
+        "applied_patches": [
+          "Enable Premium "
+        ]
+      },
+      "260330": {
+        "patches": "hoo-dles/patches-1.43.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.43.0",
         "applied_patches": [
           "Enable Premium "
         ]
@@ -10937,6 +10948,14 @@
           "Enable Pro ",
           "MicroG integration "
         ]
+      },
+      "260330": {
+        "patches": "hoo-dles/patches-1.43.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.43.0",
+        "applied_patches": [
+          "Enable Pro ",
+          "MicroG integration "
+        ]
       }
     }
   },
@@ -10952,6 +10971,13 @@
       "260315": {
         "patches": "hoo-dles/patches-1.42.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.42.0",
+        "applied_patches": [
+          "Unlock premium features "
+        ]
+      },
+      "260330": {
+        "patches": "hoo-dles/patches-1.43.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.43.0",
         "applied_patches": [
           "Unlock premium features "
         ]
@@ -10975,6 +11001,14 @@
           "Enable Premium ",
           "MicroG integration "
         ]
+      },
+      "260330": {
+        "patches": "hoo-dles/patches-1.43.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.43.0",
+        "applied_patches": [
+          "Enable Premium ",
+          "MicroG integration "
+        ]
       }
     }
   },
@@ -10990,6 +11024,13 @@
       "260315": {
         "patches": "hoo-dles/patches-1.42.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.42.0",
+        "applied_patches": [
+          "Enable Premium "
+        ]
+      },
+      "260330": {
+        "patches": "hoo-dles/patches-1.43.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.43.0",
         "applied_patches": [
           "Enable Premium "
         ]
@@ -11013,6 +11054,14 @@
           "Disable ads ",
           "Unlimited skips "
         ]
+      },
+      "260330": {
+        "patches": "hoo-dles/patches-1.43.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.43.0",
+        "applied_patches": [
+          "Disable ads ",
+          "Unlimited skips "
+        ]
       }
     }
   },
@@ -11028,6 +11077,13 @@
       "260315": {
         "patches": "hoo-dles/patches-1.42.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.42.0",
+        "applied_patches": [
+          "Enable Pro "
+        ]
+      },
+      "260330": {
+        "patches": "hoo-dles/patches-1.43.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.43.0",
         "applied_patches": [
           "Enable Pro "
         ]
@@ -11051,6 +11107,13 @@
         "applied_patches": [
           "Enable Premium "
         ]
+      },
+      "260330": {
+        "patches": "hoo-dles/patches-1.43.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.43.0",
+        "applied_patches": [
+          "Enable Premium "
+        ]
       }
     }
   },
@@ -11066,6 +11129,13 @@
       "260315": {
         "patches": "hoo-dles/patches-1.42.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.42.0",
+        "applied_patches": [
+          "Enable Prime "
+        ]
+      },
+      "260330": {
+        "patches": "hoo-dles/patches-1.43.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.43.0",
         "applied_patches": [
           "Enable Prime "
         ]
@@ -11087,6 +11157,13 @@
         "applied_patches": [
           "Enable Premium "
         ]
+      },
+      "260330": {
+        "patches": "hoo-dles/patches-1.43.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.43.0",
+        "applied_patches": [
+          "Enable Premium "
+        ]
       }
     }
   },
@@ -11102,6 +11179,13 @@
       "260315": {
         "patches": "hoo-dles/patches-1.42.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.42.0",
+        "applied_patches": [
+          "AMOLED dark theme "
+        ]
+      },
+      "260330": {
+        "patches": "hoo-dles/patches-1.43.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.43.0",
         "applied_patches": [
           "AMOLED dark theme "
         ]
@@ -11129,6 +11213,16 @@
           "Unlock custom DNS ",
           "Unlock split tunneling "
         ]
+      },
+      "260330": {
+        "patches": "hoo-dles/patches-1.43.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.43.0",
+        "applied_patches": [
+          "Remove delay ",
+          "Unlock LAN connections ",
+          "Unlock custom DNS ",
+          "Unlock split tunneling "
+        ]
       }
     }
   },
@@ -11146,6 +11240,13 @@
       "260315": {
         "patches": "hoo-dles/patches-1.42.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.42.0",
+        "applied_patches": [
+          "Enable Premium "
+        ]
+      },
+      "260330": {
+        "patches": "hoo-dles/patches-1.43.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.43.0",
         "applied_patches": [
           "Enable Premium "
         ]
@@ -11167,6 +11268,13 @@
         "applied_patches": [
           "Enable Premium+ "
         ]
+      },
+      "260330": {
+        "patches": "hoo-dles/patches-1.43.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.43.0",
+        "applied_patches": [
+          "Enable Premium+ "
+        ]
       }
     }
   },
@@ -11182,6 +11290,13 @@
       "260315": {
         "patches": "hoo-dles/patches-1.42.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.42.0",
+        "applied_patches": [
+          "Disable ads "
+        ]
+      },
+      "260330": {
+        "patches": "hoo-dles/patches-1.43.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.43.0",
         "applied_patches": [
           "Disable ads "
         ]
@@ -11210,6 +11325,11 @@
         "patches": "hoo-dles/patches-1.42.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.42.0",
         "applied_patches": []
+      },
+      "260330": {
+        "patches": "hoo-dles/patches-1.43.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.43.0",
+        "applied_patches": []
       }
     }
   },
@@ -11223,6 +11343,11 @@
       "260315": {
         "patches": "hoo-dles/patches-1.42.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.42.0",
+        "applied_patches": []
+      },
+      "260330": {
+        "patches": "hoo-dles/patches-1.43.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.43.0",
         "applied_patches": []
       }
     }
@@ -11348,6 +11473,11 @@
       "260329": {
         "patches": "kveld9/patches-1.8.0.mpp",
         "changelog": "https://github.com/kveld9/kveld-morphe-patches/releases/tag/v1.8.0",
+        "applied_patches": []
+      },
+      "260330": {
+        "patches": "kveld9/patches-1.9.0.mpp",
+        "changelog": "https://github.com/kveld9/kveld-morphe-patches/releases/tag/v1.9.0",
         "applied_patches": []
       }
     }
@@ -11790,6 +11920,15 @@
       "260315": {
         "patches": "hoo-dles/patches-1.42.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.42.0",
+        "applied_patches": [
+          "Enable Niagara Pro "
+        ]
+      }
+    },
+    "1.16.24": {
+      "260330": {
+        "patches": "hoo-dles/patches-1.43.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.43.0",
         "applied_patches": [
           "Enable Niagara Pro "
         ]
