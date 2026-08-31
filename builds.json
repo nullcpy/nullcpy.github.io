@@ -86,6 +86,20 @@
           "Remove ads and telemetry ",
           "Sanitize share links "
         ]
+      },
+      "260339": {
+        "patches": "jkennethcarino/patches-1.4.0-dev.5.mpp",
+        "changelog": "https://github.com/jkennethcarino/adobo/releases/tag/v1.4.0-dev.5",
+        "applied_patches": [
+          "Colorize comment indent lines ",
+          "Disable home screen redirect ",
+          "Disable screenshot banner ",
+          "Hide community menu badge ",
+          "Hide post view counts ",
+          "Open external links directly ",
+          "Remove ads and telemetry ",
+          "Sanitize share links "
+        ]
       }
     }
   },
@@ -169,83 +183,6 @@
       }
     },
     "12.17.0-release.0": {
-      "260242": {
-        "patches": "crimera/patches-3.9.0-dev.9.mpp",
-        "changelog": "https://github.com/crimera/piko/releases/tag/v3.9.0-dev.9",
-        "applied_patches": [
-          "Add ability to copy media link ",
-          "Block redirecting to X Lite ",
-          "Block update screen ",
-          "Change app icon ",
-          "Change version code ",
-          "Clear tracking params ",
-          "Control video auto scroll ",
-          "Custom download folder ",
-          "Custom emoji font ",
-          "Custom font ",
-          "Custom share menu ",
-          "Custom sharing domain ",
-          "Customise post font size ",
-          "Customize Inline action Bar items ",
-          "Customize Navigation Bar items ",
-          "Customize default reply sorting ",
-          "Customize explore tabs ",
-          "Customize notification tabs ",
-          "Customize profile tabs ",
-          "Customize search suggestions ",
-          "Customize search tab items ",
-          "Customize side bar items ",
-          "Customize timeline top bar ",
-          "Delete from database ",
-          "Disable auto timeline scroll on launch ",
-          "Disable chirp font ",
-          "Download patch ",
-          "Enable PiP mode automatically ",
-          "Enable Undo Posts ",
-          "Enable debug menu for posts ",
-          "Enable force HD videos ",
-          "Force enable translate ",
-          "Handle custom twitter links ",
-          "Hide Banner ",
-          "Hide Community Notes ",
-          "Hide FAB ",
-          "Hide FAB Menu Buttons ",
-          "Hide Live Threads ",
-          "Hide Recommended Users ",
-          "Hide badges from navigation bar icons ",
-          "Hide bookmark icon in timeline ",
-          "Hide community badges ",
-          "Hide followed by context ",
-          "Hide hidden replies ",
-          "Hide immersive player ",
-          "Hide nudge button ",
-          "Hide post metrics ",
-          "Hide promote button ",
-          "Hide recommendation items ",
-          "Hook feature flag ",
-          "Import/Export login token ",
-          "Legacy share links ",
-          "Log server response ",
-          "More information on profile ",
-          "Native downloader ",
-          "Native reader mode ",
-          "Native translator ",
-          "No shortened URL ",
-          "Pause search suggestions ",
-          "Remove Ads ",
-          "Remove premium upsell ",
-          "Remove search suggestions ",
-          "Remove view count ",
-          "Round off numbers ",
-          "Selectable Text ",
-          "Share Tweet as Image ",
-          "Show changelogs ",
-          "Show poll results ",
-          "Show post source label ",
-          "Show sensitive media ",
-          "Support external downloader "
-        ]
-      },
       "260316": {
         "patches": "crimera/patches-3.9.0-dev.10.mpp",
         "changelog": "https://github.com/crimera/piko/releases/tag/v3.9.0-dev.10",
@@ -486,85 +423,6 @@
       }
     },
     "12.17.0-release.0": {
-      "260242": {
-        "patches": "crimera/patches-3.9.0-dev.9.mpp",
-        "changelog": "https://github.com/crimera/piko/releases/tag/v3.9.0-dev.9",
-        "applied_patches": [
-          "Add ability to copy media link ",
-          "Block redirecting to X Lite ",
-          "Block update screen ",
-          "Bring back twitter ",
-          "Change app icon ",
-          "Change version code ",
-          "Clear tracking params ",
-          "Control video auto scroll ",
-          "Custom download folder ",
-          "Custom emoji font ",
-          "Custom font ",
-          "Custom share menu ",
-          "Custom sharing domain ",
-          "Customise post font size ",
-          "Customize Inline action Bar items ",
-          "Customize Navigation Bar items ",
-          "Customize default reply sorting ",
-          "Customize explore tabs ",
-          "Customize notification tabs ",
-          "Customize profile tabs ",
-          "Customize search suggestions ",
-          "Customize search tab items ",
-          "Customize side bar items ",
-          "Customize timeline top bar ",
-          "Delete from database ",
-          "Disable auto timeline scroll on launch ",
-          "Disable chirp font ",
-          "Download patch ",
-          "Dynamic color ",
-          "Enable PiP mode automatically ",
-          "Enable Undo Posts ",
-          "Enable debug menu for posts ",
-          "Enable force HD videos ",
-          "Force enable translate ",
-          "Handle custom twitter links ",
-          "Hide Banner ",
-          "Hide Community Notes ",
-          "Hide FAB ",
-          "Hide FAB Menu Buttons ",
-          "Hide Live Threads ",
-          "Hide Recommended Users ",
-          "Hide badges from navigation bar icons ",
-          "Hide bookmark icon in timeline ",
-          "Hide community badges ",
-          "Hide followed by context ",
-          "Hide hidden replies ",
-          "Hide immersive player ",
-          "Hide nudge button ",
-          "Hide post metrics ",
-          "Hide promote button ",
-          "Hide recommendation items ",
-          "Hook feature flag ",
-          "Import/Export login token ",
-          "Legacy share links ",
-          "Log server response ",
-          "More information on profile ",
-          "Native downloader ",
-          "Native reader mode ",
-          "Native translator ",
-          "No shortened URL ",
-          "Pause search suggestions ",
-          "Remove Ads ",
-          "Remove premium upsell ",
-          "Remove search suggestions ",
-          "Remove view count ",
-          "Round off numbers ",
-          "Selectable Text ",
-          "Share Tweet as Image ",
-          "Show changelogs ",
-          "Show poll results ",
-          "Show post source label ",
-          "Show sensitive media ",
-          "Support external downloader "
-        ]
-      },
       "260316": {
         "patches": "crimera/patches-3.9.0-dev.10.mpp",
         "changelog": "https://github.com/crimera/piko/releases/tag/v3.9.0-dev.10",
@@ -729,70 +587,6 @@
   },
   "instagram-morphe-piko": {
     "439.0.0.37.89": {
-      "260242": {
-        "patches": "crimera/patches-3.9.0-dev.9.mpp",
-        "changelog": "https://github.com/crimera/piko/releases/tag/v3.9.0-dev.9",
-        "applied_patches": [
-          "Add settings ",
-          "Allow user network certificate ",
-          "Change like animation ",
-          "Change version code ",
-          "Copy comment ",
-          "Custom sharing domain ",
-          "Customise story ring size ",
-          "Customise story timestamp ",
-          "Disable Reels scrolling ",
-          "Disable ads ",
-          "Disable analytics ",
-          "Disable comments ",
-          "Disable discover people ",
-          "Disable double tap like ",
-          "Disable explore ",
-          "Disable highlights ",
-          "Disable onboarding permission prompts ",
-          "Disable screenshot detection ",
-          "Disable stories ",
-          "Disable story flipping ",
-          "Disable swipe to create ",
-          "Disable typing status ",
-          "Disable video autoplay ",
-          "Download media ",
-          "Download voice message ",
-          "External downloader ",
-          "Filter stories ",
-          "Friendship status indicator ",
-          "Hide group creation button on sharesheet ",
-          "Hide navigation buttons ",
-          "Hide notes tray ",
-          "Hide reshare button ",
-          "Hide stories tray ",
-          "Hide suggested content ",
-          "Improve image viewing ",
-          "Limit feed to following profiles ",
-          "Loop story ",
-          "Make ephemeral media permanent ",
-          "Mark chat as read manually ",
-          "More options on post ",
-          "More options on profile ",
-          "Open links externally ",
-          "Recommended flags ",
-          "Remove build expired popup ",
-          "Remove empty bottom space ",
-          "Sanitize share links ",
-          "Save deleted messages ",
-          "Save media comment ",
-          "Stories audio autoplay ",
-          "Theme ",
-          "Unlock Plus benefits ",
-          "Unlock developer options ",
-          "Unlock employee options ",
-          "Validate links ",
-          "View DMs anonymously ",
-          "View live anonymously ",
-          "View stories anonymously ",
-          "View story mentions "
-        ]
-      },
       "260336": {
         "patches": "crimera/patches-3.9.0.mpp",
         "changelog": "https://github.com/crimera/piko/releases/tag/v3.9.0",
@@ -1127,40 +921,6 @@
   },
   "tiktok-morphe": {
     "46.2.3": {
-      "260241": {
-        "patches": "icysymmetra/patches-0.7.0-dev.5.mpp",
-        "changelog": "https://github.com/icysymmetra/tiktok-patches-for-morphe/releases/tag/v0.7.0-dev.5",
-        "applied_patches": [
-          "Always show publish date ",
-          "Copy comments without username ",
-          "Custom offline videos limit ",
-          "Disable login requirement ",
-          "Disable long-press quick share ",
-          "Downloads ",
-          "Enable Live search ",
-          "Enable non-personalized search ",
-          "Feature Gate Lab ",
-          "Feed filter ",
-          "Feed tab navigation ",
-          "Fix Google login ",
-          "Hide CAPTCHA popups ",
-          "Hide floating promotions ",
-          "Hide quick comment reactions ",
-          "Hold-and-slide 2x lock ",
-          "Open external links directly ",
-          "Playback speed ",
-          "Remember clear display ",
-          "Resume videos after scrolling ",
-          "SIM spoof ",
-          "Sanitize sharing links ",
-          "Settings ",
-          "Show seekbar ",
-          "Show seekbar thumbnail ",
-          "Stop video looping ",
-          "Translate comments ",
-          "Disable screen capture detection "
-        ]
-      },
       "260272": {
         "patches": "icysymmetra/patches-0.7.0-dev.7.mpp",
         "changelog": "https://github.com/icysymmetra/tiktok-patches-for-morphe/releases/tag/v0.7.0-dev.7",
@@ -9454,6 +9214,14 @@
           "GmsCore support (MicroG) ",
           "Unlock Lifetime Premium "
         ]
+      },
+      "260340": {
+        "patches": "rushiranpise/patches-1.21.2.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.2",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Lifetime Premium "
+        ]
       }
     },
     "4.14.0": {
@@ -9554,6 +9322,15 @@
           "GmsCore support (MicroG) ",
           "Spoof WARP+ Unlimited UI "
         ]
+      },
+      "260340": {
+        "patches": "rushiranpise/patches-1.21.2.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.2",
+        "applied_patches": [
+          "Disable Analytics / Telemetry ",
+          "GmsCore support (MicroG) ",
+          "Spoof WARP+ Unlimited UI "
+        ]
       }
     }
   },
@@ -9598,6 +9375,14 @@
           "GmsCore support (MicroG) ",
           "Unlock Premium "
         ]
+      },
+      "260340": {
+        "patches": "rushiranpise/patches-1.21.2.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.2",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Premium "
+        ]
       }
     }
   },
@@ -9638,6 +9423,14 @@
       "260333": {
         "patches": "rushiranpise/patches-1.21.0.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.0",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Premium "
+        ]
+      },
+      "260340": {
+        "patches": "rushiranpise/patches-1.21.2.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.2",
         "applied_patches": [
           "GmsCore support (MicroG) ",
           "Unlock Premium "
@@ -9688,6 +9481,14 @@
           "GmsCore support (MicroG) ",
           "Unlock VIP "
         ]
+      },
+      "260340": {
+        "patches": "rushiranpise/patches-1.21.2.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.2",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock VIP "
+        ]
       }
     }
   },
@@ -9732,6 +9533,14 @@
       "260333": {
         "patches": "rushiranpise/patches-1.21.0.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.0",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Premium "
+        ]
+      },
+      "260340": {
+        "patches": "rushiranpise/patches-1.21.2.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.2",
         "applied_patches": [
           "GmsCore support (MicroG) ",
           "Unlock Premium "
@@ -9822,6 +9631,19 @@
           "GmsCore support (MicroG) ",
           "Spoof features "
         ]
+      },
+      "260340": {
+        "patches": "rushiranpise/patches-1.21.2.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.2",
+        "applied_patches": [
+          "AMOLED dark theme ",
+          "Change package name ",
+          "Enable DCIM folders backup control ",
+          "Fix DCIM folder classification ",
+          "GmsCore support ",
+          "GmsCore support (MicroG) ",
+          "Spoof features "
+        ]
       }
     }
   },
@@ -9864,6 +9686,14 @@
       "260333": {
         "patches": "rushiranpise/patches-1.21.0.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.0",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Premium+ "
+        ]
+      },
+      "260340": {
+        "patches": "rushiranpise/patches-1.21.2.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.2",
         "applied_patches": [
           "GmsCore support (MicroG) ",
           "Unlock Premium+ "
@@ -9928,6 +9758,14 @@
           "GmsCore support (MicroG) ",
           "Unlock Premium "
         ]
+      },
+      "260340": {
+        "patches": "rushiranpise/patches-1.21.2.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.2",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Premium "
+        ]
       }
     }
   },
@@ -9976,6 +9814,14 @@
       "260333": {
         "patches": "rushiranpise/patches-1.21.0.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.0",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Premium "
+        ]
+      },
+      "260340": {
+        "patches": "rushiranpise/patches-1.21.2.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.2",
         "applied_patches": [
           "GmsCore support (MicroG) ",
           "Unlock Premium "
@@ -10191,6 +10037,21 @@
           "Hide inbox ads ",
           "Open links externally "
         ]
+      },
+      "260340": {
+        "patches": "rushiranpise/patches-1.21.2.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.2",
+        "applied_patches": [
+          "Allow screen capture ",
+          "Block screenshot detection ",
+          "Change package name ",
+          "Disable media transcoding ",
+          "Disable typing indicator ",
+          "Enable chat heads ",
+          "GmsCore support (MicroG) ",
+          "Hide inbox ads ",
+          "Open links externally "
+        ]
       }
     }
   },
@@ -10231,6 +10092,14 @@
       "260333": {
         "patches": "rushiranpise/patches-1.21.0.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.0",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Patron "
+        ]
+      },
+      "260340": {
+        "patches": "rushiranpise/patches-1.21.2.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.2",
         "applied_patches": [
           "GmsCore support (MicroG) ",
           "Unlock Patron "
@@ -12072,6 +11941,21 @@
           "Price history charts ",
           "Remove ads "
         ]
+      },
+      "260340": {
+        "patches": "rushiranpise/patches-1.21.2.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.2",
+        "applied_patches": [
+          "Dark mode ",
+          "Disable search suggestions tracking ",
+          "Disable video autoplay ",
+          "Fix Amazon manifest conflicts ",
+          "GmsCore support (MicroG) ",
+          "Hide Rufus tab ",
+          "Open links in browser ",
+          "Price history charts ",
+          "Remove ads "
+        ]
       }
     }
   },
@@ -12104,6 +11988,14 @@
       "260333": {
         "patches": "rushiranpise/patches-1.21.0.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.0",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Pro "
+        ]
+      },
+      "260340": {
+        "patches": "rushiranpise/patches-1.21.2.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.2",
         "applied_patches": [
           "GmsCore support (MicroG) ",
           "Unlock Pro "
@@ -12474,6 +12366,14 @@
           "GmsCore support (MicroG) ",
           "Unlock Premium "
         ]
+      },
+      "260340": {
+        "patches": "rushiranpise/patches-1.21.2.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.2",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Premium "
+        ]
       }
     }
   },
@@ -12490,6 +12390,14 @@
       "260333": {
         "patches": "rushiranpise/patches-1.21.0.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.0",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Premium "
+        ]
+      },
+      "260340": {
+        "patches": "rushiranpise/patches-1.21.2.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.2",
         "applied_patches": [
           "GmsCore support (MicroG) ",
           "Unlock Premium "
@@ -12525,6 +12433,14 @@
           "GmsCore support (MicroG) ",
           "Unlock Pro "
         ]
+      },
+      "260340": {
+        "patches": "rushiranpise/patches-1.21.2.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.2",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Pro "
+        ]
       }
     }
   },
@@ -12541,6 +12457,14 @@
       "260333": {
         "patches": "rushiranpise/patches-1.21.0.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.0",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Remove Ads "
+        ]
+      },
+      "260340": {
+        "patches": "rushiranpise/patches-1.21.2.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.2",
         "applied_patches": [
           "GmsCore support (MicroG) ",
           "Remove Ads "
