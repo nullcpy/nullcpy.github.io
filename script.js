@@ -116,7 +116,8 @@ const CONFIG = {
     calm: "Calm - Meditate, Sleep, Relax",
     sendfilestotv: "Send Files to TV",
     bluetoothkeyboardandmouse: "Bluetooth Keyboard & Mouse",
-    swiftkeyboard: "Microsoft SwiftKey AI Keyboard"
+    swiftkeyboard: "Microsoft SwiftKey AI Keyboard",
+    capcut: "CapCut: Photo & Video Editor"
   },
 
   // Map app slugs to true Android Package IDs for Obtainium
@@ -147,6 +148,7 @@ const CONFIG = {
     caloriecounter: "com.fatsecret.android",
     calm: "com.calm.android",
     camscanner: "com.intsig.camscanner",
+    capcutvideoeditor: "com.lemon.lvoverseas",
     cricbuzz: "com.cricbuzz.android",
     cryptomator: "org.cryptomator",
     documentscanner: "com.cv.docscanner",
