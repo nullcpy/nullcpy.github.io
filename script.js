@@ -148,7 +148,7 @@ const CONFIG = {
     caloriecounter: "com.fatsecret.android",
     calm: "com.calm.android",
     camscanner: "com.intsig.camscanner",
-    capcutvideoeditor: "com.lemon.lvoverseas",
+    capcutphotovideoeditor: "com.lemon.lvoverseas",
     cricbuzz: "com.cricbuzz.android",
     cryptomator: "org.cryptomator",
     documentscanner: "com.cv.docscanner",
