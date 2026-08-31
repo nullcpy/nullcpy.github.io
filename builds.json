@@ -1,9 +1,9 @@
 {
   "imdb-morphe": {
     "9.3.4": {
-      "260173": {
-        "patches": "jkennethcarino/patches-1.3.0.mpp",
-        "changelog": "https://github.com/jkennethcarino/adobo/releases/tag/v1.3.0",
+      "260342": {
+        "patches": "jkennethcarino/patches-1.4.0.mpp",
+        "changelog": "https://github.com/jkennethcarino/adobo/releases/tag/v1.4.0",
         "applied_patches": [
           "Remove IMDb's ads, trackers, and analytics "
         ]
@@ -90,6 +90,20 @@
       "260339": {
         "patches": "jkennethcarino/patches-1.4.0-dev.5.mpp",
         "changelog": "https://github.com/jkennethcarino/adobo/releases/tag/v1.4.0-dev.5",
+        "applied_patches": [
+          "Colorize comment indent lines ",
+          "Disable home screen redirect ",
+          "Disable screenshot banner ",
+          "Hide community menu badge ",
+          "Hide post view counts ",
+          "Open external links directly ",
+          "Remove ads and telemetry ",
+          "Sanitize share links "
+        ]
+      },
+      "260342": {
+        "patches": "jkennethcarino/patches-1.4.0.mpp",
+        "changelog": "https://github.com/jkennethcarino/adobo/releases/tag/v1.4.0",
         "applied_patches": [
           "Colorize comment indent lines ",
           "Disable home screen redirect ",
@@ -2857,6 +2871,92 @@
           "Voice over translation ",
           "Wide search bar "
         ]
+      },
+      "260341": {
+        "patches": "MorpheApp/patches-1.41.0-dev.11.mpp",
+        "changelog": "https://github.com/MorpheApp/morphe-patches/releases/tag/v1.41.0-dev.11",
+        "applied_patches": [
+          "Add to queue ",
+          "Alternative thumbnails ",
+          "Ambient mode ",
+          "App refresh rate ",
+          "Bypass image region restrictions ",
+          "Bypass link redirects ",
+          "Captions ",
+          "Change form factor ",
+          "Change header ",
+          "Change start page ",
+          "Check watch history domain name resolution ",
+          "Copy video link ",
+          "Custom branding ",
+          "Custom player overlay opacity ",
+          "Disable DRC audio ",
+          "Disable QUIC protocol ",
+          "Disable Shorts resuming on startup ",
+          "Disable double tap actions ",
+          "Disable fullscreen gestures ",
+          "Disable haptic feedback ",
+          "Disable layout updates ",
+          "Disable player popup panels ",
+          "Disable playlist autoplay ",
+          "Disable rolling number animations ",
+          "Disable scrolling speed limit ",
+          "Disable sign in to TV popup ",
+          "Disable video codecs ",
+          "Double tap to seek ",
+          "Downloads ",
+          "Enable debugging ",
+          "Exit fullscreen mode ",
+          "Force original audio ",
+          "Fullscreen video scale ",
+          "GmsCore support ",
+          "Hide Shorts components ",
+          "Hide ads ",
+          "Hide autoplay preview ",
+          "Hide end screen cards ",
+          "Hide end screen suggested video ",
+          "Hide info cards ",
+          "Hide layout components ",
+          "Hide player flyout menu components ",
+          "Hide player overlay buttons ",
+          "Hide related video overlay ",
+          "Hide related videos ",
+          "Hide timestamp ",
+          "Hide video action buttons ",
+          "Loop video ",
+          "Media notification controls ",
+          "Miniplayer ",
+          "Mute button ",
+          "Navigation bar ",
+          "Open Shorts in regular player ",
+          "Open channel of live avatar ",
+          "Open links externally ",
+          "Open system share sheet ",
+          "Open videos fullscreen ",
+          "Override YouTube Music buttons ",
+          "Play all ",
+          "Playback in feeds ",
+          "Playback speed ",
+          "PoToken provider ",
+          "Reload video ",
+          "Remove background playback restrictions ",
+          "Remove viewer discretion dialog ",
+          "Return YouTube Dislike ",
+          "Sanitize sharing links ",
+          "Save to Watch later ",
+          "Seekbar ",
+          "Settings menu filter ",
+          "Shorts autoplay ",
+          "SponsorBlock ",
+          "Spoof app version ",
+          "Spoof device dimensions ",
+          "Spoof video streams ",
+          "Swipe controls ",
+          "Theme ",
+          "Video quality ",
+          "Voice over translation ",
+          "Wide search bar "
+        ]
       }
     }
   },
@@ -5508,6 +5608,92 @@
       "260337": {
         "patches": "MorpheApp/patches-1.41.0-dev.9.mpp",
         "changelog": "https://github.com/MorpheApp/morphe-patches/releases/tag/v1.41.0-dev.9",
+        "applied_patches": [
+          "Add to queue ",
+          "Alternative thumbnails ",
+          "Ambient mode ",
+          "App refresh rate ",
+          "Bypass image region restrictions ",
+          "Bypass link redirects ",
+          "Captions ",
+          "Change form factor ",
+          "Change header ",
+          "Change start page ",
+          "Check watch history domain name resolution ",
+          "Copy video link ",
+          "Custom branding ",
+          "Custom player overlay opacity ",
+          "Disable DRC audio ",
+          "Disable QUIC protocol ",
+          "Disable Shorts resuming on startup ",
+          "Disable double tap actions ",
+          "Disable fullscreen gestures ",
+          "Disable haptic feedback ",
+          "Disable layout updates ",
+          "Disable player popup panels ",
+          "Disable playlist autoplay ",
+          "Disable rolling number animations ",
+          "Disable scrolling speed limit ",
+          "Disable sign in to TV popup ",
+          "Disable video codecs ",
+          "Double tap to seek ",
+          "Downloads ",
+          "Enable debugging ",
+          "Exit fullscreen mode ",
+          "Force original audio ",
+          "Fullscreen video scale ",
+          "GmsCore support ",
+          "Hide Shorts components ",
+          "Hide ads ",
+          "Hide autoplay preview ",
+          "Hide end screen cards ",
+          "Hide end screen suggested video ",
+          "Hide info cards ",
+          "Hide layout components ",
+          "Hide player flyout menu components ",
+          "Hide player overlay buttons ",
+          "Hide related video overlay ",
+          "Hide related videos ",
+          "Hide timestamp ",
+          "Hide video action buttons ",
+          "Loop video ",
+          "Media notification controls ",
+          "Miniplayer ",
+          "Mute button ",
+          "Navigation bar ",
+          "Open Shorts in regular player ",
+          "Open channel of live avatar ",
+          "Open links externally ",
+          "Open system share sheet ",
+          "Open videos fullscreen ",
+          "Override YouTube Music buttons ",
+          "Play all ",
+          "Playback in feeds ",
+          "Playback speed ",
+          "PoToken provider ",
+          "Reload video ",
+          "Remove background playback restrictions ",
+          "Remove viewer discretion dialog ",
+          "Return YouTube Dislike ",
+          "Sanitize sharing links ",
+          "Save to Watch later ",
+          "Seekbar ",
+          "Settings menu filter ",
+          "Shorts autoplay ",
+          "SponsorBlock ",
+          "Spoof app version ",
+          "Spoof device dimensions ",
+          "Spoof video streams ",
+          "Swipe controls ",
+          "Theme ",
+          "Video quality ",
+          "Voice over translation ",
+          "Wide search bar "
+        ]
+      },
+      "260341": {
+        "patches": "MorpheApp/patches-1.41.0-dev.11.mpp",
+        "changelog": "https://github.com/MorpheApp/morphe-patches/releases/tag/v1.41.0-dev.11",
         "applied_patches": [
           "Add to queue ",
           "Alternative thumbnails ",
@@ -9112,6 +9298,23 @@
           "Add App Trigger"
         ]
       }
+    },
+    "445.0.0.45.83": {
+      "260342": {
+        "patches": "",
+        "changelog": "",
+        "applied_patches": [
+          "Unlock Developer Options",
+          "Remove Snooze Warning",
+          "Remove Ads",
+          "AMOLED Theme",
+          "Get Generation Info",
+          "Copy Instafel Sources",
+          "Add Initialize Instafel",
+          "Change Home Long Click",
+          "Add App Trigger"
+        ]
+      }
     }
   },
   "instagram-instafel-clone": {
@@ -9181,6 +9384,23 @@
     },
     "444.0.0.46.85": {
       "260303": {
+        "patches": "",
+        "changelog": "",
+        "applied_patches": [
+          "Unlock Developer Options",
+          "Remove Snooze Warning",
+          "Remove Ads",
+          "AMOLED Theme",
+          "Get Generation Info",
+          "Copy Instafel Sources",
+          "Add Initialize Instafel",
+          "Change Home Long Click",
+          "Add App Trigger"
+        ]
+      }
+    },
+    "445.0.0.45.83": {
+      "260342": {
         "patches": "",
         "changelog": "",
         "applied_patches": [
@@ -9969,6 +10189,15 @@
           "GmsCore support ",
           "Spoof features "
         ]
+      },
+      "260342": {
+        "patches": "RookieEnough/patches-1.3.1.mpp",
+        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.3.1",
+        "applied_patches": [
+          "Fix selected account persistence ",
+          "GmsCore support ",
+          "Spoof features "
+        ]
       }
     }
   },
@@ -10145,6 +10374,13 @@
         "applied_patches": [
           "Remove device restrictions "
         ]
+      },
+      "260342": {
+        "patches": "RookieEnough/patches-1.3.1.mpp",
+        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.3.1",
+        "applied_patches": [
+          "Remove device restrictions "
+        ]
       }
     }
   },
@@ -10162,6 +10398,15 @@
       "260338": {
         "patches": "RookieEnough/patches-1.3.0.mpp",
         "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.3.0",
+        "applied_patches": [
+          "Hide update popup ",
+          "Spoof device ID ",
+          "Unlock plus "
+        ]
+      },
+      "260342": {
+        "patches": "RookieEnough/patches-1.3.1.mpp",
+        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.3.1",
         "applied_patches": [
           "Hide update popup ",
           "Spoof device ID ",
@@ -10201,20 +10446,6 @@
       }
     },
     "45.8.0.110": {
-      "260243": {
-        "patches": "arandomhooman/patches-1.49.0.mpp",
-        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.49.0",
-        "applied_patches": [
-          "Disable Tumblr TV ",
-          "Disable ad-free banner ",
-          "Disable blog notification reminder ",
-          "Disable gift message popup ",
-          "Disable in-app update ",
-          "Disable screenshot sharing ",
-          "Enable premium UI ",
-          "Remove ads "
-        ]
-      },
       "260253": {
         "patches": "arandomhooman/patches-1.50.1.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
@@ -10274,6 +10505,13 @@
         "applied_patches": [
           "Hide Ads "
         ]
+      },
+      "260342": {
+        "patches": "RookieEnough/patches-1.3.1.mpp",
+        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.3.1",
+        "applied_patches": [
+          "Hide Ads "
+        ]
       }
     }
   },
@@ -10289,6 +10527,14 @@
       "260338": {
         "patches": "RookieEnough/patches-1.3.0.mpp",
         "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.3.0",
+        "applied_patches": [
+          "Hide ads ",
+          "Remove popular search time limit "
+        ]
+      },
+      "260342": {
+        "patches": "RookieEnough/patches-1.3.1.mpp",
+        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.3.1",
         "applied_patches": [
           "Hide ads ",
           "Remove popular search time limit "
@@ -10445,15 +10691,15 @@
     }
   },
   "discord-xposed": {
-    "341.13-Stable": {
-      "260259": {
+    "342.16-Stable": {
+      "260306": {
         "patches": "revenge-mod/app-release.apk",
         "changelog": "https://github.com/revenge-mod/revenge-xposed/releases/tag/1602",
         "applied_patches": []
       }
     },
-    "342.16-Stable": {
-      "260306": {
+    "343.12-Stable": {
+      "260342": {
         "patches": "revenge-mod/app-release.apk",
         "changelog": "https://github.com/revenge-mod/revenge-xposed/releases/tag/1602",
         "applied_patches": []
@@ -10462,13 +10708,6 @@
   },
   "rumble-morphe": {
     "3.14.5": {
-      "260243": {
-        "patches": "arandomhooman/patches-1.49.0.mpp",
-        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.49.0",
-        "applied_patches": [
-          "Unlock Premium "
-        ]
-      },
       "260253": {
         "patches": "arandomhooman/patches-1.50.1.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
@@ -10499,18 +10738,6 @@
       }
     },
     "30.7.2": {
-      "260243": {
-        "patches": "arandomhooman/patches-1.49.0.mpp",
-        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.49.0",
-        "applied_patches": [
-          "7TV and BTTV emotes ",
-          "Auto claim channel points ",
-          "Block live ads ",
-          "Fix login ",
-          "Hide display ads ",
-          "Show deleted messages "
-        ]
-      },
       "260253": {
         "patches": "arandomhooman/patches-1.50.1.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
@@ -10551,13 +10778,6 @@
   },
   "money-manager-morphe": {
     "4.11.1GF": {
-      "260243": {
-        "patches": "arandomhooman/patches-1.49.0.mpp",
-        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.49.0",
-        "applied_patches": [
-          "Unlock Premium "
-        ]
-      },
       "260253": {
         "patches": "arandomhooman/patches-1.50.1.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
@@ -10576,13 +10796,6 @@
   },
   "at4k-launcher-morphe": {
     "0.99": {
-      "260243": {
-        "patches": "arandomhooman/patches-1.49.0.mpp",
-        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.49.0",
-        "applied_patches": [
-          "Unlock Premium "
-        ]
-      },
       "260253": {
         "patches": "arandomhooman/patches-1.50.1.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
@@ -10601,13 +10814,6 @@
   },
   "projectivy-launcher-morphe": {
     "4.70": {
-      "260243": {
-        "patches": "arandomhooman/patches-1.49.0.mpp",
-        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.49.0",
-        "applied_patches": [
-          "Unlock Premium "
-        ]
-      },
       "260253": {
         "patches": "arandomhooman/patches-1.50.1.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
@@ -10667,13 +10873,6 @@
   },
   "inshot-morphe": {
     "2.214.1539": {
-      "260243": {
-        "patches": "arandomhooman/patches-1.49.0.mpp",
-        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.49.0",
-        "applied_patches": [
-          "Unlock Pro "
-        ]
-      },
       "260253": {
         "patches": "arandomhooman/patches-1.50.1.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
@@ -10692,13 +10891,6 @@
   },
   "todoist-morphe": {
     "12190": {
-      "260243": {
-        "patches": "arandomhooman/patches-1.49.0.mpp",
-        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.49.0",
-        "applied_patches": [
-          "Unlock Pro "
-        ]
-      },
       "260253": {
         "patches": "arandomhooman/patches-1.50.1.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
@@ -10725,13 +10917,6 @@
   },
   "poweramp-morphe": {
     "build-1025-bundle-play": {
-      "260243": {
-        "patches": "arandomhooman/patches-1.49.0.mpp",
-        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.49.0",
-        "applied_patches": [
-          "Unlock Premium "
-        ]
-      },
       "260253": {
         "patches": "arandomhooman/patches-1.50.1.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
@@ -11088,18 +11273,27 @@
           "Overwrite media upload parameters ",
           "Unlock subscription features "
         ]
+      },
+      "260342": {
+        "patches": "RookieEnough/patches-1.3.1.mpp",
+        "changelog": "https://github.com/RookieEnough/De-Vanced/releases/tag/v1.3.1",
+        "applied_patches": [
+          "Add 'Give Kudos' button to 'Group Activity' ",
+          "Add activity export ",
+          "Add media download ",
+          "Add route export ",
+          "Block Snowplow tracking ",
+          "Disable Quick Edit ",
+          "Enable password login ",
+          "Hide distractions ",
+          "Overwrite media upload parameters ",
+          "Unlock subscription features "
+        ]
       }
     }
   },
   "battery-guru-morphe": {
     "2.5.0.6": {
-      "260243": {
-        "patches": "arandomhooman/patches-1.49.0.mpp",
-        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.49.0",
-        "applied_patches": [
-          "Unlock PRO "
-        ]
-      },
       "260253": {
         "patches": "arandomhooman/patches-1.50.1.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
@@ -11140,13 +11334,6 @@
   },
   "google-phone-morphe": {
     "161.0.726587057": {
-      "260244": {
-        "patches": "arandomhooman/patches-1.49.0.mpp",
-        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.49.0",
-        "applied_patches": [
-          "Enable call recording "
-        ]
-      },
       "260247": {
         "patches": "arandomhooman/patches-1.49.1.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.49.1",
@@ -12537,6 +12724,32 @@
           "Simplify Navigation ",
           "Suppress Telemetry ",
           "Unlock Premium "
+        ]
+      }
+    }
+  },
+  "calorie-counter-morphe": {
+    "11.8.0.5": {
+      "260342": {
+        "patches": "kondratjev/patches-1.20.0.mpp",
+        "changelog": "https://github.com/kondratjev/morphe-patches/releases/tag/v1.20.0",
+        "applied_patches": [
+          "Disable community tab ",
+          "Disable force update dialog ",
+          "Unlock Premium "
+        ]
+      }
+    }
+  },
+  "soundcloud-morphe-alt": {
+    "2026.08.26-release": {
+      "260342": {
+        "patches": "kondratjev/patches-1.20.0.mpp",
+        "changelog": "https://github.com/kondratjev/morphe-patches/releases/tag/v1.20.0",
+        "applied_patches": [
+          "Disable analytics ",
+          "Disable consent popup ",
+          "Enable SoundCloud Go "
         ]
       }
     }
