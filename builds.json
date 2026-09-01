@@ -11571,13 +11571,6 @@
   },
   "google-phone-morphe": {
     "161.0.726587057": {
-      "260247": {
-        "patches": "arandomhooman/patches-1.49.1.mpp",
-        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.49.1",
-        "applied_patches": [
-          "Enable call recording "
-        ]
-      },
       "260253": {
         "patches": "arandomhooman/patches-1.50.1.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
@@ -13042,6 +13035,20 @@
           "Disable analytics ",
           "Disable consent popup ",
           "Enable SoundCloud Go "
+        ]
+      }
+    }
+  },
+  "picsart-morphe": {
+    "30.6.4": {
+      "260345": {
+        "patches": "rushiranpise/patches-1.21.3.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.3",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Remove Ads ",
+          "Remove Watermark ",
+          "Unlock Premium "
         ]
       }
     }
