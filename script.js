@@ -214,6 +214,7 @@ const CONFIG = {
     pandora: "com.pandora.android",
     peacock: "com.peacocktv.peacockandroid",
     photomath: "com.microblink.photomath",
+    picsart: "com.picsart.studio",
     pinterest: "com.pinterest",
     pixiv: "jp.pxv.android",
     plusmessenger: "org.telegram.plus",
