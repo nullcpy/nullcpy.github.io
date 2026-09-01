@@ -2957,6 +2957,92 @@
           "Voice over translation ",
           "Wide search bar "
         ]
+      },
+      "260343": {
+        "patches": "MorpheApp/patches-1.41.0-dev.11.mpp",
+        "changelog": "https://github.com/MorpheApp/morphe-patches/releases/tag/v1.41.0-dev.11",
+        "applied_patches": [
+          "Add to queue ",
+          "Alternative thumbnails ",
+          "Ambient mode ",
+          "App refresh rate ",
+          "Bypass image region restrictions ",
+          "Bypass link redirects ",
+          "Captions ",
+          "Change form factor ",
+          "Change header ",
+          "Change start page ",
+          "Check watch history domain name resolution ",
+          "Copy video link ",
+          "Custom branding ",
+          "Custom player overlay opacity ",
+          "Disable DRC audio ",
+          "Disable QUIC protocol ",
+          "Disable Shorts resuming on startup ",
+          "Disable double tap actions ",
+          "Disable fullscreen gestures ",
+          "Disable haptic feedback ",
+          "Disable layout updates ",
+          "Disable player popup panels ",
+          "Disable playlist autoplay ",
+          "Disable rolling number animations ",
+          "Disable scrolling speed limit ",
+          "Disable sign in to TV popup ",
+          "Disable video codecs ",
+          "Double tap to seek ",
+          "Downloads ",
+          "Enable debugging ",
+          "Exit fullscreen mode ",
+          "Force original audio ",
+          "Fullscreen video scale ",
+          "GmsCore support ",
+          "Hide Shorts components ",
+          "Hide ads ",
+          "Hide autoplay preview ",
+          "Hide end screen cards ",
+          "Hide end screen suggested video ",
+          "Hide info cards ",
+          "Hide layout components ",
+          "Hide player flyout menu components ",
+          "Hide player overlay buttons ",
+          "Hide related video overlay ",
+          "Hide related videos ",
+          "Hide timestamp ",
+          "Hide video action buttons ",
+          "Loop video ",
+          "Media notification controls ",
+          "Miniplayer ",
+          "Mute button ",
+          "Navigation bar ",
+          "Open Shorts in regular player ",
+          "Open channel of live avatar ",
+          "Open links externally ",
+          "Open system share sheet ",
+          "Open videos fullscreen ",
+          "Override YouTube Music buttons ",
+          "Play all ",
+          "Playback in feeds ",
+          "Playback speed ",
+          "PoToken provider ",
+          "Reload video ",
+          "Remove background playback restrictions ",
+          "Remove viewer discretion dialog ",
+          "Return YouTube Dislike ",
+          "Sanitize sharing links ",
+          "Save to Watch later ",
+          "Seekbar ",
+          "Settings menu filter ",
+          "Shorts autoplay ",
+          "SponsorBlock ",
+          "Spoof app version ",
+          "Spoof device dimensions ",
+          "Spoof video streams ",
+          "Swipe controls ",
+          "Theme ",
+          "Video quality ",
+          "Voice over translation ",
+          "Wide search bar "
+        ]
       }
     }
   },
@@ -5776,6 +5862,92 @@
           "Voice over translation ",
           "Wide search bar "
         ]
+      },
+      "260343": {
+        "patches": "MorpheApp/patches-1.41.0-dev.11.mpp",
+        "changelog": "https://github.com/MorpheApp/morphe-patches/releases/tag/v1.41.0-dev.11",
+        "applied_patches": [
+          "Add to queue ",
+          "Alternative thumbnails ",
+          "Ambient mode ",
+          "App refresh rate ",
+          "Bypass image region restrictions ",
+          "Bypass link redirects ",
+          "Captions ",
+          "Change form factor ",
+          "Change header ",
+          "Change start page ",
+          "Check watch history domain name resolution ",
+          "Copy video link ",
+          "Custom branding ",
+          "Custom player overlay opacity ",
+          "Disable DRC audio ",
+          "Disable QUIC protocol ",
+          "Disable Shorts resuming on startup ",
+          "Disable double tap actions ",
+          "Disable fullscreen gestures ",
+          "Disable haptic feedback ",
+          "Disable layout updates ",
+          "Disable player popup panels ",
+          "Disable playlist autoplay ",
+          "Disable rolling number animations ",
+          "Disable scrolling speed limit ",
+          "Disable sign in to TV popup ",
+          "Disable video codecs ",
+          "Double tap to seek ",
+          "Downloads ",
+          "Enable debugging ",
+          "Exit fullscreen mode ",
+          "Force original audio ",
+          "Fullscreen video scale ",
+          "GmsCore support ",
+          "Hide Shorts components ",
+          "Hide ads ",
+          "Hide autoplay preview ",
+          "Hide end screen cards ",
+          "Hide end screen suggested video ",
+          "Hide info cards ",
+          "Hide layout components ",
+          "Hide player flyout menu components ",
+          "Hide player overlay buttons ",
+          "Hide related video overlay ",
+          "Hide related videos ",
+          "Hide timestamp ",
+          "Hide video action buttons ",
+          "Loop video ",
+          "Media notification controls ",
+          "Miniplayer ",
+          "Mute button ",
+          "Navigation bar ",
+          "Open Shorts in regular player ",
+          "Open channel of live avatar ",
+          "Open links externally ",
+          "Open system share sheet ",
+          "Open videos fullscreen ",
+          "Override YouTube Music buttons ",
+          "Play all ",
+          "Playback in feeds ",
+          "Playback speed ",
+          "PoToken provider ",
+          "Reload video ",
+          "Remove background playback restrictions ",
+          "Remove viewer discretion dialog ",
+          "Return YouTube Dislike ",
+          "Sanitize sharing links ",
+          "Save to Watch later ",
+          "Seekbar ",
+          "Settings menu filter ",
+          "Shorts autoplay ",
+          "SponsorBlock ",
+          "Spoof app version ",
+          "Spoof device dimensions ",
+          "Spoof video streams ",
+          "Swipe controls ",
+          "Theme ",
+          "Video quality ",
+          "Voice over translation ",
+          "Wide search bar "
+        ]
       }
     }
   },
@@ -8395,6 +8567,50 @@
           "Zhuyin Quick Traditional/Simplified Toggle ",
           "Zhuyin Slide Input "
         ]
+      },
+      "260343": {
+        "patches": "jasonwu1994/patches-3.9.0-dev.1.mpp",
+        "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v3.9.0-dev.1",
+        "applied_patches": [
+          "AI Writing Tools ",
+          "Access Points menu style ",
+          "Add Gboard Signature Bypass ",
+          "Advanced Voice Typing ",
+          "Change emoji size ",
+          "Clipboard Custom Character Limit ",
+          "Clipboard Enhancements ",
+          "Close Proactive Suggestions ",
+          "Custom Symbols ",
+          "Developer options ",
+          "Emojis, stickers & GIFs Tab Order ",
+          "Enable Inline Autofill Suggestions ",
+          "Enable OCR / Scan Text ",
+          "Enable accessibility layout ",
+          "Enable cursor trackpad mode ",
+          "Enable split keyboard ",
+          "English QWERTY Up-Flick Uppercase ",
+          "FTP Server ",
+          "Floating Web Search ",
+          "G Logo on Spacebar ",
+          "Grammar Checker ",
+          "Hyperspeed Typing Animation ",
+          "Incognito Mode Toggle ",
+          "Inline Suggestions ",
+          "Key Shape Selection ",
+          "Latin Globe Key Ignore Interval ",
+          "Long-Press Editing Shortcuts ",
+          "Quick Insert ",
+          "Rounded Keyboard Panel ",
+          "Settings Homepage Override ",
+          "Simple Calculator ",
+          "Swipeable Custom Top Row ",
+          "Top Toolbar Item Count ",
+          "Use Bluetooth Microphone ",
+          "Web Clipboard ",
+          "Zhuyin Bottom Row Key Sizes ",
+          "Zhuyin Quick Traditional/Simplified Toggle ",
+          "Zhuyin Slide Input "
+        ]
       }
     }
   },
@@ -9214,6 +9430,51 @@
           "Zhuyin Slide Input ",
           "Package Rename "
         ]
+      },
+      "260343": {
+        "patches": "jasonwu1994/patches-3.9.0-dev.1.mpp",
+        "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v3.9.0-dev.1",
+        "applied_patches": [
+          "AI Writing Tools ",
+          "Access Points menu style ",
+          "Add Gboard Signature Bypass ",
+          "Advanced Voice Typing ",
+          "Change emoji size ",
+          "Clipboard Custom Character Limit ",
+          "Clipboard Enhancements ",
+          "Close Proactive Suggestions ",
+          "Custom Symbols ",
+          "Developer options ",
+          "Emojis, stickers & GIFs Tab Order ",
+          "Enable Inline Autofill Suggestions ",
+          "Enable OCR / Scan Text ",
+          "Enable accessibility layout ",
+          "Enable cursor trackpad mode ",
+          "Enable split keyboard ",
+          "English QWERTY Up-Flick Uppercase ",
+          "FTP Server ",
+          "Floating Web Search ",
+          "G Logo on Spacebar ",
+          "Grammar Checker ",
+          "Hyperspeed Typing Animation ",
+          "Incognito Mode Toggle ",
+          "Inline Suggestions ",
+          "Key Shape Selection ",
+          "Latin Globe Key Ignore Interval ",
+          "Long-Press Editing Shortcuts ",
+          "Quick Insert ",
+          "Rounded Keyboard Panel ",
+          "Settings Homepage Override ",
+          "Simple Calculator ",
+          "Swipeable Custom Top Row ",
+          "Top Toolbar Item Count ",
+          "Use Bluetooth Microphone ",
+          "Web Clipboard ",
+          "Zhuyin Bottom Row Key Sizes ",
+          "Zhuyin Quick Traditional/Simplified Toggle ",
+          "Zhuyin Slide Input ",
+          "Package Rename "
+        ]
       }
     }
   },
@@ -9442,17 +9703,17 @@
           "GmsCore support (MicroG) ",
           "Unlock Lifetime Premium "
         ]
-      }
-    },
-    "4.14.0": {
-      "260245": {
-        "patches": "rushiranpise/patches-1.18.0.mpp",
-        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.0",
+      },
+      "260344": {
+        "patches": "rushiranpise/patches-1.21.3.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.3",
         "applied_patches": [
           "GmsCore support (MicroG) ",
           "Unlock Lifetime Premium "
         ]
-      },
+      }
+    },
+    "4.14.0": {
       "260249": {
         "patches": "rushiranpise/patches-1.18.2.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.2",
@@ -9496,15 +9757,6 @@
   },
   "warp-morphe": {
     "6.38.8": {
-      "260245": {
-        "patches": "rushiranpise/patches-1.18.0.mpp",
-        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.0",
-        "applied_patches": [
-          "Disable Analytics / Telemetry ",
-          "GmsCore support (MicroG) ",
-          "Spoof WARP+ Unlimited UI "
-        ]
-      },
       "260249": {
         "patches": "rushiranpise/patches-1.18.2.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.2",
@@ -9551,19 +9803,20 @@
           "GmsCore support (MicroG) ",
           "Spoof WARP+ Unlimited UI "
         ]
+      },
+      "260344": {
+        "patches": "rushiranpise/patches-1.21.3.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.3",
+        "applied_patches": [
+          "Disable Analytics / Telemetry ",
+          "GmsCore support (MicroG) ",
+          "Spoof WARP+ Unlimited UI "
+        ]
       }
     }
   },
   "ninja-vpn-morphe": {
     "1.4.7": {
-      "260245": {
-        "patches": "rushiranpise/patches-1.18.0.mpp",
-        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.0",
-        "applied_patches": [
-          "GmsCore support (MicroG) ",
-          "Unlock Premium "
-        ]
-      },
       "260249": {
         "patches": "rushiranpise/patches-1.18.2.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.2",
@@ -9599,6 +9852,14 @@
       "260340": {
         "patches": "rushiranpise/patches-1.21.2.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.2",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Premium "
+        ]
+      },
+      "260344": {
+        "patches": "rushiranpise/patches-1.21.3.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.3",
         "applied_patches": [
           "GmsCore support (MicroG) ",
           "Unlock Premium "
@@ -9608,14 +9869,6 @@
   },
   "windscribe-vpn-morphe": {
     "4.2.2328": {
-      "260245": {
-        "patches": "rushiranpise/patches-1.18.0.mpp",
-        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.0",
-        "applied_patches": [
-          "GmsCore support (MicroG) ",
-          "Unlock Premium "
-        ]
-      },
       "260249": {
         "patches": "rushiranpise/patches-1.18.2.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.2",
@@ -9655,27 +9908,19 @@
           "GmsCore support (MicroG) ",
           "Unlock Premium "
         ]
+      },
+      "260344": {
+        "patches": "rushiranpise/patches-1.21.3.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.3",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Premium "
+        ]
       }
     }
   },
   "terabox-morphe": {
     "4.22.6": {
-      "260245": {
-        "patches": "rushiranpise/patches-1.18.0.mpp",
-        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.0",
-        "applied_patches": [
-          "GmsCore support (MicroG) ",
-          "Unlock VIP "
-        ]
-      },
-      "260246": {
-        "patches": "rushiranpise/patches-1.18.1.mpp",
-        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.1",
-        "applied_patches": [
-          "GmsCore support (MicroG) ",
-          "Unlock VIP "
-        ]
-      },
       "260249": {
         "patches": "rushiranpise/patches-1.18.2.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.2",
@@ -9714,14 +9959,6 @@
   },
   "beta-maniac-morphe": {
     "0.9.4": {
-      "260245": {
-        "patches": "rushiranpise/patches-1.18.0.mpp",
-        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.0",
-        "applied_patches": [
-          "GmsCore support (MicroG) ",
-          "Unlock Premium "
-        ]
-      },
       "260249": {
         "patches": "rushiranpise/patches-1.18.2.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.2",
@@ -9765,24 +10002,19 @@
           "GmsCore support (MicroG) ",
           "Unlock Premium "
         ]
+      },
+      "260344": {
+        "patches": "rushiranpise/patches-1.21.3.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.3",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Premium "
+        ]
       }
     }
   },
   "google-photos-morphe-alt": {
     "7.87.0.957333026": {
-      "260245": {
-        "patches": "rushiranpise/patches-1.18.0.mpp",
-        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.0",
-        "applied_patches": [
-          "AMOLED dark theme ",
-          "Change package name ",
-          "Enable DCIM folders backup control ",
-          "Fix DCIM folder classification ",
-          "GmsCore support ",
-          "GmsCore support (MicroG) ",
-          "Spoof features "
-        ]
-      },
       "260249": {
         "patches": "rushiranpise/patches-1.18.2.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.2",
@@ -9864,19 +10096,24 @@
           "GmsCore support (MicroG) ",
           "Spoof features "
         ]
+      },
+      "260344": {
+        "patches": "rushiranpise/patches-1.21.3.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.3",
+        "applied_patches": [
+          "AMOLED dark theme ",
+          "Change package name ",
+          "Enable DCIM folders backup control ",
+          "Fix DCIM folder classification ",
+          "GmsCore support ",
+          "GmsCore support (MicroG) ",
+          "Spoof features "
+        ]
       }
     }
   },
   "accuweather-morphe": {
     "21.1.14-5-rc": {
-      "260245": {
-        "patches": "rushiranpise/patches-1.18.0.mpp",
-        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.0",
-        "applied_patches": [
-          "GmsCore support (MicroG) ",
-          "Unlock Premium+ "
-        ]
-      },
       "260249": {
         "patches": "rushiranpise/patches-1.18.2.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.2",
@@ -9918,6 +10155,14 @@
           "GmsCore support (MicroG) ",
           "Unlock Premium+ "
         ]
+      },
+      "260344": {
+        "patches": "rushiranpise/patches-1.21.3.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.3",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Premium+ "
+        ]
       }
     }
   },
@@ -9935,14 +10180,6 @@
   },
   "the-weather-channel-morphe": {
     "16.16.0": {
-      "260245": {
-        "patches": "rushiranpise/patches-1.18.0.mpp",
-        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.0",
-        "applied_patches": [
-          "GmsCore support (MicroG) ",
-          "Unlock Premium "
-        ]
-      },
       "260249": {
         "patches": "rushiranpise/patches-1.18.2.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.2",
@@ -9986,27 +10223,19 @@
           "GmsCore support (MicroG) ",
           "Unlock Premium "
         ]
+      },
+      "260344": {
+        "patches": "rushiranpise/patches-1.21.3.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.3",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Premium "
+        ]
       }
     }
   },
   "hola-vpn-morphe": {
     "AARCH64_1.248.400": {
-      "260245": {
-        "patches": "rushiranpise/patches-1.18.0.mpp",
-        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.0",
-        "applied_patches": [
-          "GmsCore support (MicroG) ",
-          "Unlock Premium "
-        ]
-      },
-      "260246": {
-        "patches": "rushiranpise/patches-1.18.1.mpp",
-        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.1",
-        "applied_patches": [
-          "GmsCore support (MicroG) ",
-          "Unlock Premium "
-        ]
-      },
       "260249": {
         "patches": "rushiranpise/patches-1.18.2.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.2",
@@ -10042,6 +10271,14 @@
       "260340": {
         "patches": "rushiranpise/patches-1.21.2.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.2",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Premium "
+        ]
+      },
+      "260344": {
+        "patches": "rushiranpise/patches-1.21.3.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.3",
         "applied_patches": [
           "GmsCore support (MicroG) ",
           "Unlock Premium "
@@ -10203,21 +10440,6 @@
   },
   "messenger-morphe": {
     "573.0.0.44.88": {
-      "260245": {
-        "patches": "rushiranpise/patches-1.18.0.mpp",
-        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.0",
-        "applied_patches": [
-          "Allow screen capture ",
-          "Block screenshot detection ",
-          "Change package name ",
-          "Disable media transcoding ",
-          "Disable typing indicator ",
-          "Enable chat heads ",
-          "GmsCore support (MicroG) ",
-          "Hide inbox ads ",
-          "Open links externally "
-        ]
-      },
       "260249": {
         "patches": "rushiranpise/patches-1.18.2.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.2",
@@ -10281,19 +10503,26 @@
           "Hide inbox ads ",
           "Open links externally "
         ]
+      },
+      "260344": {
+        "patches": "rushiranpise/patches-1.21.3.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.3",
+        "applied_patches": [
+          "Allow screen capture ",
+          "Block screenshot detection ",
+          "Change package name ",
+          "Disable media transcoding ",
+          "Disable typing indicator ",
+          "Enable chat heads ",
+          "GmsCore support (MicroG) ",
+          "Hide inbox ads ",
+          "Open links externally "
+        ]
       }
     }
   },
   "pocket-casts-morphe": {
     "8.16": {
-      "260245": {
-        "patches": "rushiranpise/patches-1.18.0.mpp",
-        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.0",
-        "applied_patches": [
-          "GmsCore support (MicroG) ",
-          "Unlock Patron "
-        ]
-      },
       "260249": {
         "patches": "rushiranpise/patches-1.18.2.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.18.2",
@@ -10329,6 +10558,14 @@
       "260340": {
         "patches": "rushiranpise/patches-1.21.2.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.2",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Patron "
+        ]
+      },
+      "260344": {
+        "patches": "rushiranpise/patches-1.21.3.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.3",
         "applied_patches": [
           "GmsCore support (MicroG) ",
           "Unlock Patron "
@@ -12143,6 +12380,21 @@
           "Price history charts ",
           "Remove ads "
         ]
+      },
+      "260344": {
+        "patches": "rushiranpise/patches-1.21.3.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.3",
+        "applied_patches": [
+          "Dark mode ",
+          "Disable search suggestions tracking ",
+          "Disable video autoplay ",
+          "Fix Amazon manifest conflicts ",
+          "GmsCore support (MicroG) ",
+          "Hide Rufus tab ",
+          "Open links in browser ",
+          "Price history charts ",
+          "Remove ads "
+        ]
       }
     }
   },
@@ -12183,6 +12435,14 @@
       "260340": {
         "patches": "rushiranpise/patches-1.21.2.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.2",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Pro "
+        ]
+      },
+      "260344": {
+        "patches": "rushiranpise/patches-1.21.3.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.3",
         "applied_patches": [
           "GmsCore support (MicroG) ",
           "Unlock Pro "
@@ -12561,6 +12821,14 @@
           "GmsCore support (MicroG) ",
           "Unlock Premium "
         ]
+      },
+      "260344": {
+        "patches": "rushiranpise/patches-1.21.3.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.3",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Premium "
+        ]
       }
     }
   },
@@ -12585,6 +12853,14 @@
       "260340": {
         "patches": "rushiranpise/patches-1.21.2.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.2",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Premium "
+        ]
+      },
+      "260344": {
+        "patches": "rushiranpise/patches-1.21.3.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.3",
         "applied_patches": [
           "GmsCore support (MicroG) ",
           "Unlock Premium "
@@ -12628,6 +12904,14 @@
           "GmsCore support (MicroG) ",
           "Unlock Pro "
         ]
+      },
+      "260344": {
+        "patches": "rushiranpise/patches-1.21.3.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.3",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Unlock Pro "
+        ]
       }
     }
   },
@@ -12652,6 +12936,14 @@
       "260340": {
         "patches": "rushiranpise/patches-1.21.2.mpp",
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.2",
+        "applied_patches": [
+          "GmsCore support (MicroG) ",
+          "Remove Ads "
+        ]
+      },
+      "260344": {
+        "patches": "rushiranpise/patches-1.21.3.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.3",
         "applied_patches": [
           "GmsCore support (MicroG) ",
           "Remove Ads "
