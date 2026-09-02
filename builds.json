@@ -13709,7 +13709,14 @@
       "260350": {
         "patches": "PrathxmOp/patches-1.13.0.mpp",
         "changelog": "https://github.com/PrathxmOp/Prathxm-Patches/releases/tag/v1.13.0",
-        "applied_patches": []
+        "applied_patches": [
+          "Ad-Free ",
+          "Custom Titles ",
+          "Global Crash Handler ",
+          "Lichess Puzzles ",
+          "Local Stockfish Analysis ",
+          "Unlock All Bots "
+        ]
       }
     }
   }
