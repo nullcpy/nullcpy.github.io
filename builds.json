@@ -11203,6 +11203,18 @@
           "Spoof signature ",
           "Unlock custom time picker "
         ]
+      },
+      "260352": {
+        "patches": "hxreborn/patches-1.14.1.mpp",
+        "changelog": "https://github.com/hxreborn/morphe-patches/releases/tag/v1.14.1",
+        "applied_patches": [
+          "AMOLED dark theme ",
+          "Hide upgrade upselling ",
+          "Remove 'Sent from' signature ",
+          "Remove free accounts limit ",
+          "Spoof signature ",
+          "Unlock custom time picker "
+        ]
       }
     },
     "7.10.4[versionCodes:ARM64_V8A=17667,ARMEABI_V7A=17667,X86_64=17667,X86=17667]": {
@@ -11259,6 +11271,14 @@
       "260333": {
         "patches": "hxreborn/patches-1.14.0.mpp",
         "changelog": "https://github.com/hxreborn/morphe-patches/releases/tag/v1.14.0",
+        "applied_patches": [
+          "AMOLED dark theme ",
+          "Unlock premium "
+        ]
+      },
+      "260352": {
+        "patches": "hxreborn/patches-1.14.1.mpp",
+        "changelog": "https://github.com/hxreborn/morphe-patches/releases/tag/v1.14.1",
         "applied_patches": [
           "AMOLED dark theme ",
           "Unlock premium "
@@ -11377,13 +11397,6 @@
       }
     },
     "26.7.1.47181": {
-      "260254": {
-        "patches": "arandomhooman/patches-1.50.1.mpp",
-        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
-        "applied_patches": [
-          "Unlock Pro "
-        ]
-      },
       "260260": {
         "patches": "arandomhooman/patches-1.50.2.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.2",
@@ -12237,11 +12250,6 @@
   },
   "camscanner-morphe": {
     "7.20.0.2606230000": {
-      "260254": {
-        "patches": "hoo-dles/patches-1.41.0.mpp",
-        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.41.0",
-        "applied_patches": []
-      },
       "260315": {
         "patches": "hoo-dles/patches-1.42.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.42.0",
@@ -12256,11 +12264,6 @@
   },
   "prime-video-morphe": {
     "3.0.452.1047": {
-      "260254": {
-        "patches": "hoo-dles/patches-1.41.0.mpp",
-        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.41.0",
-        "applied_patches": []
-      },
       "260315": {
         "patches": "hoo-dles/patches-1.42.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.42.0",
