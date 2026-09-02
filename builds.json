@@ -8825,6 +8825,51 @@
           "Zhuyin Quick Traditional/Simplified Toggle ",
           "Zhuyin Slide Input "
         ]
+      },
+      "260351": {
+        "patches": "jasonwu1994/patches-3.10.0.mpp",
+        "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v3.10.0",
+        "applied_patches": [
+          "AI Writing Tools ",
+          "Access Points menu style ",
+          "Add Gboard Signature Bypass ",
+          "Advanced Voice Typing ",
+          "Backup & Restore ",
+          "Change emoji size ",
+          "Clipboard Custom Character Limit ",
+          "Clipboard Enhancements ",
+          "Close Proactive Suggestions ",
+          "Custom Symbols ",
+          "Developer options ",
+          "Emojis, stickers & GIFs Tab Order ",
+          "Enable Inline Autofill Suggestions ",
+          "Enable OCR / Scan Text ",
+          "Enable accessibility layout ",
+          "Enable cursor trackpad mode ",
+          "Enable split keyboard ",
+          "English QWERTY Up-Flick Uppercase ",
+          "FTP Server ",
+          "Floating Web Search ",
+          "G Logo on Spacebar ",
+          "Grammar Checker ",
+          "Hyperspeed Typing Animation ",
+          "Incognito Mode Toggle ",
+          "Inline Suggestions ",
+          "Key Shape Selection ",
+          "Latin Globe Key Ignore Interval ",
+          "Long-Press Editing Shortcuts ",
+          "Quick Insert ",
+          "Rounded Keyboard Panel ",
+          "Settings Homepage Override ",
+          "Simple Calculator ",
+          "Swipeable Custom Top Row ",
+          "Top Toolbar Item Count ",
+          "Use Bluetooth Microphone ",
+          "Web Clipboard ",
+          "Zhuyin Bottom Row Key Sizes ",
+          "Zhuyin Quick Traditional/Simplified Toggle ",
+          "Zhuyin Slide Input "
+        ]
       }
     }
   },
@@ -9738,6 +9783,52 @@
       "260349": {
         "patches": "jasonwu1994/patches-3.10.0-dev.3.mpp",
         "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v3.10.0-dev.3",
+        "applied_patches": [
+          "AI Writing Tools ",
+          "Access Points menu style ",
+          "Add Gboard Signature Bypass ",
+          "Advanced Voice Typing ",
+          "Backup & Restore ",
+          "Change emoji size ",
+          "Clipboard Custom Character Limit ",
+          "Clipboard Enhancements ",
+          "Close Proactive Suggestions ",
+          "Custom Symbols ",
+          "Developer options ",
+          "Emojis, stickers & GIFs Tab Order ",
+          "Enable Inline Autofill Suggestions ",
+          "Enable OCR / Scan Text ",
+          "Enable accessibility layout ",
+          "Enable cursor trackpad mode ",
+          "Enable split keyboard ",
+          "English QWERTY Up-Flick Uppercase ",
+          "FTP Server ",
+          "Floating Web Search ",
+          "G Logo on Spacebar ",
+          "Grammar Checker ",
+          "Hyperspeed Typing Animation ",
+          "Incognito Mode Toggle ",
+          "Inline Suggestions ",
+          "Key Shape Selection ",
+          "Latin Globe Key Ignore Interval ",
+          "Long-Press Editing Shortcuts ",
+          "Quick Insert ",
+          "Rounded Keyboard Panel ",
+          "Settings Homepage Override ",
+          "Simple Calculator ",
+          "Swipeable Custom Top Row ",
+          "Top Toolbar Item Count ",
+          "Use Bluetooth Microphone ",
+          "Web Clipboard ",
+          "Zhuyin Bottom Row Key Sizes ",
+          "Zhuyin Quick Traditional/Simplified Toggle ",
+          "Zhuyin Slide Input ",
+          "Package Rename "
+        ]
+      },
+      "260351": {
+        "patches": "jasonwu1994/patches-3.10.0.mpp",
+        "changelog": "https://github.com/jasonwu1994/Gboard-patches/releases/tag/v3.10.0",
         "applied_patches": [
           "AI Writing Tools ",
           "Access Points menu style ",
@@ -10945,20 +11036,6 @@
       }
     },
     "45.8.0.110": {
-      "260253": {
-        "patches": "arandomhooman/patches-1.50.1.mpp",
-        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
-        "applied_patches": [
-          "Disable Tumblr TV ",
-          "Disable ad-free banner ",
-          "Disable blog notification reminder ",
-          "Disable gift message popup ",
-          "Disable in-app update ",
-          "Disable screenshot sharing ",
-          "Enable premium UI ",
-          "Remove ads "
-        ]
-      },
       "260260": {
         "patches": "arandomhooman/patches-1.50.2.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.2",
@@ -11207,13 +11284,6 @@
   },
   "rumble-morphe": {
     "3.14.5": {
-      "260253": {
-        "patches": "arandomhooman/patches-1.50.1.mpp",
-        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
-        "applied_patches": [
-          "Unlock Premium "
-        ]
-      },
       "260260": {
         "patches": "arandomhooman/patches-1.50.2.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.2",
@@ -11237,18 +11307,6 @@
       }
     },
     "30.7.2": {
-      "260253": {
-        "patches": "arandomhooman/patches-1.50.1.mpp",
-        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
-        "applied_patches": [
-          "7TV and BTTV emotes ",
-          "Auto claim channel points ",
-          "Block live ads ",
-          "Fix login ",
-          "Hide display ads ",
-          "Show deleted messages "
-        ]
-      },
       "260260": {
         "patches": "arandomhooman/patches-1.50.2.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.2",
@@ -11277,13 +11335,6 @@
   },
   "money-manager-morphe": {
     "4.11.1GF": {
-      "260253": {
-        "patches": "arandomhooman/patches-1.50.1.mpp",
-        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
-        "applied_patches": [
-          "Unlock Premium "
-        ]
-      },
       "260260": {
         "patches": "arandomhooman/patches-1.50.2.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.2",
@@ -11295,13 +11346,6 @@
   },
   "at4k-launcher-morphe": {
     "0.99": {
-      "260253": {
-        "patches": "arandomhooman/patches-1.50.1.mpp",
-        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
-        "applied_patches": [
-          "Unlock Premium "
-        ]
-      },
       "260260": {
         "patches": "arandomhooman/patches-1.50.2.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.2",
@@ -11313,13 +11357,6 @@
   },
   "projectivy-launcher-morphe": {
     "4.70": {
-      "260253": {
-        "patches": "arandomhooman/patches-1.50.1.mpp",
-        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
-        "applied_patches": [
-          "Unlock Premium "
-        ]
-      },
       "260260": {
         "patches": "arandomhooman/patches-1.50.2.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.2",
@@ -11340,13 +11377,6 @@
       }
     },
     "26.7.1.47181": {
-      "260253": {
-        "patches": "arandomhooman/patches-1.50.1.mpp",
-        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
-        "applied_patches": [
-          "Unlock Pro "
-        ]
-      },
       "260254": {
         "patches": "arandomhooman/patches-1.50.1.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
@@ -11372,13 +11402,6 @@
   },
   "inshot-morphe": {
     "2.214.1539": {
-      "260253": {
-        "patches": "arandomhooman/patches-1.50.1.mpp",
-        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
-        "applied_patches": [
-          "Unlock Pro "
-        ]
-      },
       "260260": {
         "patches": "arandomhooman/patches-1.50.2.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.2",
@@ -11390,13 +11413,6 @@
   },
   "todoist-morphe": {
     "12190": {
-      "260253": {
-        "patches": "arandomhooman/patches-1.50.1.mpp",
-        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
-        "applied_patches": [
-          "Unlock Pro "
-        ]
-      },
       "260260": {
         "patches": "arandomhooman/patches-1.50.2.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.2",
@@ -11416,13 +11432,6 @@
   },
   "poweramp-morphe": {
     "build-1025-bundle-play": {
-      "260253": {
-        "patches": "arandomhooman/patches-1.50.1.mpp",
-        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
-        "applied_patches": [
-          "Unlock Premium "
-        ]
-      },
       "260260": {
         "patches": "arandomhooman/patches-1.50.2.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.2",
@@ -11783,13 +11792,6 @@
   },
   "battery-guru-morphe": {
     "2.5.0.6": {
-      "260253": {
-        "patches": "arandomhooman/patches-1.50.1.mpp",
-        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
-        "applied_patches": [
-          "Unlock PRO "
-        ]
-      },
       "260260": {
         "patches": "arandomhooman/patches-1.50.2.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.2",
@@ -11823,13 +11825,6 @@
   },
   "google-phone-morphe": {
     "161.0.726587057": {
-      "260253": {
-        "patches": "arandomhooman/patches-1.50.1.mpp",
-        "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.1",
-        "applied_patches": [
-          "Enable call recording "
-        ]
-      },
       "260260": {
         "patches": "arandomhooman/patches-1.50.2.mpp",
         "changelog": "https://github.com/arandomhooman/hoomans-morphe-patches/releases/tag/v1.50.2",
@@ -11874,13 +11869,6 @@
   },
   "duolingo-morphe": {
     "6.92.5": {
-      "260253": {
-        "patches": "hoo-dles/patches-1.41.0.mpp",
-        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.41.0",
-        "applied_patches": [
-          "Enable Premium "
-        ]
-      },
       "260315": {
         "patches": "hoo-dles/patches-1.42.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.42.0",
@@ -11899,14 +11887,6 @@
   },
   "wps-office-morphe": {
     "18.12.1": {
-      "260253": {
-        "patches": "hoo-dles/patches-1.41.0.mpp",
-        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.41.0",
-        "applied_patches": [
-          "Disable anti-tamper ",
-          "Enable Pro "
-        ]
-      },
       "260315": {
         "patches": "hoo-dles/patches-1.42.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.42.0",
@@ -11927,13 +11907,6 @@
   },
   "wallcraft-morphe": {
     "3.61.01": {
-      "260253": {
-        "patches": "hoo-dles/patches-1.41.0.mpp",
-        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.41.0",
-        "applied_patches": [
-          "Enable Premium "
-        ]
-      },
       "260315": {
         "patches": "hoo-dles/patches-1.42.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.42.0",
@@ -11982,13 +11955,6 @@
   },
   "icon-packer-morphe": {
     "1.21.0-release": {
-      "260253": {
-        "patches": "hoo-dles/patches-1.41.0.mpp",
-        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.41.0",
-        "applied_patches": [
-          "Unlock premium features "
-        ]
-      },
       "260315": {
         "patches": "hoo-dles/patches-1.42.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.42.0",
@@ -12007,14 +11973,6 @@
   },
   "podcast-addict-morphe": {
     "2026.4": {
-      "260253": {
-        "patches": "hoo-dles/patches-1.41.0.mpp",
-        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.41.0",
-        "applied_patches": [
-          "Enable Premium ",
-          "MicroG integration "
-        ]
-      },
       "260315": {
         "patches": "hoo-dles/patches-1.42.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.42.0",
@@ -12035,13 +11993,6 @@
   },
   "merriam-webster-dictionary-morphe": {
     "5.5.0": {
-      "260253": {
-        "patches": "hoo-dles/patches-1.41.0.mpp",
-        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.41.0",
-        "applied_patches": [
-          "Enable Premium "
-        ]
-      },
       "260315": {
         "patches": "hoo-dles/patches-1.42.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.42.0",
@@ -12060,14 +12011,6 @@
   },
   "pandora-morphe": {
     "2608.1": {
-      "260253": {
-        "patches": "hoo-dles/patches-1.41.0.mpp",
-        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.41.0",
-        "applied_patches": [
-          "Disable ads ",
-          "Unlimited skips "
-        ]
-      },
       "260315": {
         "patches": "hoo-dles/patches-1.42.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.42.0",
@@ -12088,13 +12031,6 @@
   },
   "xrecorder-morphe": {
     "2.5.1.1": {
-      "260253": {
-        "patches": "hoo-dles/patches-1.41.0.mpp",
-        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.41.0",
-        "applied_patches": [
-          "Enable Pro "
-        ]
-      },
       "260315": {
         "patches": "hoo-dles/patches-1.42.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.42.0",
@@ -12140,13 +12076,6 @@
   },
   "nova-launcher-morphe": {
     "88600": {
-      "260253": {
-        "patches": "hoo-dles/patches-1.41.0.mpp",
-        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.41.0",
-        "applied_patches": [
-          "Enable Prime "
-        ]
-      },
       "260315": {
         "patches": "hoo-dles/patches-1.42.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.42.0",
@@ -12165,13 +12094,6 @@
   },
   "ventusky-morphe": {
     "53.1": {
-      "260253": {
-        "patches": "hoo-dles/patches-1.41.0.mpp",
-        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.41.0",
-        "applied_patches": [
-          "Enable Premium "
-        ]
-      },
       "260315": {
         "patches": "hoo-dles/patches-1.42.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.42.0",
@@ -12190,13 +12112,6 @@
   },
   "github-morphe": {
     "1.271.1": {
-      "260253": {
-        "patches": "hoo-dles/patches-1.41.0.mpp",
-        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.41.0",
-        "applied_patches": [
-          "AMOLED dark theme "
-        ]
-      },
       "260315": {
         "patches": "hoo-dles/patches-1.42.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.42.0",
@@ -12215,16 +12130,6 @@
   },
   "proton-vpn-morphe": {
     "5.19.43.0": {
-      "260253": {
-        "patches": "hoo-dles/patches-1.41.0.mpp",
-        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.41.0",
-        "applied_patches": [
-          "Remove delay ",
-          "Unlock LAN connections ",
-          "Unlock custom DNS ",
-          "Unlock split tunneling "
-        ]
-      },
       "260315": {
         "patches": "hoo-dles/patches-1.42.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.42.0",
@@ -12276,13 +12181,6 @@
   },
   "myfitnesspal-morphe": {
     "26.31.0": {
-      "260253": {
-        "patches": "hoo-dles/patches-1.41.0.mpp",
-        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.41.0",
-        "applied_patches": [
-          "Enable Premium+ "
-        ]
-      },
       "260315": {
         "patches": "hoo-dles/patches-1.42.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.42.0",
@@ -12301,13 +12199,6 @@
   },
   "goodreads-morphe": {
     "2.75.0Build3": {
-      "260253": {
-        "patches": "hoo-dles/patches-1.41.0.mpp",
-        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.41.0",
-        "applied_patches": [
-          "Disable ads "
-        ]
-      },
       "260315": {
         "patches": "hoo-dles/patches-1.42.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.42.0",
