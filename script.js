@@ -117,7 +117,8 @@ const CONFIG = {
     sendfilestotv: "Send Files to TV",
     bluetoothkeyboardandmouse: "Bluetooth Keyboard & Mouse",
     swiftkeyboard: "Microsoft SwiftKey AI Keyboard",
-    capcut: "CapCut: Photo & Video Editor"
+    capcut: "CapCut: Photo & Video Editor",
+    chesscom: "Chess.com"
   },
 
   // Map app slugs to true Android Package IDs for Obtainium
@@ -148,6 +149,7 @@ const CONFIG = {
     caloriecounter: "com.fatsecret.android",
     calm: "com.calm.android",
     camscanner: "com.intsig.camscanner",
+    chesscom: "com.chess",
     capcutphotovideoeditor: "com.lemon.lvoverseas",
     cricbuzz: "com.cricbuzz.android",
     cryptomator: "org.cryptomator",
