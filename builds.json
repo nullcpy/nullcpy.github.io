@@ -12149,6 +12149,20 @@
           "Disable Pull To Refresh ",
           "Skip First Run "
         ]
+      },
+      "260359": {
+        "patches": "kveld9/patches-1.12.0.mpp",
+        "changelog": "https://github.com/kveld9/kveld-morphe-patches/releases/tag/v1.12.0",
+        "applied_patches": [
+          "Block Brave Telemetry ",
+          "Brave In-Product & Commercial Notification Optimizer ",
+          "Brave Origin ",
+          "Brave Startup Performance Optimization ",
+          "Disable Background Sync & Periodic Sync ",
+          "Disable Battery Status API & OS Listener ",
+          "Disable Pull To Refresh ",
+          "Skip First Run "
+        ]
       }
     }
   },
