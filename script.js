@@ -1904,9 +1904,9 @@ function createObtainiumInstructions(app, patch) {
 
   const isSpecificVariant = modalVariantFilter && modalVariantFilter !== "default" && modalVariantFilter !== "all";
 
-  let regexPattern = `^${rawSlug}-${rawPatch}.*\\.apk$`;
+  let regexPattern = `^${rawSlug}-${rawPatch}-v.*\\.apk$`;
   if (isSpecificVariant) {
-    regexPattern = `^${rawSlug}-${rawPatch}-${modalVariantFilter}.*\\.apk$`;
+    regexPattern = `^${rawSlug}-${rawPatch}-${modalVariantFilter}-v.*\\.apk$`;
   }
 
   const mainPackageId = getAppPackageId(app, patch, modalVariantFilter || "default");
@@ -1929,8 +1929,8 @@ function createObtainiumInstructions(app, patch) {
   if (patch && patch.variants && patch.variants.length > 1) {
     const examples = patch.variants.map((v, index) => {
       const vRegex = v.variantKey === "default"
-        ? `^${rawSlug}-${rawPatch}.*\\.apk$`
-        : `^${rawSlug}-${rawPatch}-${v.variantKey}.*\\.apk$`;
+        ? `^${rawSlug}-${rawPatch}-v.*\\.apk$`
+        : `^${rawSlug}-${rawPatch}-${v.variantKey}-v.*\\.apk$`;
       const vLabel = `${app.appName} (${patch.patchName} - ${v.variantName})`;
       const vPackageId = getAppPackageId(app, patch, v.variantKey);
 
