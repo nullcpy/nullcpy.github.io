@@ -9673,6 +9673,21 @@
           "Change Home Long Click",
           "Add App Trigger"
         ]
+      },
+      "260355": {
+        "patches": "",
+        "changelog": "",
+        "applied_patches": [
+          "Unlock Developer Options",
+          "Remove Snooze Warning",
+          "Remove Ads",
+          "AMOLED Theme",
+          "Get Generation Info",
+          "Copy Instafel Sources",
+          "Add Initialize Instafel",
+          "Change Home Long Click",
+          "Add App Trigger"
+        ]
       }
     }
   },
@@ -9760,6 +9775,21 @@
         ]
       },
       "260354": {
+        "patches": "",
+        "changelog": "",
+        "applied_patches": [
+          "Unlock Developer Options",
+          "Remove Snooze Warning",
+          "Remove Ads",
+          "AMOLED Theme",
+          "Get Generation Info",
+          "Copy Instafel Sources",
+          "Add Initialize Instafel",
+          "Change Home Long Click",
+          "Add App Trigger"
+        ]
+      },
+      "260355": {
         "patches": "",
         "changelog": "",
         "applied_patches": [
@@ -10818,18 +10848,6 @@
   },
   "proton-mail-morphe": {
     "7.10.4": {
-      "260257": {
-        "patches": "hxreborn/patches-1.8.0.mpp",
-        "changelog": "https://github.com/hxreborn/morphe-patches/releases/tag/v1.8.0",
-        "applied_patches": [
-          "AMOLED dark theme ",
-          "Hide upgrade upselling ",
-          "Remove 'Sent from' signature ",
-          "Remove free accounts limit ",
-          "Spoof signature ",
-          "Unlock custom time picker "
-        ]
-      },
       "260263": {
         "patches": "hxreborn/patches-1.9.1.mpp",
         "changelog": "https://github.com/hxreborn/morphe-patches/releases/tag/v1.9.1",
@@ -10942,14 +10960,6 @@
   },
   "showly-morphe": {
     "3.70.0": {
-      "260257": {
-        "patches": "hxreborn/patches-1.8.0.mpp",
-        "changelog": "https://github.com/hxreborn/morphe-patches/releases/tag/v1.8.0",
-        "applied_patches": [
-          "AMOLED dark theme ",
-          "Unlock premium "
-        ]
-      },
       "260263": {
         "patches": "hxreborn/patches-1.9.1.mpp",
         "changelog": "https://github.com/hxreborn/morphe-patches/releases/tag/v1.9.1",
