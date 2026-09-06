@@ -40,22 +40,6 @@
         ]
       }
     },
-    "2026.32.0": {
-      "260277": {
-        "patches": "jkennethcarino/patches-1.3.1-dev.2.mpp",
-        "changelog": "https://github.com/jkennethcarino/adobo/releases/tag/v1.3.1-dev.2",
-        "applied_patches": [
-          "Colorize comment indent lines ",
-          "Disable home screen redirect ",
-          "Disable screenshot banner ",
-          "Hide community menu badge ",
-          "Hide post view counts ",
-          "Open external links directly ",
-          "Remove ads and telemetry ",
-          "Sanitize share links "
-        ]
-      }
-    },
     "2026.34.0": {
       "260279": {
         "patches": "jkennethcarino/patches-1.4.0-dev.2.mpp",
@@ -11567,78 +11551,6 @@
   },
   "youtube-anddea": {
     "20.51.39": {
-      "260277": {
-        "patches": "anddea/patches-4.3.0-dev.2.mpp",
-        "changelog": "https://github.com/anddea/revanced-patches/releases/tag/v4.3.0-dev.2",
-        "applied_patches": [
-          "Alternative thumbnails ",
-          "Ambient mode control ",
-          "Bypass URL redirects ",
-          "Bypass image region restrictions ",
-          "Change form factor ",
-          "Change player flyout menu toggles ",
-          "Change share sheet ",
-          "Change start page ",
-          "Custom DPI ",
-          "Custom Shorts action buttons ",
-          "Custom branding for YouTube ",
-          "Custom double tap length ",
-          "Description components ",
-          "Disable QUIC protocol ",
-          "Disable forced auto captions ",
-          "Disable haptic feedback ",
-          "Disable layout updates ",
-          "Disable resuming Miniplayer on startup ",
-          "Disable resuming Shorts on startup ",
-          "Disable sign in to TV popup ",
-          "Enable debug logging ",
-          "Enable gradient loading screen ",
-          "Force original audio ",
-          "Force player buttons background ",
-          "Fullscreen components ",
-          "GmsCore support ",
-          "Hide action buttons ",
-          "Hide ads ",
-          "Hide comments components ",
-          "Hide feed components ",
-          "Hide feed flyout menu ",
-          "Hide layout components ",
-          "Hide player buttons ",
-          "Hide player flyout menu ",
-          "Hook download actions ",
-          "Miniplayer ",
-          "Navigation bar components ",
-          "Open links externally ",
-          "Overlay buttons ",
-          "Override YouTube Music buttons ",
-          "Playback in feeds ",
-          "Player components ",
-          "Remove background playback restrictions ",
-          "Remove viewer discretion dialog ",
-          "Return YouTube Dislike ",
-          "Return YouTube Username ",
-          "Sanitize sharing links ",
-          "Seekbar components ",
-          "Set transcript cookies ",
-          "Settings menu filter ",
-          "Shorts components ",
-          "Snack bar components ",
-          "SponsorBlock ",
-          "Spoof app version ",
-          "Spoof video streams ",
-          "Spoof watch history ",
-          "Swipe controls ",
-          "Theme ",
-          "Toolbar components ",
-          "Translations for YouTube ",
-          "Video playback ",
-          "Voice Over Translation ",
-          "Wide search bar ",
-          "Visual preferences icons for YouTube ",
-          "Reload video ",
-          "Settings for YouTube "
-        ]
-      },
       "260318": {
         "patches": "anddea/patches-4.3.0-dev.4.mpp",
         "changelog": "https://github.com/anddea/revanced-patches/releases/tag/v4.3.0-dev.4",
@@ -11797,52 +11709,6 @@
   },
   "youtube-music-anddea": {
     "9.15.51": {
-      "260277": {
-        "patches": "anddea/patches-4.3.0-dev.2.mpp",
-        "changelog": "https://github.com/anddea/revanced-patches/releases/tag/v4.3.0-dev.2",
-        "applied_patches": [
-          "Bitrate default value ",
-          "Bypass image region restrictions ",
-          "Certificate spoof ",
-          "Change share sheet ",
-          "Change start page ",
-          "Custom branding for YouTube Music ",
-          "Disable Cairo splash animation ",
-          "Disable QUIC protocol ",
-          "Disable dislike redirection ",
-          "Disable forced auto captions ",
-          "Enable debug logging ",
-          "Enable landscape mode ",
-          "Flyout menu components ",
-          "Force original audio ",
-          "GmsCore support ",
-          "Hide account components ",
-          "Hide action bar components ",
-          "Hide ads ",
-          "Hide layout components ",
-          "Navigation bar components ",
-          "Player components ",
-          "Remove background playback restrictions ",
-          "Remove viewer discretion dialog ",
-          "Restore old style library shelf ",
-          "Return YouTube Dislike ",
-          "Return YouTube Username ",
-          "Sanitize sharing links ",
-          "Settings menu filter ",
-          "SponsorBlock ",
-          "Spoof app version ",
-          "Spoof app version for lyrics ",
-          "Spoof video streams ",
-          "Theme ",
-          "Third-party lyrics ",
-          "Track crossfade ",
-          "Translations for YouTube Music ",
-          "Video playback ",
-          "Watch history ",
-          "Visual preferences icons for YouTube Music ",
-          "Settings for YouTube Music "
-        ]
-      },
       "260318": {
         "patches": "anddea/patches-4.3.0-dev.4.mpp",
         "changelog": "https://github.com/anddea/revanced-patches/releases/tag/v4.3.0-dev.4",
@@ -13920,6 +13786,22 @@
         ]
       },
       "260374": {
+        "patches": "Quantro100/patches-1.0.7.mpp",
+        "changelog": "https://github.com/Quantro100/Morphe-patches/releases/tag/v1.0.7",
+        "applied_patches": [
+          "Bypass signature check ",
+          "Disable analytics ",
+          "Disable forced updates ",
+          "Disable promotions notifications ",
+          "Disable splash screen ",
+          "Enable image saving ",
+          "Remove ads ",
+          "Remove affiliate tracking ",
+          "Remove coupons popup ",
+          "Remove sponsored items from search "
+        ]
+      },
+      "260375": {
         "patches": "Quantro100/patches-1.0.7.mpp",
         "changelog": "https://github.com/Quantro100/Morphe-patches/releases/tag/v1.0.7",
         "applied_patches": [
