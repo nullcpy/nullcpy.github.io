@@ -118,18 +118,20 @@ const CONFIG = {
     bluetoothkeyboardandmouse: "Bluetooth Keyboard & Mouse",
     swiftkeyboard: "Microsoft SwiftKey AI Keyboard",
     capcut: "CapCut: Photo & Video Editor",
-    chesscom: "Chess.com"
+    chesscom: "Chess.com",
+    aliexpress: "AliExpress - Shopping App",
   },
 
   // Map app slugs to true Android Package IDs for Obtainium
   appIds: {
     "1111warp": "com.cloudflare.onedotonedotonedotone",
     acalendar: "org.withouthat.acalendar",
+    accuweather: "com.accuweather.android",
     adguard: "com.adguard.android",
     adobeacrobat: "com.adobe.reader",
     adobelightroom: "com.adobe.lrmobile",
     adobephotoshopmix: "com.adobe.photoshopmix",
-    accuweather: "com.accuweather.android",
+    aliexpressshoppingapp: "com.alibaba.aliexpresshd",
     alldocumentreader: "alldocumentsreader.docuemntviewer",
     amazonindia: "in.amazon.mShop.android.shopping",
     at4klauncher: "com.overdevs.at4k",
