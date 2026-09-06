@@ -11613,18 +11613,6 @@
   },
   "proton-mail-morphe": {
     "7.10.4": {
-      "260275": {
-        "patches": "hxreborn/patches-1.10.0.mpp",
-        "changelog": "https://github.com/hxreborn/morphe-patches/releases/tag/v1.10.0",
-        "applied_patches": [
-          "AMOLED dark theme ",
-          "Hide upgrade upselling ",
-          "Remove 'Sent from' signature ",
-          "Remove free accounts limit ",
-          "Spoof signature ",
-          "Unlock custom time picker "
-        ]
-      },
       "260296": {
         "patches": "hxreborn/patches-1.11.0.mpp",
         "changelog": "https://github.com/hxreborn/morphe-patches/releases/tag/v1.11.0",
@@ -13008,6 +12996,15 @@
           "Brave Origin "
         ]
       }
+    },
+    "1.96.46": {
+      "260373": {
+        "patches": "dh6k/patches-1.5.0.mpp",
+        "changelog": "https://github.com/dh6k/morphe-patches/releases/tag/v1.5.0",
+        "applied_patches": [
+          "Brave Origin "
+        ]
+      }
     }
   },
   "amazon-india-morphe": {
@@ -13141,6 +13138,15 @@
       "260300": {
         "patches": "dh6k/patches-1.4.0.mpp",
         "changelog": "https://github.com/dh6k/morphe-patches/releases/tag/v1.4.0",
+        "applied_patches": [
+          "Brave Origin "
+        ]
+      }
+    },
+    "1.97.8": {
+      "260373": {
+        "patches": "dh6k/patches-1.5.0.mpp",
+        "changelog": "https://github.com/dh6k/morphe-patches/releases/tag/v1.5.0",
         "applied_patches": [
           "Brave Origin "
         ]
@@ -13919,6 +13925,11 @@
         "applied_patches": [
           "Keep Helium Child Processes Alive "
         ]
+      },
+      "260373": {
+        "patches": "dh6k/patches-1.5.0.mpp",
+        "changelog": "https://github.com/dh6k/morphe-patches/releases/tag/v1.5.0",
+        "applied_patches": []
       }
     }
   },
@@ -14180,6 +14191,24 @@
           "Lichess Puzzles ",
           "Local Stockfish Analysis ",
           "Unlock All Bots "
+        ]
+      }
+    }
+  },
+  "aliexpress-morphe": {
+    "8.162.8": {
+      "260373": {
+        "patches": "Quantro100/patches-1.0.7.mpp",
+        "changelog": "https://github.com/Quantro100/Morphe-patches/releases/tag/v1.0.7",
+        "applied_patches": [
+          "Bypass signature check ",
+          "Disable analytics ",
+          "Disable forced updates ",
+          "Disable promotions notifications ",
+          "Remove ads ",
+          "Remove affiliate tracking ",
+          "Remove coupons popup ",
+          "Remove sponsored items from search "
         ]
       }
     }
