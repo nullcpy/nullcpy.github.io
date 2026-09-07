@@ -21,6 +21,9 @@ const CONFIG = {
     "all"
   ],
   "appCategories": {
+    "Adobe": [
+      "adobe"
+    ],
     "Android TV": [
       "primevideo",
       "plutotv",
@@ -36,9 +39,16 @@ const CONFIG = {
       "netflix",
       "nuvio"
     ],
+    "Browser": [
+      "browser",
+      "edge"
+    ],
     "Google": [
       "youtube",
       "google"
+    ],
+    "Launcher": [
+      "launcher"
     ],
     "Meta": [
       "threads",
@@ -47,6 +57,7 @@ const CONFIG = {
       "facebook",
       "!plusmessenger"
     ],
+    "Microsoft": ["microsoft"],
     "VPN": [
       "1111warp",
       "vpnify",
@@ -726,10 +737,7 @@ function createAppCard(app) {
   });
 
   const totalDownloads = app.totalDownloads || 0;
-  const dlBadge =
-    totalDownloads > 0
-      ? `<span class="patch-stat-badge" title="${formatCompactNumber(totalDownloads)} Total Downloads">📥 ${formatCompactNumber(totalDownloads)}</span>`
-      : "";
+  const dlBadge = `<span class="patch-stat-badge" title="${totalDownloads.toLocaleString()} Total Downloads">📥 ${formatCompactNumber(totalDownloads)}</span>`;
 
   return `
     <div class="build-card app-card">
@@ -1179,7 +1187,7 @@ function openAppliedPatchesModal(appKey, brandKey, buildId) {
     DOM.appliedPatchesTitle.textContent = `${app.appName} (${brand.brandName})`;
   }
 
-  let build = (brand.builds || []).find((b) => String(b.releaseId) === String(buildId) || String(b.build) === String(buildId) );
+  let build = (brand.builds || []).find((b) => String(b.releaseId) === String(buildId) || String(b.build) === String(buildId));
   if (!build) {
     build = brand.builds?.[0];
   }
