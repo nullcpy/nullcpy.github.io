@@ -2143,86 +2143,6 @@
   },
   "youtube-morphe": {
     "21.04.223": {
-      "260284": {
-        "patches": "MorpheApp/patches-1.40.0-dev.17.mpp",
-        "changelog": "https://github.com/MorpheApp/morphe-patches/releases/tag/v1.40.0-dev.17",
-        "applied_patches": [
-          "Add to queue ",
-          "Alternative thumbnails ",
-          "Ambient mode ",
-          "Bypass image region restrictions ",
-          "Bypass link redirects ",
-          "Captions ",
-          "Change form factor ",
-          "Change header ",
-          "Change start page ",
-          "Check watch history domain name resolution ",
-          "Copy video link ",
-          "Custom branding ",
-          "Custom player overlay opacity ",
-          "Disable DRC audio ",
-          "Disable QUIC protocol ",
-          "Disable Shorts resuming on startup ",
-          "Disable double tap actions ",
-          "Disable fullscreen gestures ",
-          "Disable haptic feedback ",
-          "Disable layout updates ",
-          "Disable player popup panels ",
-          "Disable rolling number animations ",
-          "Disable sign in to TV popup ",
-          "Disable video codecs ",
-          "Double tap to seek ",
-          "Downloads ",
-          "Enable debugging ",
-          "Exit fullscreen mode ",
-          "Force original audio ",
-          "GmsCore support ",
-          "Hide Shorts components ",
-          "Hide ads ",
-          "Hide autoplay preview ",
-          "Hide end screen cards ",
-          "Hide end screen suggested video ",
-          "Hide info cards ",
-          "Hide layout components ",
-          "Hide player flyout menu components ",
-          "Hide player overlay buttons ",
-          "Hide related video overlay ",
-          "Hide related videos ",
-          "Hide timestamp ",
-          "Hide video action buttons ",
-          "Loop video ",
-          "Media notification controls ",
-          "Miniplayer ",
-          "Navigation bar ",
-          "Open Shorts in regular player ",
-          "Open channel of live avatar ",
-          "Open links externally ",
-          "Open system share sheet ",
-          "Open videos fullscreen ",
-          "Override YouTube Music buttons ",
-          "Play all ",
-          "Playback in feeds ",
-          "Playback speed ",
-          "Reload video ",
-          "Remove background playback restrictions ",
-          "Remove viewer discretion dialog ",
-          "Return YouTube Dislike ",
-          "Sanitize sharing links ",
-          "Save to watch later ",
-          "Seekbar ",
-          "Settings menu filter ",
-          "Shorts autoplay ",
-          "SponsorBlock ",
-          "Spoof app version ",
-          "Spoof device dimensions ",
-          "Spoof video streams ",
-          "Swipe controls ",
-          "Theme ",
-          "Video quality ",
-          "Voice over translation ",
-          "Wide search bar "
-        ]
-      },
       "260286": {
         "patches": "MorpheApp/patches-1.40.0-dev.18.mpp",
         "changelog": "https://github.com/MorpheApp/morphe-patches/releases/tag/v1.40.0-dev.18",
@@ -4073,50 +3993,6 @@
   },
   "youtube-music-morphe": {
     "9.15.51": {
-      "260284": {
-        "patches": "MorpheApp/patches-1.40.0-dev.17.mpp",
-        "changelog": "https://github.com/MorpheApp/morphe-patches/releases/tag/v1.40.0-dev.17",
-        "applied_patches": [
-          "Bypass certificate checks ",
-          "Change header ",
-          "Change miniplayer color ",
-          "Change start page ",
-          "Check watch history domain name resolution ",
-          "Crossfade ",
-          "Custom branding ",
-          "Disable DRC audio ",
-          "Disable QUIC protocol ",
-          "Disable dislike redirection ",
-          "Downloads ",
-          "Enable debugging ",
-          "Enable exclusive audio playback ",
-          "Enable forced miniplayer ",
-          "Enable swipe to dismiss miniplayer ",
-          "Force original audio ",
-          "GmsCore support ",
-          "Hide ads ",
-          "Hide buttons ",
-          "Hide filter bar ",
-          "Hide flyout menu components ",
-          "Hide layout components ",
-          "Hide music action buttons ",
-          "Miniplayer previous and next buttons ",
-          "Navigation bar ",
-          "Remember repeat state ",
-          "Remember shuffle state ",
-          "Remove background playback restrictions ",
-          "Remove viewer discretion dialog ",
-          "Return YouTube Dislike ",
-          "Sanitize sharing links ",
-          "Scrobbling ",
-          "Settings menu filter ",
-          "SponsorBlock ",
-          "Spoof app version ",
-          "Spoof video streams ",
-          "Theme ",
-          "Third-party lyrics "
-        ]
-      },
       "260286": {
         "patches": "MorpheApp/patches-1.40.0-dev.18.mpp",
         "changelog": "https://github.com/MorpheApp/morphe-patches/releases/tag/v1.40.0-dev.18",
@@ -4850,88 +4726,6 @@
     }
   },
   "youtube-morphe-exp": {
-    "21.33.321": {
-      "260284": {
-        "patches": "MorpheApp/patches-1.40.0-dev.17.mpp",
-        "changelog": "https://github.com/MorpheApp/morphe-patches/releases/tag/v1.40.0-dev.17",
-        "applied_patches": [
-          "Add to queue ",
-          "Alternative thumbnails ",
-          "Ambient mode ",
-          "Bypass image region restrictions ",
-          "Bypass link redirects ",
-          "Captions ",
-          "Change form factor ",
-          "Change header ",
-          "Change start page ",
-          "Check watch history domain name resolution ",
-          "Copy video link ",
-          "Custom branding ",
-          "Custom player overlay opacity ",
-          "Disable DRC audio ",
-          "Disable QUIC protocol ",
-          "Disable Shorts resuming on startup ",
-          "Disable double tap actions ",
-          "Disable fullscreen gestures ",
-          "Disable haptic feedback ",
-          "Disable layout updates ",
-          "Disable player popup panels ",
-          "Disable rolling number animations ",
-          "Disable sign in to TV popup ",
-          "Disable video codecs ",
-          "Double tap to seek ",
-          "Downloads ",
-          "Enable debugging ",
-          "Exit fullscreen mode ",
-          "Force original audio ",
-          "GmsCore support ",
-          "Hide Shorts components ",
-          "Hide ads ",
-          "Hide autoplay preview ",
-          "Hide end screen cards ",
-          "Hide end screen suggested video ",
-          "Hide info cards ",
-          "Hide layout components ",
-          "Hide player flyout menu components ",
-          "Hide player overlay buttons ",
-          "Hide related video overlay ",
-          "Hide related videos ",
-          "Hide timestamp ",
-          "Hide video action buttons ",
-          "Loop video ",
-          "Media notification controls ",
-          "Miniplayer ",
-          "Navigation bar ",
-          "Open Shorts in regular player ",
-          "Open channel of live avatar ",
-          "Open links externally ",
-          "Open system share sheet ",
-          "Open videos fullscreen ",
-          "Override YouTube Music buttons ",
-          "Play all ",
-          "Playback in feeds ",
-          "Playback speed ",
-          "Reload video ",
-          "Remove background playback restrictions ",
-          "Remove viewer discretion dialog ",
-          "Return YouTube Dislike ",
-          "Sanitize sharing links ",
-          "Save to watch later ",
-          "Seekbar ",
-          "Settings menu filter ",
-          "Shorts autoplay ",
-          "SponsorBlock ",
-          "Spoof app version ",
-          "Spoof device dimensions ",
-          "Spoof video streams ",
-          "Swipe controls ",
-          "Theme ",
-          "Video quality ",
-          "Voice over translation ",
-          "Wide search bar "
-        ]
-      }
-    },
     "21.34.243": {
       "260286": {
         "patches": "MorpheApp/patches-1.40.0-dev.18.mpp",
@@ -6785,50 +6579,6 @@
   },
   "youtube-music-morphe-exp": {
     "9.33.52": {
-      "260284": {
-        "patches": "MorpheApp/patches-1.40.0-dev.17.mpp",
-        "changelog": "https://github.com/MorpheApp/morphe-patches/releases/tag/v1.40.0-dev.17",
-        "applied_patches": [
-          "Bypass certificate checks ",
-          "Change header ",
-          "Change miniplayer color ",
-          "Change start page ",
-          "Check watch history domain name resolution ",
-          "Crossfade ",
-          "Custom branding ",
-          "Disable DRC audio ",
-          "Disable QUIC protocol ",
-          "Disable dislike redirection ",
-          "Downloads ",
-          "Enable debugging ",
-          "Enable exclusive audio playback ",
-          "Enable forced miniplayer ",
-          "Enable swipe to dismiss miniplayer ",
-          "Force original audio ",
-          "GmsCore support ",
-          "Hide ads ",
-          "Hide buttons ",
-          "Hide filter bar ",
-          "Hide flyout menu components ",
-          "Hide layout components ",
-          "Hide music action buttons ",
-          "Miniplayer previous and next buttons ",
-          "Navigation bar ",
-          "Remember repeat state ",
-          "Remember shuffle state ",
-          "Remove background playback restrictions ",
-          "Remove viewer discretion dialog ",
-          "Return YouTube Dislike ",
-          "Sanitize sharing links ",
-          "Scrobbling ",
-          "Settings menu filter ",
-          "SponsorBlock ",
-          "Spoof app version ",
-          "Spoof video streams ",
-          "Theme ",
-          "Third-party lyrics "
-        ]
-      },
       "260286": {
         "patches": "MorpheApp/patches-1.40.0-dev.18.mpp",
         "changelog": "https://github.com/MorpheApp/morphe-patches/releases/tag/v1.40.0-dev.18",
@@ -7567,28 +7317,6 @@
   },
   "reddit-morphe-exp": {
     "2026.34.0": {
-      "260284": {
-        "patches": "MorpheApp/patches-1.40.0-dev.18.mpp",
-        "changelog": "https://github.com/MorpheApp/morphe-patches/releases/tag/v1.40.0-dev.18",
-        "applied_patches": [
-          "Custom font ",
-          "Disable modern home ",
-          "Disable screenshot popup ",
-          "Force system font ",
-          "Hide Ask button ",
-          "Hide Trending shelves ",
-          "Hide ads ",
-          "Hide communities shelf ",
-          "Hide navigation buttons ",
-          "Hide sidebar components ",
-          "Open links directly ",
-          "Open links externally ",
-          "Remove subreddit dialog ",
-          "Sanitize sharing links ",
-          "Show view count ",
-          "Spoof signature "
-        ]
-      },
       "260286": {
         "patches": "MorpheApp/patches-1.40.0-dev.18.mpp",
         "changelog": "https://github.com/MorpheApp/morphe-patches/releases/tag/v1.40.0-dev.18",
@@ -7969,28 +7697,6 @@
   },
   "reddit-morphe": {
     "2026.14.0": {
-      "260284": {
-        "patches": "MorpheApp/patches-1.40.0-dev.18.mpp",
-        "changelog": "https://github.com/MorpheApp/morphe-patches/releases/tag/v1.40.0-dev.18",
-        "applied_patches": [
-          "Custom font ",
-          "Disable modern home ",
-          "Disable screenshot popup ",
-          "Force system font ",
-          "Hide Ask button ",
-          "Hide Trending shelves ",
-          "Hide ads ",
-          "Hide communities shelf ",
-          "Hide navigation buttons ",
-          "Hide sidebar components ",
-          "Open links directly ",
-          "Open links externally ",
-          "Remove subreddit dialog ",
-          "Sanitize sharing links ",
-          "Show view count ",
-          "Spoof signature "
-        ]
-      },
       "260286": {
         "patches": "MorpheApp/patches-1.40.0-dev.18.mpp",
         "changelog": "https://github.com/MorpheApp/morphe-patches/releases/tag/v1.40.0-dev.18",
@@ -12224,6 +11930,15 @@
           "Disable telemetry ",
           "Enable SoundCloud Go "
         ]
+      },
+      "260382": {
+        "patches": "hoo-dles/patches-1.44.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.44.0",
+        "applied_patches": [
+          "AMOLED dark theme ",
+          "Disable telemetry ",
+          "Enable SoundCloud Go "
+        ]
       }
     }
   },
@@ -12239,6 +11954,15 @@
       "260330": {
         "patches": "hoo-dles/patches-1.43.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.43.0",
+        "applied_patches": [
+          "Enable Premium "
+        ]
+      }
+    },
+    "6.95.4": {
+      "260382": {
+        "patches": "hoo-dles/patches-1.44.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.44.0",
         "applied_patches": [
           "Enable Premium "
         ]
@@ -12262,6 +11986,14 @@
           "Disable anti-tamper ",
           "Enable Pro "
         ]
+      },
+      "260382": {
+        "patches": "hoo-dles/patches-1.44.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.44.0",
+        "applied_patches": [
+          "Disable anti-tamper ",
+          "Enable Pro "
+        ]
       }
     }
   },
@@ -12280,20 +12012,17 @@
         "applied_patches": [
           "Enable Premium "
         ]
+      },
+      "260382": {
+        "patches": "hoo-dles/patches-1.44.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.44.0",
+        "applied_patches": [
+          "Enable Premium "
+        ]
       }
     }
   },
   "solid-explorer-morphe": {
-    "3.5.16": {
-      "260253": {
-        "patches": "hoo-dles/patches-1.41.0.mpp",
-        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.41.0",
-        "applied_patches": [
-          "Enable Pro ",
-          "MicroG integration "
-        ]
-      }
-    },
     "3.5.19": {
       "260315": {
         "patches": "hoo-dles/patches-1.42.0.mpp",
@@ -12309,6 +12038,15 @@
         "applied_patches": [
           "Enable Pro ",
           "MicroG integration "
+        ]
+      }
+    },
+    "3.5.20": {
+      "260382": {
+        "patches": "hoo-dles/patches-1.44.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.44.0",
+        "applied_patches": [
+          "Enable Pro "
         ]
       }
     }
@@ -12336,6 +12074,13 @@
           "MicroG integration ",
           "Unlock premium features "
         ]
+      },
+      "260382": {
+        "patches": "hoo-dles/patches-1.44.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.44.0",
+        "applied_patches": [
+          "Unlock premium features "
+        ]
       }
     }
   },
@@ -12357,6 +12102,15 @@
           "MicroG integration "
         ]
       }
+    },
+    "2026.10.1": {
+      "260382": {
+        "patches": "hoo-dles/patches-1.44.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.44.0",
+        "applied_patches": [
+          "Enable Premium "
+        ]
+      }
     }
   },
   "merriam-webster-dictionary-morphe": {
@@ -12371,6 +12125,13 @@
       "260330": {
         "patches": "hoo-dles/patches-1.43.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.43.0",
+        "applied_patches": [
+          "Enable Premium "
+        ]
+      },
+      "260382": {
+        "patches": "hoo-dles/patches-1.44.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.44.0",
         "applied_patches": [
           "Enable Premium "
         ]
@@ -12390,6 +12151,14 @@
       "260330": {
         "patches": "hoo-dles/patches-1.43.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.43.0",
+        "applied_patches": [
+          "Disable ads ",
+          "Unlimited skips "
+        ]
+      },
+      "260382": {
+        "patches": "hoo-dles/patches-1.44.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.44.0",
         "applied_patches": [
           "Disable ads ",
           "Unlimited skips "
@@ -12439,6 +12208,13 @@
         "applied_patches": [
           "Enable Premium "
         ]
+      },
+      "260382": {
+        "patches": "hoo-dles/patches-1.44.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.44.0",
+        "applied_patches": [
+          "Enable Premium "
+        ]
       }
     }
   },
@@ -12454,6 +12230,13 @@
       "260330": {
         "patches": "hoo-dles/patches-1.43.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.43.0",
+        "applied_patches": [
+          "Enable Prime "
+        ]
+      },
+      "260382": {
+        "patches": "hoo-dles/patches-1.44.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.44.0",
         "applied_patches": [
           "Enable Prime "
         ]
@@ -12475,6 +12258,13 @@
         "applied_patches": [
           "Enable Premium "
         ]
+      },
+      "260382": {
+        "patches": "hoo-dles/patches-1.44.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.44.0",
+        "applied_patches": [
+          "Enable Premium "
+        ]
       }
     }
   },
@@ -12490,6 +12280,13 @@
       "260330": {
         "patches": "hoo-dles/patches-1.43.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.43.0",
+        "applied_patches": [
+          "AMOLED dark theme "
+        ]
+      },
+      "260382": {
+        "patches": "hoo-dles/patches-1.44.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.44.0",
         "applied_patches": [
           "AMOLED dark theme "
         ]
@@ -12511,6 +12308,16 @@
       "260330": {
         "patches": "hoo-dles/patches-1.43.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.43.0",
+        "applied_patches": [
+          "Remove delay ",
+          "Unlock LAN connections ",
+          "Unlock custom DNS ",
+          "Unlock split tunneling "
+        ]
+      },
+      "260382": {
+        "patches": "hoo-dles/patches-1.44.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.44.0",
         "applied_patches": [
           "Remove delay ",
           "Unlock LAN connections ",
@@ -12544,6 +12351,13 @@
         "applied_patches": [
           "Enable Premium "
         ]
+      },
+      "260382": {
+        "patches": "hoo-dles/patches-1.44.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.44.0",
+        "applied_patches": [
+          "Enable Premium "
+        ]
       }
     }
   },
@@ -12559,6 +12373,13 @@
       "260330": {
         "patches": "hoo-dles/patches-1.43.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.43.0",
+        "applied_patches": [
+          "Enable Premium+ "
+        ]
+      },
+      "260382": {
+        "patches": "hoo-dles/patches-1.44.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.44.0",
         "applied_patches": [
           "Enable Premium+ "
         ]
@@ -12580,6 +12401,13 @@
         "applied_patches": [
           "Disable ads "
         ]
+      },
+      "260382": {
+        "patches": "hoo-dles/patches-1.44.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.44.0",
+        "applied_patches": [
+          "Disable ads "
+        ]
       }
     }
   },
@@ -12597,6 +12425,13 @@
       "260331": {
         "patches": "hoo-dles/patches-1.43.0.mpp",
         "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.43.0",
+        "applied_patches": [
+          "Unlock premium features "
+        ]
+      },
+      "260382": {
+        "patches": "hoo-dles/patches-1.44.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.44.0",
         "applied_patches": [
           "Unlock premium features "
         ]
@@ -12621,6 +12456,11 @@
         "applied_patches": [
           "MicroG integration "
         ]
+      },
+      "260382": {
+        "patches": "hoo-dles/patches-1.44.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.44.0",
+        "applied_patches": []
       }
     }
   },
@@ -12642,6 +12482,11 @@
         "applied_patches": [
           "MicroG integration "
         ]
+      },
+      "260382": {
+        "patches": "hoo-dles/patches-1.44.0.mpp",
+        "changelog": "https://github.com/hoo-dles/morphe-patches/releases/tag/v1.44.0",
+        "applied_patches": []
       }
     }
   },
@@ -13870,6 +13715,15 @@
         "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.4",
         "applied_patches": [
           "GmsCore support (MicroG) ",
+          "Remove Ads ",
+          "Remove Watermark ",
+          "Unlock Premium "
+        ]
+      },
+      "260382": {
+        "patches": "rushiranpise/patches-1.21.4.mpp",
+        "changelog": "https://github.com/rushiranpise/morphe-patches/releases/tag/v1.21.4",
+        "applied_patches": [
           "Remove Ads ",
           "Remove Watermark ",
           "Unlock Premium "
