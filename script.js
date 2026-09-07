@@ -5,27 +5,91 @@
  * ==========================================
  */
 const CONFIG = {
-  owner: "",
-  repo: "",
-  appCategories: {},
-  sharedAppWordStoplist: new Set(),
-  knownArchs: [],
-  appNotices: [],
+  "owner": "nullcpy",
+  "repo": "rvb",
+  "knownArchs": [
+    "arm64-v8a",
+    "arm64",
+    "aarch64",
+    "armeabi-v7a",
+    "arm-v7a",
+    "arm32",
+    "arm",
+    "x86_64",
+    "x86",
+    "universal",
+    "all"
+  ],
+  "appCategories": {
+    "Android TV": [
+      "primevideo",
+      "plutotv",
+      "moviebox",
+      "disneyplus",
+      "disney",
+      "hbomax",
+      "tubi",
+      "vix",
+      "at4klauncher",
+      "projectivylauncher",
+      "peacock",
+      "netflix",
+      "nuvio"
+    ],
+    "Google": [
+      "youtube",
+      "google"
+    ],
+    "Meta": [
+      "threads",
+      "instagram",
+      "messenger",
+      "facebook",
+      "!plusmessenger"
+    ],
+    "VPN": [
+      "1111warp",
+      "vpnify",
+      "vpn"
+    ]
+  },
+  "appNotices": [
+    {
+      "triggers": [
+        "youtube",
+        "google"
+      ],
+      "color": "accent",
+      "title": "Login Issue",
+      "text": "Signing into Google account on APK (not Module) requires MicroG. Please install one from below before trying to sign in.",
+      "links": [
+        {
+          "label": "Morphe",
+          "url": "https://github.com/MorpheApp/MicroG-RE/releases/latest"
+        },
+        {
+          "label": "ReVanced",
+          "url": "https://github.com/ReVanced/GmsCore/releases/latest"
+        }
+      ]
+    },
+    {
+      "triggers": [
+        "twitter"
+      ],
+      "color": "warning",
+      "title": "Login Issue",
+      "text": "Since October 2025, Twitter has started checking whether the app is modified or if phone integrity fails during login.",
+      "links": [
+        {
+          "label": "Workarounds",
+          "url": "https://t.me/pikopatches/1/59772"
+        }
+      ]
+    }
+  ]
 };
 
-function applyConfig(cfg) {
-  if (!cfg || typeof cfg !== "object") return;
-  if (cfg.owner) CONFIG.owner = cfg.owner;
-  if (cfg.repo) CONFIG.repo = cfg.repo;
-  if (cfg.appCategories) CONFIG.appCategories = cfg.appCategories;
-  if (Array.isArray(cfg.sharedAppWordStoplist)) {
-    CONFIG.sharedAppWordStoplist = new Set(cfg.sharedAppWordStoplist.map((w) => w.toLowerCase()));
-  }
-  if (Array.isArray(cfg.knownArchs)) {
-    CONFIG.knownArchs = cfg.knownArchs;
-  }
-  if (cfg.appNotices) CONFIG.appNotices = cfg.appNotices;
-}
 
 // Cached DOM references
 const DOM = {};
@@ -61,25 +125,47 @@ function initDOM() {
   DOM.themeColorMeta = document.getElementById("themeColorMeta");
 }
 
+// Variant & Label Formatting Helpers
+function formatVariantLabel(variant, subVariant, bracketStyle = "square") {
+  const toTitleCase = (str) =>
+    str ? str.replace(/\b[a-z]/g, (c) => c.toUpperCase()) : "";
+  const openB = bracketStyle === "square" ? "[" : "(";
+  const closeB = bracketStyle === "square" ? "]" : ")";
+
+  if (variant && subVariant) return `${variant} ${openB}${toTitleCase(subVariant)}${closeB}`;
+  if (variant) return variant;
+  if (subVariant) return bracketStyle === "square" ? `[${toTitleCase(subVariant)}]` : toTitleCase(subVariant);
+  return "Standard";
+}
+
+function getObtainiumAppLabel(appName, brandName, variant, subVariant) {
+  const parts = [brandName];
+  if (variant) parts.push(variant);
+  let label = parts.join(" - ");
+  if (subVariant) {
+    const toTitleCase = (str) =>
+      str ? str.replace(/\b[a-z]/g, (c) => c.toUpperCase()) : "";
+    label += ` [${toTitleCase(subVariant)}]`;
+  }
+  return `${appName} (${label})`;
+}
+
 // State
 let cachedFullCatalog = [];
 let searchTerm = "";
-let appCategoryFilter = "all"; // "all" | "google" | "meta" | "vpn" | "word-..."
+let appCategoryFilter = "all";
 let sortMode = "recent"; // "recent" | "popular" | "name"
-let dynamicAppFilters = [];
 let currentAppCatalog = [];
 let activeModalAppKey = null;
-let activeModalPatchKey = null;
+let activeModalBrandKey = null;
 let modalBuildFilter = "all";
-let modalVariantFilter = "all";
+let modalSelectedVariant = null;
+let modalSelectedSubVariant = null;
 let themeMode = "system";
 let activeAppliedPatchesList = [];
 
 // Stoplist Threshold
-const SHARED_APP_WORD_MIN_COUNT = 2;
 
-// Caches for Memoization
-const tokenCache = new Map();
 
 // Initialize
 document.addEventListener("DOMContentLoaded", () => {
@@ -269,9 +355,10 @@ function setupEventListeners() {
         e.stopPropagation();
         openPatchModal(
           trigger.dataset.appKey,
-          trigger.dataset.patchKey,
+          trigger.dataset.brandKey,
           trigger.dataset.channel || "all",
-          trigger.dataset.variant || "all"
+          trigger.dataset.variant || null,
+          trigger.dataset.subVariant || null
         );
         return;
       }
@@ -348,11 +435,11 @@ function setupEventListeners() {
 
       const filterBtn = e.target.closest(".modal-filter-btn");
       if (filterBtn && !filterBtn.disabled) {
-        const filterType = filterBtn.dataset.filter;
-        if (filterType.startsWith("variant-")) {
-          modalVariantFilter = filterType.slice(8);
+        if (filterBtn.classList.contains("variant-pill-btn")) {
+          modalSelectedVariant = filterBtn.dataset.variant || null;
+          modalSelectedSubVariant = filterBtn.dataset.subVariant || null;
         } else {
-          modalBuildFilter = filterType;
+          modalBuildFilter = filterBtn.dataset.filter;
         }
         renderOpenPatchModal();
         return;
@@ -364,8 +451,8 @@ function setupEventListeners() {
         e.stopPropagation();
         openAppliedPatchesModal(
           appliedTrigger.dataset.appKey,
-          appliedTrigger.dataset.patchKey,
-          appliedTrigger.dataset.buildKey
+          appliedTrigger.dataset.brandKey,
+          appliedTrigger.dataset.buildId
         );
         return;
       }
@@ -437,7 +524,7 @@ try {
   localStorage.removeItem("data_cache_time");
   localStorage.removeItem("catalog_cache");
   localStorage.removeItem("catalog_cache_time");
-} catch {}
+} catch { }
 
 // Data Loader (Pure data.json, zero legacy fallbacks)
 async function loadReleases() {
@@ -451,9 +538,7 @@ async function loadReleases() {
     if (!dataResp.ok) throw new Error(`Failed to load data.json (${dataResp.status})`);
     const data = await dataResp.json();
 
-    if (data.config) applyConfig(data.config);
     cachedFullCatalog = Array.isArray(data.apps) ? data.apps : (Array.isArray(data) ? data : []);
-    dynamicAppFilters = getDynamicAppFilters(cachedFullCatalog);
 
     if (DOM.loading) DOM.loading.style.display = "none";
     updateLastUpdateTimestamp(data.updated_at);
@@ -471,11 +556,11 @@ async function loadReleases() {
 
 // Filter and Render Catalog
 function filterAndRenderReleases() {
-  renderDynamicAppFilterButtons(dynamicAppFilters);
+  renderCategoryFilterButtons();
 
   if (
-    appCategoryFilter.startsWith("word-") &&
-    !dynamicAppFilters.some((f) => f.key === appCategoryFilter)
+    appCategoryFilter !== "all" &&
+    !CONFIG.appCategories[appCategoryFilter]
   ) {
     appCategoryFilter = "all";
   }
@@ -503,8 +588,8 @@ function updateCatalogStatus(apps) {
   const totalApps = apps.length;
   let totalBuilds = 0;
   apps.forEach((a) => {
-    a.patches.forEach((p) => {
-      totalBuilds += p.builds.length;
+    (a.brands || []).forEach((b) => {
+      totalBuilds += (b.builds || []).length;
     });
   });
 
@@ -536,11 +621,6 @@ function applyCategoryFilter(apps) {
     });
   }
 
-  if (appCategoryFilter.startsWith("word-")) {
-    const word = appCategoryFilter.slice(5);
-    return apps.filter((app) => getAppNameWords(app.appName).includes(word));
-  }
-
   return apps;
 }
 
@@ -569,18 +649,47 @@ function filterCatalogBySearch(catalog, query) {
 }
 
 function getAppSearchScore(app, query) {
-  const normalizedQuery = normalizeForSearch(query);
-  const normalizedAppName = normalizeForSearch(app.appName);
-  const normalizedAppKey = normalizeForSearch(app.appKey);
-  if (!normalizedQuery) return Infinity;
+  const q = normalizeForSearch(query);
+  if (!q) return Infinity;
 
-  if (normalizedAppName === normalizedQuery || normalizedAppKey === normalizedQuery) return 0;
-  if (normalizedAppName.startsWith(normalizedQuery) || normalizedAppKey.startsWith(normalizedQuery)) return 1;
+  const appName = normalizeForSearch(app.appName);
+  const appKey = normalizeForSearch(app.appKey);
 
-  if (app.appTokens && app.appTokens.some((token) => token === normalizedQuery)) return 2;
-  if (app.appTokens && app.appTokens.some((token) => token.startsWith(normalizedQuery))) return 3;
-  if (normalizedAppName.includes(normalizedQuery) || normalizedAppKey.includes(normalizedQuery)) return 4;
-  if (app.searchCorpus && app.searchCorpus.includes(normalizedQuery)) return 5;
+  // 1. Exact match
+  if (appName === q || appKey === q) return 0;
+
+  // 2. Prefix match
+  if (appName.startsWith(q) || appKey.startsWith(q)) return 1;
+
+  // 3. Word match on app name
+  const appWords = (app.appName || "").toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
+  if (appWords.some((w) => w === q)) return 2;
+  if (appWords.some((w) => w.startsWith(q))) return 3;
+
+  // 4. Substring match on app name/key
+  if (appName.includes(q) || appKey.includes(q)) return 4;
+
+  // 5. Match Brand, Variant, Sub-Variant, or Package Name
+  const brands = app.brands || [];
+  for (const b of brands) {
+    if (normalizeForSearch(b.brandName || b.patchName).includes(q)) return 5;
+    for (const v of (b.variants || [])) {
+      if (v.variant && normalizeForSearch(v.variant).includes(q)) return 6;
+      if (v.subVariant && normalizeForSearch(v.subVariant).includes(q)) return 6;
+      if (v.packageName && normalizeForSearch(v.packageName).includes(q)) return 7;
+    }
+  }
+
+  // 6. Match Category names or matching category keywords
+  for (const [catName, keywords] of Object.entries(CONFIG.appCategories || {})) {
+    if (normalizeForSearch(catName).includes(q)) {
+      const includes = keywords.filter((k) => !k.startsWith("!"));
+      const nameWithPlus = normalizeForSearch((app.appName || "").replace(/\+/g, "plus"));
+      if (includes.some((kw) => appName.includes(kw) || appKey.includes(kw) || nameWithPlus.includes(kw))) {
+        return 5;
+      }
+    }
+  }
 
   return Infinity;
 }
@@ -600,8 +709,9 @@ function renderAppCards(apps) {
 
 // Create App Card Markup
 function createAppCard(app) {
-  const patchesMarkup = app.patches
-    .map((patch) => createPatchMarkup(app, patch))
+  const brands = app.brands || [];
+  const brandsMarkup = brands
+    .map((brand) => createBrandMarkup(app, brand))
     .join("");
 
   let noticesMarkup = "";
@@ -637,8 +747,8 @@ function createAppCard(app) {
         <div class="app-card-body">
           <div class="app-card-body-inner">
             ${noticesMarkup}
-            <div class="patches-list">
-              ${patchesMarkup}
+            <div class="brands-list">
+              ${brandsMarkup}
             </div>
           </div>
         </div>
@@ -647,41 +757,118 @@ function createAppCard(app) {
   `;
 }
 
+function getNoticeInlineStyles(notice) {
+  const color = (notice.color || "").trim();
+  if (!color && !notice.border && !notice.bg) return "";
+
+  const presets = {
+    accent: {
+      color: "var(--accent)",
+      border: "var(--border-hover)",
+      bg: "linear-gradient(90deg, var(--accent-glow), transparent)",
+    },
+    info: {
+      color: "var(--accent)",
+      border: "var(--border-hover)",
+      bg: "linear-gradient(90deg, var(--accent-glow), transparent)",
+    },
+    warning: {
+      color: "var(--accent-warning)",
+      border: "var(--accent-warning)",
+      bg: "linear-gradient(90deg, rgba(250, 189, 47, 0.12), transparent)",
+    },
+    danger: {
+      color: "var(--accent-danger)",
+      border: "var(--accent-danger)",
+      bg: "linear-gradient(90deg, rgba(244, 63, 94, 0.12), transparent)",
+    },
+    error: {
+      color: "var(--accent-danger)",
+      border: "var(--accent-danger)",
+      bg: "linear-gradient(90deg, rgba(244, 63, 94, 0.12), transparent)",
+    },
+    success: {
+      color: "var(--accent-stable)",
+      border: "var(--accent-stable)",
+      bg: "linear-gradient(90deg, var(--accent-stable-glow), transparent)",
+    },
+  };
+
+  const pKey = color.toLowerCase();
+  let mainColor = presets[pKey]?.color || notice.color;
+  let borderColor = notice.border || presets[pKey]?.border || notice.color;
+  let bgColor = notice.bg || presets[pKey]?.bg;
+
+  if (!bgColor && mainColor) {
+    if (mainColor.startsWith("#")) {
+      const hex = mainColor.replace("#", "");
+      let r = 0, g = 0, b = 0;
+      if (hex.length === 3) {
+        r = parseInt(hex[0] + hex[0], 16);
+        g = parseInt(hex[1] + hex[1], 16);
+        b = parseInt(hex[2] + hex[2], 16);
+      } else if (hex.length === 6) {
+        r = parseInt(hex.slice(0, 2), 16);
+        g = parseInt(hex.slice(2, 4), 16);
+        b = parseInt(hex.slice(4, 6), 16);
+      }
+      bgColor = `linear-gradient(90deg, rgba(${r}, ${g}, ${b}, 0.12), transparent)`;
+    } else {
+      bgColor = "linear-gradient(90deg, rgba(255, 255, 255, 0.06), transparent)";
+    }
+  }
+
+  const styles = [];
+  if (mainColor) styles.push(`--notice-color: ${mainColor}`);
+  if (borderColor) styles.push(`--notice-border: ${borderColor}`);
+  if (bgColor) styles.push(`--notice-bg: ${bgColor}`);
+
+  return styles.length > 0 ? `style="${styles.join("; ")};"` : "";
+}
+
 function createNoticeMarkup(notice) {
-  const linksMarkup = notice.links
+  const linksMarkup = (notice.links || [])
     .map((link) => `<a href="${link.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.label)} ↗</a>`)
     .join(" ");
 
+  const styleAttr = getNoticeInlineStyles(notice);
+
   return `
-    <div class="app-notice ${escapeHtml(notice.className)}">
+    <div class="app-notice" ${styleAttr}>
       <div class="app-notice-title">${escapeHtml(notice.title)}</div>
       <div class="app-notice-text">${escapeHtml(notice.text)}</div>
-      <div class="app-notice-links">${linksMarkup}</div>
+      ${linksMarkup ? `<div class="app-notice-links">${linksMarkup}</div>` : ""}
     </div>
   `;
 }
 
-// Create Patch Entry Markup with Multi-Channel Variant Matrix
-function createPatchMarkup(app, patch) {
-  const buildCount = patch.builds.length;
+// Create Brand Entry Markup with Multi-Channel Variant Matrix
+function createBrandMarkup(app, brand) {
+  const builds = brand.builds || [];
+  const buildCount = builds.length;
   const buildIconBadge = `<span class="patch-stat-badge" title="${buildCount} total builds">📦 ${buildCount}</span>`;
-  const downloadCount = patch.totalDownloads || 0;
+  const downloadCount = brand.totalDownloads || 0;
   const downloadIconBadge = `<span class="patch-stat-badge" title="${downloadCount.toLocaleString()} total downloads">📥 ${formatCompactNumber(downloadCount)}</span>`;
 
   // Render variant rows
-  const variantRowsHtml = patch.variants
+  const variantRowsHtml = (brand.variants || [])
     .map((variant) => {
       const channelBoxes = [];
+      const vLabel = formatVariantLabel(variant.variant, variant.subVariant, "square");
+      const varAttr = escapeHtml(variant.variant || "");
+      const subVarAttr = escapeHtml(variant.subVariant || "");
+      const brandKey = escapeHtml(brand.brandKey || "");
 
       if (variant.latestStable) {
         channelBoxes.push(`
           <button class="channel-box-btn stable" 
                   data-app-key="${app.appKey}" 
-                  data-patch-key="${patch.patchKey}" 
+                  data-brand-key="${brandKey}" 
                   data-channel="stable" 
-                  data-variant="${variant.variantKey}"
+                  data-variant="${varAttr}"
+                  data-sub-variant="${subVarAttr}"
                   type="button"
-                  title="Open Stable builds for ${escapeHtml(variant.variantName)}">
+                  title="Open Stable builds for ${escapeHtml(vLabel)}">
             <div class="channel-box-top">
               <span class="channel-tag stable">Stable</span>
               <span class="channel-date">${formatDate(variant.latestStable.publishedAt)}</span>
@@ -696,11 +883,12 @@ function createPatchMarkup(app, patch) {
         channelBoxes.push(`
           <button class="channel-box-btn beta" 
                   data-app-key="${app.appKey}" 
-                  data-patch-key="${patch.patchKey}" 
+                  data-brand-key="${brandKey}" 
                   data-channel="beta" 
-                  data-variant="${variant.variantKey}"
+                  data-variant="${varAttr}"
+                  data-sub-variant="${subVarAttr}"
                   type="button"
-                  title="Open Beta builds for ${escapeHtml(variant.variantName)}">
+                  title="Open Beta builds for ${escapeHtml(vLabel)}">
             <div class="channel-box-top">
               <span class="channel-tag beta">Beta</span>
               <span class="channel-date">${formatDate(variant.latestBeta.publishedAt)}</span>
@@ -715,9 +903,10 @@ function createPatchMarkup(app, patch) {
         channelBoxes.push(`
           <button class="channel-box-btn archive" 
                   data-app-key="${app.appKey}" 
-                  data-patch-key="${patch.patchKey}" 
+                  data-brand-key="${brandKey}" 
                   data-channel="all" 
-                  data-variant="${variant.variantKey}"
+                  data-variant="${varAttr}"
+                  data-sub-variant="${subVarAttr}"
                   type="button">
             <div class="channel-box-top">
               <span class="channel-tag archive">Builds</span>
@@ -730,7 +919,7 @@ function createPatchMarkup(app, patch) {
       return `
         <div class="variant-row">
           <div class="variant-title-wrap">
-            <span class="variant-name-chip">${escapeHtml(variant.variantName)}</span>
+            <span class="variant-name-chip">${escapeHtml(vLabel)}</span>
           </div>
           <div class="variant-channels-grid">
             ${channelBoxes.join("")}
@@ -744,7 +933,7 @@ function createPatchMarkup(app, patch) {
     <div class="patch-entry">
       <div class="patch-entry-header">
         <div class="patch-chip-group">
-          <span class="patch-engine-badge">${escapeHtml(patch.patchName)}</span>
+          <span class="patch-engine-badge">${escapeHtml(brand.brandName)}</span>
           ${buildIconBadge}
           ${downloadIconBadge}
         </div>
@@ -756,81 +945,47 @@ function createPatchMarkup(app, patch) {
   `;
 }
 
-// Dynamic Filter Buttons Generator (Alphabetically Sorted)
-function getDynamicAppFilters(apps) {
-  const wordToAppKeys = new Map();
-
-  apps.forEach((app) => {
-    const words = getAppNameWords(app.appName);
-    words.forEach((word) => {
-      if (!wordToAppKeys.has(word)) wordToAppKeys.set(word, new Set());
-      wordToAppKeys.get(word).add(app.appKey);
-    });
-  });
-
-  const categoryKeys = new Set(Object.keys(CONFIG.appCategories));
-  const dynamicFilters = Array.from(wordToAppKeys.entries())
-    .filter(([word, appKeys]) => appKeys.size >= SHARED_APP_WORD_MIN_COUNT && !categoryKeys.has(word))
-    .map(([word]) => ({
-      key: `word-${word}`,
-      label: toFilterLabel(word),
-    }));
-
-  const categoryFilters = Object.keys(CONFIG.appCategories).map((key) => ({
-    key: key,
-    label: toFilterLabel(key),
-  }));
-
-  return [...categoryFilters, ...dynamicFilters].sort((a, b) =>
-    a.label.localeCompare(b.label, undefined, { sensitivity: "base" })
-  );
-}
-
-function renderDynamicAppFilterButtons(filters) {
+// Category Filter Buttons Generator (Exclusively from CONFIG.appCategories)
+function renderCategoryFilterButtons() {
   if (!DOM.appFilterButtons) return;
 
-  DOM.appFilterButtons.querySelectorAll(".dynamic-filter-btn").forEach((btn) => btn.remove());
+  DOM.appFilterButtons.querySelectorAll(".category-filter-btn").forEach((btn) => btn.remove());
 
-  filters.forEach((filter) => {
+  Object.keys(CONFIG.appCategories).forEach((catKey) => {
     const button = document.createElement("button");
-    button.className = "filter-btn dynamic-filter-btn";
-    button.dataset.filter = filter.key;
+    button.className = "filter-btn category-filter-btn";
+    button.dataset.filter = catKey;
     button.type = "button";
-    button.textContent = filter.label;
+    button.textContent = catKey;
     DOM.appFilterButtons.appendChild(button);
   });
 }
 
-function getAppNameWords(appName) {
-  const words = (appName || "")
-    .toLowerCase()
-    .split(/[^a-z0-9]+/)
-    .filter(Boolean)
-    .filter((word) => word.length >= 3)
-    .filter((word) => !CONFIG.sharedAppWordStoplist.has(word));
-
-  return Array.from(new Set(words));
-}
-
-function toFilterLabel(value) {
-  return (value || "").replace(/\b[a-z]/g, (char) => char.toUpperCase());
-}
-
 // Download Modal Controller
-function openPatchModal(appKey, patchKey, preferredChannel = "stable", preferredVariant = "default") {
+function openPatchModal(appKey, brandKey, preferredChannel = "stable", preferredVariant = null, preferredSubVariant = null) {
   activeModalAppKey = appKey;
-  activeModalPatchKey = patchKey;
+  activeModalBrandKey = brandKey;
 
   const app = currentAppCatalog.find((item) => item.appKey === activeModalAppKey);
-  const patch = app ? app.patches.find((item) => item.patchKey === activeModalPatchKey) : null;
+  const brand = app ? (app.brands || []).find((item) => (item.brandKey) === activeModalBrandKey) : null;
 
   modalBuildFilter = preferredChannel === "beta" ? "beta" : "stable";
 
-  if (patch && patch.variants && patch.variants.length > 0) {
-    const validVariant = patch.variants.find((v) => v.variantKey === preferredVariant);
-    modalVariantFilter = validVariant ? validVariant.variantKey : patch.variants[0].variantKey;
+  if (brand && brand.variants && brand.variants.length > 0) {
+    const validVariant = brand.variants.find((v) =>
+      (v.variant || null) === (preferredVariant || null) &&
+      (v.subVariant || null) === (preferredSubVariant || null)
+    );
+    if (validVariant) {
+      modalSelectedVariant = validVariant.variant || null;
+      modalSelectedSubVariant = validVariant.subVariant || null;
+    } else {
+      modalSelectedVariant = brand.variants[0].variant || null;
+      modalSelectedSubVariant = brand.variants[0].subVariant || null;
+    }
   } else {
-    modalVariantFilter = "default";
+    modalSelectedVariant = null;
+    modalSelectedSubVariant = null;
   }
 
   renderOpenPatchModal();
@@ -839,25 +994,25 @@ function openPatchModal(appKey, patchKey, preferredChannel = "stable", preferred
 
 function renderOpenPatchModal() {
   const app = currentAppCatalog.find((item) => item.appKey === activeModalAppKey);
-  const patch = app ? app.patches.find((item) => item.patchKey === activeModalPatchKey) : null;
+  const brand = app ? (app.brands || []).find((item) => (item.brandKey) === activeModalBrandKey) : null;
 
-  if (!app || !patch) {
+  if (!app || !brand) {
     closePatchModal();
     return;
   }
 
   if (DOM.patchModalTitle) {
-    DOM.patchModalTitle.textContent = `${app.appName} • ${patch.patchName}`;
+    DOM.patchModalTitle.textContent = `${app.appName} • ${brand.brandName}`;
   }
 
-  updateModalFilterButtons(patch);
+  updateModalFilterButtons(brand);
 
   if (DOM.patchModalBody) {
-    DOM.patchModalBody.innerHTML = createPatchModalContent(app, patch, modalBuildFilter, modalVariantFilter);
+    DOM.patchModalBody.innerHTML = createPatchModalContent(app, brand, modalBuildFilter, modalSelectedVariant, modalSelectedSubVariant);
   }
 }
 
-function updateModalFilterButtons(patch) {
+function updateModalFilterButtons(brand) {
   const filterContainer = document.querySelector(".modal-filter-buttons");
   if (!filterContainer) return;
 
@@ -866,11 +1021,10 @@ function updateModalFilterButtons(patch) {
   let hasStable = false;
   let hasBeta = false;
 
-  if (patch.builds) {
-    for (const b of patch.builds) {
-      if (modalVariantFilter && modalVariantFilter !== "all") {
-        const bVar = b.variantKey || "default";
-        if (bVar !== modalVariantFilter) continue;
+  if (brand.builds) {
+    for (const b of brand.builds) {
+      if ((b.variant || null) !== modalSelectedVariant || (b.subVariant || null) !== modalSelectedSubVariant) {
+        continue;
       }
       if (b.releaseType === "stable") hasStable = true;
       if (b.releaseType === "beta") hasBeta = true;
@@ -901,7 +1055,7 @@ function updateModalFilterButtons(patch) {
   }
 
   // Variant group with divider
-  if (patch.variants && patch.variants.length > 0) {
+  if (brand.variants && brand.variants.length > 0) {
     const divider = document.createElement("span");
     divider.className = "filter-group-divider";
     filterContainer.appendChild(divider);
@@ -909,12 +1063,14 @@ function updateModalFilterButtons(patch) {
     const variantGroup = document.createElement("div");
     variantGroup.className = "filter-pill-group";
 
-    patch.variants.forEach((v) => {
+    brand.variants.forEach((v) => {
+      const isSelected = (modalSelectedVariant === (v.variant || null)) && (modalSelectedSubVariant === (v.subVariant || null));
       const btn = document.createElement("button");
       btn.type = "button";
-      btn.className = `modal-filter-btn variant-pill-btn ${modalVariantFilter === v.variantKey ? "active" : ""}`;
-      btn.dataset.filter = `variant-${v.variantKey}`;
-      btn.textContent = v.variantName;
+      btn.className = `modal-filter-btn variant-pill-btn ${isSelected ? "active" : ""}`;
+      btn.dataset.variant = v.variant || "";
+      btn.dataset.subVariant = v.subVariant || "";
+      btn.textContent = formatVariantLabel(v.variant, v.subVariant, "square");
       variantGroup.appendChild(btn);
     });
 
@@ -922,8 +1078,8 @@ function updateModalFilterButtons(patch) {
   }
 }
 
-function createPatchModalContent(app, patch, buildFilter = "stable", variantFilter = "default") {
-  let builds = patch.builds || [];
+function createPatchModalContent(app, brand, buildFilter = "stable", selectedVariant = null, selectedSubVariant = null) {
+  let builds = brand.builds || [];
 
   if (buildFilter === "stable") {
     builds = builds.filter((b) => b.releaseType === "stable");
@@ -931,20 +1087,21 @@ function createPatchModalContent(app, patch, buildFilter = "stable", variantFilt
     builds = builds.filter((b) => b.releaseType === "beta");
   }
 
-  if (variantFilter && variantFilter !== "all") {
-    builds = builds.filter((b) => (b.variantKey || "default") === variantFilter);
-  }
+  builds = builds.filter((b) =>
+    (b.variant || null) === selectedVariant &&
+    (b.subVariant || null) === selectedSubVariant
+  );
 
   if (builds.length === 0) {
     return '<div class="no-results" style="padding: 40px 20px;">No builds matching these filters.</div>';
   }
 
   return builds
-    .map((build, index) => createModalBuildMarkup(app, patch, build, index === 0))
+    .map((build, index) => createModalBuildMarkup(app, brand, build, index === 0))
     .join("");
 }
 
-function createModalBuildMarkup(app, patch, build, openByDefault = false) {
+function createModalBuildMarkup(app, brand, build, openByDefault = false) {
   const assetsByArch = groupAssetsByArchitecture(build.assets);
   const titleText = build.isArchive ? escapeHtml(build.build) : `Build ${escapeHtml(build.build)}`;
 
@@ -977,7 +1134,7 @@ function createModalBuildMarkup(app, patch, build, openByDefault = false) {
 
   const patchInfoBanner = `
     <div class="patch-info-actions">
-      <button class="patch-applied-btn" data-app-key="${app.appKey}" data-patch-key="${patch.patchKey}" data-build-key="${build.buildKey || build.releaseId}" type="button">View Applied Patches</button>
+      <button class="patch-applied-btn" data-app-key="${app.appKey}" data-brand-key="${brand.brandKey}" data-build-id="${build.releaseId || build.build}" type="button">View Applied Patches</button>
       <a href="${build.releaseUrl}" target="_blank" rel="noopener noreferrer" class="release-link-button">View Release Source</a>
     </div>
   `;
@@ -1012,69 +1169,33 @@ function closePatchModal() {
 }
 
 // Applied Patches Modal Controller
-function openAppliedPatchesModal(appKey, patchKey, buildKey) {
+function openAppliedPatchesModal(appKey, brandKey, buildId) {
   const app = currentAppCatalog.find((item) => item.appKey === appKey);
-  const patch = app ? app.patches.find((item) => item.patchKey === patchKey) : null;
-  if (!app || !patch) return;
+  const brand = app ? (app.brands || []).find((item) => (item.brandKey) === brandKey) : null;
+  if (!app || !brand) return;
 
   if (DOM.appliedPatchesTitle) {
-    DOM.appliedPatchesTitle.textContent = `${app.appName} (${patch.patchName})`;
+    DOM.appliedPatchesTitle.textContent = `${app.appName} (${brand.brandName})`;
   }
 
-  let build = patch.builds.find((b) => b.buildKey === buildKey || String(b.releaseId) === String(buildKey));
+  let build = (brand.builds || []).find((b) => String(b.releaseId) === String(buildId) || String(b.build) === String(buildId) );
   if (!build) {
-    build = patch.builds[0];
+    build = brand.builds?.[0];
   }
 
-  let pNames = null;
-  let clUrl = null;
   let appliedPatches = Array.isArray(build?.appliedPatches) && build.appliedPatches.length > 0 ? build.appliedPatches : null;
+  const allPatches = build?.patchSources || [];
+  const allChangelogs = build?.changelogs || [];
 
-  if (build && build.patchMeta) {
-    const allPatches = Array.isArray(build.patchMeta.patches) ? build.patchMeta.patches : (build.patchMeta.patches ? [build.patchMeta.patches] : []);
-    const allChangelogs = Array.isArray(build.patchMeta.changelogs) ? build.patchMeta.changelogs : (build.patchMeta.changelogs ? [build.patchMeta.changelogs] : []);
+  const patchNamesList = Array.isArray(allPatches)
+    ? allPatches
+    : (typeof allPatches === "string" ? allPatches.split(/[,\s]+/).filter(Boolean) : []);
 
-    const pKey = normalizeForSearch(patch.patchKey || patch.patchName || "");
-    const vKey = normalizeForSearch(build.variantKey || "");
-
-    const matchedIndices = [];
-    allPatches.forEach((name, idx) => {
-      const lower = name.toLowerCase();
-      if (vKey === "adobo" && (lower.includes("adobo") || lower.includes("jkenneth"))) {
-        matchedIndices.push(idx);
-      } else if (vKey === "piko" && lower.includes("piko")) {
-        matchedIndices.push(idx);
-      } else if (pKey === "morphe" && lower.includes("morphe") && !lower.includes("adobo") && !lower.includes("jkenneth")) {
-        matchedIndices.push(idx);
-      } else if (pKey === "revanced" && lower.includes("revanced") && !lower.includes("extended") && !lower.includes("advanced") && !lower.includes("anddea") && !lower.includes("rvx")) {
-        matchedIndices.push(idx);
-      } else if ((pKey === "rvx" || pKey === "revancedextended") && (lower.includes("inotia00") || lower.includes("rvx") || lower.includes("extended"))) {
-        matchedIndices.push(idx);
-      } else if ((pKey === "anddea" || pKey === "revancedadvanced") && (lower.includes("anddea") || lower.includes("advanced"))) {
-        matchedIndices.push(idx);
-      } else if (pKey === "instafel" && lower.includes("instafel")) {
-        matchedIndices.push(idx);
-      }
-    });
-
-    if (matchedIndices.length > 0) {
-      pNames = matchedIndices.map((i) => allPatches[i]);
-      clUrl = matchedIndices.map((i) => allChangelogs[i] || allChangelogs[0] || "");
-    } else {
-      pNames = allPatches;
-      clUrl = allChangelogs;
-    }
-  }
+  const changelogList = Array.isArray(allChangelogs)
+    ? allChangelogs
+    : (typeof allChangelogs === "string" ? allChangelogs.split(/[,\s]+/).filter(Boolean) : (allChangelogs ? [allChangelogs] : []));
 
   if (DOM.appliedPatchesMeta) {
-    const patchNamesList = Array.isArray(pNames)
-      ? pNames
-      : (typeof pNames === "string" ? pNames.split(/[,\s]+/).filter(Boolean) : []);
-
-    const changelogList = Array.isArray(clUrl)
-      ? clUrl
-      : (typeof clUrl === "string" ? clUrl.split(/[,\s]+/).filter(Boolean) : (clUrl ? [clUrl] : []));
-
     const badgesHtml = patchNamesList.map((name, index) => {
       const url = changelogList[index] || (changelogList.length === 1 ? changelogList[0] : null);
       if (url) {
@@ -1139,40 +1260,39 @@ function closeAppliedPatchesModal() {
 // Obtainium Modal Controller
 function openObtainiumModal() {
   const app = currentAppCatalog.find((item) => item.appKey === activeModalAppKey);
-  const patch = app ? app.patches.find((item) => item.patchKey === activeModalPatchKey) : null;
-  if (!app || !patch) return;
+  const brand = app ? (app.brands || []).find((item) => (item.brandKey) === activeModalBrandKey) : null;
+  if (!app || !brand) return;
 
   if (DOM.obtainiumTitle) {
     DOM.obtainiumTitle.textContent = `Install ${app.appName} with Obtainium`;
   }
 
   if (DOM.obtainiumBody) {
-    DOM.obtainiumBody.innerHTML = createObtainiumInstructions(app, patch);
+    DOM.obtainiumBody.innerHTML = createObtainiumInstructions(app, brand);
   }
 
   showModal(DOM.obtainiumModal);
 }
 
-function createObtainiumInstructions(app, patch) {
+function createObtainiumInstructions(app, brand) {
   const repoUrl = `https://github.com/${CONFIG.owner}/${CONFIG.repo}`;
   const obtainiumLatestUrl = "https://github.com/ImranR98/Obtainium/releases/latest";
 
   const rawSlug = app?.appKey || normalizeForSearch(app?.appName || "app");
-  const rawPatch = patch?.patchKey || normalizeForSearch(patch?.patchName || "patch");
+  const rawBrand = brand?.brandKey || normalizeForSearch(brand?.brandName || "brand");
 
-  const isSpecificVariant = modalVariantFilter && modalVariantFilter !== "default" && modalVariantFilter !== "all";
+  const activeVariant = brand?.variants?.find((v) =>
+    (v.variant || null) === modalSelectedVariant &&
+    (v.subVariant || null) === modalSelectedSubVariant
+  ) || brand?.variants?.[0];
 
-  const activeVariant = patch?.variants?.find((v) => v.variantKey === (modalVariantFilter || "default")) || patch?.variants?.[0];
   let regexPattern = activeVariant?.apkFilter;
   if (!regexPattern) {
-    regexPattern = isSpecificVariant
-      ? `^${rawSlug}-${rawPatch}-${modalVariantFilter}-v.*\\.apk$`
-      : `^${rawSlug}-${rawPatch}-v.*\\.apk$`;
+    regexPattern = `^${rawSlug}-${rawBrand}-v.*\\.apk$`;
   }
 
-  const mainBuild = patch?.builds?.[0];
-  const mainPackageId = activeVariant?.package_name || mainBuild?.package_name || getAppPackageId(app, patch, modalVariantFilter || "default");
-  const mainLabel = `${app?.appName || "App"} (${patch?.patchName || "Patch"})`;
+  const mainPackageId = activeVariant?.packageName || getAppPackageId(app, brand, modalSelectedVariant, modalSelectedSubVariant);
+  const mainLabel = getObtainiumAppLabel(app?.appName || "App", brand?.brandName || brand?.patchName || "Brand", modalSelectedVariant, modalSelectedSubVariant);
   const mainAdditionalSettings = { apkFilterRegEx: regexPattern };
   if (modalBuildFilter === "beta") {
     mainAdditionalSettings.includePrereleases = true;
@@ -1188,14 +1308,11 @@ function createObtainiumInstructions(app, patch) {
   const mainOneClickUrl = mainPackageId ? `https://apps.obtainium.imranr.dev/redirect?r=${encodeURIComponent("obtainium://app/" + JSON.stringify(mainConfig))}` : null;
 
   let step4Content = "";
-  if (patch && patch.variants && patch.variants.length > 1) {
-    const examples = patch.variants.map((v, index) => {
-      const vRegex = v.apkFilter || (v.variantKey === "default"
-        ? `^${rawSlug}-${rawPatch}-v.*\\.apk$`
-        : `^${rawSlug}-${rawPatch}-${v.variantKey}-v.*\\.apk$`);
-      const vLabel = `${app.appName} (${patch.patchName} - ${v.variantName})`;
-      const vBuild = patch.builds?.find((b) => b.variantKey === v.variantKey);
-      const vPackageId = v.package_name || vBuild?.package_name || getAppPackageId(app, patch, v.variantKey);
+  if (brand && brand.variants && brand.variants.length > 1) {
+    const examples = brand.variants.map((v) => {
+      const vRegex = v.apkFilter || `^${rawSlug}-${rawBrand}-v.*\\.apk$`;
+      const vLabel = getObtainiumAppLabel(app.appName, brand.brandName, v.variant, v.subVariant);
+      const vPackageId = v.packageName || getAppPackageId(app, brand, v.variant, v.subVariant);
 
       const vAdditionalSettings = { apkFilterRegEx: vRegex };
       if (modalBuildFilter === "beta") {
@@ -1275,15 +1392,13 @@ function createObtainiumInstructions(app, patch) {
   `;
 }
 
-function getAppPackageId(app, patch, variantKey) {
+function getAppPackageId(app, brand, variant, subVariant) {
   if (!app) return "";
-  const normVar = (variantKey || "").toLowerCase();
-  const matchingBuild =
-    patch?.builds?.find((b) => b.package_name && (normVar && normVar !== "default" ? b.variantKey === normVar : true)) ||
-    patch?.builds?.find((b) => b.package_name) ||
-    app?.patches?.flatMap((p) => p.builds || []).find((b) => b.package_name);
-
-  return matchingBuild?.package_name || "";
+  const v = brand?.variants?.find((item) => (item.variant || null) === (variant || null) && (item.subVariant || null) === (subVariant || null));
+  if (v?.packageName) return v.packageName;
+  const b = brand?.builds?.find((item) => (item.variant || null) === (variant || null) && (item.subVariant || null) === (subVariant || null));
+  if (b?.packageName) return b.packageName;
+  return brand?.variants?.[0]?.packageName || "";
 }
 
 function closeObtainiumModal() {
@@ -1334,8 +1449,8 @@ function showToast(message) {
 function groupAssetsByArchitecture(assets) {
   const groups = { arm64: [], arm32: [], universal: [], x86: [], other: [] };
   assets.forEach((asset) => {
-    const detectedArch = detectArchitecture(asset.name);
-    groups[detectedArch].push(asset);
+    const arch = asset.arch && groups[asset.arch] ? asset.arch : "other";
+    groups[arch].push(asset);
   });
 
   const filtered = {};
@@ -1357,15 +1472,6 @@ function getFileType(filename) {
   if (lower.endsWith(".apk")) return "APK";
   if (lower.endsWith(".zip")) return "Module";
   return "File";
-}
-
-function detectArchitecture(filename) {
-  const name = (filename || "").toLowerCase();
-  if (name.includes("arm64") || name.includes("aarch64") || name.includes("arm64-v8a")) return "arm64";
-  if ((name.includes("arm") && !name.includes("arm64")) || name.includes("arm-v7a") || name.includes("armeabi")) return "arm32";
-  if (name.includes("universal") || name.includes("-all.") || /^(?!.*arm|x86|x64|i386)[^-]*\.apk$/.test(name)) return "universal";
-  if (name.includes("x86_64") || name.includes("x64") || name.includes("x86")) return "x86";
-  return "other";
 }
 
 function capitalizeArch(arch) {
@@ -1397,12 +1503,6 @@ function normalizeForSearch(value) {
   return (value || "").toLowerCase().replace(/[^a-z0-9]/g, "");
 }
 
-function getSearchTokens(value) {
-  if (tokenCache.has(value)) return tokenCache.get(value);
-  const tokens = (value || "").toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
-  tokenCache.set(value, tokens);
-  return tokens;
-}
 
 
 

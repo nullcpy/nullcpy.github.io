@@ -663,10 +663,12 @@ main {
     gap: 14px;
 }
 
-/* Notices */
+/* Dynamic Notices */
 .app-notice {
     padding: 12px 14px;
     border-radius: var(--radius-md);
+    border: 1px dashed var(--notice-border, var(--border));
+    background: var(--notice-bg, linear-gradient(90deg, var(--accent-glow), transparent));
 }
 
 .app-notice-title {
@@ -674,6 +676,7 @@ main {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.04em;
+    color: var(--notice-color, var(--text-primary));
 }
 
 .app-notice-text {
@@ -699,52 +702,21 @@ main {
     font-size: 0.75rem;
     font-weight: 700;
     transition: all 0.2s ease;
+    border: 1px solid var(--notice-border, var(--border));
+    color: var(--notice-color, var(--text-primary));
 }
 
-.microg-note {
-    border: 1px dashed var(--border-hover);
-    background: linear-gradient(90deg, var(--accent-glow), transparent);
+@media (hover: hover) {
+    .app-notice-links a:hover {
+        background: var(--notice-color, var(--text-primary));
+        color: var(--btn-on-accent);
+    }
 }
 
-.microg-note .app-notice-title {
-    color: var(--accent);
-}
-
-.microg-note .app-notice-links a {
-    border: 1px solid var(--border-hover);
-    color: var(--accent);
-}@media (hover: hover) {
-
-
-.microg-note .app-notice-links a:hover {
-    background: var(--accent);
-    color: var(--btn-on-accent);
-}
-}
-
-.twitter-login-note {
-    border: 1px dashed var(--accent-warning);
-    background: linear-gradient(90deg, rgba(250, 189, 47, 0.12), transparent);
-}
-
-.twitter-login-note .app-notice-title {
-    color: var(--accent-warning);
-}
-
-.twitter-login-note .app-notice-links a {
-    border: 1px solid var(--accent-warning);
-    color: var(--accent-warning);
-}@media (hover: hover) {
-
-
-.twitter-login-note .app-notice-links a:hover {
-    background: var(--accent-warning);
-    color: var(--btn-on-accent);
-}
-}
 
 /* Patch Entries & Variant Matrix */
-.patches-list {
+.patches-list,
+.brands-list {
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -783,7 +755,8 @@ main {
     color: var(--accent);
     font-size: 0.78rem;
     font-weight: 700;
-    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
     display: inline-flex;
     align-items: center;
     gap: 4px;
@@ -902,45 +875,36 @@ body.light-mode .variant-row {
     transition: all 0.15s ease;
     width: 100%;
     box-sizing: border-box;
-}@media (hover: hover) {
-
-
-.channel-box-btn:hover {
-    transform: translateY(-1px);
-}
 }
 
 .channel-box-btn.stable {
     border-color: var(--border-stable);
-}@media (hover: hover) {
-
-
-.channel-box-btn.stable:hover {
-    background: var(--accent-stable-glow);
-    border-color: var(--accent-stable);
-}
 }
 
 .channel-box-btn.beta {
     border-color: var(--border-beta);
-}@media (hover: hover) {
-
-
-.channel-box-btn.beta:hover {
-    background: var(--accent-beta-glow);
-    border-color: var(--accent-beta);
-}
 }
 
 .channel-box-btn.archive {
     border-color: var(--accent-archive-border);
-}@media (hover: hover) {
-
-
-.channel-box-btn.archive:hover {
-    background: var(--accent-archive-bg);
-    border-color: var(--accent-archive);
 }
+
+@media (hover: hover) {
+    .channel-box-btn:hover {
+        transform: translateY(-1px);
+    }
+    .channel-box-btn.stable:hover {
+        background: var(--accent-stable-glow);
+        border-color: var(--accent-stable);
+    }
+    .channel-box-btn.beta:hover {
+        background: var(--accent-beta-glow);
+        border-color: var(--accent-beta);
+    }
+    .channel-box-btn.archive:hover {
+        background: var(--accent-archive-bg);
+        border-color: var(--accent-archive);
+    }
 }
 
 .channel-box-top {
@@ -1248,33 +1212,27 @@ body.light-mode .modal-build-card {
     min-height: 56px;
     box-sizing: border-box;
     transition: background-color 0.2s ease;
-}@media (hover: hover) {
-
-
-.modal-build-header:hover {
-    background: rgba(0, 0, 0, 0.18);
-}
 }
 
 body.light-mode .modal-build-header {
     background: #ffffff;
-}@media (hover: hover) {
-
-
-body.light-mode .modal-build-header:hover {
-    background: #f7f4ee;
-}
 }
 
 body.light-mode .download-btn {
     background: #faf8f5;
     border: 1px solid var(--border);
-}@media (hover: hover) {
-
-
-body.light-mode .download-btn:hover {
-    background: #f2ede6;
 }
+
+@media (hover: hover) {
+    .modal-build-header:hover {
+        background: rgba(0, 0, 0, 0.18);
+    }
+    body.light-mode .modal-build-header:hover {
+        background: #f7f4ee;
+    }
+    body.light-mode .download-btn:hover {
+        background: #f2ede6;
+    }
 }
 
 
