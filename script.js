@@ -1601,11 +1601,9 @@ async function openAppliedPatchesModal(appKey, patchKey, buildKey) {
               return candidate[tagKey];
             }
           }
-          // Strict matching: do not fallback to another channel's patches
-          return null;
         }
 
-        // Only fallback to the latest available if no specific type was requested
+        // Fallback to the latest available tag in candidate
         for (const tagKey of tagKeys) {
           if (isPatchEntry(candidate[tagKey])) return candidate[tagKey];
         }
