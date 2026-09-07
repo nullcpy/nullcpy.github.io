@@ -57,7 +57,7 @@ const CONFIG = {
     "all",
   ],
 
-  // Brand name overrides (loaded dynamically from brands.json)
+  // Brand name overrides (loaded directly from catalog.json)
   brandOverrides: {},
 
   // App-specific notices to display on App Cards
@@ -119,7 +119,6 @@ function initDOM() {
 }
 
 // State
-let allReleases = [];
 let cachedFullCatalog = [];
 let searchTerm = "";
 let appCategoryFilter = "all"; // "all" | "google" | "meta" | "vpn" | "word-..."
@@ -141,7 +140,6 @@ const SHARED_APP_WORD_MIN_COUNT = 2;
 // Caches for Memoization
 const parseCache = new Map();
 const tokenCache = new Map();
-let masterBuildDataCache = null;
 
 // Initialize
 document.addEventListener("DOMContentLoaded", () => {
@@ -508,45 +506,47 @@ function syncUrlParams() {
   history.replaceState(null, "", url);
 }
 
-// Dynamic Brands Loader
-async function loadBrands() {
+// LocalStorage Caching
+function getCachedCatalog() {
+  const cached = localStorage.getItem("catalog_cache");
+  const timestamp = localStorage.getItem("catalog_cache_time");
+  if (!cached || !timestamp) return null;
+
+  const age = (Date.now() - parseInt(timestamp, 10)) / (1000 * 60);
+  if (age > CONFIG.cacheDuration) {
+    localStorage.removeItem("catalog_cache");
+    localStorage.removeItem("catalog_cache_time");
+    return null;
+  }
   try {
-    const cachedBrands = localStorage.getItem("brands_cache");
-    const cachedTime = localStorage.getItem("brands_cache_time");
-    if (cachedBrands && cachedTime && (Date.now() - parseInt(cachedTime, 10)) / (1000 * 60) < CONFIG.cacheDuration) {
-      Object.assign(CONFIG.brandOverrides, JSON.parse(cachedBrands));
-      return;
-    }
-    const resp = await fetch(`brands.json?v=${Date.now()}`);
-    if (resp.ok) {
-      const data = await resp.json();
-      Object.assign(CONFIG.brandOverrides, data);
-      localStorage.setItem("brands_cache", JSON.stringify(data));
-      localStorage.setItem("brands_cache_time", Date.now().toString());
-    }
-  } catch (e) {
-    console.warn("Could not load brands.json", e);
+    return JSON.parse(cached);
+  } catch {
+    return null;
   }
 }
 
-// Releases Loader
+function cacheCatalog(catalogData) {
+  try {
+    localStorage.setItem("catalog_cache", JSON.stringify(catalogData));
+    localStorage.setItem("catalog_cache_time", Date.now().toString());
+  } catch (e) {
+    console.warn("Could not cache catalog to localStorage", e);
+  }
+}
+
+// Catalog Loader (Pure catalog.json, zero legacy fallbacks)
 async function loadReleases() {
   try {
     setPillState("checking", "Checking for updates...");
-    await loadBrands();
 
-    const cached = getCachedReleases();
+    const cached = getCachedCatalog();
     if (cached) {
-      if (Array.isArray(cached.apps) || (Array.isArray(cached) && cached[0]?.patches)) {
-        cachedFullCatalog = Array.isArray(cached.apps) ? cached.apps : cached;
-        dynamicAppFilters = getDynamicAppFilters(cachedFullCatalog);
-      } else {
-        allReleases = cached;
-        rebuildCatalogCache();
-      }
+      if (cached.brands) Object.assign(CONFIG.brandOverrides, cached.brands);
+      cachedFullCatalog = Array.isArray(cached.apps) ? cached.apps : (Array.isArray(cached) ? cached : []);
+      dynamicAppFilters = getDynamicAppFilters(cachedFullCatalog);
       if (DOM.loading) DOM.loading.style.display = "none";
       if (DOM.error) DOM.error.style.display = "none";
-      updateLastUpdateTimestamp();
+      updateLastUpdateTimestamp(cached.updated_at);
       filterAndRenderReleases();
       setPillState("success", "Up to date");
       return;
@@ -555,340 +555,28 @@ async function loadReleases() {
     if (DOM.loading) DOM.loading.style.display = "block";
     if (DOM.error) DOM.error.style.display = "none";
 
-    const cacheBuster = Date.now();
-    let loadedCatalog = false;
+    const catResp = await fetch(`catalog.json?v=${Date.now()}`);
+    if (!catResp.ok) throw new Error(`Failed to load catalog.json (${catResp.status})`);
+    const catData = await catResp.json();
 
-    // 1. Try precomputed unified catalog.json first (fast, lightweight, instant)
-    try {
-      const catResp = await fetch(`catalog.json?v=${cacheBuster}`);
-      if (catResp.ok) {
-        const catData = await catResp.json();
-        if (catData && (Array.isArray(catData.apps) || Array.isArray(catData))) {
-          cachedFullCatalog = Array.isArray(catData.apps) ? catData.apps : catData;
-          dynamicAppFilters = getDynamicAppFilters(cachedFullCatalog);
-          cacheReleases(catData);
-          loadedCatalog = true;
-        }
-      }
-    } catch (e) {
-      console.warn("Could not load catalog.json, falling back...", e);
-    }
-
-    // 2. Fallback to legacy releases.json or GitHub API if catalog.json is unavailable
-    if (!loadedCatalog) {
-      let fetchedData = null;
-      let useFallback = true;
-
-      try {
-        const response = await fetch(`releases.json?v=${cacheBuster}`);
-        if (response.ok) {
-          const data = await response.json();
-          if (Array.isArray(data) && data.length > 0) {
-            fetchedData = data;
-            useFallback = false;
-          }
-        }
-      } catch (e) {
-        console.warn("Network error fetching releases.json, using fallback...", e);
-      }
-
-      if (useFallback) {
-        const response = await fetch(
-          `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/releases`,
-          { headers: { Accept: "application/vnd.github.v3+json" } }
-        );
-        if (!response.ok) throw new Error(`Failed to fetch data: ${response.status}`);
-        fetchedData = await response.json();
-      }
-
-      allReleases = fetchedData;
-      cacheReleases(allReleases);
-      rebuildCatalogCache();
-      fetchMasterBuildData(); // Prefetch builds.json in background for instant modal opens
-    }
+    if (catData.brands) Object.assign(CONFIG.brandOverrides, catData.brands);
+    cachedFullCatalog = Array.isArray(catData.apps) ? catData.apps : (Array.isArray(catData) ? catData : []);
+    dynamicAppFilters = getDynamicAppFilters(cachedFullCatalog);
+    cacheCatalog(catData);
 
     if (DOM.loading) DOM.loading.style.display = "none";
-    updateLastUpdateTimestamp();
+    updateLastUpdateTimestamp(catData.updated_at);
     filterAndRenderReleases();
     setPillState("success", "Up to date");
   } catch (error) {
-    console.error("Error loading releases:", error);
-    setPillState("error", "Failed to check updates");
+    console.error("Error loading catalog:", error);
+    setPillState("error", "Failed to load catalog");
     if (DOM.loading) DOM.loading.style.display = "none";
     if (DOM.error) {
       DOM.error.style.display = "block";
-      DOM.error.textContent = `Failed to load releases: ${error.message}`;
+      DOM.error.textContent = `Failed to load catalog: ${error.message}`;
     }
   }
-}
-
-// LocalStorage Caching
-function getCachedReleases() {
-  const cached = localStorage.getItem("releases_cache");
-  const timestamp = localStorage.getItem("releases_cache_time");
-  if (!cached || !timestamp) return null;
-
-  const age = (Date.now() - parseInt(timestamp, 10)) / (1000 * 60);
-  if (age > CONFIG.cacheDuration) {
-    localStorage.removeItem("releases_cache");
-    localStorage.removeItem("releases_cache_time");
-    return null;
-  }
-  return JSON.parse(cached);
-}
-
-function cacheReleases(releases) {
-  try {
-    localStorage.setItem("releases_cache", JSON.stringify(releases));
-    localStorage.setItem("releases_cache_time", Date.now().toString());
-  } catch (e) {
-    console.warn("Could not cache releases to localStorage", e);
-  }
-}
-
-// Build Catalog Cache
-function rebuildCatalogCache() {
-  cachedFullCatalog = buildAppCatalog(allReleases.filter((r) => !r.draft));
-  dynamicAppFilters = getDynamicAppFilters(cachedFullCatalog);
-}
-
-// Multi-Channel Variant Catalog Builder
-function buildAppCatalog(releases) {
-  const sortedReleases = [...releases].sort(
-    (a, b) => new Date(b.published_at) - new Date(a.published_at),
-  );
-
-  const appMap = new Map();
-
-  sortedReleases.forEach((release) => {
-    const isArchive = release.tag_name === "stable" || release.tag_name === "beta";
-    let releaseType = release.prerelease ? "beta" : "stable";
-    if (release.tag_name === "stable") releaseType = "stable";
-    if (release.tag_name === "beta") releaseType = "beta";
-
-    const patchMetaFromRelease = extractPatchInfoFromRelease(release);
-
-    (release.assets || []).forEach((asset) => {
-      if (!asset.name || !/\.(apk|zip)$/i.test(asset.name)) return;
-
-      const arch = detectArchitecture(asset.name);
-      const fileType = getFileType(asset.name);
-      const parsed = parseAssetDisplay(asset.name, arch, fileType);
-
-      const appKey = normalizeForSearch(parsed.appName);
-      if (!appKey) return;
-
-      if (!appMap.has(appKey)) {
-        appMap.set(appKey, {
-          appKey,
-          appName: parsed.appName,
-          latestStable: null,
-          latestBeta: null,
-          patches: new Map(),
-        });
-      }
-
-      const appEntry = appMap.get(appKey);
-      setLatestBuildMeta(appEntry, releaseType, release);
-
-      const patchKey = normalizeForSearch(parsed.patchName) || "patchedbuild";
-      if (!appEntry.patches.has(patchKey)) {
-        appEntry.patches.set(patchKey, {
-          patchKey,
-          patchName: parsed.patchName,
-          latestVersion: null,
-          latestPublishedAt: 0,
-          variants: new Map(),
-          builds: new Map(),
-        });
-      }
-
-      const patchEntry = appEntry.patches.get(patchKey);
-      const variantKey = parsed.rawVariant || (parsed.variant ? normalizeForSearch(parsed.variant) : "default") || "default";
-      const variantName = parsed.variant ? parsed.variant : "Standard";
-
-      if (!patchEntry.variants.has(variantKey)) {
-        patchEntry.variants.set(variantKey, {
-          variantKey,
-          variantName,
-          latestStable: null,
-          latestBeta: null,
-          latestArchiveStable: null,
-          latestArchiveBeta: null,
-        });
-      }
-
-      const variantEntry = patchEntry.variants.get(variantKey);
-      const buildLabel = getBuildNumberLabel(release);
-      const buildDateString = isArchive
-        ? asset.updated_at || asset.created_at || release.published_at
-        : release.published_at;
-      const buildDateMs = new Date(buildDateString).getTime();
-
-      if (!isArchive) {
-        const patchDate = new Date(patchEntry.latestPublishedAt).getTime();
-        if (buildDateMs > patchDate) {
-          patchEntry.latestVersion = parsed.version;
-          patchEntry.latestPublishedAt = buildDateString;
-        }
-
-        const channelKey = releaseType === "beta" ? "latestBeta" : "latestStable";
-        const currentMeta = variantEntry[channelKey];
-        const currentMetaTime = currentMeta ? new Date(currentMeta.publishedAt).getTime() : 0;
-        if (!currentMeta || buildDateMs > currentMetaTime) {
-          variantEntry[channelKey] = {
-            version: parsed.version,
-            build: buildLabel,
-            publishedAt: buildDateString,
-            releaseId: release.id,
-            releaseUrl: release.html_url,
-          };
-        }
-      } else {
-        const channelKey = releaseType === "beta" ? "latestArchiveBeta" : "latestArchiveStable";
-        const currentMeta = variantEntry[channelKey];
-        const currentMetaTime = currentMeta ? new Date(currentMeta.publishedAt).getTime() : 0;
-        if (!currentMeta || buildDateMs > currentMetaTime) {
-          variantEntry[channelKey] = {
-            version: parsed.version,
-            build: buildLabel,
-            publishedAt: buildDateString,
-            releaseId: release.id,
-            releaseUrl: release.html_url,
-            isArchiveFallback: true,
-          };
-        }
-      }
-
-      const buildKey = isArchive
-        ? `archive-${releaseType}-${parsed.version}-${variantKey}`
-        : `${release.id}-${variantKey}`;
-
-      if (!patchEntry.builds.has(buildKey)) {
-        patchEntry.builds.set(buildKey, {
-          buildKey,
-          releaseId: release.id,
-          build: isArchive ? parsed.version : getBuildNumberLabel(release),
-          releaseType,
-          isArchive,
-          variantKey,
-          publishedAt: isArchive
-            ? asset.updated_at || asset.created_at || release.published_at
-            : release.published_at,
-          releaseUrl: release.html_url,
-          version: parsed.version,
-          patchMeta: {
-            ...patchMetaFromRelease,
-          },
-          appliedPatches: null,
-          assets: [],
-        });
-      }
-
-      const buildEntry = patchEntry.builds.get(buildKey);
-      const exists = buildEntry.assets.some((existing) => existing.name === asset.name);
-      if (!exists) {
-        buildEntry.assets.push({
-          ...asset,
-          parsed,
-          arch,
-          fileType,
-        });
-      }
-    });
-  });
-
-  return Array.from(appMap.values())
-    .map((app) => {
-      // Resolve archive fallbacks if no active build exists
-      app.patches.forEach((patch) => {
-        patch.variants.forEach((variant) => {
-          if (!variant.latestStable && variant.latestArchiveStable) {
-            variant.latestStable = variant.latestArchiveStable;
-          }
-          if (!variant.latestBeta && variant.latestArchiveBeta) {
-            variant.latestBeta = variant.latestArchiveBeta;
-          }
-        });
-      });
-
-      const patchesArray = Array.from(app.patches.values())
-        .sort((a, b) => new Date(b.latestPublishedAt) - new Date(a.latestPublishedAt))
-        .map((patch) => {
-          const patchDownloads = Array.from(patch.builds.values()).reduce(
-            (sum, b) => sum + (b.assets || []).reduce((aSum, a) => aSum + (a.download_count || 0), 0),
-            0
-          );
-          return {
-            ...patch,
-            totalDownloads: patchDownloads,
-            variants: Array.from(patch.variants.values()).sort((a, b) => {
-              if (a.variantKey === "default") return -1;
-              if (b.variantKey === "default") return 1;
-              return a.variantName.localeCompare(b.variantName);
-            }),
-            builds: Array.from(patch.builds.values()).sort((a, b) => {
-              if (a.isArchive && !b.isArchive) return 1;
-              if (!a.isArchive && b.isArchive) return -1;
-              if (a.isArchive && b.isArchive) {
-                const comp = b.version.localeCompare(a.version, undefined, { numeric: true, sensitivity: "base" });
-                if (comp !== 0) return comp;
-              }
-              return new Date(b.publishedAt) - new Date(a.publishedAt);
-            }),
-          };
-        });
-
-      // Pre-compute O(1) metrics on app object for ultra-fast sorting
-      const totalAppDownloads = patchesArray.reduce((sum, p) => sum + p.totalDownloads, 0);
-      const latestAppTime = patchesArray.reduce(
-        (latest, p) => Math.max(latest, new Date(p.latestPublishedAt).getTime() || 0),
-        0
-      );
-
-      // Pre-build search tokens corpus for fast searching
-      const searchTerms = [app.appName, app.appKey];
-      patchesArray.forEach((p) => {
-        searchTerms.push(p.patchName, p.patchKey);
-        p.variants.forEach((v) => {
-          searchTerms.push(v.variantName, v.variantKey);
-          if (v.latestStable) searchTerms.push(v.latestStable.version);
-          if (v.latestBeta) searchTerms.push(v.latestBeta.version);
-        });
-        p.builds.forEach((b) => {
-          (b.assets || []).forEach((a) => {
-            if (a.name) searchTerms.push(a.name);
-          });
-        });
-      });
-      const searchCorpus = normalizeForSearch(searchTerms.join(" "));
-      const appTokens = getSearchTokens(app.appName);
-
-      return {
-        ...app,
-        totalDownloads: totalAppDownloads,
-        latestPublishedAt: latestAppTime,
-        searchCorpus,
-        appTokens,
-        patches: patchesArray,
-      };
-    })
-    .filter((app) => app.patches.length > 0)
-    .sort((a, b) => a.appName.localeCompare(b.appName));
-}
-
-// Extract patch info helper
-function extractPatchInfoFromRelease(release) {
-  const body = release.body || "";
-  const cliMatch = body.match(/CLI:\s*([^\s\n\r]+)/i);
-  const patchMatches = Array.from(body.matchAll(/Patches:\s*([^\s\n\r]+)/gi));
-  const changelogMatches = Array.from(body.matchAll(/\[Changelog\]\((https?:\/\/[^\s\)]+)\)/gi));
-
-  return {
-    cli: cliMatch ? cliMatch[1] : null,
-    patches: patchMatches.map((m) => m[1]),
-    changelogs: changelogMatches.map((m) => m[1]),
-  };
 }
 
 // Filter and Render Catalog
@@ -1462,26 +1150,8 @@ function closePatchModal() {
   hideModal(DOM.patchModal);
 }
 
-// Master Build Metadata Store
-async function fetchMasterBuildData() {
-  if (masterBuildDataCache) return masterBuildDataCache;
-  try {
-    const cacheBuster = Date.now();
-    const resp = await fetch(`builds.json?v=${cacheBuster}`);
-    if (resp.ok) {
-      masterBuildDataCache = await resp.json();
-    } else {
-      masterBuildDataCache = {};
-    }
-  } catch (e) {
-    console.warn("Could not load builds.json:", e);
-    masterBuildDataCache = {};
-  }
-  return masterBuildDataCache;
-}
-
 // Applied Patches Modal Controller
-async function openAppliedPatchesModal(appKey, patchKey, buildKey) {
+function openAppliedPatchesModal(appKey, patchKey, buildKey) {
   const app = currentAppCatalog.find((item) => item.appKey === appKey);
   const patch = app ? app.patches.find((item) => item.patchKey === patchKey) : null;
   if (!app || !patch) return;
@@ -1494,166 +1164,44 @@ async function openAppliedPatchesModal(appKey, patchKey, buildKey) {
   if (!build) {
     build = patch.builds[0];
   }
-  const isArchiveBuild = build && build.isArchive;
 
   let pNames = null;
   let clUrl = null;
-  let appliedPatches = null;
+  let appliedPatches = Array.isArray(build?.appliedPatches) && build.appliedPatches.length > 0 ? build.appliedPatches : null;
 
-  if (build && Array.isArray(build.appliedPatches) && build.appliedPatches.length > 0) {
-    appliedPatches = build.appliedPatches;
-    if (build.patchMeta) {
-      const allPatches = Array.isArray(build.patchMeta.patches) ? build.patchMeta.patches : (build.patchMeta.patches ? [build.patchMeta.patches] : []);
-      const allChangelogs = Array.isArray(build.patchMeta.changelogs) ? build.patchMeta.changelogs : (build.patchMeta.changelogs ? [build.patchMeta.changelogs] : []);
+  if (build && build.patchMeta) {
+    const allPatches = Array.isArray(build.patchMeta.patches) ? build.patchMeta.patches : (build.patchMeta.patches ? [build.patchMeta.patches] : []);
+    const allChangelogs = Array.isArray(build.patchMeta.changelogs) ? build.patchMeta.changelogs : (build.patchMeta.changelogs ? [build.patchMeta.changelogs] : []);
 
-      const pKey = normalizeForSearch(patch.patchKey || patch.patchName || "");
-      const vKey = normalizeForSearch(build.variantKey || "");
+    const pKey = normalizeForSearch(patch.patchKey || patch.patchName || "");
+    const vKey = normalizeForSearch(build.variantKey || "");
 
-      const matchedIndices = [];
-      allPatches.forEach((name, idx) => {
-        const lower = name.toLowerCase();
-        if (vKey === "adobo" && (lower.includes("adobo") || lower.includes("jkenneth"))) {
-          matchedIndices.push(idx);
-        } else if (vKey === "piko" && lower.includes("piko")) {
-          matchedIndices.push(idx);
-        } else if (pKey === "morphe" && lower.includes("morphe") && !lower.includes("adobo") && !lower.includes("jkenneth")) {
-          matchedIndices.push(idx);
-        } else if (pKey === "revanced" && lower.includes("revanced") && !lower.includes("extended") && !lower.includes("advanced") && !lower.includes("anddea") && !lower.includes("rvx")) {
-          matchedIndices.push(idx);
-        } else if ((pKey === "rvx" || pKey === "revancedextended") && (lower.includes("inotia00") || lower.includes("rvx") || lower.includes("extended"))) {
-          matchedIndices.push(idx);
-        } else if ((pKey === "anddea" || pKey === "revancedadvanced") && (lower.includes("anddea") || lower.includes("advanced"))) {
-          matchedIndices.push(idx);
-        } else if (pKey === "instafel" && lower.includes("instafel")) {
-          matchedIndices.push(idx);
-        }
-      });
-
-      if (matchedIndices.length > 0) {
-        pNames = matchedIndices.map((i) => allPatches[i]);
-        clUrl = matchedIndices.map((i) => allChangelogs[i] || allChangelogs[0] || "");
-      } else {
-        pNames = allPatches;
-        clUrl = allChangelogs;
+    const matchedIndices = [];
+    allPatches.forEach((name, idx) => {
+      const lower = name.toLowerCase();
+      if (vKey === "adobo" && (lower.includes("adobo") || lower.includes("jkenneth"))) {
+        matchedIndices.push(idx);
+      } else if (vKey === "piko" && lower.includes("piko")) {
+        matchedIndices.push(idx);
+      } else if (pKey === "morphe" && lower.includes("morphe") && !lower.includes("adobo") && !lower.includes("jkenneth")) {
+        matchedIndices.push(idx);
+      } else if (pKey === "revanced" && lower.includes("revanced") && !lower.includes("extended") && !lower.includes("advanced") && !lower.includes("anddea") && !lower.includes("rvx")) {
+        matchedIndices.push(idx);
+      } else if ((pKey === "rvx" || pKey === "revancedextended") && (lower.includes("inotia00") || lower.includes("rvx") || lower.includes("extended"))) {
+        matchedIndices.push(idx);
+      } else if ((pKey === "anddea" || pKey === "revancedadvanced") && (lower.includes("anddea") || lower.includes("advanced"))) {
+        matchedIndices.push(idx);
+      } else if (pKey === "instafel" && lower.includes("instafel")) {
+        matchedIndices.push(idx);
       }
-    }
-  }
+    });
 
-  // Resolve applied patches from builds.json if not already embedded
-  if (!appliedPatches) {
-    const masterData = await fetchMasterBuildData();
-    const appKeyNorm = normalizeForSearch(app.appKey || app.appName);
-    const patchKeyNorm = normalizeForSearch(patch.patchKey || patch.patchName);
-    // Use stored variantKey to get the correct variant — avoids cross-variant asset contamination
-    // (multiple variants share the same buildKey when from the same numbered release)
-    const variantNorm = (build?.variantKey && build.variantKey !== "default")
-      ? normalizeForSearch(build.variantKey)
-      : "";
-
-    let rawSlugNorm = appKeyNorm;
-    let rawPatchNorm = patchKeyNorm;
-    const asset = build?.assets?.[0];
-    if (asset?.name) {
-      const parsedAsset = parseAssetDisplay(asset.name);
-      if (parsedAsset.rawAppSlug) rawSlugNorm = parsedAsset.rawAppSlug;
-      if (parsedAsset.rawPatchToken) rawPatchNorm = parsedAsset.rawPatchToken;
-    }
-
-    const targetKey = `${appKeyNorm}-${patchKeyNorm}`;
-    const variantTargetKey = variantNorm ? `${appKeyNorm}-${patchKeyNorm}-${variantNorm}` : targetKey;
-    const rawTargetKey = `${rawSlugNorm}-${patchKeyNorm}`;
-    const rawVariantTargetKey = variantNorm ? `${rawSlugNorm}-${patchKeyNorm}-${variantNorm}` : rawTargetKey;
-    const rawPatchTargetKey = `${rawSlugNorm}-${rawPatchNorm}`;
-    const rawPatchVariantTargetKey = variantNorm ? `${rawSlugNorm}-${rawPatchNorm}-${variantNorm}` : rawPatchTargetKey;
-
-    function isPatchEntry(obj) {
-      return obj && typeof obj === "object" && (
-        Array.isArray(obj.applied_patches) || typeof obj.patches === "string" || typeof obj.changelog === "string"
-      );
-    }
-
-    // Direct O(1) version & tag dictionary lookup (no dead engine loops)
-    function resolveVersionFromDict(dict, rawVer, specificTag, isArchive, preferredReleaseType) {
-      if (!dict || typeof dict !== "object") return null;
-      if (isPatchEntry(dict)) return dict;
-
-      const cleanVer = (rawVer || "").toLowerCase().replace(/^v(?=[a-z0-9])/i, "").trim();
-      if (!cleanVer) return null;
-
-      const candidate = dict[cleanVer] || dict[`v${cleanVer}`] || dict[rawVer];
-      if (!candidate) return null;
-      if (isPatchEntry(candidate)) return candidate;
-
-      if (typeof candidate === "object") {
-        if (specificTag && !isArchive) {
-          return isPatchEntry(candidate[specificTag]) ? candidate[specificTag] : null;
-        }
-        const tagKeys = Object.keys(candidate).sort((a, b) => {
-          const na = Number(a), nb = Number(b);
-          if (!isNaN(na) && !isNaN(nb)) return nb - na;
-          return b.localeCompare(a);
-        });
-
-        // If we have a preferred release type (for archives), try to find a matching tag first
-        if (preferredReleaseType) {
-          for (const tagKey of tagKeys) {
-            if (tagToReleaseType[tagKey] === preferredReleaseType && isPatchEntry(candidate[tagKey])) {
-              return candidate[tagKey];
-            }
-          }
-        }
-
-        // Fallback to the latest available tag in candidate
-        for (const tagKey of tagKeys) {
-          if (isPatchEntry(candidate[tagKey])) return candidate[tagKey];
-        }
-      }
-      return null;
-    }
-
-    const specificTag = isArchiveBuild ? null : (build?.build || null);
-    const cleanBuildVer = (build?.version || "").replace(/^v(?=[a-z0-9])/i, "").trim();
-    const versionsToTry = cleanBuildVer ? [cleanBuildVer, `v${cleanBuildVer}`] : [];
-
-    // Map build tag to releaseType to prefer the right patches for archive builds
-    const tagToReleaseType = {};
-    if (patch && patch.builds) {
-      for (const b of patch.builds.values()) {
-        if (b.build && b.releaseType) {
-          tagToReleaseType[b.build] = b.releaseType;
-        }
-      }
-    }
-
-    let resolved = null;
-    if (variantNorm) {
-      for (const ver of versionsToTry) {
-        resolved =
-          resolveVersionFromDict(masterData[rawPatchVariantTargetKey], ver, specificTag, isArchiveBuild, build?.releaseType) ||
-          resolveVersionFromDict(masterData[rawVariantTargetKey], ver, specificTag, isArchiveBuild, build?.releaseType) ||
-          resolveVersionFromDict(masterData[variantTargetKey], ver, specificTag, isArchiveBuild, build?.releaseType);
-        if (resolved) break;
-      }
+    if (matchedIndices.length > 0) {
+      pNames = matchedIndices.map((i) => allPatches[i]);
+      clUrl = matchedIndices.map((i) => allChangelogs[i] || allChangelogs[0] || "");
     } else {
-      for (const ver of versionsToTry) {
-        resolved =
-          resolveVersionFromDict(masterData[rawPatchTargetKey], ver, specificTag, isArchiveBuild, build?.releaseType) ||
-          resolveVersionFromDict(masterData[rawTargetKey], ver, specificTag, isArchiveBuild, build?.releaseType) ||
-          resolveVersionFromDict(masterData[targetKey], ver, specificTag, isArchiveBuild, build?.releaseType);
-        if (resolved) break;
-      }
-    }
-
-    if (resolved) {
-      if (Array.isArray(resolved.applied_patches) && resolved.applied_patches.length > 0) {
-        appliedPatches = resolved.applied_patches;
-      }
-      if (resolved.patches) {
-        pNames = resolved.patches;
-      }
-      if (resolved.changelog) {
-        clUrl = resolved.changelog;
-      }
+      pNames = allPatches;
+      clUrl = allChangelogs;
     }
   }
 
@@ -1872,109 +1420,13 @@ function createObtainiumInstructions(app, patch) {
 
 function getAppPackageId(app, patch, variantKey) {
   if (!app) return "";
-
-  // 1. Direct resolution from build data (embedded in catalog.json)
   const normVar = (variantKey || "").toLowerCase();
   const matchingBuild =
     patch?.builds?.find((b) => b.package_name && (normVar && normVar !== "default" ? b.variantKey === normVar : true)) ||
     patch?.builds?.find((b) => b.package_name) ||
     app?.patches?.flatMap((p) => p.builds || []).find((b) => b.package_name);
 
-  if (matchingBuild && matchingBuild.package_name) {
-    return matchingBuild.package_name;
-  }
-
-  const sampleAsset = patch?.builds?.[0]?.assets?.[0] || app?.patches?.[0]?.builds?.[0]?.assets?.[0];
-  let rawSlug = "";
-  let rawPatch = "";
-
-  if (sampleAsset?.name) {
-    const parsedAsset = parseAssetDisplay(sampleAsset.name);
-    rawSlug = parsedAsset.rawAppSlug || "";
-    rawPatch = parsedAsset.rawPatchToken || "";
-  }
-
-  const appKeyNorm = normalizeForSearch(app.appKey || app.appName || "");
-  const appNameNorm = normalizeForSearch(app.appName || "");
-
-  let mapping = null;
-  const candidates = [rawSlug, app.appKey, appKeyNorm, appNameNorm];
-  for (const cand of candidates) {
-    if (!cand) continue;
-    if (CONFIG.appIds && CONFIG.appIds[cand]) {
-      mapping = CONFIG.appIds[cand];
-      break;
-    }
-    const candNorm = normalizeForSearch(cand);
-    if (CONFIG.appIds && CONFIG.appIds[candNorm]) {
-      mapping = CONFIG.appIds[candNorm];
-      break;
-    }
-  }
-
-  if (!mapping && CONFIG.appIds) {
-    // Fuzzy matching against CONFIG.appIds
-    for (const [key, val] of Object.entries(CONFIG.appIds)) {
-      const normKey = normalizeForSearch(key);
-      if (normKey === appNameNorm || appNameNorm.includes(normKey) || normKey.includes(appNameNorm) ||
-        normKey === appKeyNorm || appKeyNorm.includes(normKey) || normKey.includes(appKeyNorm)) {
-        mapping = val;
-        break;
-      }
-    }
-  }
-
-  if (!mapping) return "";
-  if (typeof mapping === "string") return mapping;
-
-  if (typeof mapping === "object") {
-    const patchCandidates = [
-      rawPatch,
-      patch?.patchKey,
-      normalizeForSearch(patch?.patchName || ""),
-    ];
-
-    const normVariant = normalizeForSearch(variantKey || "");
-
-    // Check if there is an engine/patch-specific sub-mapping (e.g. instagram.instafel)
-    let activeMapping = mapping;
-    for (const pCand of patchCandidates) {
-      if (!pCand) continue;
-      const sub = mapping[pCand] ||
-        (pCand === "revancedextended" ? mapping["rvx"] : null) ||
-        (pCand === "revancedadvanced" ? mapping["anddea"] : null) ||
-        (pCand === "rvx" ? mapping["revancedextended"] : null) ||
-        (pCand === "anddea" ? mapping["revancedadvanced"] : null);
-
-      if (sub) {
-        if (typeof sub === "string") return sub;
-        if (typeof sub === "object") {
-          activeMapping = sub;
-          break;
-        }
-      }
-    }
-
-    // 1. Check variant overrides in activeMapping (e.g. clone, androidtv, foss)
-    if (normVariant && normVariant !== "default" && normVariant !== "all") {
-      if (typeof activeMapping[normVariant] === "string") return activeMapping[normVariant];
-      if (normVariant.includes("tv") && typeof activeMapping["androidtv"] === "string") return activeMapping["androidtv"];
-      if (normVariant.includes("clone") && typeof activeMapping["clone"] === "string") return activeMapping["clone"];
-      if (normVariant.includes("foss") && typeof activeMapping["foss"] === "string") return activeMapping["foss"];
-      if (typeof mapping[normVariant] === "string") return mapping[normVariant];
-    }
-
-    // 2. Default fallback on activeMapping or top-level mapping
-    if (typeof activeMapping.default === "string") return activeMapping.default;
-    if (typeof mapping.default === "string") return mapping.default;
-
-    // 3. First string value fallback
-    const firstVal = Object.values(activeMapping).find((v) => typeof v === "string") ||
-      Object.values(mapping).find((v) => typeof v === "string");
-    if (firstVal) return firstVal;
-  }
-
-  return "";
+  return matchingBuild?.package_name || "";
 }
 
 function closeObtainiumModal() {
@@ -2169,25 +1621,6 @@ function formatBrandDisplayName(value) {
     .join(" ");
 }
 
-function setLatestBuildMeta(appEntry, releaseType, release) {
-  const key = releaseType === "beta" ? "latestBeta" : "latestStable";
-  const current = appEntry[key];
-  const currentDate = current ? new Date(current.publishedAt).getTime() : 0;
-  const releaseDate = new Date(release.published_at).getTime();
-
-  if (!current || releaseDate > currentDate) {
-    appEntry[key] = {
-      build: getBuildNumberLabel(release),
-      publishedAt: release.published_at,
-      releaseUrl: release.html_url,
-    };
-  }
-}
-
-function getBuildNumberLabel(release) {
-  return String(release.tag_name || release.name || "N/A");
-}
-
 function escapeHtml(text) {
   return String(text ?? "")
     .replace(/&/g, "&amp;")
@@ -2197,13 +1630,10 @@ function escapeHtml(text) {
     .replace(/'/g, "&#39;");
 }
 
-function updateLastUpdateTimestamp() {
+function updateLastUpdateTimestamp(updatedAt) {
   let latestTime = 0;
-  if (allReleases && allReleases.length > 0) {
-    latestTime = allReleases.reduce((max, release) => {
-      const t = new Date(release.published_at).getTime();
-      return t > max ? t : max;
-    }, 0);
+  if (updatedAt) {
+    latestTime = new Date(updatedAt).getTime();
   } else if (cachedFullCatalog && cachedFullCatalog.length > 0) {
     latestTime = cachedFullCatalog.reduce((max, app) => {
       const t = typeof app.latestPublishedAt === "number" ? app.latestPublishedAt : new Date(app.latestPublishedAt).getTime();
