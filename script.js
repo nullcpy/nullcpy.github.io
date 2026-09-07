@@ -8,82 +8,36 @@ const CONFIG = {
   owner: "nullcpy",
   repo: "rvb",
   cacheDuration: 5, // Cache duration in minutes
-
-  // App Categories for the filter buttons
-  appCategories: {
-    androidtv: ["primevideo", "plutotv", "moviebox", "disneyplus", "hbomax", "tubi", "vix", "at4klauncher", "projectivylauncher", "peacock", "netflix", "nuvio"],
-    google: ["youtube", "google"],
-    meta: ["threads", "instagram", "messenger", "facebook", "!plusmessenger"],
-    vpn: ["1111warp", "vpnify", "vpn"]
-  },
-
-  // Words ignored in the dynamic app filters (must be lowercase)
-  sharedAppWordStoplist: new Set(["messenger", "document", "reader", "keyboard", "browser", "editor", "video"]),
-
-  // Known tokens indicating a patch name starts (must be lowercase)
-  knownPatchTokens: new Set(["revanced", "morphe", "anddea", "rvx", "xposed", "instafel"]),
-
-  // Known tokens indicating a variant (must be lowercase)
-  variantKeywords: new Set([
-    "exp",
-    "nord",
-    "mocha",
-    "privacy",
-    "materialu",
-    "foss",
-    "gplay",
-    "piko",
-    "adobo",
-    "patcheddit",
-    "paresh",
-    "nightly",
-    "androidtv",
-    "alt",
-    "clone",
-    "beta"
-  ]),
-
-  // Known architectures (used for regex parsing)
-  knownArchs: [
-    "arm64-v8a",
-    "arm64",
-    "aarch64",
-    "armeabi-v7a",
-    "arm-v7a",
-    "arm32",
-    "arm",
-    "x86_64",
-    "x86",
-    "universal",
-    "all",
-  ],
-
-  // Brand name overrides (loaded directly from catalog.json)
+  appCategories: {},
+  sharedAppWordStoplist: new Set(),
+  knownPatchTokens: new Set(),
+  variantKeywords: new Set(),
+  knownArchs: [],
   brandOverrides: {},
-
-  // App-specific notices to display on App Cards
-  appNotices: [
-    {
-      triggers: ["youtube", "google"],
-      className: "microg-note",
-      title: "Login Issue",
-      text: "Signing into Google account on APK (not Module) requires MicroG. Please install one from below before trying to sign in.",
-      links: [
-        { label: "Morphe", url: "https://github.com/MorpheApp/MicroG-RE/releases/latest" },
-        { label: "ReVanced", url: "https://github.com/ReVanced/GmsCore/releases/latest" },
-      ],
-    },
-    {
-      triggers: ["twitter"],
-      className: "twitter-login-note",
-      title: "Login Issue",
-      text: "Since October 2025, Twitter has started checking whether the app is modified or if phone integrity fails during login.",
-      links: [
-        { label: "Workarounds", url: "https://t.me/pikopatches/1/59772" },
-      ],
-    },
-  ],
+  appNotices: [],
 };
+
+function applyConfig(cfg) {
+  if (!cfg || typeof cfg !== "object") return;
+  if (cfg.owner) CONFIG.owner = cfg.owner;
+  if (cfg.repo) CONFIG.repo = cfg.repo;
+  if (cfg.cacheDuration) CONFIG.cacheDuration = cfg.cacheDuration;
+  if (cfg.appCategories) CONFIG.appCategories = cfg.appCategories;
+  if (Array.isArray(cfg.sharedAppWordStoplist)) {
+    CONFIG.sharedAppWordStoplist = new Set(cfg.sharedAppWordStoplist);
+  }
+  if (Array.isArray(cfg.knownPatchTokens)) {
+    CONFIG.knownPatchTokens = new Set(cfg.knownPatchTokens);
+  }
+  if (Array.isArray(cfg.variantKeywords)) {
+    CONFIG.variantKeywords = new Set(cfg.variantKeywords);
+  }
+  if (Array.isArray(cfg.knownArchs)) {
+    CONFIG.knownArchs = cfg.knownArchs;
+  }
+  if (cfg.appNotices) CONFIG.appNotices = cfg.appNotices;
+  if (cfg.brands) Object.assign(CONFIG.brandOverrides, cfg.brands);
+}
 
 // Cached DOM references
 const DOM = {};
@@ -542,6 +496,7 @@ async function loadReleases() {
 
     const cached = getCachedCatalog();
     if (cached) {
+      if (cached.config) applyConfig(cached.config);
       if (cached.brands) Object.assign(CONFIG.brandOverrides, cached.brands);
       cachedFullCatalog = Array.isArray(cached.apps) ? cached.apps : (Array.isArray(cached) ? cached : []);
       dynamicAppFilters = getDynamicAppFilters(cachedFullCatalog);
@@ -560,6 +515,7 @@ async function loadReleases() {
     if (!catResp.ok) throw new Error(`Failed to load catalog.json (${catResp.status})`);
     const catData = await catResp.json();
 
+    if (catData.config) applyConfig(catData.config);
     if (catData.brands) Object.assign(CONFIG.brandOverrides, catData.brands);
     cachedFullCatalog = Array.isArray(catData.apps) ? catData.apps : (Array.isArray(catData) ? catData : []);
     dynamicAppFilters = getDynamicAppFilters(cachedFullCatalog);
