@@ -57,241 +57,8 @@ const CONFIG = {
     "all",
   ],
 
-  // Brand name overrides (keys must be lowercase)
-  brandOverrides: {
-    youtube: "YouTube",
-    revanced: "ReVanced",
-    tiktok: "TikTok",
-    soundcloud: "SoundCloud",
-    xrecorder: "XRecorder",
-    calcnote: "CalcNote",
-    imdb: "IMDb",
-    trakt: "trakt.TV",
-    github: "GitHub",
-    vpn: "VPN",
-    rvx: "ReVanced Extended",
-    anddea: "ReVanced Advanced",
-    exp: "Experimental",
-    macrodroid: "MacroDroid",
-    ticktick: "TickTick",
-    fing: "Fing - Network Tools",
-    sdmaid: "SD Maid 2/SE",
-    mocha: "Mocha Theme",
-    nord: "Nord Theme",
-    materialu: "Material You",
-    photoshop: "Adobe Photoshop",
-    lightroom: "Adobe Lightroom",
-    xodo: "Xodo PDF Reader & Editor",
-    hellochinese: "HelloChinese: Learn Chinese",
-    gplay: "Google Play",
-    foss: "FOSS",
-    gboard: "Google Keyboard",
-    wps: "WPS",
-    rar: "RAR",
-    adguard: "AdGuard",
-    moonplus: "Moon+",
-    eyecon: "Eyecon Caller ID & Spam Block",
-    camscanner: "CamScanner",
-    inshorts: "Inshorts - News in 60 words",
-    warp: "1.1.1.1 + WARP",
-    acalendar: "aCalendar",
-    at4k: "AT4K",
-    androidtv: "Android TV",
-    disneyplus: "Disney+",
-    hbomax: "HBO Max",
-    vix: "ViX",
-    komoot: "komoot - hike, bike & run",
-    vpnify: "VPNify",
-    snorelab: "SnoreLab",
-    myfitnesspal: "MyFitnessPal",
-    terabox: "TeraBox",
-    plutotv: "PlutoTV",
-    accuweather: "AccuWeather",
-    pixiv: "pixiv",
-    mxplayer: "MX Player",
-    moviebox: "MovieBox",
-    kinestop: "KineStop",
-    byair: "ByAir",
-    drofus: "DROFUS - ISO 2 USB",
-    calm: "Calm - Meditate, Sleep, Relax",
-    sendfilestotv: "Send Files to TV",
-    bluetoothkeyboardandmouse: "Bluetooth Keyboard & Mouse",
-    swiftkeyboard: "Microsoft SwiftKey AI Keyboard",
-    capcut: "CapCut: Photo & Video Editor",
-    chesscom: "Chess.com",
-    aliexpress: "AliExpress - Shopping App",
-  },
-
-  // Map app slugs to true Android Package IDs for Obtainium
-  appIds: {
-    "1111warp": "com.cloudflare.onedotonedotonedotone",
-    acalendar: "org.withouthat.acalendar",
-    accuweather: "com.accuweather.android",
-    adguard: "com.adguard.android",
-    adobeacrobat: "com.adobe.reader",
-    adobelightroom: "com.adobe.lrmobile",
-    adobephotoshopmix: "com.adobe.photoshopmix",
-    aliexpressshoppingapp: "com.alibaba.aliexpresshd",
-    alldocumentreader: "alldocumentsreader.docuemntviewer",
-    amazonindia: "in.amazon.mShop.android.shopping",
-    at4klauncher: "com.overdevs.at4k",
-    automate: "com.llamalab.automate",
-    autosync: "com.ttxapps.autosync",
-    backdrops: "com.backdrops.wallpapers",
-    batteryguru: "com.paget96.batteryguru",
-    betamaniac: "it.mirko.beta",
-    bluetoothkeyboardmouse: "io.appground.blek",
-    bravebrowser: {
-      default: "com.brave.browser",
-      beta: "com.brave.browser_beta",
-      nightly: "com.brave.browser_nightly"
-    },
-    byair: "com.byairapp.android",
-    calcnote: "com.appumstudios.calcnote",
-    caloriecounter: "com.fatsecret.android",
-    calm: "com.calm.android",
-    camscanner: "com.intsig.camscanner",
-    chesscom: "com.chess",
-    capcutphotovideoeditor: "com.lemon.lvoverseas",
-    cricbuzz: "com.cricbuzz.android",
-    cryptomator: "org.cryptomator",
-    documentscanner: "com.cv.docscanner",
-    duolingo: "com.duolingo",
-    disneyplus: "com.disney.disneyplus",
-    discord: "com.discord",
-    drofus: "com.mixapplications.rufus",
-    eyeconcalleridspamblock: "com.eyecon.global",
-    facebook: "com.facebook.katana",
-    fingnetworktools: "com.overlook.android.fing",
-    github: "com.github.android",
-    goodreads: "com.goodreads",
-    googlekeyboard: {
-      default: "com.google.android.inputmethod.latin",
-      clone: "dev.jason.com.google.android.inputmethod.latin"
-    },
-    googlenews: "com.google.android.apps.magazines",
-    googlephone: "com.google.android.dialer",
-    googlephotos: {
-      revanced: "app.revanced.android.apps.photos",
-      morphe: "app.morphe.android.apps.photos",
-      default: "com.google.android.apps.photos",
-    },
-    googlerecorder: "com.google.android.apps.recorder",
-    hbomax: "com.wbd.hbomax",
-    hermit: "com.chimbori.hermitcrab",
-    hellochineselearnchinese: "com.hellochinese",
-    holavpn: "org.hola.play",
-    iconpacker: "cn.ommiao.iconpacker",
-    instagram: {
-      default: "com.instagram.android",
-      instafel: {
-        default: "com.instagram.android",
-        clone: "com.instafel.android"
-      }
-    },
-    inshot: "com.camerasideas.instashot",
-    inshortsnewsin60words: "com.nis.app",
-    imdb: "com.imdb.mobile",
-    kinestop: "com.urbandroid.kinestop",
-    komoothikebikerun: "de.komoot.android",
-    luminawallpapers: "com.lumina.wallpapers",
-    macrodroid: "com.arlosoft.macrodroid",
-    medium: "com.medium.reader",
-    merriamwebsterdictionary: "com.merriamwebster",
-    messenger: { default: "com.facebook.orca", morphe: "app.morphe.messenger.orca" },
-    microsoftlens: "com.microsoft.office.officelens",
-    microsoftedge: "com.microsoft.emmx",
-    microsoftswiftkeyaikeyboard: "com.microsoft.swiftkey",
-    moonreader: "com.flyersoft.moonreader",
-    moneymanager: "com.realbyteapps.moneymanagerfree",
-    moviebox: {
-      default: "com.community.oneroom",
-      androidtv: "com.community.mbox.tv"
-    },
-    mxplayer: "com.mxtech.videoplayer.pro",
-    myfitnesspal: "com.myfitnesspal.android",
-    netflix: { androidtv: "com.netflix.ninja" },
-    niagaralauncher: "bitpit.launcher",
-    ninjavpn: "app.ninjavpn.android",
-    novalauncher: "com.teslacoilsw.launcher",
-    nuvio: { androidtv: "com.nuvio.tv" },
-    pandora: "com.pandora.android",
-    peacock: "com.peacocktv.peacockandroid",
-    photomath: "com.microblink.photomath",
-    picsart: "com.picsart.studio",
-    pinterest: "com.pinterest",
-    pixiv: "jp.pxv.android",
-    plusmessenger: "org.telegram.plus",
-    plutotv: { androidtv: "tv.pluto.android" },
-    pocketcasts: "au.com.shiftyjelly.pocketcasts",
-    podcastaddict: "com.bambuna.podcastaddict",
-    poweramp: "com.maxmpz.audioplayer",
-    primevideo: {
-      default: "com.amazon.avod.thirdpartyclient",
-      androidtv: "com.amazon.amazonvideo.livingroom.mod"
-    },
-    protonmail: "ch.protonmail.android",
-    protonvpn: "ch.protonvpn.android",
-    projectivylauncher: "com.spocky.projengmenu",
-    sdmaid2se: "eu.darken.sdmse",
-    sendfilestotv: "com.yablio.sendfilestotv",
-    showly: "com.michaldrabik.showly2",
-    smartlauncher6: "ginlemon.flowerfree",
-    solidexplorer: "pl.solidexplorer2",
-    soundcloud: "com.soundcloud.android",
-    snorelab: "com.snorelab.app",
-    speedtest: "org.zwanoo.android.speedtest",
-    strava: "com.strava",
-    symfonium: "app.symfonik.music.player",
-    telegram: {
-      default: "org.telegram.messenger",
-      foss: "org.telegram.messenger.web",
-    },
-    terabox: "com.dubox.drive",
-    theweatherchannel: "com.weather.Weather",
-    threads: "com.instagram.barcelona",
-    ticktick: "com.ticktick.task",
-    tiktok: "com.zhiliaoapp.musically",
-    titaniumbrowser: "io.github.jqssun.helium",
-    todoist: "com.todoist",
-    trakttv: "tv.trakt.trakt",
-    truecaller: "com.truecaller",
-    tubi: "com.tubitv",
-    tumblr: "com.tumblr",
-    twitch: "tv.twitch.android.app",
-    reddit: "com.reddit.frontpage",
-    rumble: "com.rumble.battles",
-    ventusky: "cz.ackee.ventusky",
-    viber: "com.viber.voip",
-    vix: "com.univision.prendetv",
-    vpnify: "com.vpn.free.hotspot.secure.vpnify",
-    rar: "com.rarlab.rar",
-    wallcraft: "com.wallpaperscraft.wallpaper",
-    waze: "com.waze",
-    windscribevpn: "com.windscribe.vpn",
-    wpsoffice: "cn.wps.moffice_eng",
-    twitter: "com.twitter.android",
-    xodopdfreadereditor: "com.xodo.pdf.reader",
-    xrecorder: "videoeditor.videorecorder.screenrecorder",
-    youtube: {
-      revanced: "app.revanced.android.youtube",
-      rvx: "app.rvx.android.youtube",
-      revancedextended: "app.rvx.android.youtube",
-      anddea: "anddea.youtube",
-      revancedadvanced: "anddea.youtube",
-      morphe: "app.morphe.android.youtube",
-      default: "com.google.android.youtube",
-    },
-    youtubemusic: {
-      revanced: "app.revanced.android.apps.youtube.music",
-      rvx: "app.rvx.android.apps.youtube.music",
-      revancedextended: "app.rvx.android.apps.youtube.music",
-      anddea: "anddea.youtube.music",
-      revancedadvanced: "anddea.youtube.music",
-      morphe: "app.morphe.android.apps.youtube.music",
-      default: "com.google.android.apps.youtube.music",
-    },
-  },
+  // Brand name overrides (loaded dynamically from brands.json)
+  brandOverrides: {},
 
   // App-specific notices to display on App Cards
   appNotices: [
@@ -741,10 +508,32 @@ function syncUrlParams() {
   history.replaceState(null, "", url);
 }
 
+// Dynamic Brands Loader
+async function loadBrands() {
+  try {
+    const cachedBrands = localStorage.getItem("brands_cache");
+    const cachedTime = localStorage.getItem("brands_cache_time");
+    if (cachedBrands && cachedTime && (Date.now() - parseInt(cachedTime, 10)) / (1000 * 60) < CONFIG.cacheDuration) {
+      Object.assign(CONFIG.brandOverrides, JSON.parse(cachedBrands));
+      return;
+    }
+    const resp = await fetch(`brands.json?v=${Date.now()}`);
+    if (resp.ok) {
+      const data = await resp.json();
+      Object.assign(CONFIG.brandOverrides, data);
+      localStorage.setItem("brands_cache", JSON.stringify(data));
+      localStorage.setItem("brands_cache_time", Date.now().toString());
+    }
+  } catch (e) {
+    console.warn("Could not load brands.json", e);
+  }
+}
+
 // Releases Loader
 async function loadReleases() {
   try {
     setPillState("checking", "Checking for updates...");
+    await loadBrands();
 
     const cached = getCachedReleases();
     if (cached) {
@@ -2055,6 +1844,17 @@ function createObtainiumInstructions(app, patch) {
 function getAppPackageId(app, patch, variantKey) {
   if (!app) return "";
 
+  // 1. Direct resolution from build data (embedded in catalog.json)
+  const normVar = (variantKey || "").toLowerCase();
+  const matchingBuild =
+    patch?.builds?.find((b) => b.package_name && (normVar && normVar !== "default" ? b.variantKey === normVar : true)) ||
+    patch?.builds?.find((b) => b.package_name) ||
+    app?.patches?.flatMap((p) => p.builds || []).find((b) => b.package_name);
+
+  if (matchingBuild && matchingBuild.package_name) {
+    return matchingBuild.package_name;
+  }
+
   const sampleAsset = patch?.builds?.[0]?.assets?.[0] || app?.patches?.[0]?.builds?.[0]?.assets?.[0];
   let rawSlug = "";
   let rawPatch = "";
@@ -2072,18 +1872,18 @@ function getAppPackageId(app, patch, variantKey) {
   const candidates = [rawSlug, app.appKey, appKeyNorm, appNameNorm];
   for (const cand of candidates) {
     if (!cand) continue;
-    if (CONFIG.appIds[cand]) {
+    if (CONFIG.appIds && CONFIG.appIds[cand]) {
       mapping = CONFIG.appIds[cand];
       break;
     }
     const candNorm = normalizeForSearch(cand);
-    if (CONFIG.appIds[candNorm]) {
+    if (CONFIG.appIds && CONFIG.appIds[candNorm]) {
       mapping = CONFIG.appIds[candNorm];
       break;
     }
   }
 
-  if (!mapping) {
+  if (!mapping && CONFIG.appIds) {
     // Fuzzy matching against CONFIG.appIds
     for (const [key, val] of Object.entries(CONFIG.appIds)) {
       const normKey = normalizeForSearch(key);
