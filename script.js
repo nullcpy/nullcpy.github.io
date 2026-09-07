@@ -7,7 +7,6 @@
 const CONFIG = {
   owner: "",
   repo: "",
-  cacheDuration: 5, // Cache duration in minutes
   appCategories: {},
   sharedAppWordStoplist: new Set(),
   knownPatchTokens: new Set(),
@@ -21,7 +20,6 @@ function applyConfig(cfg) {
   if (!cfg || typeof cfg !== "object") return;
   if (cfg.owner) CONFIG.owner = cfg.owner;
   if (cfg.repo) CONFIG.repo = cfg.repo;
-  if (cfg.cacheDuration) CONFIG.cacheDuration = cfg.cacheDuration;
   if (cfg.appCategories) CONFIG.appCategories = cfg.appCategories;
   if (Array.isArray(cfg.sharedAppWordStoplist)) {
     CONFIG.sharedAppWordStoplist = new Set(cfg.sharedAppWordStoplist.map((w) => w.toLowerCase()));
@@ -461,63 +459,23 @@ function syncUrlParams() {
   history.replaceState(null, "", url);
 }
 
-// LocalStorage Caching
-function getCachedCatalog() {
-  // Clear any legacy catalog cache
-  try {
-    localStorage.removeItem("catalog_cache");
-    localStorage.removeItem("catalog_cache_time");
-  } catch {}
-
-  const cached = localStorage.getItem("data_cache");
-  const timestamp = localStorage.getItem("data_cache_time");
-  if (!cached || !timestamp) return null;
-
-  const age = (Date.now() - parseInt(timestamp, 10)) / (1000 * 60);
-  if (age > (CONFIG.cacheDuration || 5)) {
-    localStorage.removeItem("data_cache");
-    localStorage.removeItem("data_cache_time");
-    return null;
-  }
-  try {
-    return JSON.parse(cached);
-  } catch {
-    return null;
-  }
-}
-
-function cacheCatalog(catalogData) {
-  try {
-    localStorage.setItem("data_cache", JSON.stringify(catalogData));
-    localStorage.setItem("data_cache_time", Date.now().toString());
-  } catch (e) {
-    console.warn("Could not cache data to localStorage", e);
-  }
-}
+// Clean up legacy localStorage catalog caches
+try {
+  localStorage.removeItem("data_cache");
+  localStorage.removeItem("data_cache_time");
+  localStorage.removeItem("catalog_cache");
+  localStorage.removeItem("catalog_cache_time");
+} catch {}
 
 // Data Loader (Pure data.json, zero legacy fallbacks)
 async function loadReleases() {
   try {
     setPillState("checking", "Checking for updates...");
 
-    const cached = getCachedCatalog();
-    if (cached) {
-      if (cached.config) applyConfig(cached.config);
-      if (cached.brands) Object.assign(CONFIG.brandOverrides, cached.brands);
-      cachedFullCatalog = Array.isArray(cached.apps) ? cached.apps : (Array.isArray(cached) ? cached : []);
-      dynamicAppFilters = getDynamicAppFilters(cachedFullCatalog);
-      if (DOM.loading) DOM.loading.style.display = "none";
-      if (DOM.error) DOM.error.style.display = "none";
-      updateLastUpdateTimestamp(cached.updated_at);
-      filterAndRenderReleases();
-      setPillState("success", "Up to date");
-      return;
-    }
-
     if (DOM.loading) DOM.loading.style.display = "block";
     if (DOM.error) DOM.error.style.display = "none";
 
-    const dataResp = await fetch(`data.json?v=${Date.now()}`);
+    const dataResp = await fetch("data.json");
     if (!dataResp.ok) throw new Error(`Failed to load data.json (${dataResp.status})`);
     const data = await dataResp.json();
 
@@ -525,12 +483,10 @@ async function loadReleases() {
     if (data.brands) Object.assign(CONFIG.brandOverrides, data.brands);
     cachedFullCatalog = Array.isArray(data.apps) ? data.apps : (Array.isArray(data) ? data : []);
     dynamicAppFilters = getDynamicAppFilters(cachedFullCatalog);
-    cacheCatalog(data);
 
     if (DOM.loading) DOM.loading.style.display = "none";
     updateLastUpdateTimestamp(data.updated_at);
     filterAndRenderReleases();
-    setPillState("success", "Up to date");
   } catch (error) {
     console.error("Error loading data:", error);
     setPillState("error", "Failed to load data");
@@ -965,15 +921,12 @@ function updateModalFilterButtons(patch) {
 
   if (patch.builds) {
     for (const b of patch.builds) {
-      const matchingAssets = b.assets.filter((a) => {
-        const vKey = a.parsed.rawVariant || (a.parsed.variant ? normalizeForSearch(a.parsed.variant) : "default") || "default";
-        return vKey === modalVariantFilter || modalVariantFilter === "all";
-      });
-
-      if (matchingAssets.length > 0) {
-        if (b.releaseType === "stable") hasStable = true;
-        if (b.releaseType === "beta") hasBeta = true;
+      if (modalVariantFilter && modalVariantFilter !== "all") {
+        const bVar = b.variantKey || "default";
+        if (bVar !== modalVariantFilter) continue;
       }
+      if (b.releaseType === "stable") hasStable = true;
+      if (b.releaseType === "beta") hasBeta = true;
       if (hasStable && hasBeta) break;
     }
   }
@@ -1032,15 +985,7 @@ function createPatchModalContent(app, patch, buildFilter = "stable", variantFilt
   }
 
   if (variantFilter && variantFilter !== "all") {
-    builds = builds
-      .map((b) => ({
-        ...b,
-        assets: b.assets.filter((a) => {
-          const vKey = a.parsed.rawVariant || (a.parsed.variant ? normalizeForSearch(a.parsed.variant) : "default") || "default";
-          return vKey === variantFilter;
-        }),
-      }))
-      .filter((b) => b.assets.length > 0);
+    builds = builds.filter((b) => (b.variantKey || "default") === variantFilter);
   }
 
   if (builds.length === 0) {
@@ -1069,8 +1014,8 @@ function createModalBuildMarkup(app, patch, build, openByDefault = false) {
       downloadsMarkup += `
         <div class="download-btn ${arch}">
           <div class="asset-left">
-            <span class="asset-title">${escapeHtml(asset.parsed.appName)}</span>
-            <span class="asset-subtitle">${escapeHtml(asset.parsed.version)} • ${asset.fileType}</span>
+            <span class="asset-title">${escapeHtml(app.appName)}</span>
+            <span class="asset-subtitle">${escapeHtml(build.version || "Latest")} • ${escapeHtml(asset.fileType)}</span>
           </div>
           <div class="asset-right">
             <span class="btn-text">${sizeStr} • 📥 ${downloads}</span>
@@ -1277,13 +1222,16 @@ function createObtainiumInstructions(app, patch) {
 
   const isSpecificVariant = modalVariantFilter && modalVariantFilter !== "default" && modalVariantFilter !== "all";
 
-  let regexPattern = `^${rawSlug}-${rawPatch}-v.*\\.apk$`;
-  if (isSpecificVariant) {
-    regexPattern = `^${rawSlug}-${rawPatch}-${modalVariantFilter}-v.*\\.apk$`;
+  const activeVariant = patch?.variants?.find((v) => v.variantKey === (modalVariantFilter || "default")) || patch?.variants?.[0];
+  let regexPattern = activeVariant?.apkFilter;
+  if (!regexPattern) {
+    regexPattern = isSpecificVariant
+      ? `^${rawSlug}-${rawPatch}-${modalVariantFilter}-v.*\\.apk$`
+      : `^${rawSlug}-${rawPatch}-v.*\\.apk$`;
   }
 
   const mainBuild = patch?.builds?.[0];
-  const mainPackageId = mainBuild?.package_name || getAppPackageId(app, patch, modalVariantFilter || "default");
+  const mainPackageId = activeVariant?.package_name || mainBuild?.package_name || getAppPackageId(app, patch, modalVariantFilter || "default");
   const mainLabel = `${app?.appName || "App"} (${patch?.patchName || "Patch"})`;
   const mainAdditionalSettings = { apkFilterRegEx: regexPattern };
   if (modalBuildFilter === "beta") {
@@ -1302,12 +1250,12 @@ function createObtainiumInstructions(app, patch) {
   let step4Content = "";
   if (patch && patch.variants && patch.variants.length > 1) {
     const examples = patch.variants.map((v, index) => {
-      const vRegex = v.variantKey === "default"
+      const vRegex = v.apkFilter || (v.variantKey === "default"
         ? `^${rawSlug}-${rawPatch}-v.*\\.apk$`
-        : `^${rawSlug}-${rawPatch}-${v.variantKey}-v.*\\.apk$`;
+        : `^${rawSlug}-${rawPatch}-${v.variantKey}-v.*\\.apk$`);
       const vLabel = `${app.appName} (${patch.patchName} - ${v.variantName})`;
       const vBuild = patch.builds?.find((b) => b.variantKey === v.variantKey);
-      const vPackageId = vBuild?.package_name || getAppPackageId(app, patch, v.variantKey);
+      const vPackageId = v.package_name || vBuild?.package_name || getAppPackageId(app, patch, v.variantKey);
 
       const vAdditionalSettings = { apkFilterRegEx: vRegex };
       if (modalBuildFilter === "beta") {
