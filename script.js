@@ -1503,8 +1503,39 @@ async function openAppliedPatchesModal(appKey, patchKey, buildKey) {
   if (build && Array.isArray(build.appliedPatches) && build.appliedPatches.length > 0) {
     appliedPatches = build.appliedPatches;
     if (build.patchMeta) {
-      pNames = build.patchMeta.patches;
-      clUrl = build.patchMeta.changelogs?.[0];
+      const allPatches = Array.isArray(build.patchMeta.patches) ? build.patchMeta.patches : (build.patchMeta.patches ? [build.patchMeta.patches] : []);
+      const allChangelogs = Array.isArray(build.patchMeta.changelogs) ? build.patchMeta.changelogs : (build.patchMeta.changelogs ? [build.patchMeta.changelogs] : []);
+
+      const pKey = normalizeForSearch(patch.patchKey || patch.patchName || "");
+      const vKey = normalizeForSearch(build.variantKey || "");
+
+      const matchedIndices = [];
+      allPatches.forEach((name, idx) => {
+        const lower = name.toLowerCase();
+        if (vKey === "adobo" && (lower.includes("adobo") || lower.includes("jkenneth"))) {
+          matchedIndices.push(idx);
+        } else if (vKey === "piko" && lower.includes("piko")) {
+          matchedIndices.push(idx);
+        } else if (pKey === "morphe" && lower.includes("morphe") && !lower.includes("adobo") && !lower.includes("jkenneth")) {
+          matchedIndices.push(idx);
+        } else if (pKey === "revanced" && lower.includes("revanced") && !lower.includes("extended") && !lower.includes("advanced") && !lower.includes("anddea") && !lower.includes("rvx")) {
+          matchedIndices.push(idx);
+        } else if ((pKey === "rvx" || pKey === "revancedextended") && (lower.includes("inotia00") || lower.includes("rvx") || lower.includes("extended"))) {
+          matchedIndices.push(idx);
+        } else if ((pKey === "anddea" || pKey === "revancedadvanced") && (lower.includes("anddea") || lower.includes("advanced"))) {
+          matchedIndices.push(idx);
+        } else if (pKey === "instafel" && lower.includes("instafel")) {
+          matchedIndices.push(idx);
+        }
+      });
+
+      if (matchedIndices.length > 0) {
+        pNames = matchedIndices.map((i) => allPatches[i]);
+        clUrl = matchedIndices.map((i) => allChangelogs[i] || allChangelogs[0] || "");
+      } else {
+        pNames = allPatches;
+        clUrl = allChangelogs;
+      }
     }
   }
 
