@@ -85,9 +85,7 @@ let modalVariantFilter = "all";
 let themeMode = "system";
 let activeAppliedPatchesList = [];
 
-// Progressive Render State
-let currentVisibleCount = 0;
-const RENDER_CHUNK_SIZE = 40;
+// Stoplist Threshold
 const SHARED_APP_WORD_MIN_COUNT = 2;
 
 // Caches for Memoization
@@ -431,21 +429,6 @@ function setupEventListeners() {
 
 
 
-  // Infinite Scroll Observer
-  const sentinel = document.createElement("div");
-  sentinel.id = "scroll-sentinel";
-  sentinel.style.height = "1px";
-  if (DOM.builds) DOM.builds.after(sentinel);
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      if (entries[0].isIntersecting) {
-        renderNextChunk();
-      }
-    },
-    { rootMargin: "400px" },
-  );
-  observer.observe(sentinel);
 }
 
 function syncUrlParams() {
@@ -614,39 +597,17 @@ function getAppSearchScore(app, query) {
   return Infinity;
 }
 
-// Progressive Rendering for App Cards
+// Render App Cards Directly
 function renderAppCards(apps) {
   if (!DOM.builds) return;
   currentAppCatalog = apps;
-  currentVisibleCount = 0;
-  DOM.builds.innerHTML = "";
 
   if (apps.length === 0) {
     DOM.builds.innerHTML = '<div class="no-results">No applications found matching your criteria.</div>';
     return;
   }
 
-  renderNextChunk();
-}
-
-function renderNextChunk() {
-  if (!DOM.builds) return;
-
-  const nextChunk = currentAppCatalog.slice(
-    currentVisibleCount,
-    currentVisibleCount + RENDER_CHUNK_SIZE,
-  );
-
-  if (nextChunk.length === 0) return;
-
-  const tempDiv = document.createElement("div");
-  tempDiv.innerHTML = nextChunk.map((app) => createAppCard(app)).join("");
-
-  while (tempDiv.firstChild) {
-    DOM.builds.appendChild(tempDiv.firstChild);
-  }
-
-  currentVisibleCount += RENDER_CHUNK_SIZE;
+  DOM.builds.innerHTML = apps.map((app) => createAppCard(app)).join("");
 }
 
 // Create App Card Markup
