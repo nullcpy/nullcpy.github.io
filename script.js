@@ -5,8 +5,8 @@
  * ==========================================
  */
 const CONFIG = {
-  owner: "nullcpy",
-  repo: "rvb",
+  owner: "",
+  repo: "",
   cacheDuration: 5, // Cache duration in minutes
   appCategories: {},
   sharedAppWordStoplist: new Set(),
@@ -24,13 +24,13 @@ function applyConfig(cfg) {
   if (cfg.cacheDuration) CONFIG.cacheDuration = cfg.cacheDuration;
   if (cfg.appCategories) CONFIG.appCategories = cfg.appCategories;
   if (Array.isArray(cfg.sharedAppWordStoplist)) {
-    CONFIG.sharedAppWordStoplist = new Set(cfg.sharedAppWordStoplist);
+    CONFIG.sharedAppWordStoplist = new Set(cfg.sharedAppWordStoplist.map((w) => w.toLowerCase()));
   }
   if (Array.isArray(cfg.knownPatchTokens)) {
-    CONFIG.knownPatchTokens = new Set(cfg.knownPatchTokens);
+    CONFIG.knownPatchTokens = new Set(cfg.knownPatchTokens.map((t) => t.toLowerCase()));
   }
   if (Array.isArray(cfg.variantKeywords)) {
-    CONFIG.variantKeywords = new Set(cfg.variantKeywords);
+    CONFIG.variantKeywords = new Set(cfg.variantKeywords.map((k) => k.toLowerCase()));
   }
   if (Array.isArray(cfg.knownArchs)) {
     CONFIG.knownArchs = cfg.knownArchs;
@@ -463,14 +463,20 @@ function syncUrlParams() {
 
 // LocalStorage Caching
 function getCachedCatalog() {
-  const cached = localStorage.getItem("catalog_cache");
-  const timestamp = localStorage.getItem("catalog_cache_time");
+  // Clear any legacy catalog cache
+  try {
+    localStorage.removeItem("catalog_cache");
+    localStorage.removeItem("catalog_cache_time");
+  } catch {}
+
+  const cached = localStorage.getItem("data_cache");
+  const timestamp = localStorage.getItem("data_cache_time");
   if (!cached || !timestamp) return null;
 
   const age = (Date.now() - parseInt(timestamp, 10)) / (1000 * 60);
-  if (age > CONFIG.cacheDuration) {
-    localStorage.removeItem("catalog_cache");
-    localStorage.removeItem("catalog_cache_time");
+  if (age > (CONFIG.cacheDuration || 5)) {
+    localStorage.removeItem("data_cache");
+    localStorage.removeItem("data_cache_time");
     return null;
   }
   try {
@@ -482,14 +488,14 @@ function getCachedCatalog() {
 
 function cacheCatalog(catalogData) {
   try {
-    localStorage.setItem("catalog_cache", JSON.stringify(catalogData));
-    localStorage.setItem("catalog_cache_time", Date.now().toString());
+    localStorage.setItem("data_cache", JSON.stringify(catalogData));
+    localStorage.setItem("data_cache_time", Date.now().toString());
   } catch (e) {
-    console.warn("Could not cache catalog to localStorage", e);
+    console.warn("Could not cache data to localStorage", e);
   }
 }
 
-// Catalog Loader (Pure catalog.json, zero legacy fallbacks)
+// Data Loader (Pure data.json, zero legacy fallbacks)
 async function loadReleases() {
   try {
     setPillState("checking", "Checking for updates...");
@@ -511,27 +517,27 @@ async function loadReleases() {
     if (DOM.loading) DOM.loading.style.display = "block";
     if (DOM.error) DOM.error.style.display = "none";
 
-    const catResp = await fetch(`catalog.json?v=${Date.now()}`);
-    if (!catResp.ok) throw new Error(`Failed to load catalog.json (${catResp.status})`);
-    const catData = await catResp.json();
+    const dataResp = await fetch(`data.json?v=${Date.now()}`);
+    if (!dataResp.ok) throw new Error(`Failed to load data.json (${dataResp.status})`);
+    const data = await dataResp.json();
 
-    if (catData.config) applyConfig(catData.config);
-    if (catData.brands) Object.assign(CONFIG.brandOverrides, catData.brands);
-    cachedFullCatalog = Array.isArray(catData.apps) ? catData.apps : (Array.isArray(catData) ? catData : []);
+    if (data.config) applyConfig(data.config);
+    if (data.brands) Object.assign(CONFIG.brandOverrides, data.brands);
+    cachedFullCatalog = Array.isArray(data.apps) ? data.apps : (Array.isArray(data) ? data : []);
     dynamicAppFilters = getDynamicAppFilters(cachedFullCatalog);
-    cacheCatalog(catData);
+    cacheCatalog(data);
 
     if (DOM.loading) DOM.loading.style.display = "none";
-    updateLastUpdateTimestamp(catData.updated_at);
+    updateLastUpdateTimestamp(data.updated_at);
     filterAndRenderReleases();
     setPillState("success", "Up to date");
   } catch (error) {
-    console.error("Error loading catalog:", error);
-    setPillState("error", "Failed to load catalog");
+    console.error("Error loading data:", error);
+    setPillState("error", "Failed to load data");
     if (DOM.loading) DOM.loading.style.display = "none";
     if (DOM.error) {
       DOM.error.style.display = "block";
-      DOM.error.textContent = `Failed to load catalog: ${error.message}`;
+      DOM.error.textContent = `Failed to load data: ${error.message}`;
     }
   }
 }
@@ -588,11 +594,17 @@ function applyCategoryFilter(apps) {
   if (CONFIG.appCategories[appCategoryFilter]) {
     return apps.filter((app) => {
       const name = normalizeForSearch(app.appName);
+      const key = normalizeForSearch(app.appKey);
+      const nameWithPlus = normalizeForSearch((app.appName || "").replace(/\+/g, "plus"));
       const keywords = CONFIG.appCategories[appCategoryFilter];
       const includes = keywords.filter((k) => !k.startsWith("!"));
       const excludes = keywords.filter((k) => k.startsWith("!")).map((k) => k.slice(1));
-      const isIncluded = includes.some((keyword) => name.includes(keyword));
-      const isExcluded = excludes.some((keyword) => name.includes(keyword));
+      const isIncluded = includes.some(
+        (keyword) => name.includes(keyword) || key.includes(keyword) || nameWithPlus.includes(keyword)
+      );
+      const isExcluded = excludes.some(
+        (keyword) => name.includes(keyword) || key.includes(keyword) || nameWithPlus.includes(keyword)
+      );
       return isIncluded && !isExcluded;
     });
   }
