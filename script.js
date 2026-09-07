@@ -51,6 +51,7 @@ const CONFIG = {
     "armeabi-v7a",
     "arm-v7a",
     "arm32",
+    "arm",
     "x86_64",
     "x86",
     "universal",
