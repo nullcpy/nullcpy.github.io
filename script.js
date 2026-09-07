@@ -748,12 +748,18 @@ async function loadReleases() {
 
     const cached = getCachedReleases();
     if (cached) {
-      allReleases = cached;
+      if (Array.isArray(cached.apps) || (Array.isArray(cached) && cached[0]?.patches)) {
+        cachedFullCatalog = Array.isArray(cached.apps) ? cached.apps : cached;
+        dynamicAppFilters = getDynamicAppFilters(cachedFullCatalog);
+      } else {
+        allReleases = cached;
+        rebuildCatalogCache();
+      }
       if (DOM.loading) DOM.loading.style.display = "none";
       if (DOM.error) DOM.error.style.display = "none";
-      rebuildCatalogCache();
       updateLastUpdateTimestamp();
       filterAndRenderReleases();
+      setPillState("success", "Up to date");
       return;
     }
 
@@ -761,39 +767,61 @@ async function loadReleases() {
     if (DOM.error) DOM.error.style.display = "none";
 
     const cacheBuster = Date.now();
-    let fetchedData = null;
-    let useFallback = true;
+    let loadedCatalog = false;
 
+    // 1. Try precomputed unified catalog.json first (fast, lightweight, instant)
     try {
-      const response = await fetch(`releases.json?v=${cacheBuster}`);
-      if (response.ok) {
-        const data = await response.json();
-        if (Array.isArray(data) && data.length > 0) {
-          fetchedData = data;
-          useFallback = false;
+      const catResp = await fetch(`catalog.json?v=${cacheBuster}`);
+      if (catResp.ok) {
+        const catData = await catResp.json();
+        if (catData && (Array.isArray(catData.apps) || Array.isArray(catData))) {
+          cachedFullCatalog = Array.isArray(catData.apps) ? catData.apps : catData;
+          dynamicAppFilters = getDynamicAppFilters(cachedFullCatalog);
+          cacheReleases(catData);
+          loadedCatalog = true;
         }
       }
     } catch (e) {
-      console.warn("Network error fetching releases.json, using fallback...", e);
+      console.warn("Could not load catalog.json, falling back...", e);
     }
 
-    if (useFallback) {
-      const response = await fetch(
-        `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/releases`,
-        { headers: { Accept: "application/vnd.github.v3+json" } }
-      );
-      if (!response.ok) throw new Error(`Failed to fetch data: ${response.status}`);
-      fetchedData = await response.json();
-    }
+    // 2. Fallback to legacy releases.json or GitHub API if catalog.json is unavailable
+    if (!loadedCatalog) {
+      let fetchedData = null;
+      let useFallback = true;
 
-    allReleases = fetchedData;
-    cacheReleases(allReleases);
-    rebuildCatalogCache();
-    fetchMasterBuildData(); // Prefetch builds.json in background for instant modal opens
+      try {
+        const response = await fetch(`releases.json?v=${cacheBuster}`);
+        if (response.ok) {
+          const data = await response.json();
+          if (Array.isArray(data) && data.length > 0) {
+            fetchedData = data;
+            useFallback = false;
+          }
+        }
+      } catch (e) {
+        console.warn("Network error fetching releases.json, using fallback...", e);
+      }
+
+      if (useFallback) {
+        const response = await fetch(
+          `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/releases`,
+          { headers: { Accept: "application/vnd.github.v3+json" } }
+        );
+        if (!response.ok) throw new Error(`Failed to fetch data: ${response.status}`);
+        fetchedData = await response.json();
+      }
+
+      allReleases = fetchedData;
+      cacheReleases(allReleases);
+      rebuildCatalogCache();
+      fetchMasterBuildData(); // Prefetch builds.json in background for instant modal opens
+    }
 
     if (DOM.loading) DOM.loading.style.display = "none";
     updateLastUpdateTimestamp();
     filterAndRenderReleases();
+    setPillState("success", "Up to date");
   } catch (error) {
     console.error("Error loading releases:", error);
     setPillState("error", "Failed to check updates");
@@ -1683,7 +1711,15 @@ async function openAppliedPatchesModal(appKey, patchKey, buildKey) {
   let clUrl = null;
   let appliedPatches = null;
 
-  // Resolve applied patches from builds.json
+  if (build && Array.isArray(build.appliedPatches) && build.appliedPatches.length > 0) {
+    appliedPatches = build.appliedPatches;
+    if (build.patchMeta) {
+      pNames = build.patchMeta.patches;
+      clUrl = build.patchMeta.changelogs?.[0];
+    }
+  }
+
+  // Resolve applied patches from builds.json if not already embedded
   if (!appliedPatches) {
     const masterData = await fetchMasterBuildData();
     const appKeyNorm = normalizeForSearch(app.appKey || app.appName);
@@ -1911,7 +1947,8 @@ function createObtainiumInstructions(app, patch) {
     regexPattern = `^${rawSlug}-${rawPatch}-${modalVariantFilter}-v.*\\.apk$`;
   }
 
-  const mainPackageId = getAppPackageId(app, patch, modalVariantFilter || "default");
+  const mainBuild = patch?.builds?.[0];
+  const mainPackageId = mainBuild?.package_name || getAppPackageId(app, patch, modalVariantFilter || "default");
   const mainLabel = `${app?.appName || "App"} (${patch?.patchName || "Patch"})`;
   const mainAdditionalSettings = { apkFilterRegEx: regexPattern };
   if (modalBuildFilter === "beta") {
@@ -1934,7 +1971,8 @@ function createObtainiumInstructions(app, patch) {
         ? `^${rawSlug}-${rawPatch}-v.*\\.apk$`
         : `^${rawSlug}-${rawPatch}-${v.variantKey}-v.*\\.apk$`;
       const vLabel = `${app.appName} (${patch.patchName} - ${v.variantName})`;
-      const vPackageId = getAppPackageId(app, patch, v.variantKey);
+      const vBuild = patch.builds?.find((b) => b.variantKey === v.variantKey);
+      const vPackageId = vBuild?.package_name || getAppPackageId(app, patch, v.variantKey);
 
       const vAdditionalSettings = { apkFilterRegEx: vRegex };
       if (modalBuildFilter === "beta") {
@@ -2331,17 +2369,23 @@ function escapeHtml(text) {
 }
 
 function updateLastUpdateTimestamp() {
-  if (!allReleases || allReleases.length === 0) {
-    setPillState("success", "No releases found");
-    return;
+  let latestTime = 0;
+  if (allReleases && allReleases.length > 0) {
+    latestTime = allReleases.reduce((max, release) => {
+      const t = new Date(release.published_at).getTime();
+      return t > max ? t : max;
+    }, 0);
+  } else if (cachedFullCatalog && cachedFullCatalog.length > 0) {
+    latestTime = cachedFullCatalog.reduce((max, app) => {
+      const t = typeof app.latestPublishedAt === "number" ? app.latestPublishedAt : new Date(app.latestPublishedAt).getTime();
+      return t > max ? t : max;
+    }, 0);
   }
 
-  const latestTime = allReleases.reduce((max, release) => {
-    const t = new Date(release.published_at).getTime();
-    return t > max ? t : max;
-  }, 0);
-
-  if (latestTime === 0) return;
+  if (latestTime === 0) {
+    setPillState("success", "Up to date");
+    return;
+  }
 
   const dateStr = new Date(latestTime).toLocaleString("en-US", {
     day: "numeric",
