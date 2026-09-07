@@ -9,10 +9,7 @@ const CONFIG = {
   repo: "",
   appCategories: {},
   sharedAppWordStoplist: new Set(),
-  knownPatchTokens: new Set(),
-  variantKeywords: new Set(),
   knownArchs: [],
-  brandOverrides: {},
   appNotices: [],
 };
 
@@ -24,17 +21,10 @@ function applyConfig(cfg) {
   if (Array.isArray(cfg.sharedAppWordStoplist)) {
     CONFIG.sharedAppWordStoplist = new Set(cfg.sharedAppWordStoplist.map((w) => w.toLowerCase()));
   }
-  if (Array.isArray(cfg.knownPatchTokens)) {
-    CONFIG.knownPatchTokens = new Set(cfg.knownPatchTokens.map((t) => t.toLowerCase()));
-  }
-  if (Array.isArray(cfg.variantKeywords)) {
-    CONFIG.variantKeywords = new Set(cfg.variantKeywords.map((k) => k.toLowerCase()));
-  }
   if (Array.isArray(cfg.knownArchs)) {
     CONFIG.knownArchs = cfg.knownArchs;
   }
   if (cfg.appNotices) CONFIG.appNotices = cfg.appNotices;
-  if (cfg.brands) Object.assign(CONFIG.brandOverrides, cfg.brands);
 }
 
 // Cached DOM references
@@ -89,7 +79,6 @@ let activeAppliedPatchesList = [];
 const SHARED_APP_WORD_MIN_COUNT = 2;
 
 // Caches for Memoization
-const parseCache = new Map();
 const tokenCache = new Map();
 
 // Initialize
@@ -463,7 +452,6 @@ async function loadReleases() {
     const data = await dataResp.json();
 
     if (data.config) applyConfig(data.config);
-    if (data.brands) Object.assign(CONFIG.brandOverrides, data.brands);
     cachedFullCatalog = Array.isArray(data.apps) ? data.apps : (Array.isArray(data) ? data : []);
     dynamicAppFilters = getDynamicAppFilters(cachedFullCatalog);
 
@@ -825,9 +813,7 @@ function getAppNameWords(appName) {
 }
 
 function toFilterLabel(value) {
-  const lower = (value || "").toLowerCase();
-  if (CONFIG.brandOverrides[lower]) return CONFIG.brandOverrides[lower];
-  return value.replace(/\b[a-z]/g, (char) => char.toUpperCase());
+  return (value || "").replace(/\b[a-z]/g, (char) => char.toUpperCase());
 }
 
 // Download Modal Controller
@@ -1171,15 +1157,8 @@ function createObtainiumInstructions(app, patch) {
   const repoUrl = `https://github.com/${CONFIG.owner}/${CONFIG.repo}`;
   const obtainiumLatestUrl = "https://github.com/ImranR98/Obtainium/releases/latest";
 
-  const sampleAsset = patch?.builds?.[0]?.assets?.[0] || app?.patches?.[0]?.builds?.[0]?.assets?.[0];
-  let rawSlug = normalizeForSearch(app?.appName || "app");
-  let rawPatch = normalizeForSearch(patch?.patchName || "patch");
-
-  if (sampleAsset?.name) {
-    const parsedAsset = parseAssetDisplay(sampleAsset.name);
-    if (parsedAsset.rawAppSlug) rawSlug = parsedAsset.rawAppSlug;
-    if (parsedAsset.rawPatchToken) rawPatch = parsedAsset.rawPatchToken;
-  }
+  const rawSlug = app?.appKey || normalizeForSearch(app?.appName || "app");
+  const rawPatch = patch?.patchKey || normalizeForSearch(patch?.patchName || "patch");
 
   const isSpecificVariant = modalVariantFilter && modalVariantFilter !== "default" && modalVariantFilter !== "all";
 
@@ -1425,79 +1404,7 @@ function getSearchTokens(value) {
   return tokens;
 }
 
-function parseAssetDisplay(filename, arch, fileType) {
-  if (parseCache.has(filename)) return parseCache.get(filename);
 
-  const baseName = filename.replace(/\.(apk|zip)$/i, "");
-  const tokens = baseName.split("-").filter(Boolean);
-  const archSubTokens = new Set(CONFIG.knownArchs.flatMap((a) => a.split("-")));
-  const versionIndex = tokens.findIndex(
-    (token) => /^(v\w*\d|vbuild)/i.test(token) && !archSubTokens.has(token.toLowerCase())
-  );
-  const moduleIndex = tokens.findIndex((token) => token.toLowerCase() === "module");
-  const stopIndexCandidates = [versionIndex, moduleIndex].filter((i) => i >= 0);
-  const stopIndex = stopIndexCandidates.length > 0 ? Math.min(...stopIndexCandidates) : tokens.length;
-  const preMetaTokens = tokens.slice(0, stopIndex);
-
-  let patchStartIndex = preMetaTokens.findIndex((token) => CONFIG.knownPatchTokens.has(token.toLowerCase()));
-  if (patchStartIndex < 0) patchStartIndex = Math.max(preMetaTokens.length - 1, 0);
-
-  const appTokens = preMetaTokens.slice(0, patchStartIndex);
-  let patchTokens = preMetaTokens.slice(patchStartIndex);
-
-  let variant = null;
-  while (patchTokens.length > 1 && CONFIG.variantKeywords.has(patchTokens[patchTokens.length - 1].toLowerCase())) {
-    variant = patchTokens[patchTokens.length - 1];
-    patchTokens = patchTokens.slice(0, -1);
-  }
-
-  let version = "Version unknown";
-  if (versionIndex >= 0) {
-    const versionParts = [tokens[versionIndex].replace(/^v(?=[a-z0-9])/i, "")];
-    for (let i = versionIndex + 1; i < tokens.length; i++) {
-      const t = tokens[i].toLowerCase();
-      const isArchToken = CONFIG.knownArchs.some((a) => a.split("-").includes(t));
-      if (t === "module" || t === "universal" || isArchToken) break;
-      versionParts.push(tokens[i]);
-    }
-    version = versionParts.join("-");
-  }
-
-  const rawAppSlug = appTokens.length > 0 ? appTokens.join("-").toLowerCase() : (preMetaTokens.join("-").toLowerCase() || baseName.toLowerCase());
-  const rawPatchToken = patchTokens.length > 0 ? patchTokens[0].toLowerCase() : "";
-
-  const result = {
-    appName: formatBrandDisplayName(appTokens.length > 0 ? appTokens.join(" ") : preMetaTokens.join(" ") || baseName),
-    patchName: formatBrandDisplayName(patchTokens.length > 0 ? patchTokens.join(" ") : "Patched Build"),
-    variant: variant ? formatBrandDisplayName(variant) : null,
-    rawVariant: variant ? variant.toLowerCase() : null,
-    version,
-    fileType,
-    rawAppSlug,
-    rawPatchToken,
-  };
-
-  parseCache.set(filename, result);
-  return result;
-}
-
-function formatBrandDisplayName(value) {
-  const normalized = (value || "").replace(/\s+/g, " ").trim();
-  const noSpaceLower = normalized.replace(/\s+/g, "").toLowerCase();
-  const exactLower = normalized.toLowerCase();
-
-  if (CONFIG.brandOverrides[noSpaceLower]) return CONFIG.brandOverrides[noSpaceLower];
-  if (CONFIG.brandOverrides[exactLower]) return CONFIG.brandOverrides[exactLower];
-
-  return normalized
-    .split(" ")
-    .map((token) => {
-      const lower = token.toLowerCase();
-      if (CONFIG.brandOverrides[lower]) return CONFIG.brandOverrides[lower];
-      return token.charAt(0).toUpperCase() + token.slice(1);
-    })
-    .join(" ");
-}
 
 function escapeHtml(text) {
   return String(text ?? "")
