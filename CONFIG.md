@@ -227,5 +227,5 @@ Unmatched apps return `Infinity` and are filtered out instantly.
 
 - **Publishing Builds**:
   - When `nullcpy/rvb` builds apps, [`.github/scripts/update_website_catalog.py`](https://github.com/nullcpy/rvb/blob/main/.github/scripts/update_website_catalog.py) clones this repository, inserts or deduplicates builds matching `build` + `variant` + `subVariant`, updates channel pointers, and pushes back to `main`.
-- **Pruning Deleted Archives**:
-  - When GitHub Actions runs cleanup, [`.github/scripts/cleanup_website_catalog.py`](https://github.com/nullcpy/rvb/blob/main/.github/scripts/cleanup_website_catalog.py) verifies surviving release assets on GitHub, prunes deleted builds, reconciles variant pointers to the next surviving build, and deletes empty apps/brands.
+- **Live Metrics Synchronization & Pruning**:
+  - When GitHub Actions runs cleanup, [`.github/scripts/sync_website_catalog.py`](https://github.com/nullcpy/rvb/blob/main/.github/scripts/sync_website_catalog.py) verifies surviving release assets on GitHub, prunes deleted builds, reconciles variant pointers to the next surviving build, and deletes empty apps/brands.

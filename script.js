@@ -627,13 +627,14 @@ function applyCategoryFilter(apps) {
 // O(1) Instant Property Comparisons
 function applySortMode(apps) {
   if (sortMode === "popular") {
-    return [...apps].sort((a, b) => b.totalDownloads - a.totalDownloads);
+    return [...apps].sort((a, b) => (b.totalDownloads || 0) - (a.totalDownloads || 0));
   }
   if (sortMode === "name") {
-    return [...apps].sort((a, b) => a.appName.localeCompare(b.appName));
+    return [...apps].sort((a, b) => (a.appName || "").localeCompare(b.appName || ""));
   }
-  // Default: recent
-  return [...apps].sort((a, b) => b.latestPublishedAt - a.latestPublishedAt);
+  // Default: recent (safely handles epoch timestamps, ISO strings, and null/undefined)
+  const toTimestamp = (val) => (typeof val === "number" ? val : Date.parse(val) || 0);
+  return [...apps].sort((a, b) => toTimestamp(b.latestPublishedAt) - toTimestamp(a.latestPublishedAt));
 }
 
 function filterCatalogBySearch(catalog, query) {
@@ -1292,7 +1293,7 @@ function createObtainiumInstructions(app, brand) {
   }
 
   const mainPackageId = activeVariant?.packageName || getAppPackageId(app, brand, modalSelectedVariant, modalSelectedSubVariant);
-  const mainLabel = getObtainiumAppLabel(app?.appName || "App", brand?.brandName || brand?.patchName || "Brand", modalSelectedVariant, modalSelectedSubVariant);
+  const mainLabel = getObtainiumAppLabel(app?.appName || "App", brand?.brandName || "Brand", modalSelectedVariant, modalSelectedSubVariant);
   const mainAdditionalSettings = { apkFilterRegEx: regexPattern };
   if (modalBuildFilter === "beta") {
     mainAdditionalSettings.includePrereleases = true;
