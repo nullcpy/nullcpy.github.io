@@ -8,61 +8,34 @@ const CONFIG = {
   "owner": "nullcpy",
   "repo": "rvb",
   "knownArchs": [
-    "arm64-v8a",
-    "arm64",
-    "aarch64",
-    "armeabi-v7a",
-    "arm-v7a",
-    "arm32",
-    "arm",
-    "x86_64",
-    "x86",
-    "universal",
-    "all"
+    "arm64-v8a", "arm64", "aarch64", "armeabi-v7a", "arm-v7a", "arm32", "arm", "x86_64", "x86", "universal", "all"
   ],
   "appCategories": {
     "Adobe": [
       "adobe"
     ],
     "Android TV": [
-      "primevideo",
-      "plutotv",
-      "moviebox",
-      "disneyplus",
-      "disney",
-      "hbomax",
-      "tubi",
-      "vix",
-      "at4klauncher",
-      "projectivylauncher",
-      "peacock",
-      "netflix",
-      "nuvio"
+      "primevideo", "plutotv", "moviebox", "disneyplus", "disney", "hbomax", "tubi", "vix", "at4klauncher", "projectivylauncher", "peacock", "netflix", "nuvio"
     ],
     "Browser": [
-      "browser",
-      "edge"
+      "browser", "edge"
     ],
     "Google": [
-      "youtube",
-      "google"
+      "youtube", "google", "gboard"
     ],
     "Launcher": [
-      "launcher"
+      "launcher", "at4klauncher", "projectivylauncher"
     ],
     "Meta": [
-      "threads",
-      "instagram",
-      "messenger",
-      "facebook",
-      "!plusmessenger"
+      "threads", "instagram", "messenger", "facebook", "!plusmessenger"
     ],
-    "Microsoft": ["microsoft"],
+    "Social": ["threads", "instagram", "messenger", "facebook", "twitter", "tiktok", "telegram", "reddit", "pinterest", "tumblr"],
     "VPN": [
-      "1111warp",
-      "vpnify",
-      "vpn"
-    ]
+      "cloudflarewarp", "vpnify", "vpn"
+    ],
+    "YouTube": [
+      "youtube"
+    ],
   },
   "appNotices": [
     {
