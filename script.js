@@ -1456,14 +1456,14 @@ function showToast(message) {
 
 // Architecture & Asset Helpers
 function groupAssetsByArchitecture(assets) {
-  const groups = { arm64: [], arm32: [], universal: [], x86: [], other: [] };
+  const groups = { arm64: [], arm: [], all: [], x86: [], other: [] };
   assets.forEach((asset) => {
     const arch = asset.arch && groups[asset.arch] ? asset.arch : "other";
     groups[arch].push(asset);
   });
 
   const filtered = {};
-  ["arm64", "arm32", "universal", "x86", "other"].forEach((arch) => {
+  ["arm64", "arm", "all", "x86", "other"].forEach((arch) => {
     if (groups[arch].length > 0) {
       groups[arch].sort((a, b) => {
         const aIsApk = a.name.toLowerCase().endsWith(".apk") ? 0 : 1;
@@ -1484,7 +1484,13 @@ function getFileType(filename) {
 }
 
 function capitalizeArch(arch) {
-  const map = { arm64: "ARM64 (v8a)", arm32: "ARM32 (v7a)", universal: "Universal", x86: "x86 / x64", other: "Other" };
+  const map = {
+    arm64: "ARM64 (v8a)",
+    arm: "ARM32 (v7a)",
+    all: "Universal",
+    x86: "x86 / x64",
+    other: "Other"
+  };
   return map[arch] || arch.toUpperCase();
 }
 
