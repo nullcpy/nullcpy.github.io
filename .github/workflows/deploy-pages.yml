@@ -9,6 +9,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  actions: write
 
 concurrency:
   group: "pages"
@@ -38,6 +39,15 @@ jobs:
           action: actions/deploy-pages@v4
           attempt_limit: 3
           attempt_delay: 10000 # Wait 10 seconds between retries
+
+      - name: Remove older workflow runs
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh run list -L400 --repo "$GITHUB_REPOSITORY" --json databaseId -q '.[].databaseId' |
+            tail -n+10 |
+            xargs -IID gh api "repos/$GITHUB_REPOSITORY/actions/runs/ID" -X DELETE || :
 
   trigger_notify_failure:
     needs: [ deploy ]
