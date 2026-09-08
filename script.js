@@ -137,28 +137,24 @@ function initDOM() {
 }
 
 // Variant & Label Formatting Helpers
-function formatVariantLabel(variant, subVariant, bracketStyle = "square") {
+function formatVariantLabel(variant, subVariant) {
   const toTitleCase = (str) =>
     str ? str.replace(/\b[a-z]/g, (c) => c.toUpperCase()) : "";
-  const openB = bracketStyle === "square" ? "[" : "(";
-  const closeB = bracketStyle === "square" ? "]" : ")";
-
-  if (variant && subVariant) return `${variant} ${openB}${toTitleCase(subVariant)}${closeB}`;
+  if (variant && subVariant) return `${variant} • ${toTitleCase(subVariant)}`;
   if (variant) return variant;
-  if (subVariant) return bracketStyle === "square" ? `[${toTitleCase(subVariant)}]` : toTitleCase(subVariant);
+  if (subVariant) return toTitleCase(subVariant);
   return "Standard";
 }
 
 function getObtainiumAppLabel(appName, brandName, variant, subVariant) {
   const parts = [brandName];
   if (variant) parts.push(variant);
-  let label = parts.join(" - ");
   if (subVariant) {
     const toTitleCase = (str) =>
       str ? str.replace(/\b[a-z]/g, (c) => c.toUpperCase()) : "";
-    label += ` [${toTitleCase(subVariant)}]`;
+    parts.push(toTitleCase(subVariant));
   }
-  return `${appName} (${label})`;
+  return `${appName} (${parts.join(" • ")})`;
 }
 
 // State
@@ -448,6 +444,17 @@ function setupEventListeners() {
       if (filterBtn && !filterBtn.disabled) {
         if (filterBtn.classList.contains("variant-pill-btn")) {
           modalSelectedVariant = filterBtn.dataset.variant || null;
+          const app = currentAppCatalog.find((item) => item.appKey === activeModalAppKey);
+          const brand = app ? (app.brands || []).find((item) => item.brandKey === activeModalBrandKey) : null;
+          if (brand && brand.variants) {
+            const validSubs = brand.variants
+              .filter((v) => (v.variant || null) === modalSelectedVariant)
+              .map((v) => v.subVariant || null);
+            if (!validSubs.includes(modalSelectedSubVariant)) {
+              modalSelectedSubVariant = validSubs[0] || null;
+            }
+          }
+        } else if (filterBtn.classList.contains("subvariant-pill-btn")) {
           modalSelectedSubVariant = filterBtn.dataset.subVariant || null;
         } else {
           modalBuildFilter = filterBtn.dataset.filter;
@@ -863,7 +870,7 @@ function createBrandMarkup(app, brand) {
   const variantRowsHtml = (brand.variants || [])
     .map((variant) => {
       const channelBoxes = [];
-      const vLabel = formatVariantLabel(variant.variant, variant.subVariant, "square");
+      const vLabel = formatVariantLabel(variant.variant, variant.subVariant);
       const varAttr = escapeHtml(variant.variant || "");
       const subVarAttr = escapeHtml(variant.subVariant || "");
       const brandKey = escapeHtml(brand.brandKey || "");
@@ -1063,8 +1070,20 @@ function updateModalFilterButtons(brand) {
     filterContainer.appendChild(channelGroup);
   }
 
-  // Variant group with divider
-  if (brand.variants && brand.variants.length > 0) {
+  if (!brand.variants || brand.variants.length === 0) return;
+
+  // Extract distinct base variants
+  const baseVariants = [];
+  brand.variants.forEach((v) => {
+    const varName = v.variant || null;
+    if (!baseVariants.includes(varName)) {
+      baseVariants.push(varName);
+    }
+  });
+
+  const shouldRenderVariantGroup = baseVariants.length > 1 || (baseVariants.length === 1 && baseVariants[0] !== null);
+
+  if (shouldRenderVariantGroup) {
     const divider = document.createElement("span");
     divider.className = "filter-group-divider";
     filterContainer.appendChild(divider);
@@ -1072,18 +1091,51 @@ function updateModalFilterButtons(brand) {
     const variantGroup = document.createElement("div");
     variantGroup.className = "filter-pill-group";
 
-    brand.variants.forEach((v) => {
-      const isSelected = (modalSelectedVariant === (v.variant || null)) && (modalSelectedSubVariant === (v.subVariant || null));
+    baseVariants.forEach((varName) => {
+      const isSelected = (modalSelectedVariant === varName);
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = `modal-filter-btn variant-pill-btn ${isSelected ? "active" : ""}`;
-      btn.dataset.variant = v.variant || "";
-      btn.dataset.subVariant = v.subVariant || "";
-      btn.textContent = formatVariantLabel(v.variant, v.subVariant, "square");
+      btn.dataset.variant = varName || "";
+      btn.textContent = varName || "Standard";
       variantGroup.appendChild(btn);
     });
 
     filterContainer.appendChild(variantGroup);
+  }
+
+  // Extract available sub-variants for current modalSelectedVariant
+  const availableSubVariants = [];
+  brand.variants.forEach((v) => {
+    if ((v.variant || null) === modalSelectedVariant) {
+      const sub = v.subVariant || null;
+      if (!availableSubVariants.includes(sub)) {
+        availableSubVariants.push(sub);
+      }
+    }
+  });
+
+  const shouldRenderSubVariantGroup = availableSubVariants.length > 1 || (availableSubVariants.length === 1 && availableSubVariants[0] !== null);
+
+  if (shouldRenderSubVariantGroup) {
+    const divider = document.createElement("span");
+    divider.className = "filter-group-divider";
+    filterContainer.appendChild(divider);
+
+    const subVariantGroup = document.createElement("div");
+    subVariantGroup.className = "filter-pill-group";
+
+    availableSubVariants.forEach((subName) => {
+      const isSelected = (modalSelectedSubVariant === subName);
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = `modal-filter-btn subvariant-pill-btn ${isSelected ? "active" : ""}`;
+      btn.dataset.subVariant = subName || "";
+      btn.textContent = subName || "Standard";
+      subVariantGroup.appendChild(btn);
+    });
+
+    filterContainer.appendChild(subVariantGroup);
   }
 }
 
@@ -1340,7 +1392,7 @@ function createObtainiumInstructions(app, brand) {
       return `
         <div style="margin-top: 8px;">
           <div style="font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px; display: flex; flex-direction: column;">
-            <span>${escapeHtml(vLabel)}</span>
+            <span>${escapeHtml(app.appName)} • ${escapeHtml(brand.brandName)}${v.variant ? ` • ${escapeHtml(v.variant)}` : ''}${v.subVariant ? ` • ${escapeHtml(v.subVariant)}` : (!v.variant ? ' • Standard' : '')}</span>
             ${vPackageId ? `<span style="font-family: monospace; opacity: 0.8; font-weight: normal; margin-top: 2px; cursor: pointer; width: fit-content; word-break: break-all;" onclick="copyToClipboard('${escapeHtml(vPackageId)}', 'Package ID copied!')" title="Click to copy Package ID">${escapeHtml(vPackageId)}</span>` : ''}
           </div>
           <div class="instruction-code">

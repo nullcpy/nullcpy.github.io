@@ -853,6 +853,7 @@ body.light-mode .variant-row {
     color: var(--accent-variant);
 }
 
+
 .variant-channels-grid {
     display: flex;
     flex-direction: column;
