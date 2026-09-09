@@ -443,7 +443,11 @@ function setupEventListeners() {
         openAppliedPatchesModal(
           appliedTrigger.dataset.appKey,
           appliedTrigger.dataset.brandKey,
-          appliedTrigger.dataset.buildId
+          appliedTrigger.dataset.buildId,
+          appliedTrigger.dataset.variant || null,
+          appliedTrigger.dataset.subVariant || null,
+          appliedTrigger.dataset.build || null,
+          appliedTrigger.dataset.releaseId || null
         );
         return;
       }
@@ -1166,9 +1170,21 @@ function createModalBuildMarkup(app, brand, build, openByDefault = false) {
     downloadsMarkup += `</div>`;
   });
 
+  const varAttr = escapeHtml(build.variant || "");
+  const subVarAttr = escapeHtml(build.subVariant || "");
+  const buildAttr = escapeHtml(build.build || "");
+  const releaseIdAttr = escapeHtml(build.releaseId || "");
   const patchInfoBanner = `
     <div class="patch-info-actions">
-      <button class="patch-applied-btn" data-app-key="${app.appKey}" data-brand-key="${brand.brandKey}" data-build-id="${build.releaseId || build.build}" type="button">View Applied Patches</button>
+      <button class="patch-applied-btn" 
+              data-app-key="${app.appKey}" 
+              data-brand-key="${brand.brandKey}" 
+              data-build-id="${releaseIdAttr || buildAttr}" 
+              data-build="${buildAttr}" 
+              data-release-id="${releaseIdAttr}" 
+              data-variant="${varAttr}" 
+              data-sub-variant="${subVarAttr}" 
+              type="button">View Applied Patches</button>
       <a href="${build.releaseUrl}" target="_blank" rel="noopener noreferrer" class="release-link-button">View Release Source</a>
     </div>
   `;
@@ -1203,18 +1219,62 @@ function closePatchModal() {
 }
 
 // Applied Patches Modal Controller
-function openAppliedPatchesModal(appKey, brandKey, buildId) {
+function openAppliedPatchesModal(appKey, brandKey, buildId, variant = null, subVariant = null, buildNum = null, releaseId = null) {
   const app = currentAppCatalog.find((item) => item.appKey === appKey);
   const brand = app ? (app.brands || []).find((item) => (item.brandKey) === brandKey) : null;
   if (!app || !brand) return;
 
-  if (DOM.appliedPatchesTitle) {
-    DOM.appliedPatchesTitle.textContent = `${app.appName} (${brand.brandName})`;
+  const normVariant = variant || null;
+  const normSubVariant = subVariant || null;
+  const bNum = buildNum ? String(buildNum) : null;
+  const rId = releaseId ? String(releaseId) : (buildId ? String(buildId) : null);
+  const bId = buildId ? String(buildId) : null;
+
+  // 1. Exact match with variant, subVariant, buildNum, and releaseId
+  let build = (brand.builds || []).find((b) => {
+    if ((b.variant || null) !== normVariant) return false;
+    if ((b.subVariant || null) !== normSubVariant) return false;
+    if (bNum && String(b.build || "") !== bNum) return false;
+    if (rId && String(b.releaseId || "") !== rId && String(b.build || "") !== rId) return false;
+    return true;
+  });
+
+  // 2. Match with variant, subVariant, and bId
+  if (!build && (normVariant !== null || normSubVariant !== null)) {
+    build = (brand.builds || []).find((b) => {
+      if ((b.variant || null) !== normVariant) return false;
+      if ((b.subVariant || null) !== normSubVariant) return false;
+      if (bId && String(b.releaseId || "") !== bId && String(b.build || "") !== bId) return false;
+      return true;
+    });
   }
 
-  let build = (brand.builds || []).find((b) => String(b.releaseId) === String(buildId) || String(b.build) === String(buildId));
+  // 3. Match with variant and bId
+  if (!build && normVariant !== null) {
+    build = (brand.builds || []).find((b) => {
+      if ((b.variant || null) !== normVariant) return false;
+      if (bId && String(b.releaseId || "") !== bId && String(b.build || "") !== bId) return false;
+      return true;
+    });
+  }
+
+  // 4. Match with bId / bNum only
+  if (!build) {
+    build = (brand.builds || []).find((b) => {
+      const idMatch = bId && (String(b.releaseId || "") === bId || String(b.build || "") === bId);
+      const numMatch = bNum && String(b.build || "") === bNum;
+      return idMatch || numMatch;
+    });
+  }
+
   if (!build) {
     build = brand.builds?.[0];
+  }
+
+  if (DOM.appliedPatchesTitle) {
+    const variantLabel = formatVariantLabel(build?.variant, build?.subVariant);
+    const variantSuffix = variantLabel && variantLabel !== "Standard" ? ` • ${variantLabel}` : "";
+    DOM.appliedPatchesTitle.textContent = `${app.appName} (${brand.brandName})${variantSuffix}`;
   }
 
   let appliedPatches = Array.isArray(build?.appliedPatches) && build.appliedPatches.length > 0 ? build.appliedPatches : null;
@@ -1280,7 +1340,7 @@ function filterAppliedPatchesList(query) {
       ${filtered.map((patchName) => `
         <div class="applied-patch-item">
           <span class="patch-check-icon">✓</span>
-          <span>${escapeHtml(patchName)}</span>
+          <span>${escapeHtml(patchName.trim())}</span>
         </div>
       `).join("")}
     </div>
