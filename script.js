@@ -705,7 +705,16 @@ function renderAppCards(apps) {
 
 // Create App Card Markup
 function createAppCard(app) {
-  const brands = app.brands || [];
+  const toTimestamp = (val) => (typeof val === "number" ? val : Date.parse(val) || 0);
+  let brands = [...(app.brands || [])];
+  if (sortMode === "popular") {
+    brands.sort((a, b) => (b.totalDownloads || 0) - (a.totalDownloads || 0));
+  } else if (sortMode === "name") {
+    brands.sort((a, b) => (a.brandName || "").localeCompare(b.brandName || ""));
+  } else {
+    // Default: recent — newest latestPublishedAt first
+    brands.sort((a, b) => toTimestamp(b.latestPublishedAt) - toTimestamp(a.latestPublishedAt));
+  }
   const brandsMarkup = brands
     .map((brand) => createBrandMarkup(app, brand))
     .join("");
