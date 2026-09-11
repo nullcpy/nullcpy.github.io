@@ -3,6 +3,10 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: ["main"]
+    paths-ignore:
+      - "data.json"
+  repository_dispatch:
+    types: [deploy-pages, update-catalog-cache]
   workflow_dispatch:
 
 permissions:
