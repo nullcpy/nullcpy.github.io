@@ -23,8 +23,8 @@ jobs:
       - name: Send Notification to Telegram
         env:
           TG_TOKEN: ${{ secrets.TG_TOKEN }}
-          TG_CHAT_ID: "@rvb27"
-          TG_THREAD_ID: "3031"
+          TG_CHAT_ID: "${{ vars.TG_CHAT_ID || '@rvb27' }}"
+          TG_THREAD_ID: "${{ vars.TG_THREAD_NOTIFY || '3031' }}"
         run: |
           set -euo pipefail
 
