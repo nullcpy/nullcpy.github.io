@@ -36,6 +36,12 @@ from pathlib import Path
 ARCH_ORDER = {"arm64": 0, "arm": 1, "all": 2, "universal": 3, "x86_64": 4, "x86": 5}
 FILE_PREFIX_RE = re.compile(r"^(.*?)-(?:v[0-9]|module-)", re.IGNORECASE)
 
+# NOTE: normalize_key / normalize_arch / extract_arch / fallback_entry below
+# are a dependency-free mirror of rvb's canonical .github/scripts/naming.py.
+# If filename-parsing behavior changes there, change it here in the same
+# series of commits — silent divergence between builder and website parsing
+# is the bug class the manifest architecture exists to prevent.
+
 
 def run_gh(args, check=True):
     result = subprocess.run(["gh"] + args, capture_output=True, text=True)
