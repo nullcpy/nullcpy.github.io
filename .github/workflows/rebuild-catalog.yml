@@ -1,0 +1,104 @@
+name: Rebuild Catalog
+
+on:
+  repository_dispatch:
+    types: [catalog-updated]
+  schedule:
+    - cron: "23 */6 * * *"   # safety net for lost dispatches
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Rebuild and diff only, do not commit/push"
+        type: boolean
+        default: false
+
+concurrency:
+  group: catalog-rebuild
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Rebuild data.json from rvb release manifests
+        env:
+          RVB_REPO: nullcpy/rvb
+        run: |
+          cp data.json temp_old_data.json
+          python3 .github/scripts/rebuild_catalog.py --repo "$RVB_REPO" --out data.json.new --existing temp_old_data.json
+          echo "REBUILT_OK=1" >> "$GITHUB_ENV"
+
+      - name: Report diff
+        run: |
+          echo "### Rebuilt catalog summary" >> "$GITHUB_STEP_SUMMARY"
+          python3 - <<'EOF' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          new = json.load(open("data.json.new"))
+          apps = len(new["apps"])
+          builds = sum(len(b["builds"]) for a in new["apps"] for b in a["brands"])
+          assets = sum(len(x["assets"]) for a in new["apps"] for b in a["brands"] for x in b["builds"])
+          print(f"- apps: {apps}, build entries: {builds}, assets: {assets}")
+          EOF
+
+      - name: Commit and push (if content changed)
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          # Compare ignoring updated_at, which changes every run
+          strip() { python3 -c "import json,sys; d=json.load(open(sys.argv[1])); d.pop('updated_at',None); print(json.dumps(d,sort_keys=True,separators=(',',':')))" "$1"; }
+          if cmp -s <(strip data.json) <(strip data.json.new); then
+            echo "No material catalog change."
+            rm -f data.json.new
+            exit 0
+          fi
+          mv data.json.new data.json
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add data.json
+          git commit -m "chore: rebuild catalog from release manifests [skip ci]"
+          pushed=0
+          for attempt in 1 2 3; do
+            if git push origin main; then pushed=1; break; fi
+            echo "Push attempt $attempt failed; integrating with remote..."
+            if ! git pull --rebase origin main; then
+              # Conflict in a derived file: drop our commit and let the next
+              # (dispatch/scheduled) rebuild converge from fresh inputs.
+              git rebase --abort || true
+              git fetch origin main && git reset --hard origin/main
+              echo "::warning::Conflicting catalog push; deferred to next rebuild run."
+              exit 0
+            fi
+          done
+          if [ "$pushed" != "1" ]; then
+            echo "::error::Failed to push rebuilt data.json after 3 attempts."
+            exit 1
+          fi
+          echo "CATALOG_PUSHED=1" >> "$GITHUB_ENV"
+
+      - name: Trigger Pages deployment
+        if: env.CATALOG_PUSHED == '1'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow run deploy-pages.yml --ref main
+          echo "Dispatched deploy-pages workflow."
+
+  trigger_notify_failure:
+    needs: [rebuild]
+    if: failure()
+    uses: ./.github/workflows/notify.yml
+    with:
+      workflow_name: "Rebuild Catalog"
+    secrets: inherit
