@@ -36,6 +36,7 @@ jobs:
       - name: Rebuild data.json from rvb release manifests
         env:
           RVB_REPO: nullcpy/rvb
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # available by default; gh reads this implicitly
         run: |
           cp data.json temp_old_data.json
           python3 .github/scripts/rebuild_catalog.py --repo "$RVB_REPO" --out data.json.new --existing temp_old_data.json
