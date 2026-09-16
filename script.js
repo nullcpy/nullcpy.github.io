@@ -852,8 +852,18 @@ function createBrandMarkup(app, brand) {
   const downloadCount = brand.totalDownloads || 0;
   const downloadIconBadge = `<span class="patch-stat-badge" title="${downloadCount.toLocaleString()} total downloads">📥 ${formatCompactNumber(downloadCount)}</span>`;
 
+  // Pin Standard (null/null) at top, sort the rest alphabetically by variant then subVariant.
+  const sortedVariants = [...(brand.variants || [])].sort((a, b) => {
+    const aIsStd = a.variant == null && a.subVariant == null;
+    const bIsStd = b.variant == null && b.subVariant == null;
+    if (aIsStd !== bIsStd) return aIsStd ? -1 : 1;
+    const vc = (a.variant || "").localeCompare(b.variant || "");
+    if (vc !== 0) return vc;
+    return (a.subVariant || "").localeCompare(b.subVariant || "");
+  });
+
   // Render variant rows
-  const variantRowsHtml = (brand.variants || [])
+  const variantRowsHtml = sortedVariants
     .map((variant) => {
       const channelBoxes = [];
       const vLabel = formatVariantLabel(variant.variant, variant.subVariant);
@@ -1067,6 +1077,13 @@ function updateModalFilterButtons(brand) {
     }
   });
 
+  // Pin Standard (null) at top, sort the rest alphabetically.
+  baseVariants.sort((a, b) => {
+    if (a === null) return -1;
+    if (b === null) return 1;
+    return a.localeCompare(b);
+  });
+
   const shouldRenderVariantGroup = baseVariants.length > 1 || (baseVariants.length === 1 && baseVariants[0] !== null);
 
   if (shouldRenderVariantGroup) {
@@ -1099,6 +1116,13 @@ function updateModalFilterButtons(brand) {
         availableSubVariants.push(sub);
       }
     }
+  });
+
+  // Pin Standard (null) at top, sort the rest alphabetically.
+  availableSubVariants.sort((a, b) => {
+    if (a === null) return -1;
+    if (b === null) return 1;
+    return a.localeCompare(b);
   });
 
   const shouldRenderSubVariantGroup = availableSubVariants.length > 1 || (availableSubVariants.length === 1 && availableSubVariants[0] !== null);
