@@ -1143,6 +1143,18 @@ function createPatchModalContent(app, brand, buildFilter = "stable", selectedVar
     return '<div class="no-results" style="padding: 40px 20px;">No builds matching these filters.</div>';
   }
 
+  builds.sort((a, b) => {
+    if (a.isArchive !== b.isArchive) return a.isArchive ? 1 : -1;
+    const pa = parseVersion(a.version);
+    const pb = parseVersion(b.version);
+    for (let i = 0; i < Math.max(pa.length, pb.length); i++) {
+      const diff = (pb[i] || 0) - (pa[i] || 0);
+      if (diff !== 0) return diff;
+    }
+    const toTs = (v) => (typeof v === "number" ? v : Date.parse(v) || 0);
+    return toTs(b.publishedAt) - toTs(a.publishedAt);
+  });
+
   return builds
     .map((build, index) => createModalBuildMarkup(app, brand, build, index === 0))
     .join("");
@@ -1610,6 +1622,10 @@ function formatDate(value) {
 
 function normalizeForSearch(value) {
   return (value || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
+function parseVersion(version) {
+  return (version || "0").split(".").map(Number);
 }
 
 
