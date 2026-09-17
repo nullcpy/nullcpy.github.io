@@ -1,15 +1,13 @@
 name: Deploy to GitHub Pages
 
 on:
-  repository_dispatch:
-    types: [deploy-pages]
+  workflow_call:
   workflow_dispatch:
 
 permissions:
   contents: read
   pages: write
   id-token: write
-  actions: write
 
 concurrency:
   group: "pages"
