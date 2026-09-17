@@ -18,13 +18,12 @@ concurrency:
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   rebuild:
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    outputs:
-      catalog_pushed: ${{ steps.deploy_check.outputs.catalog_pushed }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -37,7 +36,7 @@ jobs:
       - name: Rebuild data.json from rvb release manifests
         env:
           RVB_REPO: nullcpy/rvb
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # available by default; gh reads this implicitly
         run: |
           cp data.json temp_old_data.json
           python3 .github/scripts/rebuild_catalog.py --repo "$RVB_REPO" --out data.json.new --existing temp_old_data.json
@@ -58,6 +57,7 @@ jobs:
       - name: Commit and push (if content changed)
         if: ${{ github.event.inputs.dry_run != 'true' }}
         run: |
+          # Compare ignoring updated_at, which changes every run
           strip() { python3 -c "import json,sys; d=json.load(open(sys.argv[1])); d.pop('updated_at',None); print(json.dumps(d,sort_keys=True,separators=(',',':')))" "$1"; }
           if cmp -s <(strip data.json) <(strip data.json.new); then
             echo "No material catalog change."
@@ -74,6 +74,8 @@ jobs:
             if git push origin main; then pushed=1; break; fi
             echo "Push attempt $attempt failed; integrating with remote..."
             if ! git pull --rebase origin main; then
+              # Conflict in a derived file: drop our commit and let the next
+              # (dispatch/scheduled) rebuild converge from fresh inputs.
               git rebase --abort || true
               git fetch origin main && git reset --hard origin/main
               echo "::warning::Conflicting catalog push; deferred to next rebuild run."
@@ -86,20 +88,13 @@ jobs:
           fi
           echo "CATALOG_PUSHED=1" >> "$GITHUB_ENV"
 
-      - name: Check if catalog was pushed
-        id: deploy_check
+      - name: Trigger Pages deployment
+        if: env.CATALOG_PUSHED == '1'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          if [ "${{ env.CATALOG_PUSHED }}" == "1" ]; then
-            echo "catalog_pushed=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "catalog_pushed=false" >> "$GITHUB_OUTPUT"
-          fi
-
-  deploy:
-    needs: rebuild
-    if: needs.rebuild.outputs.catalog_pushed == 'true'
-    uses: ./.github/workflows/deploy-pages.yml
-    secrets: inherit
+          gh workflow run deploy-pages.yml --ref main
+          echo "Dispatched deploy-pages workflow."
 
   trigger_notify_failure:
     needs: [rebuild]
