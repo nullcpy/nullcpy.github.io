@@ -108,11 +108,3 @@ jobs:
     with:
       workflow_name: "Rebuild Catalog"
     secrets: inherit
-
-  trigger_notify_failure:
-    needs: [rebuild]
-    if: failure()
-    uses: ./.github/workflows/notify.yml
-    with:
-      workflow_name: "Rebuild Catalog"
-    secrets: inherit
