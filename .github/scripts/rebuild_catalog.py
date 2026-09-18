@@ -258,13 +258,13 @@ def group_files(manifest, live_assets, tag, rel, is_archive):
             e.get("version"),
         )
         groups.setdefault(gk, []).append((fname, e))
-    pub = (rel.get("published_at") or "").replace("+00:00", "Z")
-    for fname in live_assets:
-        if fname in entries:
-            continue
-        fb = fallback_entry(fname, None if is_archive else tag, pub)
-        gk = (normalize_key(fb["name"]) or fb["name"], None, "patched", None, None, None, None)
-        groups.setdefault(gk, []).append((fname, fb))
+    # Only synthesize fallback entries for legacy releases that completely lack a build.json manifest
+    if not manifest:
+        pub = (rel.get("published_at") or "").replace("+00:00", "Z")
+        for fname in live_assets:
+            fb = fallback_entry(fname, None if is_archive else tag, pub)
+            gk = (normalize_key(fb["name"]) or fb["name"], None, "patched", None, None, None, None)
+            groups.setdefault(gk, []).append((fname, fb))
     return groups
 
 
