@@ -1448,7 +1448,16 @@ function createObtainiumInstructions(app, brand) {
 
   let step4Content = "";
   if (brand && brand.variants && brand.variants.length > 1) {
-    const examples = brand.variants.map((v) => {
+    // Pin Standard (null/null) at top, sort the rest alphabetically — same order as the variant pills.
+    const orderedVariants = [...brand.variants].sort((a, b) => {
+      const aIsStd = a.variant == null && a.subVariant == null;
+      const bIsStd = b.variant == null && b.subVariant == null;
+      if (aIsStd !== bIsStd) return aIsStd ? -1 : 1;
+      const vc = (a.variant || "").localeCompare(b.variant || "");
+      if (vc !== 0) return vc;
+      return (a.subVariant || "").localeCompare(b.subVariant || "");
+    });
+    const examples = orderedVariants.map((v) => {
       const vRegex = v.apkFilter || `^${rawSlug}-${rawBrand}-v.*\\.apk$`;
       const vLabel = getObtainiumAppLabel(app.appName, brand.brandName, v.variant, v.subVariant);
       const vPackageId = v.packageName || getAppPackageId(app, brand, v.variant, v.subVariant);
