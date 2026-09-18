@@ -69,6 +69,8 @@ jobs:
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           git add data.json
           git commit -m "chore: rebuild catalog from release manifests [skip ci]"
+          # Note: the push itself won't redeploy Pages (deploy-pages.yml ignores data.json
+          # pushes); an explicit dispatch below refreshes the deployed copy instead.
           pushed=0
           for attempt in 1 2 3; do
             if git push origin main; then pushed=1; break; fi
@@ -89,6 +91,7 @@ jobs:
           echo "CATALOG_PUSHED=1" >> "$GITHUB_ENV"
 
       - name: Trigger Pages deployment
+        # data.json is served from the deployed Pages copy, so refresh it explicitly.
         if: env.CATALOG_PUSHED == '1'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

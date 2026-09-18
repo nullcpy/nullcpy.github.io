@@ -1,6 +1,18 @@
 name: Deploy to GitHub Pages
 
 on:
+  push:
+    branches: [main]
+    # Skip pushes that can't change the deployed site:
+    # - data.json: catalog rebuilds (dispatched explicitly by rebuild-catalog.yml)
+    # - .github/, .gitignore, README/LICENSE/CONFIG: repo maintenance, not site content
+    paths-ignore:
+      - 'data.json'
+      - '.github/**'
+      - '.gitignore'
+      - 'README.md'
+      - 'LICENSE'
+      - 'CONFIG.md'
   workflow_call:
   workflow_dispatch:
 
@@ -8,6 +20,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  actions: write # required by the workflow-run cleanup step below
 
 concurrency:
   group: "pages"
@@ -40,6 +53,7 @@ jobs:
 
       - name: Remove older workflow runs
         if: always()
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
