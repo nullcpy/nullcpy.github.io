@@ -133,6 +133,8 @@ function getObtainiumAppLabel(appName, brandName, variant, subVariant) {
 // State
 let cachedFullCatalog = [];
 let cachedPatchSets = []; // Shared top-level appliedPatches table (schema v2 dedup)
+let cachedChangelogSets = []; // Shared top-level changelogs table (schema v2 dedup)
+let cachedPatchSourceSets = []; // Shared top-level patchSources table (schema v2 dedup)
 let searchTerm = "";
 let appCategoryFilter = "all";
 let sortMode = "recent"; // "recent" | "popular" | "name"
@@ -537,6 +539,8 @@ async function loadReleases() {
 
     cachedFullCatalog = Array.isArray(data.apps) ? data.apps : (Array.isArray(data) ? data : []);
     cachedPatchSets = Array.isArray(data.patchSets) ? data.patchSets : [];
+    cachedChangelogSets = Array.isArray(data.changelogSets) ? data.changelogSets : [];
+    cachedPatchSourceSets = Array.isArray(data.patchSourceSets) ? data.patchSourceSets : [];
     // Warm the normalized search index once so the first keystroke is instant.
     cachedFullCatalog.forEach(getSI);
 
@@ -1402,8 +1406,8 @@ function openAppliedPatchesModal(appKey, brandKey, buildId, variant = null, subV
   }
 
   let appliedPatches = getBuildAppliedPatches(build);
-  const allPatches = build?.patchSources || [];
-  const allChangelogs = build?.changelogs || [];
+  const allPatches = getBuildPatchSources(build);
+  const allChangelogs = getBuildChangelogs(build);
 
   const patchNamesList = Array.isArray(allPatches)
     ? allPatches
@@ -1440,6 +1444,27 @@ function getBuildAppliedPatches(build) {
   if (!build || !Number.isInteger(build.patchSetRef)) return null;
   const set = cachedPatchSets[build.patchSetRef];
   return Array.isArray(set) && set.length > 0 ? set : null;
+}
+
+// Resolve a build's changelogs / patchSources from the shared top-level tables
+// (schema v2 dedup), falling back to any legacy inline array so the client
+// renders correctly both before and after a catalog rebuild.
+function _resolveSetRef(ref, table, inline) {
+  if (Number.isInteger(ref)) {
+    const set = table[ref];
+    if (Array.isArray(set)) return set;
+  }
+  return Array.isArray(inline) ? inline : [];
+}
+
+function getBuildChangelogs(build) {
+  if (!build) return [];
+  return _resolveSetRef(build.changelogRef, cachedChangelogSets, build.changelogs);
+}
+
+function getBuildPatchSources(build) {
+  if (!build) return [];
+  return _resolveSetRef(build.patchSourceRef, cachedPatchSourceSets, build.patchSources);
 }
 
 function filterAppliedPatchesList(query) {

@@ -406,6 +406,28 @@ def apply_archive(cat, tag, rel, manifest):
         brand_entry["builds"].insert(insert_at, archive_entry)
 
 
+def _dedup_lists(builds, field, ref_key, table):
+    """Collapse byte-identical list values of `field` across `builds` into a
+    shared `table`, replacing each build's copy with an integer `ref_key`.
+    Keyed on the ordered serialization, so genuinely different lists still get
+    their own entry -- only exact repeats collapse (zero data loss). An empty
+    list is dropped entirely (the client treats a missing ref as empty)."""
+    index = {}
+    for build in builds:
+        val = build.pop(field, None)
+        if val is None:
+            continue
+        if not val:
+            continue
+        key = json.dumps(val, ensure_ascii=False, separators=(",", ":"))
+        idx = index.get(key)
+        if idx is None:
+            idx = len(table)
+            table.append(val)
+            index[key] = idx
+        build[ref_key] = idx
+
+
 def finalize(cat):
     apps = []
     for app_key in cat.order:
@@ -454,39 +476,30 @@ def finalize(cat):
             apps.append(app_entry)
     apps.sort(key=lambda a: a["appName"].lower())
 
-    # Dedup identical appliedPatches lists into a shared, top-level patchSets
-    # table. Each build keeps only an integer patchSetRef pointing into it.
-    # Dedup is keyed on the *ordered* serialized list, so genuinely different
-    # patch lists (even across builds of the same brand) still get their own
-    # entry -- only byte-identical repeats collapse. This trims the single
-    # fattest block in data.json (~30% of the file) with zero data loss.
-    patch_sets = []
-    patch_index = {}
-    for app in apps:
-        for brand in app["brands"]:
-            for build in brand["builds"]:
-                # releaseId duplicates build for numbered releases (both are the
-                # tag). Drop it when redundant; archive entries keep it since
-                # their build is a version while releaseId is the rolling tag.
-                # The client falls back to build when releaseId is absent.
-                if build.get("releaseId") is not None and build.get("releaseId") == build.get("build"):
-                    build.pop("releaseId")
-                patches = build.pop("appliedPatches", None)
-                if patches is None:
-                    continue
-                key = json.dumps(patches, ensure_ascii=False,
-                                 separators=(",", ":"))
-                idx = patch_index.get(key)
-                if idx is None:
-                    idx = len(patch_sets)
-                    patch_sets.append(patches)
-                    patch_index[key] = idx
-                build["patchSetRef"] = idx
+    all_builds = [build for app in apps for brand in app["brands"]
+                  for build in brand["builds"]]
+    # releaseId duplicates build for numbered releases (both are the tag). Drop
+    # it when redundant; archive entries keep it since their build is a version
+    # while releaseId is the rolling tag. The client falls back to build.
+    for build in all_builds:
+        if build.get("releaseId") is not None and build.get("releaseId") == build.get("build"):
+            build.pop("releaseId")
+
+    # Dedup identical appliedPatches/changelogs/patchSources lists into shared
+    # top-level tables; each build keeps only an integer ref. Content-keyed on
+    # the ordered serialization, so only byte-identical repeats collapse (zero
+    # data loss). These are the fattest repeated blocks in data.json.
+    patch_sets, changelog_sets, patch_source_sets = [], [], []
+    _dedup_lists(all_builds, "appliedPatches", "patchSetRef", patch_sets)
+    _dedup_lists(all_builds, "changelogs", "changelogRef", changelog_sets)
+    _dedup_lists(all_builds, "patchSources", "patchSourceRef", patch_source_sets)
 
     return {
         "version": 2,
         "updated_at": cat.now_iso,
         "patchSets": patch_sets,
+        "changelogSets": changelog_sets,
+        "patchSourceSets": patch_source_sets,
         "apps": apps,
     }
 

@@ -23,21 +23,24 @@ The catalog uses Schema v2. All legacy baggage (such as artificial composite key
   "version": 2,
   "updated_at": "2026-09-08T03:30:00.000Z",
   "patchSets": [ ... ],
+  "changelogSets": [ ... ],
+  "patchSourceSets": [ ... ],
   "apps": [ ... ]
 }
 ```
 
-### `patchSets` — shared applied-patches table
-Applied-patch lists repeat heavily across builds of the same brand, so identical
-lists are stored **once** in a top-level `patchSets` array. Each build references
-an entry by integer index (`patchSetRef`) instead of inlining its own copy.
+### Shared list tables (`patchSets` / `changelogSets` / `patchSourceSets`)
+Applied-patch names, changelog URLs and patch-source slugs repeat heavily across
+builds, so **identical lists are stored once** in a top-level table and each build
+references the entry by integer index (`patchSetRef` / `changelogRef` /
+`patchSourceRef`) instead of inlining its own copy.
 ```json
 [
   ["Unlock Premium", "Hide Ads", "Remove Tracking"],
   ["Theme ENABLER", "Custom Branding"]
 ]
 ```
-> Dedup is keyed on the **ordered** list, so builds with genuinely different patch sets still get distinct entries — only byte-identical repeats collapse (no data loss). The client resolves `patchSetRef` via `getBuildAppliedPatches()`.
+> Dedup is keyed on the **ordered** list, so builds with genuinely different lists still get distinct entries — only byte-identical repeats collapse (no data loss). An **empty list is omitted entirely** (the build simply carries no ref). The client resolves each ref via `getBuildAppliedPatches()` / `getBuildChangelogs()` / `getBuildPatchSources()`.
 
 ### App Object (`apps[i]`)
 Each application in the catalog contains:
@@ -89,7 +92,6 @@ Represents an individual build artifact release:
 ```json
 {
   "build": "380576727",
-  "releaseId": "380576727",
   "releaseType": "stable",
   "isArchive": false,
   "version": "19.16.39",
@@ -97,8 +99,8 @@ Represents an individual build artifact release:
   "subVariant": null,
   "publishedAt": "2026-09-08T02:00:00.000Z",
   "releaseUrl": "https://github.com/nullcpy/rvb/releases/tag/380576727",
-  "patchSources": ["MorpheApp/morphe-patches"],
-  "changelogs": ["https://github.com/MorpheApp/morphe-patches/releases/latest"],
+  "patchSourceRef": 0,
+  "changelogRef": 0,
   "patchSetRef": 0,
   "assets": [
     {
@@ -106,15 +108,14 @@ Represents an individual build artifact release:
       "size": 134217728,
       "download_count": 4200,
       "browser_download_url": "https://github.com/nullcpy/rvb/releases/download/380576727/youtube-morphe-v19.16.39-arm64-v8a.apk",
-      "arch": "arm64",
-      "fileType": "APK"
+      "arch": "arm64"
     }
   ]
 }
 ```
 
 > **Notes**
-> - **`patchSetRef`** is an integer index into the top-level `patchSets` table (see above) holding this build's applied-patch names as a flat array of **strings**. Rendered as a checklist in the *Applied Patches* modal, never on the collapsed cards.
+> - **`patchSetRef` / `changelogRef` / `patchSourceRef`** are integer indices into the top-level `patchSets` / `changelogSets` / `patchSourceSets` tables (see above). Each build's applied-patch names, changelog URLs and patch-source slugs live once in the shared table; an empty list is omitted (no ref). Rendered in the *Applied Patches* modal, never on collapsed cards.
 > - **`releaseId`** is **omitted when it equals `build`** (true for all numbered releases; both are the tag). It is kept only when it differs — i.e. rolling archive entries, where `build` is a version but `releaseId` is `stable`/`beta`. The client falls back to `build` when it is absent.
 > - **`assets[].arch`** uses the compact keys `arm64 | arm | all | x86 | other` (see `groupAssetsByArchitecture`), while `CONFIG.knownArchs` lists the raw filename tokens used for auto-detection.
 > - **`assets[].fileType`** is **not stored** — it is always derived client-side from the filename extension via `getFileType()` (`.apk` → `APK`, `.zip` → `Module`).
