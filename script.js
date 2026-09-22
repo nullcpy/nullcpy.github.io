@@ -354,6 +354,7 @@ function setupEventListeners() {
             document.querySelectorAll(".app-card.open").forEach(c => {
               if (c !== card) c.classList.remove("open");
             });
+            ensureAppCardBody(card);
             card.classList.add("open");
 
             setTimeout(() => {
@@ -733,11 +734,40 @@ function renderAppCards(apps) {
     return;
   }
 
-  DOM.builds.innerHTML = apps.map((app) => createAppCard(app)).join("");
+  DOM.builds.innerHTML = apps.map((app, index) => createAppCard(app, index)).join("");
 }
 
-// Create App Card Markup
-function createAppCard(app) {
+// Create App Card shell (summary only). The heavy brand/variant body is built
+// lazily on first expand (see ensureAppCardBody) so the initial DOM stays small
+// -- 118 collapsed summaries instead of 118 fully-expanded trees.
+function createAppCard(app, index) {
+  const totalDownloads = app.totalDownloads || 0;
+  const dlBadge = `<span class="patch-stat-badge" title="${totalDownloads.toLocaleString()} Total Downloads">📥 ${formatCompactNumber(totalDownloads)}</span>`;
+
+  return `
+    <div class="build-card app-card" data-app-index="${index}">
+      <div class="app-card-summary" role="button" tabindex="0">
+        <div class="app-title-group">
+          <div class="app-name">${escapeHtml(app.appName)}</div>
+        </div>
+        <div class="app-badge-group">
+          ${dlBadge}
+          <svg class="app-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </div>
+      <div class="app-card-body-wrapper">
+        <div class="app-card-body">
+          <div class="app-card-body-inner"></div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// Build the expandable body content (notices + brand/variant matrix) on demand.
+function buildAppCardBody(app) {
   const toTimestamp = (val) => (typeof val === "number" ? val : Date.parse(val) || 0);
   let brands = [...(app.brands || [])];
   if (sortMode === "popular") {
@@ -762,34 +792,25 @@ function createAppCard(app) {
     }
   });
 
-  const totalDownloads = app.totalDownloads || 0;
-  const dlBadge = `<span class="patch-stat-badge" title="${totalDownloads.toLocaleString()} Total Downloads">📥 ${formatCompactNumber(totalDownloads)}</span>`;
-
   return `
-    <div class="build-card app-card">
-      <div class="app-card-summary" role="button" tabindex="0">
-        <div class="app-title-group">
-          <div class="app-name">${escapeHtml(app.appName)}</div>
-        </div>
-        <div class="app-badge-group">
-          ${dlBadge}
-          <svg class="app-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="6 9 12 15 18 9"></polyline>
-          </svg>
-        </div>
-      </div>
-      <div class="app-card-body-wrapper">
-        <div class="app-card-body">
-          <div class="app-card-body-inner">
-            ${noticesMarkup}
-            <div class="brands-list">
-              ${brandsMarkup}
-            </div>
-          </div>
-        </div>
-      </div>
+    ${noticesMarkup}
+    <div class="brands-list">
+      ${brandsMarkup}
     </div>
   `;
+}
+
+// Populate a card's body the first time it is expanded, then mark it loaded.
+function ensureAppCardBody(card) {
+  if (card.dataset.bodyLoaded === "1") return;
+  const app = currentAppCatalog[Number(card.dataset.appIndex)];
+  const inner = card.querySelector(".app-card-body-inner");
+  if (app && inner) {
+    inner.innerHTML = buildAppCardBody(app);
+    // Force layout so the collapse->expand transition animates from 0 height.
+    void card.offsetHeight;
+  }
+  card.dataset.bodyLoaded = "1";
 }
 
 function getNoticeInlineStyles(notice) {
