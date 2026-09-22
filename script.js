@@ -898,6 +898,38 @@ function createNoticeMarkup(notice) {
   `;
 }
 
+// Resolve a variant's channel pointer into display fields.
+// New data.json stores only a build id (string/number) which is looked up in
+// brand.builds; older catalogs stored a full inline pointer object. Both shapes
+// are supported during rollout so the client works before and after a rebuild.
+function resolveChannelPointer(brand, variant, channel) {
+  const ptr = variant[channel === "beta" ? "latestBeta" : "latestStable"];
+  if (!ptr) return null;
+  if (typeof ptr === "object") {
+    return {
+      version: ptr.version,
+      build: ptr.build,
+      publishedAt: ptr.publishedAt,
+      isArchiveFallback: !!ptr.isArchiveFallback,
+    };
+  }
+  const ref = String(ptr);
+  const found = (brand.builds || []).find(
+    (b) =>
+      (b.variant || null) === (variant.variant || null) &&
+      (b.subVariant || null) === (variant.subVariant || null) &&
+      b.releaseType === channel &&
+      String(b.build) === ref
+  );
+  if (!found) return null;
+  return {
+    version: found.version,
+    build: found.build,
+    publishedAt: found.publishedAt,
+    isArchiveFallback: !!found.isArchive,
+  };
+}
+
 // Create Brand Entry Markup with Multi-Channel Variant Matrix
 function createBrandMarkup(app, brand) {
   const builds = brand.builds || [];
@@ -925,7 +957,8 @@ function createBrandMarkup(app, brand) {
       const subVarAttr = escapeHtml(variant.subVariant || "");
       const brandKey = escapeHtml(brand.brandKey || "");
 
-      if (variant.latestStable) {
+      const stablePtr = resolveChannelPointer(brand, variant, "stable");
+      if (stablePtr) {
         channelBoxes.push(`
           <button class="channel-box-btn stable" 
                   data-app-key="${app.appKey}" 
@@ -937,15 +970,16 @@ function createBrandMarkup(app, brand) {
                   title="Open Stable builds for ${escapeHtml(vLabel)}">
             <div class="channel-box-top">
               <span class="channel-tag stable">Stable</span>
-              <span class="channel-date">${formatDate(variant.latestStable.publishedAt)}</span>
+              <span class="channel-date">${formatDate(stablePtr.publishedAt)}</span>
             </div>
-            <span class="channel-version">${escapeHtml(variant.latestStable.version)}</span>
-            <span class="channel-build-num">${variant.latestStable.isArchiveFallback ? "Archive" : `Build ${escapeHtml(variant.latestStable.build)}`}</span>
+            <span class="channel-version">${escapeHtml(stablePtr.version)}</span>
+            <span class="channel-build-num">${stablePtr.isArchiveFallback ? "Archive" : `Build ${escapeHtml(stablePtr.build)}`}</span>
           </button>
         `);
       }
 
-      if (variant.latestBeta) {
+      const betaPtr = resolveChannelPointer(brand, variant, "beta");
+      if (betaPtr) {
         channelBoxes.push(`
           <button class="channel-box-btn beta" 
                   data-app-key="${app.appKey}" 
@@ -957,10 +991,10 @@ function createBrandMarkup(app, brand) {
                   title="Open Beta builds for ${escapeHtml(vLabel)}">
             <div class="channel-box-top">
               <span class="channel-tag beta">Beta</span>
-              <span class="channel-date">${formatDate(variant.latestBeta.publishedAt)}</span>
+              <span class="channel-date">${formatDate(betaPtr.publishedAt)}</span>
             </div>
-            <span class="channel-version">${escapeHtml(variant.latestBeta.version)}</span>
-            <span class="channel-build-num">${variant.latestBeta.isArchiveFallback ? "Archive" : `Build ${escapeHtml(variant.latestBeta.build)}`}</span>
+            <span class="channel-version">${escapeHtml(betaPtr.version)}</span>
+            <span class="channel-build-num">${betaPtr.isArchiveFallback ? "Archive" : `Build ${escapeHtml(betaPtr.build)}`}</span>
           </button>
         `);
       }

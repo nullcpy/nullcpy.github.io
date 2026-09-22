@@ -71,8 +71,7 @@ Models a distinct functional or packaging stream:
 - **`subVariant`** (`string | null`): Packaging variant (e.g. `"clone"`, `"alt"`). Standard builds use `null`.
 - **`packageName`** (`string`): Target Android package name (e.g. `"com.google.android.youtube"`).
 - **`apkFilter`** (`string`): Regular expression used for asset filtering (e.g. in Obtainium).
-- **`latestStable` / `latestBeta`** (`object | null`): Channel pointer objects storing:
-  - `version`, `build`, `publishedAt`, `releaseId`, `releaseUrl`, `isArchiveFallback`.
+- **`latestStable` / `latestBeta`** (`string | null`): Channel pointer storing **only the referenced build's `build` id** (or `null` when the channel has no build). The client resolves `version` / `publishedAt` / `isArchiveFallback` by looking the id up in the brand's `builds` array (matching `variant` + `subVariant` + `releaseType` + `build`), so these fields are no longer duplicated per pointer. *Older catalogs stored a full inline pointer object (`version`, `build`, `publishedAt`, `releaseId`, `releaseUrl`, `isArchiveFallback`); the client still reads that shape during rollout.*
 
 ```json
 {
@@ -80,14 +79,7 @@ Models a distinct functional or packaging stream:
   "subVariant": "clone",
   "packageName": "com.amazon.amazonvideo.livingroom",
   "apkFilter": "^primevideo-morphe-androidtv-clone-v.*\\.apk$",
-  "latestStable": {
-    "version": "3.0.380",
-    "build": "380576727",
-    "publishedAt": "2026-09-08T02:00:00.000Z",
-    "releaseId": "380576727",
-    "releaseUrl": "https://github.com/nullcpy/rvb/releases/tag/380576727",
-    "isArchiveFallback": false
-  },
+  "latestStable": "380576727",
   "latestBeta": null
 }
 ```

@@ -413,18 +413,11 @@ def finalize(cat):
                     newest = next((b for b in v_builds if b.get(
                         "releaseType") == rel_filter), None)
                     if newest:
-                        v[ch] = {
-                            "version": newest.get("version", ""),
-                            "build": newest.get("build", ""),
-                            "publishedAt": newest.get("publishedAt", ""),
-                            "releaseId": newest.get("releaseId", ""),
-                            "releaseUrl": newest.get("releaseUrl", ""),
-                            "isArchiveFallback": newest.get("isArchive", False),
-                        }
-                        # Keep the pointer lean: omit releaseId when it merely
-                        # mirrors the referenced build tag (client infers it).
-                        if not v[ch]["releaseId"] or v[ch]["releaseId"] == v[ch]["build"]:
-                            v[ch].pop("releaseId", None)
+                        # Store only a reference to the newest build (its id) instead
+                        # of duplicating version/publishedAt/releaseUrl/releaseId.
+                        # The client resolves the display fields from brand.builds by
+                        # matching (variant, subVariant, releaseType, build).
+                        v[ch] = newest.get("build", "")
                     else:
                         v[ch] = None
                 surviving_variants.append(v)
