@@ -123,8 +123,9 @@ Represents an individual build artifact release:
 
 > **Notes**
 > - **`patchSetRef`** is an integer index into the top-level `patchSets` table (see above) holding this build's applied-patch names as a flat array of **strings**. Rendered as a checklist in the *Applied Patches* modal, never on the collapsed cards.
+> - **`releaseId`** is **omitted when it equals `build`** (true for all numbered releases; both are the tag). It is kept only when it differs — i.e. rolling archive entries, where `build` is a version but `releaseId` is `stable`/`beta`. The client falls back to `build` when it is absent.
 > - **`assets[].arch`** uses the compact keys `arm64 | arm | all | x86 | other` (see `groupAssetsByArchitecture`), while `CONFIG.knownArchs` lists the raw filename tokens used for auto-detection.
-> - **`assets[].fileType`** is precomputed upstream (`APK` / `Module` / `File`); the client renders it directly.
+> - **`assets[].fileType`** is **not stored** — it is always derivable from the filename extension and computed client-side via `getFileType()` (`.apk` → `APK`, `.zip` → `Module`). Older catalogs that still include it remain readable (the stored value takes precedence).
 
 ---
 

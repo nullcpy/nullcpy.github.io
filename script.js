@@ -1204,7 +1204,7 @@ function createModalBuildMarkup(app, brand, build, openByDefault = false) {
         <div class="download-btn ${arch}">
           <div class="asset-left">
             <span class="asset-title">${escapeHtml(app.appName)}</span>
-            <span class="asset-subtitle">${escapeHtml(build.version || "Latest")} • ${escapeHtml(asset.fileType)}</span>
+            <span class="asset-subtitle">${escapeHtml(build.version || "Latest")} • ${escapeHtml(asset.fileType || getFileType(asset.name))}</span>
           </div>
           <div class="asset-right">
             <span class="btn-text">${sizeStr} • 📥 ${downloads}</span>
@@ -1220,7 +1220,7 @@ function createModalBuildMarkup(app, brand, build, openByDefault = false) {
   const varAttr = escapeHtml(build.variant || "");
   const subVarAttr = escapeHtml(build.subVariant || "");
   const buildAttr = escapeHtml(build.build || "");
-  const releaseIdAttr = escapeHtml(build.releaseId || "");
+  const releaseIdAttr = escapeHtml(build.releaseId || build.build || "");
   const patchInfoBanner = `
     <div class="patch-info-actions">
       <button class="patch-applied-btn" 
