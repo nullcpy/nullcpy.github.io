@@ -492,7 +492,8 @@ def finalize(cat):
     patch_sets, changelog_sets, patch_source_sets = [], [], []
     _dedup_lists(all_builds, "appliedPatches", "patchSetRef", patch_sets)
     _dedup_lists(all_builds, "changelogs", "changelogRef", changelog_sets)
-    _dedup_lists(all_builds, "patchSources", "patchSourceRef", patch_source_sets)
+    _dedup_lists(all_builds, "patchSources",
+                 "patchSourceRef", patch_source_sets)
 
     return {
         "version": 2,
