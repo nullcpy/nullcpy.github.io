@@ -132,6 +132,7 @@ function getObtainiumAppLabel(appName, brandName, variant, subVariant) {
 
 // State
 let cachedFullCatalog = [];
+let cachedPatchSets = []; // Shared top-level appliedPatches table (schema v2 dedup)
 let searchTerm = "";
 let appCategoryFilter = "all";
 let sortMode = "recent"; // "recent" | "popular" | "name"
@@ -534,6 +535,7 @@ async function loadReleases() {
     const data = await dataResp.json();
 
     cachedFullCatalog = Array.isArray(data.apps) ? data.apps : (Array.isArray(data) ? data : []);
+    cachedPatchSets = Array.isArray(data.patchSets) ? data.patchSets : [];
 
     if (DOM.loading) DOM.loading.style.display = "none";
     updateLastUpdateTimestamp(data.updated_at);
@@ -1322,7 +1324,7 @@ function openAppliedPatchesModal(appKey, brandKey, buildId, variant = null, subV
     DOM.appliedPatchesTitle.textContent = `${app.appName} (${brand.brandName})${variantSuffix}`;
   }
 
-  let appliedPatches = Array.isArray(build?.appliedPatches) && build.appliedPatches.length > 0 ? build.appliedPatches : null;
+  let appliedPatches = getBuildAppliedPatches(build);
   const allPatches = build?.patchSources || [];
   const allChangelogs = build?.changelogs || [];
 
@@ -1353,6 +1355,21 @@ function openAppliedPatchesModal(appKey, brandKey, buildId, variant = null, subV
   if (DOM.patchSearchInput) {
     DOM.patchSearchInput.value = "";
   }
+}
+
+// Resolve a build's applied-patches list, supporting both the deduped
+// (patchSetRef -> top-level patchSets table) and legacy inline (appliedPatches)
+// shapes, so the client works with either an old or newly-built data.json.
+function getBuildAppliedPatches(build) {
+  if (!build) return null;
+  if (Array.isArray(build.appliedPatches)) {
+    return build.appliedPatches.length > 0 ? build.appliedPatches : null;
+  }
+  if (Number.isInteger(build.patchSetRef)) {
+    const set = cachedPatchSets[build.patchSetRef];
+    return Array.isArray(set) && set.length > 0 ? set : null;
+  }
+  return null;
 }
 
 function filterAppliedPatchesList(query) {

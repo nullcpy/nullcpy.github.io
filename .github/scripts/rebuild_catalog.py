@@ -408,7 +408,35 @@ def finalize(cat):
             app_entry["totalDownloads"] = sum(b.get("totalDownloads", 0) for b in surviving_brands)
             apps.append(app_entry)
     apps.sort(key=lambda a: a["appName"].lower())
-    return {"version": 2, "updated_at": cat.now_iso, "apps": apps}
+
+    # Dedup identical appliedPatches lists into a shared, top-level patchSets
+    # table. Each build keeps only an integer patchSetRef pointing into it.
+    # Dedup is keyed on the *ordered* serialized list, so genuinely different
+    # patch lists (even across builds of the same brand) still get their own
+    # entry -- only byte-identical repeats collapse. This trims the single
+    # fattest block in data.json (~30% of the file) with zero data loss.
+    patch_sets = []
+    patch_index = {}
+    for app in apps:
+        for brand in app["brands"]:
+            for build in brand["builds"]:
+                patches = build.pop("appliedPatches", None)
+                if patches is None:
+                    continue
+                key = json.dumps(patches, ensure_ascii=False, separators=(",", ":"))
+                idx = patch_index.get(key)
+                if idx is None:
+                    idx = len(patch_sets)
+                    patch_sets.append(patches)
+                    patch_index[key] = idx
+                build["patchSetRef"] = idx
+
+    return {
+        "version": 2,
+        "updated_at": cat.now_iso,
+        "patchSets": patch_sets,
+        "apps": apps,
+    }
 
 
 def validate(catalog, existing_path):

@@ -22,9 +22,22 @@ The catalog uses Schema v2. All legacy baggage (such as artificial composite key
 {
   "version": 2,
   "updated_at": "2026-09-08T03:30:00.000Z",
+  "patchSets": [ ... ],
   "apps": [ ... ]
 }
 ```
+
+### `patchSets` — shared applied-patches table
+Applied-patch lists repeat heavily across builds of the same brand, so identical
+lists are stored **once** in a top-level `patchSets` array. Each build references
+an entry by integer index (`patchSetRef`) instead of inlining its own copy.
+```json
+[
+  ["Unlock Premium", "Hide Ads", "Remove Tracking"],
+  ["Theme ENABLER", "Custom Branding"]
+]
+```
+> Dedup is keyed on the **ordered** list, so builds with genuinely different patch sets still get distinct entries — only byte-identical repeats collapse (no data loss). The client resolves `patchSetRef` via `getBuildAppliedPatches()`.
 
 ### App Object (`apps[i]`)
 Each application in the catalog contains:
@@ -94,23 +107,24 @@ Represents an individual build artifact release:
   "releaseUrl": "https://github.com/nullcpy/rvb/releases/tag/380576727",
   "patchSources": ["MorpheApp/morphe-patches"],
   "changelogs": ["https://github.com/MorpheApp/morphe-patches/releases/latest"],
-  "appliedPatches": [
-    {
-      "name": "Hide Ads",
-      "description": "Removes video and banner advertisements."
-    }
-  ],
+  "patchSetRef": 0,
   "assets": [
     {
       "name": "youtube-morphe-v19.16.39-arm64-v8a.apk",
       "size": 134217728,
-      "downloadCount": 4200,
-      "downloadUrl": "https://github.com/nullcpy/rvb/releases/download/380576727/youtube-morphe-v19.16.39-arm64-v8a.apk",
-      "arch": "arm64"
+      "download_count": 4200,
+      "browser_download_url": "https://github.com/nullcpy/rvb/releases/download/380576727/youtube-morphe-v19.16.39-arm64-v8a.apk",
+      "arch": "arm64",
+      "fileType": "APK"
     }
   ]
 }
 ```
+
+> **Notes**
+> - **`patchSetRef`** is an integer index into the top-level `patchSets` table (see above) holding this build's applied-patch names as a flat array of **strings**. Rendered as a checklist in the *Applied Patches* modal, never on the collapsed cards.
+> - **`assets[].arch`** uses the compact keys `arm64 | arm | all | x86 | other` (see `groupAssetsByArchitecture`), while `CONFIG.knownArchs` lists the raw filename tokens used for auto-detection.
+> - **`assets[].fileType`** is precomputed upstream (`APK` / `Module` / `File`); the client renders it directly.
 
 ---
 
@@ -128,14 +142,22 @@ const CONFIG = {
     "x86_64", "x86", "universal", "all"
   ],
   appCategories: {
+    "Adobe": ["adobe"],
     "Android TV": [
       "primevideo", "plutotv", "moviebox", "disneyplus", "disney",
       "hbomax", "tubi", "vix", "at4klauncher", "projectivylauncher",
       "peacock", "netflix", "nuvio"
     ],
-    "Google": ["youtube", "google"],
+    "Browser": ["browser", "edge"],
+    "Google": ["youtube", "google", "gboard"],
+    "Launcher": ["launcher", "at4klauncher", "projectivylauncher"],
     "Meta": ["threads", "instagram", "messenger", "facebook", "!plusmessenger"],
-    "VPN": ["1111warp", "vpnify", "vpn"]
+    "Social": [
+      "threads", "instagram", "messenger", "facebook", "twitter",
+      "tiktok", "telegram", "reddit", "pinterest", "tumblr"
+    ],
+    "VPN": ["cloudflarewarp", "vpnify", "vpn"],
+    "YouTube": ["youtube"]
   },
   appNotices: [ ... ]
 };
