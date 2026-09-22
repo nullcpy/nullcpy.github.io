@@ -71,7 +71,7 @@ Models a distinct functional or packaging stream:
 - **`subVariant`** (`string | null`): Packaging variant (e.g. `"clone"`, `"alt"`). Standard builds use `null`.
 - **`packageName`** (`string`): Target Android package name (e.g. `"com.google.android.youtube"`).
 - **`apkFilter`** (`string`): Regular expression used for asset filtering (e.g. in Obtainium).
-- **`latestStable` / `latestBeta`** (`string | null`): Channel pointer storing **only the referenced build's `build` id** (or `null` when the channel has no build). The client resolves `version` / `publishedAt` / `isArchiveFallback` by looking the id up in the brand's `builds` array (matching `variant` + `subVariant` + `releaseType` + `build`), so these fields are no longer duplicated per pointer. *Older catalogs stored a full inline pointer object (`version`, `build`, `publishedAt`, `releaseId`, `releaseUrl`, `isArchiveFallback`); the client still reads that shape during rollout.*
+- **`latestStable` / `latestBeta`** (`string | null`): Channel pointer storing **only the referenced build's `build` id** (or `null` when the channel has no build). The client resolves `version` / `publishedAt` / `isArchiveFallback` by looking the id up in the brand's `builds` array (matching `variant` + `subVariant` + `releaseType` + `build`), so these fields are no longer duplicated per pointer. This is the **only** shape the client reads; a pointer written as an inline object will not resolve.
 
 ```json
 {
@@ -117,7 +117,7 @@ Represents an individual build artifact release:
 > - **`patchSetRef`** is an integer index into the top-level `patchSets` table (see above) holding this build's applied-patch names as a flat array of **strings**. Rendered as a checklist in the *Applied Patches* modal, never on the collapsed cards.
 > - **`releaseId`** is **omitted when it equals `build`** (true for all numbered releases; both are the tag). It is kept only when it differs — i.e. rolling archive entries, where `build` is a version but `releaseId` is `stable`/`beta`. The client falls back to `build` when it is absent.
 > - **`assets[].arch`** uses the compact keys `arm64 | arm | all | x86 | other` (see `groupAssetsByArchitecture`), while `CONFIG.knownArchs` lists the raw filename tokens used for auto-detection.
-> - **`assets[].fileType`** is **not stored** — it is always derivable from the filename extension and computed client-side via `getFileType()` (`.apk` → `APK`, `.zip` → `Module`). Older catalogs that still include it remain readable (the stored value takes precedence).
+> - **`assets[].fileType`** is **not stored** — it is always derived client-side from the filename extension via `getFileType()` (`.apk` → `APK`, `.zip` → `Module`).
 
 ---
 
@@ -240,7 +240,8 @@ Unmatched apps return `Infinity` and are filtered out instantly.
 
 ## 6. Maintenance & CI Lifecycle
 
-- **Publishing Builds**:
-  - When `nullcpy/rvb` builds apps, [`.github/scripts/update_website_catalog.py`](https://github.com/nullcpy/rvb/blob/main/.github/scripts/update_website_catalog.py) clones this repository, inserts or deduplicates builds matching `build` + `variant` + `subVariant`, updates channel pointers, and pushes back to `main`.
-- **Live Metrics Synchronization & Pruning**:
-  - When GitHub Actions runs cleanup, [`.github/scripts/sync_website_catalog.py`](https://github.com/nullcpy/rvb/blob/main/.github/scripts/sync_website_catalog.py) verifies surviving release assets on GitHub, prunes deleted builds, reconciles variant pointers to the next surviving build, and deletes empty apps/brands.
+- **Sole writer of `data.json`**:
+  - [`.github/scripts/rebuild_catalog.py`](.github/scripts/rebuild_catalog.py) regenerates the entire catalog in **this** repo and is the *only* component that writes `data.json`. Its `finalize()` step emits the deduped schema: a top-level `patchSets` table with per-build integer `patchSetRef`, channel pointers stored as bare **build-id strings**, `releaseId` omitted when equal to `build`, and asset `fileType` omitted (derived client-side).
+  - It runs via [`rebuild-catalog.yml`](.github/workflows/rebuild-catalog.yml) on `repository_dispatch` (from rvb releases), the ~6-hourly schedule safety-net, or manual `workflow_dispatch`, then self-dispatches a Pages deploy.
+- **rvb is an input source only**:
+  - `nullcpy/rvb` does **not** write or patch `data.json`. `rebuild_catalog.py` reads it through the GitHub API — each release's `build.json` manifest plus the releases/assets listings — and derives every field locally.

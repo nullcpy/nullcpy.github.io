@@ -898,21 +898,12 @@ function createNoticeMarkup(notice) {
   `;
 }
 
-// Resolve a variant's channel pointer into display fields.
-// New data.json stores only a build id (string/number) which is looked up in
-// brand.builds; older catalogs stored a full inline pointer object. Both shapes
-// are supported during rollout so the client works before and after a rebuild.
+// Resolve a variant's channel pointer into display fields. data.json stores
+// only the referenced build's id (schema v2, emitted by rebuild_catalog.py),
+// which is looked up in brand.builds by (variant, subVariant, releaseType, build).
 function resolveChannelPointer(brand, variant, channel) {
   const ptr = variant[channel === "beta" ? "latestBeta" : "latestStable"];
   if (!ptr) return null;
-  if (typeof ptr === "object") {
-    return {
-      version: ptr.version,
-      build: ptr.build,
-      publishedAt: ptr.publishedAt,
-      isArchiveFallback: !!ptr.isArchiveFallback,
-    };
-  }
   const ref = String(ptr);
   const found = (brand.builds || []).find(
     (b) =>
@@ -1290,7 +1281,7 @@ function createModalBuildMarkup(app, brand, build, openByDefault = false) {
         <div class="download-btn ${arch}">
           <div class="asset-left">
             <span class="asset-title">${escapeHtml(app.appName)}</span>
-            <span class="asset-subtitle">${escapeHtml(build.version || "Latest")} • ${escapeHtml(asset.fileType || getFileType(asset.name))}</span>
+            <span class="asset-subtitle">${escapeHtml(build.version || "Latest")} • ${escapeHtml(getFileType(asset.name))}</span>
           </div>
           <div class="asset-right">
             <span class="btn-text">${sizeStr} • 📥 ${downloads}</span>
@@ -1443,19 +1434,12 @@ function openAppliedPatchesModal(appKey, brandKey, buildId, variant = null, subV
   }
 }
 
-// Resolve a build's applied-patches list, supporting both the deduped
-// (patchSetRef -> top-level patchSets table) and legacy inline (appliedPatches)
-// shapes, so the client works with either an old or newly-built data.json.
+// Resolve a build's applied-patches list from the deduped patchSetRef ->
+// top-level patchSets table (schema v2, emitted by rebuild_catalog.py).
 function getBuildAppliedPatches(build) {
-  if (!build) return null;
-  if (Array.isArray(build.appliedPatches)) {
-    return build.appliedPatches.length > 0 ? build.appliedPatches : null;
-  }
-  if (Number.isInteger(build.patchSetRef)) {
-    const set = cachedPatchSets[build.patchSetRef];
-    return Array.isArray(set) && set.length > 0 ? set : null;
-  }
-  return null;
+  if (!build || !Number.isInteger(build.patchSetRef)) return null;
+  const set = cachedPatchSets[build.patchSetRef];
+  return Array.isArray(set) && set.length > 0 ? set : null;
 }
 
 function filterAppliedPatchesList(query) {
