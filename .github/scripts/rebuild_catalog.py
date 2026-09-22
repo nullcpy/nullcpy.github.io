@@ -30,6 +30,7 @@ import os
 import re
 import subprocess
 import sys
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -181,6 +182,26 @@ def fetch_manifest(repo, tag, rel):
         return m, None
     except Exception as e:
         return None, f"build.json for {tag} is not valid: {e}"
+
+
+def fetch_all_manifests(repo, releases, tags, max_workers=6):
+    """Pre-fetch build.json manifests for `tags` concurrently.
+
+    Each manifest is an independent, read-only gh API download, so they are
+    fetched in a small thread pool (the underlying subprocess calls release
+    the GIL while blocked, giving real parallelism). This collapses ~100
+    sequential round-trips into a few concurrent waves without changing any
+    output. The actual fold stays sequential/deterministic in the caller.
+    Returns {tag: (manifest_or_None, error_or_None)}.
+    """
+    with ThreadPoolExecutor(max_workers=max_workers) as pool:
+        return {
+            tag: fut.result()
+            for tag, fut in (
+                (tag, pool.submit(fetch_manifest, repo, tag, releases[tag]))
+                for tag in tags
+            )
+        }
 
 
 def live_apkzip_assets(rel):
@@ -518,14 +539,22 @@ def main():
     )
     cat = Catalog(args.repo)
 
-    missing_manifests = []
-    for tag in numbered_tags:
-        rel = releases[tag]
-        m, err = fetch_manifest(args.repo, tag, rel)
+    # Pre-fetch every manifest concurrently (I/O-bound), then fold them in a
+    # deterministic sequential pass below. Parallel downloads do not change the
+    # produced catalog because the fold order is fixed here regardless of the
+    # order in which the fetches complete.
+    all_tags = numbered_tags + [t for t in ("stable", "beta") if t in releases]
+    fetched = fetch_all_manifests(args.repo, releases, all_tags)
+    for tag, (_m, err) in fetched.items():
         if err:
             print(
                 f"Error: {err}. Aborting rebuild — data.json left untouched.", file=sys.stderr)
             sys.exit(2)
+
+    missing_manifests = []
+    for tag in numbered_tags:
+        rel = releases[tag]
+        m = fetched[tag][0]
         if m is None:
             missing_manifests.append(tag)
         apply_numbered(cat, tag, rel, m)
@@ -534,11 +563,7 @@ def main():
         if tag not in releases:
             continue
         rel = releases[tag]
-        m, err = fetch_manifest(args.repo, tag, rel)
-        if err:
-            print(
-                f"Error: {err}. Aborting rebuild — data.json left untouched.", file=sys.stderr)
-            sys.exit(2)
+        m = fetched[tag][0]
         if m is None:
             missing_manifests.append(tag)
         apply_archive(cat, tag, rel, m)
