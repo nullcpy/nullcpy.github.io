@@ -33,13 +33,20 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Rebuild data.json from rvb release manifests
+      - name: Checkout rvb website branch (manifest source)
+        # Public repo, anonymous shallow clone — the branch replaces the old
+        # per-release build.json asset downloads entirely.
+        run: git clone --depth 1 --branch website "https://github.com/$RVB_REPO.git" rvb-website
+        env:
+          RVB_REPO: nullcpy/rvb
+
+      - name: Rebuild data.json from website branch manifests
         env:
           RVB_REPO: nullcpy/rvb
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # available by default; gh reads this implicitly
         run: |
           cp data.json temp_old_data.json
-          python3 .github/scripts/rebuild_catalog.py --repo "$RVB_REPO" --out data.json.new --existing temp_old_data.json
+          python3 .github/scripts/rebuild_catalog.py --repo "$RVB_REPO" --manifest-dir rvb-website --out data.json.new --existing temp_old_data.json
           echo "REBUILT_OK=1" >> "$GITHUB_ENV"
 
       - name: Report diff
@@ -68,7 +75,7 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           git add data.json
-          git commit -m "chore: rebuild catalog from release manifests [skip ci]"
+          git commit -m "chore: rebuild catalog from website branch manifests [skip ci]"
           # Note: the push itself won't redeploy Pages (deploy-pages.yml ignores data.json
           # pushes); an explicit dispatch below refreshes the deployed copy instead.
           pushed=0

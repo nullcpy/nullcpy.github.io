@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rebuild data.json from immutable per-release build.json manifests.
+"""Rebuild data.json from the rvb `website` branch's build.json manifests.
 
 The catalog is derived from scratch on every run:
 
@@ -10,14 +10,18 @@ The catalog is derived from scratch on every run:
 A release or asset that no longer exists simply doesn't appear. Nothing here
 edits data.json in place.
 
-Inputs (all from the rvb releases API, public repo):
-  - every release's build.json asset: filename-keyed manifest,
+Inputs:
+  - --manifest-dir (canonical): checkout of rvb's `website` branch, providing
+    manifests/<tag>.json and archive/{stable,beta}.json — filename-keyed,
     {"schema":1,"kind":"build|archive","meta":{...},"files":{"<name>.apk":{...}}}
+  - without --manifest-dir: every release's build.json release asset, fetched
+    from the releases API (legacy/dev fallback path)
   - releases with a missing/unparseable manifest get minimal entries synthesized
     from asset filenames, so download buttons never disappear.
 
 Usage:
-  python3 rebuild_catalog.py --repo nullcpy/rvb --out data.json [--existing data.json]
+  python3 rebuild_catalog.py --repo nullcpy/rvb --manifest-dir rvb-website \
+      --out data.json [--existing data.json]
 Env:
   MIN_RATIO (default 0.6)  fraction of existing apps/builds the new catalog must
                            retain or the run aborts (circuit breaker)
@@ -184,7 +188,23 @@ def fetch_manifest(repo, tag, rel):
         return None, f"build.json for {tag} is not valid: {e}"
 
 
-def fetch_all_manifests(repo, releases, tags, max_workers=6):
+def manifest_from_dir(manifest_dir, tag):
+    """Load one manifest from a `website` branch checkout (same return
+    contract as fetch_manifest: (manifest_or_None, error_or_None))."""
+    sub = "archive" if tag in ("stable", "beta") else "manifests"
+    p = Path(manifest_dir) / sub / f"{tag}.json"
+    if not p.exists():
+        return None, None
+    try:
+        m = json.loads(p.read_text(encoding="utf-8"))
+        if not isinstance(m, dict) or not isinstance(m.get("files"), dict):
+            raise ValueError("missing files map")
+        return m, None
+    except Exception as e:
+        return None, f"{p} is not a valid manifest: {e}"
+
+
+def fetch_all_manifests(repo, releases, tags, max_workers=6, manifest_dir=None):
     """Pre-fetch build.json manifests for `tags` concurrently.
 
     Each manifest is an independent, read-only gh API download, so they are
@@ -192,8 +212,13 @@ def fetch_all_manifests(repo, releases, tags, max_workers=6):
     the GIL while blocked, giving real parallelism). This collapses ~100
     sequential round-trips into a few concurrent waves without changing any
     output. The actual fold stays sequential/deterministic in the caller.
+    With `manifest_dir` (a `website` branch checkout) the manifests are read
+    from disk instead — one clone replaced all API downloads. The releases
+    API is still fetched by the caller for existence/size/download counts.
     Returns {tag: (manifest_or_None, error_or_None)}.
     """
+    if manifest_dir:
+        return {tag: manifest_from_dir(manifest_dir, tag) for tag in tags}
     with ThreadPoolExecutor(max_workers=max_workers) as pool:
         return {
             tag: fut.result()
@@ -537,6 +562,9 @@ def main():
     ap.add_argument("--out", default="data.json")
     ap.add_argument("--existing", default=None,
                     help="existing data.json for shrink checks")
+    ap.add_argument("--manifest-dir", default=None,
+                    help="checkout of rvb's website branch; when set, manifests "
+                         "are read from disk instead of release assets")
     args = ap.parse_args()
 
     releases = fetch_releases(args.repo)
@@ -558,7 +586,8 @@ def main():
     # produced catalog because the fold order is fixed here regardless of the
     # order in which the fetches complete.
     all_tags = numbered_tags + [t for t in ("stable", "beta") if t in releases]
-    fetched = fetch_all_manifests(args.repo, releases, all_tags)
+    fetched = fetch_all_manifests(
+        args.repo, releases, all_tags, manifest_dir=args.manifest_dir)
     for tag, (_m, err) in fetched.items():
         if err:
             print(
