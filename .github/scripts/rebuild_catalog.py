@@ -36,6 +36,7 @@ import argparse
 import importlib.util
 import json
 import os
+import re
 import subprocess
 import sys
 from concurrent.futures import ThreadPoolExecutor
@@ -44,6 +45,13 @@ from pathlib import Path
 
 ARCH_ORDER = {"arm64": 0, "arm": 1, "all": 2,
               "universal": 3, "x86_64": 4, "x86": 5}
+
+
+def _ver_key(v):
+    """Numeric-aware version sort key so 6.12.18 outranks 6.12.9; non-numeric
+    segments (e.g. `1.42.1-dev.2`) fall back to their string form."""
+    parts = re.split(r"[.\-]+", str(v))
+    return [(0, int(p)) if p.isdigit() else (1, p) for p in parts]
 
 
 # Filename parsing belongs to the builder, not to us: rvb applies these same rules
@@ -307,7 +315,11 @@ def group_files(manifest, live_assets, tag, rel, is_archive):
             e.get("brandName"),
             e.get("variant"),
             e.get("subVariant"),
-            e.get("version"),
+            # A numbered release is ONE build card keyed by the tag; the app
+            # version is per-file (a fallback arch can differ from arm64), so it
+            # must not split the card. The archive release is a version history,
+            # so there the version stays part of the card identity.
+            e.get("version") if is_archive else None,
         )
         groups.setdefault(gk, []).append((fname, e))
     # Only synthesize fallback entries for legacy releases that completely lack a build.json manifest
@@ -331,6 +343,11 @@ def build_assets(group, live_assets):
             "size": live.get("size", 0),
             "download_count": live.get("download_count", 0),
             "arch": e.get("arch") or normalize_arch(extract_arch(fname, e.get("version") or "")),
+            # Per-file truth: a numbered build can hold several versions, so each
+            # asset names its own; appliedPatches is carried inline here and folded
+            # into the shared patchSets table (as a per-asset patchSetRef) in finalize.
+            "version": e.get("version") or "",
+            "appliedPatches": e.get("appliedPatches") or [],
             # fileType intentionally omitted: it is always derivable from the
             # asset name (.apk -> APK, .zip -> Module) and computed client-side.
         })
@@ -345,8 +362,14 @@ def apply_numbered(cat, tag, rel, manifest):
         rel.get("published_at") or "").replace("+00:00", "Z")
     live_assets = live_apkzip_assets(rel)
     groups = group_files(manifest, live_assets, tag, rel, is_archive=False)
-    for (app_key, app_name, brand_key, brand_name, variant, sub_variant, version), group in groups.items():
+    for (app_key, app_name, brand_key, brand_name, variant, sub_variant, _version), group in groups.items():
         e0 = group[0][1]
+        # Distinct versions across this card's files, newest first. `version` is
+        # the primary (highest) for back-compat (latestVersion, channel pointers);
+        # `versions` lets the UI show every version one build actually published.
+        vers = sorted({(e.get("version") or "")
+                      for _, e in group if e.get("version")}, key=_ver_key, reverse=True)
+        version = vers[0] if vers else ""
         prefix = next((e.get("name") for _, e in group if e.get("name")), "")
         pkg = next((e.get("packageName")
                    for _, e in group if e.get("packageName")), "")
@@ -358,7 +381,8 @@ def apply_numbered(cat, tag, rel, manifest):
             "releaseId": tag,
             "releaseType": release_type,
             "isArchive": False,
-            "version": version or "",
+            "version": version,
+            "versions": vers,
             "variant": variant,
             "subVariant": sub_variant,
             "publishedAt": published_at,
@@ -511,6 +535,14 @@ def finalize(cat):
     _dedup_lists(all_builds, "changelogs", "changelogRef", changelog_sets)
     _dedup_lists(all_builds, "patchSources",
                  "patchSourceRef", patch_source_sets)
+
+    # Per-arch applied patches: each asset carries the list its own file applied
+    # (a fallback arch can differ). Fold those into the SAME patchSets table so a
+    # list identical to another collapses to a shared index (no duplication), while
+    # a genuinely different one gets its own — the UI then shows per-arch tabs only
+    # where the asset refs actually differ.
+    all_assets = [a for build in all_builds for a in build.get("assets", [])]
+    _dedup_lists(all_assets, "appliedPatches", "patchSetRef", patch_sets)
 
     return {
         "version": 2,
