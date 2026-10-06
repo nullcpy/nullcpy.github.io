@@ -1272,9 +1272,16 @@ function createModalBuildMarkup(app, brand, build, openByDefault = false) {
   const assetsByArch = groupAssetsByArchitecture(build.assets);
   const titleText = build.isArchive ? escapeHtml(build.build) : `Build ${escapeHtml(build.build)}`;
   // A numbered build publishes each arch independently, so it can carry several
-  // versions at once (arm64 newest, arm a fallback). Show them all on the card.
+  // versions at once (arm64 newest, arm a fallback). Show at most two joined by
+  // " / " and fold the rest into a "+ N" overflow so long version lists stay compact.
   const versionsArr = (build.versions && build.versions.length) ? build.versions : (build.version ? [build.version] : []);
-  const verText = versionsArr.map((v) => `v${v}`).join(" · ");
+  let verText = "";
+  if (versionsArr.length === 1) {
+    verText = `v${versionsArr[0]}`;
+  } else if (versionsArr.length > 1) {
+    const extra = versionsArr.length - 2;
+    verText = versionsArr.slice(0, 2).map((v) => `v${v}`).join(" / ") + (extra > 0 ? ` + ${extra}` : "");
+  }
 
   let downloadsMarkup = "";
 
