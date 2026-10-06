@@ -837,6 +837,27 @@ main {
     }
 }
 
+/* Per-arch applied-patch tabs: shown when one build's arches resolve to distinct
+   patch sets (a fallback arch applied a different list). Each tab is also a
+   .patch-applied-btn, so it inherits the accent chrome; this stacks the arch
+   label above its own version. */
+.arch-tab-btn {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    text-align: left;
+}
+
+.arch-tab-label {
+    font-weight: 700;
+}
+
+.arch-tab-ver {
+    font-weight: 500;
+    font-size: 0.68rem;
+    opacity: 0.82;
+}
+
 /* Variant Rows & Matrix */
 .variant-matrix {
     display: flex;

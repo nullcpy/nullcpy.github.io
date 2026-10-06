@@ -451,7 +451,8 @@ function setupEventListeners() {
           appliedTrigger.dataset.variant || null,
           appliedTrigger.dataset.subVariant || null,
           appliedTrigger.dataset.build || null,
-          appliedTrigger.dataset.releaseId || null
+          appliedTrigger.dataset.releaseId || null,
+          appliedTrigger.dataset.arch || null
         );
         return;
       }
@@ -1270,6 +1271,10 @@ function createPatchModalContent(app, brand, buildFilter = "stable", selectedVar
 function createModalBuildMarkup(app, brand, build, openByDefault = false) {
   const assetsByArch = groupAssetsByArchitecture(build.assets);
   const titleText = build.isArchive ? escapeHtml(build.build) : `Build ${escapeHtml(build.build)}`;
+  // A numbered build publishes each arch independently, so it can carry several
+  // versions at once (arm64 newest, arm a fallback). Show them all on the card.
+  const versionsArr = (build.versions && build.versions.length) ? build.versions : (build.version ? [build.version] : []);
+  const verText = versionsArr.map((v) => `v${v}`).join(" · ");
 
   let downloadsMarkup = "";
 
@@ -1285,7 +1290,7 @@ function createModalBuildMarkup(app, brand, build, openByDefault = false) {
         <div class="download-btn ${arch}">
           <div class="asset-left">
             <span class="asset-title">${escapeHtml(app.appName)}</span>
-            <span class="asset-subtitle">${escapeHtml(build.version || "Latest")} • ${escapeHtml(getFileType(asset.name))}</span>
+            <span class="asset-subtitle">${escapeHtml(asset.version ? `v${asset.version}` : (build.version ? `v${build.version}` : "Latest"))} • ${escapeHtml(getFileType(asset.name))}</span>
           </div>
           <div class="asset-right">
             <span class="btn-text">${sizeStr} • 📥 ${downloads}</span>
@@ -1302,17 +1307,32 @@ function createModalBuildMarkup(app, brand, build, openByDefault = false) {
   const subVarAttr = escapeHtml(build.subVariant || "");
   const buildAttr = escapeHtml(build.build || "");
   const releaseIdAttr = escapeHtml(build.releaseId || build.build || "");
+  const commonAttrs = `data-app-key="${app.appKey}" data-brand-key="${brand.brandKey}" data-build-id="${releaseIdAttr || buildAttr}" data-build="${buildAttr}" data-release-id="${releaseIdAttr}" data-variant="${varAttr}" data-sub-variant="${subVarAttr}"`;
+
+  // Per-arch applied patches: when this build's arches resolve to different patch
+  // sets (distinct patchSetRefs — a fallback arch applied a different list), offer
+  // one patch button per arch, mirroring the Stable/Beta channel tabs. When the
+  // arches share one list, a single button stays.
+  const archPatchRefs = {};
+  Object.entries(assetsByArch).forEach(([arch, list]) => {
+    const rep = list.find((a) => a.name.toLowerCase().endsWith(".apk")) || list[0];
+    if (rep && Number.isInteger(rep.patchSetRef)) {
+      archPatchRefs[arch] = { ref: rep.patchSetRef, version: rep.version || build.version || "" };
+    }
+  });
+  const distinctPatchRefs = [...new Set(Object.values(archPatchRefs).map((x) => x.ref))];
+  const patchActions = distinctPatchRefs.length > 1
+    ? Object.entries(archPatchRefs).map(([arch, info]) => `
+      <button class="patch-applied-btn arch-tab-btn" ${commonAttrs} data-arch="${arch}" type="button">
+        <span class="arch-tab-label">${escapeHtml(capitalizeArch(arch))}</span>
+        ${info.version ? `<span class="arch-tab-ver">v${escapeHtml(info.version)}</span>` : ""}
+      </button>`).join("")
+    : `
+      <button class="patch-applied-btn" ${commonAttrs} type="button">View Applied Patches</button>`;
+
   const patchInfoBanner = `
     <div class="patch-info-actions">
-      <button class="patch-applied-btn" 
-              data-app-key="${app.appKey}" 
-              data-brand-key="${brand.brandKey}" 
-              data-build-id="${releaseIdAttr || buildAttr}" 
-              data-build="${buildAttr}" 
-              data-release-id="${releaseIdAttr}" 
-              data-variant="${varAttr}" 
-              data-sub-variant="${subVarAttr}" 
-              type="button">View Applied Patches</button>
+      ${patchActions}
       <a href="${build.releaseUrl}" target="_blank" rel="noopener noreferrer" class="release-link-button">View Release Source</a>
     </div>
   `;
@@ -1322,7 +1342,7 @@ function createModalBuildMarkup(app, brand, build, openByDefault = false) {
       <div class="modal-build-header" role="button" tabindex="0">
         <div class="modal-build-header-left">
           <div class="modal-build-title">${titleText}</div>
-          <div class="modal-build-date">${formatDate(build.publishedAt)}${build.isArchive ? "" : ` • ${escapeHtml(build.version)}`}</div>
+          <div class="modal-build-date">${formatDate(build.publishedAt)}${build.isArchive || !verText ? "" : ` • ${escapeHtml(verText)}`}</div>
         </div>
         <div class="modal-build-header-right">
           <span class="badge-group">
@@ -1347,7 +1367,7 @@ function closePatchModal() {
 }
 
 // Applied Patches Modal Controller
-function openAppliedPatchesModal(appKey, brandKey, buildId, variant = null, subVariant = null, buildNum = null, releaseId = null) {
+function openAppliedPatchesModal(appKey, brandKey, buildId, variant = null, subVariant = null, buildNum = null, releaseId = null, arch = null) {
   const app = currentAppCatalog.find((item) => item.appKey === appKey);
   const brand = app ? (app.brands || []).find((item) => (item.brandKey) === brandKey) : null;
   if (!app || !brand) return;
@@ -1402,10 +1422,14 @@ function openAppliedPatchesModal(appKey, brandKey, buildId, variant = null, subV
   if (DOM.appliedPatchesTitle) {
     const variantLabel = formatVariantLabel(build?.variant, build?.subVariant);
     const variantSuffix = variantLabel && variantLabel !== "Standard" ? ` • ${variantLabel}` : "";
-    DOM.appliedPatchesTitle.textContent = `${app.appName} (${brand.brandName})${variantSuffix}`;
+    const archSuffix = arch ? ` • ${capitalizeArch(arch)}` : "";
+    DOM.appliedPatchesTitle.textContent = `${app.appName} (${brand.brandName})${variantSuffix}${archSuffix}`;
   }
 
-  let appliedPatches = getBuildAppliedPatches(build);
+  // When an arch tab opened the modal, resolve that arch's own patch list from its
+  // asset-level patchSetRef (schema v2); fall back to the build-level list when the
+  // arch has no distinct list so the view is never empty for want of a ref.
+  let appliedPatches = arch ? (getArchAppliedPatches(build, arch) || getBuildAppliedPatches(build)) : getBuildAppliedPatches(build);
   const allPatches = getBuildPatchSources(build);
   const allChangelogs = getBuildChangelogs(build);
 
@@ -1443,6 +1467,17 @@ function openAppliedPatchesModal(appKey, brandKey, buildId, variant = null, subV
 function getBuildAppliedPatches(build) {
   if (!build || !Number.isInteger(build.patchSetRef)) return null;
   const set = cachedPatchSets[build.patchSetRef];
+  return Array.isArray(set) && set.length > 0 ? set : null;
+}
+
+// Resolve one arch's applied-patches list from its asset-level patchSetRef
+// (schema v2). A numbered build can carry distinct patch sets per arch, so the
+// card's arch tabs read here rather than the single build-level list.
+function getArchAppliedPatches(build, arch) {
+  if (!build || !Array.isArray(build.assets) || !arch) return null;
+  const asset = build.assets.find((a) => a.arch === arch);
+  if (!asset || !Number.isInteger(asset.patchSetRef)) return null;
+  const set = cachedPatchSets[asset.patchSetRef];
   return Array.isArray(set) && set.length > 0 ? set : null;
 }
 

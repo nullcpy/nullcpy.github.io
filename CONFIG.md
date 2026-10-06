@@ -95,6 +95,7 @@ Represents an individual build artifact release:
   "releaseType": "stable",
   "isArchive": false,
   "version": "19.16.39",
+  "versions": ["19.16.39"],
   "variant": null,
   "subVariant": null,
   "publishedAt": "2026-09-08T02:00:00.000Z",
@@ -108,7 +109,9 @@ Represents an individual build artifact release:
       "size": 134217728,
       "download_count": 4200,
       "browser_download_url": "https://github.com/nullcpy/rvb/releases/download/380576727/youtube-morphe-v19.16.39-arm64-v8a.apk",
-      "arch": "arm64"
+      "arch": "arm64",
+      "version": "19.16.39",
+      "patchSetRef": 0
     }
   ]
 }
@@ -116,6 +119,8 @@ Represents an individual build artifact release:
 
 > **Notes**
 > - **`patchSetRef` / `changelogRef` / `patchSourceRef`** are integer indices into the top-level `patchSets` / `changelogSets` / `patchSourceSets` tables (see above). Each build's applied-patch names, changelog URLs and patch-source slugs live once in the shared table; an empty list is omitted (no ref). Rendered in the *Applied Patches* modal, never on collapsed cards.
+> - **A numbered build groups every arch under one card.** Because rvb publishes each arch independently, one build can carry several app versions (e.g. `arm64` at the newest, `arm` at a fallback). `version` is the primary (highest) value used for `latestVersion` and channel pointers; **`versions`** lists every distinct version the build published, newest first, and is shown on the build card. `assets[].version` records the version of that specific file, so download rows show their own.
+> - **`assets[].patchSetRef`** is a per-asset index into the same shared `patchSets` table. It lets the *Applied Patches* modal expose **per-arch tabs** (mirroring the Stable/Beta channel tabs) whenever a build's arches resolve to **different** patch sets; arches sharing one list collapse to the same index and the modal shows a single button. Resolved via `getArchAppliedPatches()`; the build-level `patchSetRef` remains as the default for older clients.
 > - **`releaseId`** is **omitted when it equals `build`** (true for all numbered releases; both are the tag). It is kept only when it differs — i.e. rolling archive entries, where `build` is a version but `releaseId` is `stable`/`beta`. The client falls back to `build` when it is absent.
 > - **`assets[].arch`** uses the compact keys `arm64 | arm | all | x86 | other` (see `groupAssetsByArchitecture`), while `CONFIG.knownArchs` lists the raw filename tokens used for auto-detection.
 > - **`assets[].fileType`** is **not stored** — it is always derived client-side from the filename extension via `getFileType()` (`.apk` → `APK`, `.zip` → `Module`).
