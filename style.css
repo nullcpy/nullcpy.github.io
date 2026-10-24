@@ -1816,6 +1816,10 @@ body.light-mode .download-btn {
     }
 }
 
+.obtainium-instructions .highlight {
+    color: var(--accent-obtainium)
+}
+
 .obtainium-instructions ol {
     padding-left: 20px;
     display: flex;
