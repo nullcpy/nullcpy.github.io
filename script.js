@@ -77,7 +77,8 @@ const CONFIG = {
     "github": [
       { "label": "Builder Repo", "url": "https://github.com/nullcpy/rvb" },
       { "label": "Website Repo", "url": "https://github.com/nullcpy/nullcpy.github.io" },
-      { "label": "Report an issue", "url": "https://github.com/nullcpy/rvb/issues/new/choose" }
+      { "label": "Build Archive", "url": "https://nullcpy.github.io/archive" },
+      { "label": "Report an Issue", "url": "https://github.com/nullcpy/rvb/issues/new/choose" }
     ],
     "donate": [
       { "label": "Patreon", "url": "https://www.patreon.com/cw/fahim_ahmed" },
