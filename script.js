@@ -203,6 +203,34 @@ let searchTerm = "";
 let appCategoryFilter = "all";
 let sortMode = "recent"; // "recent" | "popular" | "name"
 let currentAppCatalog = [];
+// appKey -> app lookup, rebuilt whenever the rendered catalog changes, so a modal
+// or filter click resolves an app in O(1) instead of scanning the full catalog
+// (100+ apps) on every interaction. Stays in lockstep with currentAppCatalog.
+const appCatalogIndex = new Map();
+function findApp(appKey) {
+  const indexed = appCatalogIndex.get(appKey);
+  if (indexed) return indexed;
+  // Fall back to a scan if the key predates the index (should not happen), so a
+  // lookup is never silently wrong.
+  return currentAppCatalog.find((item) => item.appKey === appKey) || null;
+}
+
+// Each returned function schedules fn to run after the browser has painted the
+// current frame (double rAF), cancelling any still-pending render from the same
+// slot. Used to move heavy modal-body layout out of the click task: the modal
+// shell opens and paints first, the big innerHTML swap follows a frame later,
+// which is what Core Web Vitals scored as INP presentation delay.
+function makeDeferredRender() {
+  let token = 0;
+  return (fn) => {
+    const id = ++token;
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      if (id === token) fn();
+    }));
+  };
+}
+const renderPatchModalBody = makeDeferredRender();
+const renderAppliedPatchesBody = makeDeferredRender();
 let activeModalAppKey = null;
 let activeModalBrandKey = null;
 let modalBuildFilter = "all";
@@ -471,7 +499,7 @@ function setupEventListeners() {
       if (filterBtn && !filterBtn.disabled) {
         if (filterBtn.classList.contains("variant-pill-btn")) {
           modalSelectedVariant = filterBtn.dataset.variant || null;
-          const app = currentAppCatalog.find((item) => item.appKey === activeModalAppKey);
+          const app = findApp(activeModalAppKey);
           const brand = app ? (app.brands || []).find((item) => item.brandKey === activeModalBrandKey) : null;
           if (brand && brand.variants) {
             const validSubs = brand.variants
@@ -996,6 +1024,8 @@ function getAppSearchScore(app, query) {
 function renderAppCards(apps) {
   if (!DOM.builds) return;
   currentAppCatalog = apps;
+  appCatalogIndex.clear();
+  for (const app of apps) appCatalogIndex.set(app.appKey, app);
 
   if (apps.length === 0) {
     DOM.builds.innerHTML = '<div class="no-results">No applications found matching your criteria.</div>';
@@ -1336,7 +1366,7 @@ function openPatchModal(appKey, brandKey, preferredChannel = "stable", preferred
   activeModalAppKey = appKey;
   activeModalBrandKey = brandKey;
 
-  const app = currentAppCatalog.find((item) => item.appKey === activeModalAppKey);
+  const app = findApp(activeModalAppKey);
   const brand = app ? (app.brands || []).find((item) => (item.brandKey) === activeModalBrandKey) : null;
 
   modalBuildFilter = preferredChannel === "beta" ? "beta" : "stable";
@@ -1363,7 +1393,7 @@ function openPatchModal(appKey, brandKey, preferredChannel = "stable", preferred
 }
 
 function renderOpenPatchModal() {
-  const app = currentAppCatalog.find((item) => item.appKey === activeModalAppKey);
+  const app = findApp(activeModalAppKey);
   const brand = app ? (app.brands || []).find((item) => (item.brandKey) === activeModalBrandKey) : null;
 
   if (!app || !brand) {
@@ -1377,9 +1407,13 @@ function renderOpenPatchModal() {
 
   updateModalFilterButtons(brand);
 
-  if (DOM.patchModalBody) {
+  if (!DOM.patchModalBody) return;
+  // Building and assigning the full build-card tree is the expensive layout that
+  // was blocking the click task. Do it after this frame paints so the modal shell
+  // opens instantly and the body fills a frame later (channel-box-btn INP fix).
+  renderPatchModalBody(() => {
     DOM.patchModalBody.innerHTML = createPatchModalContent(app, brand, modalBuildFilter, modalSelectedVariant, modalSelectedSubVariant);
-  }
+  });
 }
 
 function updateModalFilterButtons(brand) {
@@ -1642,7 +1676,7 @@ function closePatchModal() {
 
 // Applied Patches Modal Controller
 function openAppliedPatchesModal(appKey, brandKey, buildId, variant = null, subVariant = null, buildNum = null, releaseId = null, arch = null) {
-  const app = currentAppCatalog.find((item) => item.appKey === appKey);
+  const app = findApp(appKey);
   const brand = app ? (app.brands || []).find((item) => (item.brandKey) === brandKey) : null;
   if (!app || !brand) return;
 
@@ -1731,27 +1765,37 @@ function openAppliedPatchesModal(appKey, brandKey, buildId, variant = null, subV
     ? allChangelogs
     : (typeof allChangelogs === "string" ? allChangelogs.split(/[,\s]+/).filter(Boolean) : (allChangelogs ? [allChangelogs] : []));
 
-  if (DOM.appliedPatchesMeta) {
-    const badgesHtml = patchNamesList.map((name, index) => {
-      const url = changelogList[index] || (changelogList.length === 1 ? changelogList[0] : null);
-      if (url) {
-        return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="patch-engine-badge patch-engine-link" title="Open changelog for ${escapeHtml(name)}">${escapeHtml(name)}${EXTERNAL_LINK_ARROW}</a>`;
-      }
-      return `<span class="patch-engine-badge">${escapeHtml(name)}</span>`;
-    }).join("");
-
-    DOM.appliedPatchesMeta.innerHTML = badgesHtml;
-  }
-
+  // State that the deferred render reads is set here, inside the click task, so
+  // it is always current when the body fills a frame later.
   activeAppliedPatchesList = appliedPatches;
-  renderPatchFilterPills();
-  filterAppliedPatchesList("");
-  showModal(DOM.appliedPatchesModal);
 
-  if (DOM.patchSearchInput) {
-    DOM.patchSearchInput.value = "";
-    syncPatchClearBtn();
-  }
+  // Open the shell now, then fill the badge strip, arch pills and patch grid on
+  // the next frame. Those innerHTML swaps are the layout that used to run inside
+  // the click task (the worst INP reading); moving them after paint keeps the tap
+  // responsive while the open animation plays. Rapid re-clicks cancel any pending
+  // fill, so only the latest request paints.
+  showModal(DOM.appliedPatchesModal);
+  renderAppliedPatchesBody(() => {
+    if (DOM.appliedPatchesMeta) {
+      const badgesHtml = patchNamesList.map((name, index) => {
+        const url = changelogList[index] || (changelogList.length === 1 ? changelogList[0] : null);
+        if (url) {
+          return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="patch-engine-badge patch-engine-link" title="Open changelog for ${escapeHtml(name)}">${escapeHtml(name)}${EXTERNAL_LINK_ARROW}</a>`;
+        }
+        return `<span class="patch-engine-badge">${escapeHtml(name)}</span>`;
+      }).join("");
+
+      DOM.appliedPatchesMeta.innerHTML = badgesHtml;
+    }
+
+    renderPatchFilterPills();
+    filterAppliedPatchesList("");
+
+    if (DOM.patchSearchInput) {
+      DOM.patchSearchInput.value = "";
+      syncPatchClearBtn();
+    }
+  });
 }
 
 // Resolve a build's applied-patches list from the deduped patchSetRef ->
@@ -1996,7 +2040,7 @@ function closeAppliedPatchesModal() {
 
 // Obtainium Modal Controller
 function openObtainiumModal() {
-  const app = currentAppCatalog.find((item) => item.appKey === activeModalAppKey);
+  const app = findApp(activeModalAppKey);
   const brand = app ? (app.brands || []).find((item) => (item.brandKey) === activeModalBrandKey) : null;
   if (!app || !brand) return;
 
