@@ -20,16 +20,22 @@ const CONFIG = {
     "Browser": [
       "browser", "edge"
     ],
+    "Games": [
+      "swampattack", "blockblast", "offlinegames", "pocketwhip", "rikardonemlopot", "chesscom"
+    ],
     "Google": [
       "youtube", "google", "gboard"
     ],
     "Launcher": [
       "launcher", "at4klauncher", "projectivylauncher"
     ],
-    "Meta": [
-      "threads", "instagram", "messenger", "facebook", "!plusmessenger"
+    "Keyboard": [
+      "keyboard", "swiftkey", "!bluetoothkeyboardmouse"
     ],
-    "Social": ["threads", "instagram", "messenger", "facebook", "twitter", "tiktok", "telegram", "reddit", "pinterest", "tumblr"],
+    "Meta": [
+      "threads", "instagram", "messenger", "facebook", "!plusmessenger", "whatsapp"
+    ],
+    "Social": ["threads", "instagram", "messenger", "facebook", "twitter", "tiktok", "telegram", "reddit", "pinterest", "tumblr", "whatsapp", "discord"],
     "VPN": [
       "cloudflarewarp", "vpnify", "vpn"
     ],
