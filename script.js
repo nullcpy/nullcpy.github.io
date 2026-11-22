@@ -1565,16 +1565,38 @@ function createPatchModalContent(app, brand, buildFilter = "stable", selectedVar
     return '<div class="no-results" style="padding: 40px 20px;">No builds matching these filters.</div>';
   }
 
-  builds.sort((a, b) => {
-    if (a.isArchive !== b.isArchive) return a.isArchive ? 1 : -1;
-    const pa = parseVersion(a.version);
-    const pb = parseVersion(b.version);
-    for (let i = 0; i < Math.max(pa.length, pb.length); i++) {
-      const diff = (pb[i] || 0) - (pa[i] || 0);
+  // Keep this in step with the channel pointers in data.json: variant.latestStable /
+  // latestBeta resolve to the newest matching build by publishedAt (rebuild_catalog.py
+  // finalize). Sorting by app version instead can bury that build under an older one
+  // that happened to ship a higher base version, so the modal and the app card disagree.
+  const toTs = (v) => (typeof v === "number" ? v : Date.parse(v) || 0);
+  const buildNum = (b) => {
+    const raw = String(b && b.build != null ? b.build : "");
+    return /^\d+$/.test(raw) ? Number(raw) : null;
+  };
+  const compareVersions = (x, y) => {
+    const px = parseVersion(x);
+    const py = parseVersion(y);
+    for (let i = 0; i < Math.max(px.length, py.length); i++) {
+      const diff = (py[i] || 0) - (px[i] || 0);
       if (diff !== 0) return diff;
     }
-    const toTs = (v) => (typeof v === "number" ? v : Date.parse(v) || 0);
-    return toTs(b.publishedAt) - toTs(a.publishedAt);
+    return 0;
+  };
+  builds.sort((a, b) => {
+    if (a.isArchive !== b.isArchive) return a.isArchive ? 1 : -1;
+    if (a.isArchive) {
+      // Archive cards are keyed by version (a version history). Their publishedAt
+      // is the source numbered build's date, so sorting by it misorders versions.
+      const vd = compareVersions(a.version, b.version);
+      return vd !== 0 ? vd : toTs(b.publishedAt) - toTs(a.publishedAt);
+    }
+    const timeDiff = toTs(b.publishedAt) - toTs(a.publishedAt);
+    if (timeDiff !== 0) return timeDiff;
+    const na = buildNum(a);
+    const nb = buildNum(b);
+    if (na !== null && nb !== null && na !== nb) return nb - na;
+    return compareVersions(a.version, b.version);
   });
 
   return builds
